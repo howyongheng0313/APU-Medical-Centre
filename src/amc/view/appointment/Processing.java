@@ -66,6 +66,7 @@ public class Processing extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         add(jSeparator1, gridBagConstraints);
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient.png"))); // NOI18N
         jLabel3.setText("Patient Steve");
         jLabel3.setPreferredSize(new java.awt.Dimension(210, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
