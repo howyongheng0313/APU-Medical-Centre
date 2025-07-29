@@ -29,7 +29,6 @@ public class TestFrame extends javax.swing.JFrame {
         bookingPanel2 = new amc.view.staff.BookingPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
         getContentPane().add(bookingPanel2, java.awt.BorderLayout.CENTER);
 
         pack();

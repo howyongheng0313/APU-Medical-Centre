@@ -28,7 +28,6 @@ public class BookingPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
         processing1 = new amc.view.appointment.Processing();
         processing2 = new amc.view.appointment.Processing();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
@@ -53,16 +52,6 @@ public class BookingPanel extends javax.swing.JPanel {
         java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
         jPanel3Layout.columnWeights = new double[] {1.0};
         jPanel3.setLayout(jPanel3Layout);
-
-        jButton2.setText("jButton2");
-        jButton2.setMaximumSize(new java.awt.Dimension(400, 80));
-        jButton2.setMinimumSize(new java.awt.Dimension(400, 80));
-        jButton2.setPreferredSize(new java.awt.Dimension(0, 80));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        jPanel3.add(jButton2, gridBagConstraints);
 
         processing1.setMinimumSize(new java.awt.Dimension(0, 100));
         processing1.setPreferredSize(new java.awt.Dimension(0, 100));
@@ -114,7 +103,6 @@ public class BookingPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
