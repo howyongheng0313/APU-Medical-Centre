@@ -1,9 +1,9 @@
-package amc.view;
+package amc.view.manager;
 
 import java.awt.*;
 import javax.swing.*;
 
-public class uiUtils {
+public class UiUtils {
     
     // Custom menu style
     public static void applyFlatHoverStyle(JButton button) {
@@ -27,6 +27,7 @@ public class uiUtils {
         });
     }
     
+    // Custom comboBox style
     public static void styleComboBox(JComboBox comboBox) {
         comboBox.setBorder(BorderFactory.createEmptyBorder()); // remove border
         comboBox.setFocusable(false); // prevent ugly focus border

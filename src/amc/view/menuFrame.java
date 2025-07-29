@@ -1,11 +1,16 @@
 package amc.view;
 
+import amc.view.manager.UiUtils;
+
 public class menuFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(menuFrame.class.getName());
 
     public menuFrame() {
         initComponents();
+        UiUtils.applyFlatHoverStyle(btnDepartment);
+        UiUtils.applyFlatHoverStyle(btnDoctors);
+        UiUtils.applyFlatHoverStyle(btnLogin);
     }
 
     /**
@@ -32,6 +37,7 @@ public class menuFrame extends javax.swing.JFrame {
         login_service1 = new javax.swing.JPanel();
         btnLogin1 = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(10000, 100));
+        serviceEdit1 = new amc.view.manager.ServiceEdit();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 800));
@@ -129,6 +135,7 @@ public class menuFrame extends javax.swing.JFrame {
         main.add(login_menu1, "card2");
 
         getContentPane().add(main, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(serviceEdit1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -187,5 +194,6 @@ public class menuFrame extends javax.swing.JFrame {
     private javax.swing.JPanel login_service;
     private javax.swing.JPanel login_service1;
     private javax.swing.JPanel main;
+    private amc.view.manager.ServiceEdit serviceEdit1;
     // End of variables declaration//GEN-END:variables
 }

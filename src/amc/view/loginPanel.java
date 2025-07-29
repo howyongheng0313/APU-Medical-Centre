@@ -1,11 +1,12 @@
 package amc.view;
+import amc.view.manager.UiUtils;
 import java.awt.*;
 
 public class loginPanel extends javax.swing.JPanel {
 
     public loginPanel() {
         initComponents();
-        uiUtils.styleComboBox(jcbGender);
+        UiUtils.styleComboBox(jcbGender);
     }
 
     /**
@@ -69,11 +70,11 @@ public class loginPanel extends javax.swing.JPanel {
 
         signup_menu.setBackground(new java.awt.Color(255, 255, 255));
         signup_menu.setPreferredSize(new java.awt.Dimension(808, 50));
-        signup_menu.setLayout(new java.awt.GridLayout());
+        signup_menu.setLayout(new java.awt.GridLayout(1, 0));
 
         base1.setBackground(new java.awt.Color(255, 255, 255));
         base1.setPreferredSize(new java.awt.Dimension(300, 50));
-        base1.setLayout(new java.awt.GridLayout());
+        base1.setLayout(new java.awt.GridLayout(1, 0));
 
         btnDepartment1.setText("Department");
         btnDepartment1.setBorder(null);
@@ -104,11 +105,11 @@ public class loginPanel extends javax.swing.JPanel {
 
         login_menu.setBackground(new java.awt.Color(255, 255, 255));
         login_menu.setPreferredSize(new java.awt.Dimension(800, 50));
-        login_menu.setLayout(new java.awt.GridLayout());
+        login_menu.setLayout(new java.awt.GridLayout(1, 0));
 
         login_base.setBackground(new java.awt.Color(255, 255, 255));
         login_base.setPreferredSize(new java.awt.Dimension(300, 50));
-        login_base.setLayout(new java.awt.GridLayout());
+        login_base.setLayout(new java.awt.GridLayout(1, 0));
 
         btnDepartment.setText("Department");
         btnDepartment.setBorder(null);
@@ -147,14 +148,14 @@ public class loginPanel extends javax.swing.JPanel {
         login_menu.add(login_service);
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1000, 800));
+        setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new java.awt.CardLayout());
 
         login_page.setBackground(new java.awt.Color(255, 255, 255));
         login_page.setPreferredSize(new java.awt.Dimension(800, 500));
         login_page.setLayout(new java.awt.BorderLayout());
 
-        login_content.setLayout(new java.awt.GridLayout());
+        login_content.setLayout(new java.awt.GridLayout(1, 0));
 
         login_left_content.setBackground(new java.awt.Color(255, 255, 255));
         login_left_content.setLayout(new java.awt.GridBagLayout());
@@ -259,6 +260,7 @@ public class loginPanel extends javax.swing.JPanel {
 
         add(login_page, "login_page");
 
+        sign_up.setPreferredSize(new java.awt.Dimension(800, 500));
         sign_up.setLayout(new java.awt.BorderLayout());
 
         signup_content.setBackground(new java.awt.Color(255, 255, 255));

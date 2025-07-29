@@ -1,8 +1,8 @@
-package amc.view;
+package amc.view.manager;
 
-public class viewCommentPanel extends javax.swing.JPanel {
+public class CommentLs extends javax.swing.JPanel {
 
-    public viewCommentPanel() {
+    public CommentLs() {
         initComponents();
         
     }

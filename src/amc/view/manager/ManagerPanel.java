@@ -1,8 +1,19 @@
-package amc.view;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package amc.view.manager;
 
-public class reportPanel extends javax.swing.JPanel {
+/**
+ *
+ * @author heeth
+ */
+public class ManagerPanel extends javax.swing.JPanel {
 
-    public reportPanel() {
+    /**
+     * Creates new form managerPanel
+     */
+    public ManagerPanel() {
         initComponents();
     }
 
@@ -15,8 +26,8 @@ public class reportPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setPreferredSize(new java.awt.Dimension(1000, 800));
-        setLayout(new java.awt.BorderLayout());
+        setPreferredSize(new java.awt.Dimension(800, 500));
+        setLayout(new java.awt.CardLayout());
     }// </editor-fold>//GEN-END:initComponents
 
 
