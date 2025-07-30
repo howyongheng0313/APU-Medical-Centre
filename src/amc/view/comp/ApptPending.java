@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package amc.view.appointment;
+package amc.view.comp;
 
 /**
  *
  * @author kzy
  */
-public class Processing extends javax.swing.JPanel {
+public class ApptPending extends javax.swing.JPanel {
 
     /**
      * Creates new form Processing
      */
-    public Processing() {
+    public ApptPending() {
         initComponents();
     }
 
@@ -31,8 +31,8 @@ public class Processing extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        amcPicture1 = new amc.view.comp.AmcPicture();
+        amcPicture2 = new amc.view.comp.AmcPicture();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -100,19 +100,21 @@ public class Processing extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         jPanel1.add(jComboBox1, gridBagConstraints);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient_30.png"))); // NOI18N
-        jLabel5.setPreferredSize(new java.awt.Dimension(30, 30));
+        amcPicture1.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient_30.png"))); // NOI18N
+        amcPicture1.set$max_size(new java.awt.Dimension(30, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        jPanel1.add(jLabel5, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(amcPicture1, gridBagConstraints);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor_30.png"))); // NOI18N
-        jLabel6.setPreferredSize(new java.awt.Dimension(30, 30));
+        amcPicture2.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor_30.png"))); // NOI18N
+        amcPicture2.set$max_size(new java.awt.Dimension(30, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        jPanel1.add(jLabel6, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(amcPicture2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -161,6 +163,8 @@ public class Processing extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private amc.view.comp.AmcPicture amcPicture1;
+    private amc.view.comp.AmcPicture amcPicture2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -168,8 +172,6 @@ public class Processing extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;

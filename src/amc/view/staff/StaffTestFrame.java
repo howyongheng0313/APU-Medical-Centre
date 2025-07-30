@@ -8,14 +8,14 @@ package amc.view.staff;
  *
  * @author kzy
  */
-public class TestFrame extends javax.swing.JFrame {
+public class StaffTestFrame extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TestFrame.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffTestFrame.class.getName());
 
     /**
      * Creates new form TestFrame
      */
-    public TestFrame() {
+    public StaffTestFrame() {
         initComponents();
     }
 
@@ -26,10 +26,11 @@ public class TestFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bookingPanel2 = new amc.view.staff.BookingPanel();
+        bookingPanel1 = new amc.view.staff.BookingPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(bookingPanel2, java.awt.BorderLayout.CENTER);
+        setBackground(new java.awt.Color(51, 255, 204));
+        getContentPane().add(bookingPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -56,10 +57,10 @@ public class TestFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TestFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new StaffTestFrame().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.staff.BookingPanel bookingPanel2;
+    private amc.view.staff.BookingPanel bookingPanel1;
     // End of variables declaration//GEN-END:variables
 }
