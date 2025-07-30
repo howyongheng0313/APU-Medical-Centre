@@ -37,7 +37,7 @@ public class menuFrame extends javax.swing.JFrame {
         login_service1 = new javax.swing.JPanel();
         btnLogin1 = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(10000, 100));
-        serviceEdit1 = new amc.view.manager.ServiceEdit();
+        dashboard2 = new amc.view.manager.Dashboard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 800));
@@ -135,7 +135,7 @@ public class menuFrame extends javax.swing.JFrame {
         main.add(login_menu1, "card2");
 
         getContentPane().add(main, java.awt.BorderLayout.PAGE_START);
-        getContentPane().add(serviceEdit1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(dashboard2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,6 +185,7 @@ public class menuFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnDoctors1;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLogin1;
+    private amc.view.manager.Dashboard dashboard2;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JPanel login_base;
@@ -194,6 +195,5 @@ public class menuFrame extends javax.swing.JFrame {
     private javax.swing.JPanel login_service;
     private javax.swing.JPanel login_service1;
     private javax.swing.JPanel main;
-    private amc.view.manager.ServiceEdit serviceEdit1;
     // End of variables declaration//GEN-END:variables
 }

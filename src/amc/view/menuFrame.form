@@ -255,7 +255,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="amc.view.manager.ServiceEdit" name="serviceEdit1">
+    <Component class="amc.view.manager.Dashboard" name="dashboard2">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>
