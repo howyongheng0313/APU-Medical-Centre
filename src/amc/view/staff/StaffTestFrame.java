@@ -26,11 +26,13 @@ public class StaffTestFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bookingPanel1 = new amc.view.staff.BookingPanel();
+        amcDateField2 = new amc.view.comp.AmcDateField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 204));
-        getContentPane().add(bookingPanel1, java.awt.BorderLayout.CENTER);
+
+        amcDateField2.setText("amcDateField2");
+        getContentPane().add(amcDateField2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -61,6 +63,6 @@ public class StaffTestFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.staff.BookingPanel bookingPanel1;
+    private amc.view.comp.AmcDateField amcDateField2;
     // End of variables declaration//GEN-END:variables
 }

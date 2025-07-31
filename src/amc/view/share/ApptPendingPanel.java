@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-package amc.view.comp;
+package amc.view.share;
 
-/**
- *
- * @author kzy
- */
-public class ApptPending extends javax.swing.JPanel {
+public class ApptPendingPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form Processing
      */
-    public ApptPending() {
+    public ApptPendingPanel() {
         initComponents();
     }
 

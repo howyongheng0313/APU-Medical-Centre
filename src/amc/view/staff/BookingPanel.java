@@ -28,8 +28,8 @@ public class BookingPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        processing1 = new amc.view.comp.ApptPending();
-        processing2 = new amc.view.comp.ApptPending();
+        processing1 = new amc.view.share.ApptPendingPanel();
+        processing2 = new amc.view.share.ApptPendingPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -106,7 +106,7 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private amc.view.comp.ApptPending processing1;
-    private amc.view.comp.ApptPending processing2;
+    private amc.view.share.ApptPendingPanel processing1;
+    private amc.view.share.ApptPendingPanel processing2;
     // End of variables declaration//GEN-END:variables
 }
