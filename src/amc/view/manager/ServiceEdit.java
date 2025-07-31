@@ -59,9 +59,9 @@ public class ServiceEdit extends javax.swing.JPanel {
         jtfSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         crudButtons = new javax.swing.JPanel();
-        btnCreate = new amc.view.manager.GlossyPillButton();
-        btnUpdate = new amc.view.manager.GlossyPillButton();
-        btnDelete = new amc.view.manager.GlossyPillButton();
+        btnCreate = new amc.view.comp.AmcButton();
+        btnUpdate = new amc.view.comp.AmcButton();
+        btnDelete = new amc.view.comp.AmcButton();
         servicesTable = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(32767, 0));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(32767, 0));
@@ -247,10 +247,11 @@ public class ServiceEdit extends javax.swing.JPanel {
             .addComponent(main1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
         );
 
+        setBackground(new java.awt.Color(245, 253, 253));
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new java.awt.BorderLayout());
 
-        servicesFilter.setBackground(new java.awt.Color(224, 247, 247));
+        servicesFilter.setBackground(new java.awt.Color(245, 253, 253));
         servicesFilter.setForeground(new java.awt.Color(224, 247, 247));
         servicesFilter.setPreferredSize(new java.awt.Dimension(864, 70));
 
@@ -271,12 +272,17 @@ public class ServiceEdit extends javax.swing.JPanel {
             }
         });
 
-        btnSearch.setBackground(new java.awt.Color(0, 139, 139));
+        btnSearch.setBackground(new java.awt.Color(0, 153, 153));
         btnSearch.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(255, 255, 255));
         btnSearch.setText("Search");
         btnSearch.setBorder(null);
         btnSearch.setPreferredSize(new java.awt.Dimension(72, 25));
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout servicesFilterLayout = new javax.swing.GroupLayout(servicesFilter);
         servicesFilter.setLayout(servicesFilterLayout);
@@ -306,10 +312,10 @@ public class ServiceEdit extends javax.swing.JPanel {
 
         add(servicesFilter, java.awt.BorderLayout.PAGE_START);
 
-        crudButtons.setBackground(new java.awt.Color(224, 247, 247));
+        crudButtons.setBackground(new java.awt.Color(245, 253, 253));
         crudButtons.setLayout(new java.awt.GridBagLayout());
 
-        btnCreate.setBackground(new java.awt.Color(0, 139, 139));
+        btnCreate.setBackground(new java.awt.Color(0, 153, 153));
         btnCreate.setForeground(new java.awt.Color(255, 255, 255));
         btnCreate.setText("Create");
         btnCreate.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
@@ -322,7 +328,7 @@ public class ServiceEdit extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         crudButtons.add(btnCreate, gridBagConstraints);
 
-        btnUpdate.setBackground(new java.awt.Color(0, 139, 139));
+        btnUpdate.setBackground(new java.awt.Color(0, 153, 153));
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
@@ -335,7 +341,7 @@ public class ServiceEdit extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         crudButtons.add(btnUpdate, gridBagConstraints);
 
-        btnDelete.setBackground(new java.awt.Color(0, 139, 139));
+        btnDelete.setBackground(new java.awt.Color(0, 153, 153));
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
@@ -352,7 +358,14 @@ public class ServiceEdit extends javax.swing.JPanel {
 
         servicesTable.setBackground(new java.awt.Color(224, 247, 247));
         servicesTable.setLayout(new java.awt.BorderLayout());
+
+        filler1.setAutoscrolls(true);
+        filler1.setBackground(new java.awt.Color(245, 253, 253));
+        filler1.setOpaque(true);
         servicesTable.add(filler1, java.awt.BorderLayout.LINE_END);
+
+        filler2.setBackground(new java.awt.Color(245, 253, 253));
+        filler2.setOpaque(true);
         servicesTable.add(filler2, java.awt.BorderLayout.LINE_START);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -366,7 +379,14 @@ public class ServiceEdit extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         servicesTable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        filler3.setAutoscrolls(true);
+        filler3.setBackground(new java.awt.Color(245, 253, 253));
+        filler3.setOpaque(true);
         servicesTable.add(filler3, java.awt.BorderLayout.PAGE_START);
+
+        filler4.setBackground(new java.awt.Color(245, 253, 253));
+        filler4.setOpaque(true);
         servicesTable.add(filler4, java.awt.BorderLayout.PAGE_END);
 
         add(servicesTable, java.awt.BorderLayout.CENTER);
@@ -471,14 +491,18 @@ public class ServiceEdit extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private amc.view.manager.GlossyPillButton btnCreate;
-    private amc.view.manager.GlossyPillButton btnDelete;
+    private amc.view.comp.AmcButton btnCreate;
+    private amc.view.comp.AmcButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
-    private amc.view.manager.GlossyPillButton btnUpdate;
+    private amc.view.comp.AmcButton btnUpdate;
     private javax.swing.JPanel button;
     private javax.swing.JPanel button1;
     private javax.swing.JDialog createService;

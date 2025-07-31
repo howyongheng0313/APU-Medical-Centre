@@ -50,9 +50,9 @@ public class MedicineEdit extends javax.swing.JPanel {
         button1 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         medicineButtons = new javax.swing.JPanel();
-        btnCreate = new amc.view.manager.GlossyPillButton();
-        btnUpdate = new amc.view.manager.GlossyPillButton();
-        btnDelete = new amc.view.manager.GlossyPillButton();
+        btnCreate = new amc.view.comp.AmcButton();
+        btnUpdate = new amc.view.comp.AmcButton();
+        btnDelete = new amc.view.comp.AmcButton();
         medicineDetails = new javax.swing.JPanel();
         medicineLabel = new javax.swing.JPanel();
         medicineFilter = new javax.swing.JPanel();
@@ -321,7 +321,7 @@ public class MedicineEdit extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(69, 185, 174));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/amc/Pharmacist（2）.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/amc/image/bg_medicine_room.jpg"))); // NOI18N
         medicineLabel.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         filler4.setBackground(new java.awt.Color(255, 255, 255));
@@ -471,11 +471,11 @@ public class MedicineEdit extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private amc.view.manager.GlossyPillButton btnCreate;
-    private amc.view.manager.GlossyPillButton btnDelete;
+    private amc.view.comp.AmcButton btnCreate;
+    private amc.view.comp.AmcButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
-    private amc.view.manager.GlossyPillButton btnUpdate;
+    private amc.view.comp.AmcButton btnUpdate;
     private javax.swing.JPanel button;
     private javax.swing.JPanel button1;
     private javax.swing.JDialog createMedicine;

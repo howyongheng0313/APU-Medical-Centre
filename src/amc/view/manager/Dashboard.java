@@ -15,7 +15,6 @@ public class Dashboard extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         main = new javax.swing.JPanel();
         filter = new javax.swing.JPanel();

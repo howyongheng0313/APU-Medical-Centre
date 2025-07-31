@@ -29,11 +29,11 @@ public class UiUtils {
     
     // Custom comboBox style
     public static void styleComboBox(JComboBox comboBox) {
-        comboBox.setBorder(BorderFactory.createEmptyBorder()); // remove border
-        comboBox.setFocusable(false); // prevent ugly focus border
-        comboBox.setBackground(Color.WHITE); // or match your panel color
+        comboBox.setBorder(BorderFactory.createEmptyBorder()); 
+        comboBox.setFocusable(false); 
+        comboBox.setBackground(Color.WHITE); 
         comboBox.setForeground(Color.BLACK);
-        comboBox.setCursor(new Cursor(Cursor.HAND_CURSOR)); // nice touch
+        comboBox.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
 
     }
 }

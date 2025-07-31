@@ -1,4 +1,4 @@
-package amc.view;
+package amc.view.share;
 
 import amc.view.manager.UiUtils;
 
@@ -37,16 +37,14 @@ public class menuFrame extends javax.swing.JFrame {
         login_service1 = new javax.swing.JPanel();
         btnLogin1 = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(10000, 100));
-        dashboard2 = new amc.view.manager.Dashboard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 800));
 
         main.setBackground(new java.awt.Color(255, 255, 255));
         main.setPreferredSize(new java.awt.Dimension(1000, 60));
         main.setLayout(new java.awt.CardLayout());
 
-        login_menu.setBackground(new java.awt.Color(255, 255, 255));
+        login_menu.setBackground(new java.awt.Color(0, 139, 139));
         login_menu.setPreferredSize(new java.awt.Dimension(800, 50));
         login_menu.setLayout(new javax.swing.BoxLayout(login_menu, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -55,9 +53,11 @@ public class menuFrame extends javax.swing.JFrame {
         login_base.setPreferredSize(new java.awt.Dimension(300, 50));
         login_base.setLayout(new java.awt.GridLayout(1, 0));
 
+        btnDepartment.setBackground(new java.awt.Color(0, 139, 139));
         btnDepartment.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDepartment.setText("Department");
         btnDepartment.setBorder(null);
+        btnDepartment.setOpaque(true);
         btnDepartment.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnDepartmentMouseEntered(evt);
@@ -70,6 +70,7 @@ public class menuFrame extends javax.swing.JFrame {
         });
         login_base.add(btnDepartment);
 
+        btnDoctors.setBackground(new java.awt.Color(0, 139, 139));
         btnDoctors.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDoctors.setText("Doctors");
         btnDoctors.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -77,11 +78,12 @@ public class menuFrame extends javax.swing.JFrame {
 
         login_menu.add(login_base);
 
-        login_service.setBackground(new java.awt.Color(255, 255, 255));
+        login_service.setBackground(new java.awt.Color(0, 139, 139));
         login_service.setPreferredSize(new java.awt.Dimension(520, 50));
         login_service.setLayout(new java.awt.GridLayout(1, 0));
         login_menu.add(login_service);
 
+        btnLogin.setBackground(new java.awt.Color(0, 139, 139));
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLogin.setText("Login");
         btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -135,7 +137,6 @@ public class menuFrame extends javax.swing.JFrame {
         main.add(login_menu1, "card2");
 
         getContentPane().add(main, java.awt.BorderLayout.PAGE_START);
-        getContentPane().add(dashboard2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,7 +186,6 @@ public class menuFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnDoctors1;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLogin1;
-    private amc.view.manager.Dashboard dashboard2;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JPanel login_base;

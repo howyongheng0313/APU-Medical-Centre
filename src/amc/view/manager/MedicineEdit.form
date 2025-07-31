@@ -478,7 +478,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
       <SubComponents>
-        <Component class="amc.view.manager.GlossyPillButton" name="btnCreate">
+        <Component class="amc.view.comp.AmcButton" name="btnCreate">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="8b" green="8b" red="0" type="rgb"/>
@@ -500,7 +500,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="amc.view.manager.GlossyPillButton" name="btnUpdate">
+        <Component class="amc.view.comp.AmcButton" name="btnUpdate">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="8b" green="8b" red="0" type="rgb"/>
@@ -519,7 +519,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="amc.view.manager.GlossyPillButton" name="btnDelete">
+        <Component class="amc.view.comp.AmcButton" name="btnDelete">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="8b" green="8b" red="0" type="rgb"/>
@@ -648,7 +648,7 @@
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/amc/Pharmacist&#xff08;2&#xff09;.jpg"/>
+                  <Image iconType="3" name="/amc/image/bg_medicine_room.jpg"/>
                 </Property>
               </Properties>
               <Constraints>
