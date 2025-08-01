@@ -64,6 +64,7 @@ public class Consultation extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
 
         jButton1.setBackground(new java.awt.Color(0, 139, 139));
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Services");
         jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -80,12 +81,17 @@ public class Consultation extends javax.swing.JPanel {
         jPanel2.add(jButton1, gridBagConstraints);
 
         jButton4.setBackground(new java.awt.Color(0, 139, 139));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Submit");
         jButton4.setAlignmentX(1.5F);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setPreferredSize(new java.awt.Dimension(73, 40));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -115,7 +121,7 @@ public class Consultation extends javax.swing.JPanel {
         jPanel4.setEnabled(false);
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Feedback");
         jLabel3.setPreferredSize(new java.awt.Dimension(100, 32));
@@ -126,7 +132,7 @@ public class Consultation extends javax.swing.JPanel {
         jPanel4.add(textArea1, java.awt.BorderLayout.CENTER);
 
         jButton3.setBackground(new java.awt.Color(0, 139, 139));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Submit");
         jPanel4.add(jButton3, java.awt.BorderLayout.PAGE_END);
@@ -148,6 +154,7 @@ public class Consultation extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
 
         jButton5.setBackground(new java.awt.Color(0, 139, 139));
+        jButton5.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Medicine");
         jButton5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -164,7 +171,7 @@ public class Consultation extends javax.swing.JPanel {
         jPanel3.add(jButton5, gridBagConstraints);
 
         jButton6.setBackground(new java.awt.Color(0, 139, 139));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton6.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Submit");
         jButton6.setPreferredSize(new java.awt.Dimension(120, 35));
@@ -230,6 +237,10 @@ public class Consultation extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
