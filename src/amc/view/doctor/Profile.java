@@ -8,12 +8,12 @@ package amc.view.doctor;
  *
  * @author User
  */
-public class NewJPanel extends javax.swing.JPanel {
+public class Profile extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public NewJPanel() {
+    public Profile() {
         initComponents();
     }
 

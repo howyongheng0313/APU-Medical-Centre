@@ -29,7 +29,7 @@ public class MainPageDoc extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        newJPanel1 = new amc.view.doctor.NewJPanel();
+        newJPanel1 = new amc.view.doctor.Profile();
 
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -66,6 +66,6 @@ public class MainPageDoc extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private amc.view.doctor.NewJPanel newJPanel1;
+    private amc.view.doctor.Profile newJPanel1;
     // End of variables declaration//GEN-END:variables
 }
