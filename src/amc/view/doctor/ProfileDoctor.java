@@ -8,12 +8,12 @@ package amc.view.doctor;
  *
  * @author User
  */
-public class Profile extends javax.swing.JPanel {
+public class ProfileDoctor extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public Profile() {
+    public ProfileDoctor() {
         initComponents();
     }
 
@@ -28,6 +28,7 @@ public class Profile extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -45,7 +46,6 @@ public class Profile extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -57,6 +57,11 @@ public class Profile extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(245, 253, 253));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 500));
         jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/amc/image/9193824 (1).png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
+        jPanel1.add(jLabel17, gridBagConstraints);
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.GridBagLayout());
@@ -237,15 +242,6 @@ public class Profile extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jPanel3, gridBagConstraints);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/amc/view/doctor/9193824 (1).png"))); // NOI18N
-        jLabel2.setToolTipText("");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.weightx = 0.2;
-        gridBagConstraints.weighty = 0.2;
-        jPanel1.add(jLabel2, gridBagConstraints);
-
         jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
@@ -308,7 +304,7 @@ public class Profile extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
