@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package gui;
+package amc.view.doctor;
 
 /**
  *
@@ -34,7 +34,7 @@ public class ProfileDoc extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        profileDoctor2 = new gui.ProfileDoctor();
+        profileDoctor2 = new amc.view.doctor.ProfileDoctor();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -177,6 +177,6 @@ public class ProfileDoc extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private gui.ProfileDoctor profileDoctor2;
+    private amc.view.doctor.ProfileDoctor profileDoctor2;
     // End of variables declaration//GEN-END:variables
 }

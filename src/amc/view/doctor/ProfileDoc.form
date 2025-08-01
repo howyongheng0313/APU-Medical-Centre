@@ -169,7 +169,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="gui.ProfileDoctor" name="profileDoctor2">
+    <Component class="amc.view.doctor.ProfileDoctor" name="profileDoctor2">
     </Component>
   </SubComponents>
 </Form>

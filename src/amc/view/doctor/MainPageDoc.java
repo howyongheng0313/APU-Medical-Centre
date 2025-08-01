@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package gui;
+package amc.view.doctor;
 
 /**
  *
@@ -29,7 +29,7 @@ public class MainPageDoc extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        mainPageDoctor1 = new gui.MainPageDoctor();
+        mainPageDoctor1 = new amc.view.doctor.MainPageDoctor();
 
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -66,6 +66,6 @@ public class MainPageDoc extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private gui.MainPageDoctor mainPageDoctor1;
+    private amc.view.doctor.MainPageDoctor mainPageDoctor1;
     // End of variables declaration//GEN-END:variables
 }
