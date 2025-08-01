@@ -50,7 +50,7 @@ public class cutProfile extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(245, 253, 253));
         jPanel2.setPreferredSize(new java.awt.Dimension(300, 612));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -64,10 +64,11 @@ public class cutProfile extends javax.swing.JPanel {
 
         add(jPanel2, java.awt.BorderLayout.LINE_START);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(245, 253, 253));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 153));
         jLabel2.setText("Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -85,6 +86,7 @@ public class cutProfile extends javax.swing.JPanel {
         jPanel1.add(jTextPane1, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 153, 153));
         jLabel8.setText("Email:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -102,6 +104,7 @@ public class cutProfile extends javax.swing.JPanel {
         jPanel1.add(jTextPane2, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 153, 153));
         jLabel6.setText("Contact:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -120,6 +123,7 @@ public class cutProfile extends javax.swing.JPanel {
         jPanel1.add(jTextPane3, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("ID:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
@@ -139,6 +143,7 @@ public class cutProfile extends javax.swing.JPanel {
         jPanel1.add(jTextPane4, gridBagConstraints);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 153));
         jLabel5.setText("Email:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
@@ -157,6 +162,7 @@ public class cutProfile extends javax.swing.JPanel {
         jPanel1.add(jTextPane5, gridBagConstraints);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 153, 153));
         jLabel7.setText("Password:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
@@ -183,6 +189,7 @@ public class cutProfile extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 18, 0, 0);
         jPanel1.add(jButton2, gridBagConstraints);
 
+        jButton3.setForeground(new java.awt.Color(0, 153, 153));
         jButton3.setText("Past Appointments");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -192,6 +199,7 @@ public class cutProfile extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(91, 45, 0, 0);
         jPanel1.add(jButton3, gridBagConstraints);
 
+        jButton1.setForeground(new java.awt.Color(0, 153, 153));
         jButton1.setText("Edit Profile");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;

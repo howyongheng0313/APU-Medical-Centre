@@ -32,11 +32,15 @@ public class showAppointment extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(245, 253, 253));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 139, 139), null));
 
+        jButton5.setBackground(new java.awt.Color(0, 153, 153));
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Incomplete");
 
+        jButton4.setBackground(new java.awt.Color(0, 153, 153));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Completed");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
