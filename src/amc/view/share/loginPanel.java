@@ -1,0 +1,524 @@
+package amc.view.share;
+import java.awt.*;
+
+public class loginPanel extends javax.swing.JPanel {
+
+    public loginPanel() {
+        initComponents();
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        signup_menu = new javax.swing.JPanel();
+        base1 = new javax.swing.JPanel();
+        btnDepartment1 = new javax.swing.JButton();
+        btnDoctors1 = new javax.swing.JButton();
+        services1 = new javax.swing.JPanel();
+        login_menu = new javax.swing.JPanel();
+        login_base = new javax.swing.JPanel();
+        btnDepartment = new javax.swing.JButton();
+        btnDoctors = new javax.swing.JButton();
+        login_service = new javax.swing.JPanel();
+        login_page = new javax.swing.JPanel();
+        login_content = new javax.swing.JPanel();
+        login_left_content = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        login_right_content = new javax.swing.JPanel();
+        login_logo = new javax.swing.JPanel();
+        lblLogin = new javax.swing.JLabel();
+        login_detail = new javax.swing.JPanel();
+        login_details = new javax.swing.JPanel();
+        lblLoginID = new javax.swing.JLabel();
+        jtfUsername = new javax.swing.JTextField();
+        lblPassword = new javax.swing.JLabel();
+        jtfPassword = new javax.swing.JPasswordField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        btnLogin = new javax.swing.JButton();
+        signup = new javax.swing.JPanel();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        btnSignUp = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        sign_up = new javax.swing.JPanel();
+        signup_content = new javax.swing.JPanel();
+        logo = new javax.swing.JPanel();
+        signup_detail = new javax.swing.JPanel();
+        signup_details = new javax.swing.JPanel();
+        jtfICnumber = new javax.swing.JTextField();
+        jtfCustomerName = new javax.swing.JTextField();
+        jtfEmail = new javax.swing.JTextField();
+        jtfContact = new javax.swing.JTextField();
+        jcbGender = new javax.swing.JComboBox<>();
+        btnSignup = new javax.swing.JButton();
+        filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 15), new java.awt.Dimension(0, 0));
+
+        signup_menu.setBackground(new java.awt.Color(255, 255, 255));
+        signup_menu.setPreferredSize(new java.awt.Dimension(808, 50));
+        signup_menu.setLayout(new java.awt.GridLayout(1, 0));
+
+        base1.setBackground(new java.awt.Color(255, 255, 255));
+        base1.setPreferredSize(new java.awt.Dimension(300, 50));
+        base1.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnDepartment1.setText("Department");
+        btnDepartment1.setBorder(null);
+        btnDepartment1.setOpaque(true);
+        base1.add(btnDepartment1);
+
+        btnDoctors1.setText("Doctors");
+        btnDoctors1.setBorder(null);
+        base1.add(btnDoctors1);
+
+        signup_menu.add(base1);
+
+        services1.setBackground(new java.awt.Color(255, 255, 255));
+        services1.setPreferredSize(new java.awt.Dimension(520, 50));
+
+        javax.swing.GroupLayout services1Layout = new javax.swing.GroupLayout(services1);
+        services1.setLayout(services1Layout);
+        services1Layout.setHorizontalGroup(
+            services1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 458, Short.MAX_VALUE)
+        );
+        services1Layout.setVerticalGroup(
+            services1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        signup_menu.add(services1);
+
+        login_menu.setBackground(new java.awt.Color(255, 255, 255));
+        login_menu.setPreferredSize(new java.awt.Dimension(800, 50));
+        login_menu.setLayout(new java.awt.GridLayout(1, 0));
+
+        login_base.setBackground(new java.awt.Color(255, 255, 255));
+        login_base.setPreferredSize(new java.awt.Dimension(300, 50));
+        login_base.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnDepartment.setText("Department");
+        btnDepartment.setBorder(null);
+        btnDepartment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDepartmentMouseEntered(evt);
+            }
+        });
+        btnDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDepartmentActionPerformed(evt);
+            }
+        });
+        login_base.add(btnDepartment);
+
+        btnDoctors.setText("Doctors");
+        btnDoctors.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        login_base.add(btnDoctors);
+
+        login_menu.add(login_base);
+
+        login_service.setBackground(new java.awt.Color(255, 255, 255));
+        login_service.setPreferredSize(new java.awt.Dimension(520, 50));
+
+        javax.swing.GroupLayout login_serviceLayout = new javax.swing.GroupLayout(login_service);
+        login_service.setLayout(login_serviceLayout);
+        login_serviceLayout.setHorizontalGroup(
+            login_serviceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 458, Short.MAX_VALUE)
+        );
+        login_serviceLayout.setVerticalGroup(
+            login_serviceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        login_menu.add(login_service);
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(800, 500));
+        setLayout(new java.awt.CardLayout());
+
+        login_page.setBackground(new java.awt.Color(255, 255, 255));
+        login_page.setPreferredSize(new java.awt.Dimension(800, 500));
+        login_page.setLayout(new java.awt.BorderLayout());
+
+        login_content.setLayout(new java.awt.GridLayout(1, 0));
+
+        login_left_content.setBackground(new java.awt.Color(255, 255, 255));
+        login_left_content.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/amc/image/logo_clover.png"))); // NOI18N
+        login_left_content.add(jLabel1, new java.awt.GridBagConstraints());
+
+        login_content.add(login_left_content);
+
+        login_right_content.setBackground(new java.awt.Color(0, 153, 153));
+        login_right_content.setLayout(new javax.swing.BoxLayout(login_right_content, javax.swing.BoxLayout.Y_AXIS));
+
+        login_logo.setBackground(new java.awt.Color(0, 153, 153));
+        login_logo.setLayout(new java.awt.GridBagLayout());
+
+        lblLogin.setBackground(new java.awt.Color(255, 255, 255));
+        lblLogin.setFont(new java.awt.Font("SansSerif", 1, 80)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
+        lblLogin.setText("Login");
+        login_logo.add(lblLogin, new java.awt.GridBagConstraints());
+
+        login_right_content.add(login_logo);
+
+        login_detail.setBackground(new java.awt.Color(0, 153, 153));
+        login_detail.setLayout(new java.awt.GridBagLayout());
+
+        login_details.setBackground(new java.awt.Color(0, 153, 153));
+        login_details.setLayout(new java.awt.GridLayout(3, 2, 50, 20));
+
+        lblLoginID.setBackground(new java.awt.Color(0, 153, 153));
+        lblLoginID.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        lblLoginID.setForeground(new java.awt.Color(255, 255, 255));
+        lblLoginID.setText("Login ID:");
+        login_details.add(lblLoginID);
+
+        jtfUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfUsernameActionPerformed(evt);
+            }
+        });
+        login_details.add(jtfUsername);
+
+        lblPassword.setBackground(new java.awt.Color(255, 255, 255));
+        lblPassword.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        lblPassword.setForeground(new java.awt.Color(255, 255, 255));
+        lblPassword.setText("Password:");
+        login_details.add(lblPassword);
+
+        jtfPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPasswordActionPerformed(evt);
+            }
+        });
+        login_details.add(jtfPassword);
+        login_details.add(filler1);
+
+        btnLogin.setFont(new java.awt.Font("STZhongsong", 1, 14)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(0, 153, 153));
+        btnLogin.setText("Login");
+        btnLogin.setBorder(null);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        login_details.add(btnLogin);
+
+        login_detail.add(login_details, new java.awt.GridBagConstraints());
+
+        login_right_content.add(login_detail);
+
+        signup.setBackground(new java.awt.Color(0, 153, 153));
+        signup.setPreferredSize(new java.awt.Dimension(250, 200));
+        signup.setLayout(new java.awt.GridLayout(3, 3, 0, 20));
+        signup.add(filler4);
+        signup.add(filler5);
+        signup.add(filler2);
+        signup.add(filler8);
+
+        btnSignUp.setBackground(new java.awt.Color(0, 204, 204));
+        btnSignUp.setFont(new java.awt.Font("STZhongsong", 1, 14)); // NOI18N
+        btnSignUp.setText("Sign Up");
+        btnSignUp.setBorder(null);
+        btnSignUp.setPreferredSize(new java.awt.Dimension(100, 20));
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignUpActionPerformed(evt);
+            }
+        });
+        signup.add(btnSignUp);
+        signup.add(filler3);
+        signup.add(filler6);
+        signup.add(filler7);
+        signup.add(filler9);
+
+        login_right_content.add(signup);
+
+        login_content.add(login_right_content);
+
+        login_page.add(login_content, java.awt.BorderLayout.CENTER);
+
+        add(login_page, "login_page");
+
+        sign_up.setPreferredSize(new java.awt.Dimension(800, 500));
+        sign_up.setLayout(new java.awt.BorderLayout());
+
+        signup_content.setBackground(new java.awt.Color(255, 255, 255));
+        signup_content.setLayout(new java.awt.BorderLayout());
+
+        logo.setBackground(new java.awt.Color(255, 255, 255));
+        logo.setForeground(new java.awt.Color(255, 255, 255));
+        logo.setPreferredSize(new java.awt.Dimension(829, 250));
+        logo.setLayout(new java.awt.BorderLayout());
+        signup_content.add(logo, java.awt.BorderLayout.PAGE_START);
+
+        signup_detail.setBackground(new java.awt.Color(255, 255, 255));
+        signup_detail.setForeground(new java.awt.Color(255, 255, 255));
+        java.awt.GridBagLayout signup_detailLayout = new java.awt.GridBagLayout();
+        signup_detailLayout.columnWidths = new int[] {1, 1, 1};
+        signup_detailLayout.columnWeights = new double[] {1.0, 1.0, 1.0};
+        signup_detail.setLayout(signup_detailLayout);
+
+        signup_details.setBackground(new java.awt.Color(255, 255, 255));
+        signup_details.setForeground(new java.awt.Color(255, 255, 255));
+        java.awt.GridBagLayout signup_detailsLayout = new java.awt.GridBagLayout();
+        signup_detailsLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0};
+        signup_detailsLayout.columnWeights = new double[] {1.0};
+        signup_detailsLayout.rowWeights = new double[] {1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+        signup_details.setLayout(signup_detailsLayout);
+
+        jtfICnumber.setText("Enter your identification number");
+        jtfICnumber.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jtfICnumber.setPreferredSize(new java.awt.Dimension(74, 35));
+        jtfICnumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfICnumberFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfICnumberFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        signup_details.add(jtfICnumber, gridBagConstraints);
+
+        jtfCustomerName.setText("Enter your full name");
+        jtfCustomerName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jtfCustomerName.setPreferredSize(new java.awt.Dimension(74, 35));
+        jtfCustomerName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfCustomerNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfCustomerNameFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        signup_details.add(jtfCustomerName, gridBagConstraints);
+
+        jtfEmail.setText("Enter your email");
+        jtfEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jtfEmail.setPreferredSize(new java.awt.Dimension(74, 35));
+        jtfEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfEmailFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        signup_details.add(jtfEmail, gridBagConstraints);
+
+        jtfContact.setText("Enter your contact number");
+        jtfContact.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jtfContact.setPreferredSize(new java.awt.Dimension(74, 35));
+        jtfContact.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtfContactFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfContactFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        signup_details.add(jtfContact, gridBagConstraints);
+
+        jcbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        jcbGender.setToolTipText("");
+        jcbGender.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jcbGender.setPreferredSize(new java.awt.Dimension(74, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        signup_details.add(jcbGender, gridBagConstraints);
+
+        btnSignup.setBackground(new java.awt.Color(0, 204, 204));
+        btnSignup.setText("Sign Up");
+        btnSignup.setBorder(null);
+        btnSignup.setPreferredSize(new java.awt.Dimension(72, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        signup_details.add(btnSignup, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weighty = 1.0;
+        signup_detail.add(signup_details, gridBagConstraints);
+
+        signup_content.add(signup_detail, java.awt.BorderLayout.CENTER);
+        signup_content.add(filler10, java.awt.BorderLayout.PAGE_END);
+
+        sign_up.add(signup_content, java.awt.BorderLayout.CENTER);
+
+        add(sign_up, "sign_up_page");
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDepartmentMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDepartmentMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDepartmentMouseEntered
+
+    private void btnDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepartmentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDepartmentActionPerformed
+
+    private void jtfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfUsernameActionPerformed
+
+    private void jtfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPasswordActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout) this.getLayout();
+        layout.show (this, "sign_up_page");
+    }//GEN-LAST:event_btnSignUpActionPerformed
+
+    private void jtfICnumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfICnumberFocusGained
+        // TODO add your handling code here:
+        if(jtfICnumber.getText().equals("Enter your identification number")){
+            jtfICnumber.setText("");
+            jtfICnumber.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jtfICnumberFocusGained
+
+    private void jtfICnumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfICnumberFocusLost
+        // TODO add your handling code here:
+        if(jtfICnumber.getText().equals("")){
+            jtfICnumber.setText("Enter your identification number");
+            jtfICnumber.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jtfICnumberFocusLost
+
+    private void jtfCustomerNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCustomerNameFocusGained
+        // TODO add your handling code here:
+        if(jtfCustomerName.getText().equals("Enter your full name")){
+            jtfCustomerName.setText("");
+            jtfCustomerName.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jtfCustomerNameFocusGained
+
+    private void jtfCustomerNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCustomerNameFocusLost
+        // TODO add your handling code here:
+        if(jtfCustomerName.getText().equals("")){
+            jtfCustomerName.setText("Enter your full name");
+            jtfCustomerName.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jtfCustomerNameFocusLost
+
+    private void jtfEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfEmailFocusGained
+        // TODO add your handling code here:
+        if(jtfEmail.getText().equals("Enter your email")){
+            jtfEmail.setText("");
+            jtfEmail.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jtfEmailFocusGained
+
+    private void jtfEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfEmailFocusLost
+        // TODO add your handling code here:
+        if(jtfEmail.getText().equals("")){
+            jtfEmail.setText("Enter your email");
+            jtfEmail.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jtfEmailFocusLost
+
+    private void jtfContactFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfContactFocusGained
+        // TODO add your handling code here:
+        if(jtfContact.getText().equals("Enter your contact number")){
+            jtfContact.setText("");
+            jtfContact.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jtfContactFocusGained
+
+    private void jtfContactFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfContactFocusLost
+        // TODO add your handling code here:
+        if(jtfContact.getText().equals("")){
+            jtfContact.setText("Enter your contact number");
+            jtfContact.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_jtfContactFocusLost
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel base1;
+    private javax.swing.JButton btnDepartment;
+    private javax.swing.JButton btnDepartment1;
+    private javax.swing.JButton btnDoctors;
+    private javax.swing.JButton btnDoctors1;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSignUp;
+    private javax.swing.JButton btnSignup;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler10;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.Box.Filler filler8;
+    private javax.swing.Box.Filler filler9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jcbGender;
+    private javax.swing.JTextField jtfContact;
+    private javax.swing.JTextField jtfCustomerName;
+    private javax.swing.JTextField jtfEmail;
+    private javax.swing.JTextField jtfICnumber;
+    private javax.swing.JPasswordField jtfPassword;
+    private javax.swing.JTextField jtfUsername;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblLoginID;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JPanel login_base;
+    private javax.swing.JPanel login_content;
+    private javax.swing.JPanel login_detail;
+    private javax.swing.JPanel login_details;
+    private javax.swing.JPanel login_left_content;
+    private javax.swing.JPanel login_logo;
+    private javax.swing.JPanel login_menu;
+    private javax.swing.JPanel login_page;
+    private javax.swing.JPanel login_right_content;
+    private javax.swing.JPanel login_service;
+    private javax.swing.JPanel logo;
+    private javax.swing.JPanel services1;
+    private javax.swing.JPanel sign_up;
+    private javax.swing.JPanel signup;
+    private javax.swing.JPanel signup_content;
+    private javax.swing.JPanel signup_detail;
+    private javax.swing.JPanel signup_details;
+    private javax.swing.JPanel signup_menu;
+    // End of variables declaration//GEN-END:variables
+}
