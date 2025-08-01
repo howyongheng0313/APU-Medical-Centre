@@ -29,12 +29,12 @@ public class MainPageDoc extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        mainPageDoctor1 = new amc.view.doctor.MainPageDoctor();
+        newJPanel1 = new amc.view.doctor.NewJPanel();
 
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(mainPageDoctor1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(newJPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -66,6 +66,6 @@ public class MainPageDoc extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private amc.view.doctor.MainPageDoctor mainPageDoctor1;
+    private amc.view.doctor.NewJPanel newJPanel1;
     // End of variables declaration//GEN-END:variables
 }
