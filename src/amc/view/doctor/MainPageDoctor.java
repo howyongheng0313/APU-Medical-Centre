@@ -15,6 +15,8 @@ public class MainPageDoctor extends javax.swing.JPanel {
      */
     public MainPageDoctor() {
         initComponents();
+        Appointment apt = new Appointment();
+        apt.view_appointment(jTable1);
     }
 
     /**
