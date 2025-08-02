@@ -7,8 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 public class AmcDateField extends JTextField {
-    private LocalDate $date;
-    private CalendarDialog $calendar;
+    private LocalDate $date = LocalDate.now();
 
     public LocalDate get$date() {
         return $date;
@@ -25,10 +24,13 @@ public class AmcDateField extends JTextField {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                AmcDateField.this.$calendar.setVisible(true);
+                CalendarDialog calendar = new CalendarDialog(
+                    (JFrame) SwingUtilities.getWindowAncestor(AmcDateField.this),
+                    AmcDateField.this.$date,
+                    AmcDateField.this::set$date
+                );
+                calendar.setVisible(true);
             }
         });
-        this.$calendar = new CalendarDialog((JFrame)SwingUtilities.getWindowAncestor(this), false);
-        this.$calendar.set$outHandle(this::set$date);
     }
 }

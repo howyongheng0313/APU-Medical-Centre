@@ -8,14 +8,14 @@ package amc.view.staff;
  *
  * @author kzy
  */
-public class StaffTestFrame extends javax.swing.JFrame {
+public class TestFrame extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffTestFrame.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TestFrame.class.getName());
 
     /**
      * Creates new form TestFrame
      */
-    public StaffTestFrame() {
+    public TestFrame() {
         initComponents();
     }
 
@@ -26,13 +26,29 @@ public class StaffTestFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        amcDateField2 = new amc.view.comp.AmcDateField();
+        amcDateField1 = new amc.view.comp.AmcDateField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(51, 255, 204));
 
-        amcDateField2.setText("amcDateField2");
-        getContentPane().add(amcDateField2, java.awt.BorderLayout.CENTER);
+        amcDateField1.setText("");
+        amcDateField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addComponent(amcDateField1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(amcDateField1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(137, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -59,10 +75,10 @@ public class StaffTestFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new StaffTestFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TestFrame().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.comp.AmcDateField amcDateField2;
+    private amc.view.comp.AmcDateField amcDateField1;
     // End of variables declaration//GEN-END:variables
 }
