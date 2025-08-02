@@ -25,7 +25,6 @@ public class Dashboard extends javax.swing.JPanel {
         lblSelectReport = new javax.swing.JLabel();
         cbxReportType = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jYearChooser2 = new com.toedter.calendar.JYearChooser();
         jButton1 = new javax.swing.JButton();
         reports = new javax.swing.JPanel();
         patientNumberReport = new javax.swing.JPanel();
@@ -81,7 +80,6 @@ public class Dashboard extends javax.swing.JPanel {
                     .addComponent(lblSelectReport, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxReportType, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jYearChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -94,9 +92,7 @@ public class Dashboard extends javax.swing.JPanel {
                 .addComponent(cbxReportType, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jYearChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(55, 55, 55)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(128, Short.MAX_VALUE))
         );
@@ -176,7 +172,6 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel incomeReport;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
-    private com.toedter.calendar.JYearChooser jYearChooser2;
     private javax.swing.JLabel lblSelectReport;
     private javax.swing.JPanel main;
     private javax.swing.JPanel patientNumberReport;
