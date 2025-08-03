@@ -1,6 +1,6 @@
 package amc.model;
 
-import amc.controller.ROps;
+import amc.controller.DbMan;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,10 +33,10 @@ public class MyModel {
 
     public static void main(String[] args) {
         Path my_P = Path.of("./database/MyModel.txt");
-        DbHandle<MyModel> my_T = new DbHandle<> (DbRow.MYMODEL, my_P);
+        DbHandle<MyModel> my_T = new DbHandle<> (DbAdapter.MYMODEL, my_P);
         List<MyModel> snowLs = new ArrayList<> ();
         snowLs.add(new MyModel(LocalDate.now(), 175));
 //        my_T.insert(snowLs);
-        my_T.update(-1, ROps.checkId(174), ROps.birthPlus());
+        my_T.update(-1, DbMan.checkId(174), DbMan.birthPlus());
     }
 }

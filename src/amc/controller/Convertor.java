@@ -3,11 +3,11 @@ package amc.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public interface Convert<E> {
+public interface Convertor<E> {
     public E convert(String element);
     public String strify(E element);
 
-    public static final Convert<LocalDate> DATE = new Convert<>() {
+    public static final Convertor<LocalDate> DATE = new Convertor<>() {
         @Override
         public LocalDate convert(String element) {
             return LocalDate.parse(element, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -19,7 +19,7 @@ public interface Convert<E> {
         }
     };
 
-    public static final Convert<Number> NUM = new Convert<>() {
+    public static final Convertor<Number> NUM = new Convertor<>() {
         @Override
         public Number convert(String element) {
             return Integer.valueOf(element);
