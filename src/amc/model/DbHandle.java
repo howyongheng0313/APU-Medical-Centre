@@ -1,35 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package dbTest;
+package amc.model;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.nio.file.Path;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
+import amc.controller.DbMan;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-/**
- *
- * @author kzy
- */
-public class DBHandle {
-    @FunctionalInterface
-    public static interface RowFilter {
-        boolean apply(List<String> row);
-    }
-    @FunctionalInterface
-    public static interface RowChanger {
-        List<String> apply(List<String> row);
-    }
-
+public class DbHandle<T> {
+    private static final String SEPARATOR = ":";
     private static final Path TEMP_DIR;
     static {
         Path path = Path.of("./temp");
@@ -38,23 +23,24 @@ public class DBHandle {
         } catch (IOException e) {}
         TEMP_DIR = path;
     }
-    private static final Pattern UNESC_PTN = Pattern.compile("\\\\[\\\\n|]|\\|");
+
+    private static final Pattern UNESC_PTN = Pattern.compile("\\\\[\\\\n"+SEPARATOR+"]|\\"+SEPARATOR+"");
 
     private static List<String> unesc_split(String line) {
-        Matcher mch = DBHandle.UNESC_PTN.matcher(line);
-        List<String> row  = new ArrayList<>();
-        StringBuilder strb = new StringBuilder();
+        Matcher mch = UNESC_PTN.matcher(line);
+        List<String>  row = new ArrayList<>();
+        StringBuilder strb   = new StringBuilder();
         while (mch.find()) {
             String raw = mch.group();
             String esc = switch (raw) {
+                case "\\"+SEPARATOR -> SEPARATOR;
+                case SEPARATOR -> "";
                 case "\\\\"-> "\\";
                 case "\\n" -> "\n";
-                case "\\|" -> "|";
-                case "|"   -> "";
                 default    -> "";
             };
             mch.appendReplacement(strb, Matcher.quoteReplacement(esc));
-            if ("|".equals(raw)) {
+            if (SEPARATOR.equals(raw)) {
                 row.add(strb.toString());
                 strb.setLength(0);
             }
@@ -67,10 +53,10 @@ public class DBHandle {
     private static String esc_bind(List<String> row) {
         StringBuilder strb = new StringBuilder();
         for (int index = 0; index < row.size(); index++) {
-            if (index != 0) strb.append("|");
+            if (index != 0) strb.append(SEPARATOR);
             strb.append(row.get(index)
                 .replaceAll("\\\\", "\\\\")
-                .replaceAll("\\|" , "\\|")
+                .replaceAll("\\"+SEPARATOR , "\\"+SEPARATOR)
                 .replaceAll("\n"  , "\\n")
             );
         }
@@ -78,47 +64,49 @@ public class DBHandle {
     }
 
     private final Path path;
-
-    public DBHandle(String file_path) {
-        this.path = Path.of(file_path);
+    private final DbAdapter<T> rowAdapter;
+    
+    public DbHandle(DbAdapter<T> rowAdapter, Path path) {
+        this.rowAdapter = rowAdapter;
+        this.path = path;
     }
 
-    public boolean insert(List<List<String>> rowList) {
+    public boolean insert(List<T> modelLs) {
         try (BufferedWriter writer = Files.newBufferedWriter(this.path, StandardOpenOption.APPEND)) {
-            for (List<String> row: rowList) {
-                writer.write(DBHandle.esc_bind(row));
+            for (T model: modelLs) {
+                List<String> row = this.rowAdapter.getRow(model);
+                writer.write(esc_bind(row));
                 writer.newLine();
             }
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
     }
 
-    public List<List<String>> select(DBHandle.RowFilter filter, int limit) {
+    public List<T> select(int limit, DbMan.Query<T> query) {
         try (BufferedReader reader = Files.newBufferedReader(this.path)) {
-            List<List<String>> result = new ArrayList<>();
+            List<T> modelLs = new ArrayList<>();
             int selected = 0;
             String line;
             reader.readLine();
             while ((selected < limit || limit == -1) && (line = reader.readLine()) != null) {
-                List<String> row = DBHandle.unesc_split(line);
-                if (filter.apply(row)) {
-                    result.add(row);
+                List<String> row = unesc_split(line);
+                T model = this.rowAdapter.getMod(row);
+                if (query.apply(model)) {
+                    modelLs.add(model);
                     selected++;
                 }
             }
-            return result;
+            return modelLs;
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
     }
 
-    private int modify(RowFilter filter, RowChanger changer, int limit) throws IOException {
+    private int modify(int limit, DbMan.Query<T> query, DbMan.Alter<T> alter) throws IOException {
         int updated = 0;
-        Path tmp = Files.createTempFile(DBHandle.TEMP_DIR, "update-", ".tmp");
+        Path tmp = Files.createTempFile(TEMP_DIR, "update-", ".tmp");
         try (
             BufferedWriter writer = Files.newBufferedWriter(tmp);
             BufferedReader reader = Files.newBufferedReader(this.path);
@@ -127,13 +115,15 @@ public class DBHandle {
             writer.write(reader.readLine());
             writer.newLine();
             while ((line = reader.readLine()) != null) {
-                List<String> row = DBHandle.unesc_split(line);
-                if ((updated < limit || limit == -1) && filter.apply(row)) {
-                    row = changer.apply(row);
+                List<String> row = unesc_split(line);
+                T model = this.rowAdapter.getMod(row);
+                if ((updated < limit || limit == -1) && query.apply(model)) {
+                    model = alter.apply(model);
                     updated++;
                 }
-                if (row == null) continue;
-                writer.write(DBHandle.esc_bind(row));
+                if (model == null) continue;
+                row = this.rowAdapter.getRow(model);
+                writer.write(esc_bind(row));
                 writer.newLine();
             }
         }
@@ -141,16 +131,15 @@ public class DBHandle {
         return updated;
     }
 
-    public int update(RowFilter filter, RowChanger changer, int limit) {
+    public int update(int limit, DbMan.Query<T> query, DbMan.Alter<T> alter) {
         try {
-            return this.modify(filter, changer, limit);
+            return this.modify(limit, query, alter);
         } catch (IOException e) {
-            e.printStackTrace();
             return -1;
         }
     }
 
-    public int delete(RowFilter filter, int limit) {
-        return this.update(filter, row -> null, limit);
+    public int delete(int limit, DbMan.Query<T> query) {
+        return this.update(limit, query, model -> null);
     }
 }
