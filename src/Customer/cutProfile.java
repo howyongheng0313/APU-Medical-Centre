@@ -180,6 +180,7 @@ public class cutProfile extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(131, 18, 0, 61);
         jPanel1.add(jTextPane6, gridBagConstraints);
 
+        jButton2.setForeground(new java.awt.Color(0, 153, 153));
         jButton2.setText("Show");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
