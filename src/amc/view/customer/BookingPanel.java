@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Customer;
+package amc.view.customer;
 
 /**
  *
  * @author czy
  */
-public class bookAppointment extends javax.swing.JPanel {
+public class BookingPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form bookAppointment
      */
-    public bookAppointment() {
+    public BookingPanel() {
         initComponents();
     }
 
@@ -38,6 +38,7 @@ public class bookAppointment extends javax.swing.JPanel {
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
+        amcDateField1 = new amc.view.comp.AmcDateField();
 
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new java.awt.BorderLayout());
@@ -150,6 +151,18 @@ public class bookAppointment extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(68, 65, 0, 113);
         jPanel3.add(jTextField2, gridBagConstraints);
 
+        amcDateField1.setText("amcDateField1");
+        amcDateField1.setMaximumSize(new java.awt.Dimension(64, 24));
+        amcDateField1.setPreferredSize(new java.awt.Dimension(64, 24));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
+        jPanel3.add(amcDateField1, gridBagConstraints);
+
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -159,6 +172,7 @@ public class bookAppointment extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private amc.view.comp.AmcDateField amcDateField1;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

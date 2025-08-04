@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Customer;
+package amc.view.customer;
 
 /**
  *
  * @author czy
  */
-public class detailAppointment extends javax.swing.JPanel {
+public class DetailApptPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form detailAppointment
      */
-    public detailAppointment() {
+    public DetailApptPanel() {
         initComponents();
     }
 
