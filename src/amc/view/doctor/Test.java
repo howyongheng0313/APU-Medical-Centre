@@ -28,10 +28,10 @@ public class Test extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainPageDoctor1 = new amc.view.doctor.MainPageDoctor();
+        loginPanel11 = new amc.view.share.loginPanel1();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(mainPageDoctor1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(loginPanel11, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -62,6 +62,6 @@ public class Test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.doctor.MainPageDoctor mainPageDoctor1;
+    private amc.view.share.loginPanel1 loginPanel11;
     // End of variables declaration//GEN-END:variables
 }
