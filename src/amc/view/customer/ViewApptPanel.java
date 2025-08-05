@@ -98,7 +98,7 @@ public class ViewApptPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        jTable1.selectAll();
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
