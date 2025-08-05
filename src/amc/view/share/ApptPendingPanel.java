@@ -21,10 +21,10 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
+        amcPicture3 = new amc.view.comp.AmcPicture();
+        amcPicture4 = new amc.view.comp.AmcPicture();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        amcPicture1 = new amc.view.comp.AmcPicture();
-        amcPicture2 = new amc.view.comp.AmcPicture();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -73,6 +73,20 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         jPanel1Layout.rowWeights = new double[] {0.5, 0.5};
         jPanel1.setLayout(jPanel1Layout);
 
+        amcPicture3.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(amcPicture3, gridBagConstraints);
+
+        amcPicture4.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(amcPicture4, gridBagConstraints);
+
         jLabel3.setText("Patient Steve");
         jLabel3.setPreferredSize(new java.awt.Dimension(210, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -91,22 +105,6 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         jPanel1.add(jComboBox1, gridBagConstraints);
-
-        amcPicture1.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient_30.png"))); // NOI18N
-        amcPicture1.set$max_size(new java.awt.Dimension(30, 30));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(amcPicture1, gridBagConstraints);
-
-        amcPicture2.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor_30.png"))); // NOI18N
-        amcPicture2.set$max_size(new java.awt.Dimension(30, 30));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(amcPicture2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -155,8 +153,8 @@ public class ApptPendingPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.comp.AmcPicture amcPicture1;
-    private amc.view.comp.AmcPicture amcPicture2;
+    private amc.view.comp.AmcPicture amcPicture3;
+    private amc.view.comp.AmcPicture amcPicture4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
