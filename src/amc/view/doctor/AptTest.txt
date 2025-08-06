@@ -1,0 +1,5 @@
+APT-007,080512345678,DOC-007,STF-007,DPT-007,2025-08-03,09:00:00,Paid,Take prescribed medication regularly
+APT-008,090623456789,DOC-008,STF-008,DPT-008,2025-08-04,10:15:00,End_Consultation,Reduce sugar intake and exercise daily
+APT-009,100734567890,DOC-009,STF-009,DPT-009,2025-08-05,11:45:00,Cancelled,-
+APT-010,110845678901,DOC-010,STF-010,DPT-010,2025-08-06,14:00:00,Paid,Avoid cold drinks and rest well
+APT-011,120956789012,DOC-011,STF-011,DPT-011,2025-08-07,15:30:00,End_Consultation,Practice mindfulness and reduce screen time at night
