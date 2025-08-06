@@ -39,13 +39,11 @@ public class AmcButton extends JButton {
         this.setForeground(Theme.C2_FG);
         this.setBackground(Theme.C2_BG);
         this.addMouseListener(new java.awt.event.MouseAdapter() {
-            private Color defaultFg;
-            private Color defaultBg;
+            private final Color defaultFg = AmcButton.this.getForeground();
+            private final Color defaultBg = AmcButton.this.getBackground();
 
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                this.defaultFg = AmcButton.this.getForeground();
-                this.defaultBg = AmcButton.this.getBackground();
                 AmcButton.this.setForeground(AmcButton.this.$hoverForeground);
                 AmcButton.this.setBackground(AmcButton.this.$hoverBackground);
                 AmcButton.this.dilation = 0;
