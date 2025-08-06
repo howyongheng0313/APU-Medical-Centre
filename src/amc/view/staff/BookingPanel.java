@@ -4,6 +4,8 @@
  */
 package amc.view.staff;
 
+import amc.view.Theme;
+
 /**
  *
  * @author kzy
@@ -32,8 +34,9 @@ public class BookingPanel extends javax.swing.JPanel {
         processing2 = new amc.view.share.ApptPendingPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        amcButton1 = new amc.view.comp.AmcButton();
 
+        setBackground(Theme.C1_BG);
         setPreferredSize(new java.awt.Dimension(800, 500));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {10, 200, 10};
@@ -42,12 +45,14 @@ public class BookingPanel extends javax.swing.JPanel {
         layout.rowWeights = new double[] {1.0, 0.0};
         setLayout(layout);
 
+        jScrollPane1.setBackground(Theme.C1_BG);
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         jScrollPane1.setOpaque(true);
         jScrollPane1.setViewportView(null);
 
+        jPanel3.setBackground(Theme.C1_BG);
         jPanel3.setPreferredSize(new java.awt.Dimension(0, 1000));
         java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
         jPanel3Layout.columnWeights = new double[] {1.0};
@@ -82,15 +87,17 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         add(jScrollPane1, gridBagConstraints);
 
+        jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 50));
         jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
 
-        jButton1.setText("jButton1");
-        jButton1.setAlignmentX(1.0F);
-        jButton1.setMaximumSize(new java.awt.Dimension(150, 35));
-        jButton1.setMinimumSize(new java.awt.Dimension(150, 35));
-        jButton1.setPreferredSize(new java.awt.Dimension(150, 35));
-        jPanel1.add(jButton1);
+        amcButton1.setText("Add");
+        amcButton1.setAlignmentX(1.0F);
+        amcButton1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        amcButton1.setMaximumSize(new java.awt.Dimension(150, 40));
+        amcButton1.setMinimumSize(new java.awt.Dimension(150, 40));
+        amcButton1.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel1.add(amcButton1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -101,8 +108,8 @@ public class BookingPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private amc.view.comp.AmcButton amcButton1;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
