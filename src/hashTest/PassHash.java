@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package hashTest;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Random;
 
-/**
- *
- * @author kzy
- */
 public class PassHash {
     public final String hash64;
     public final String salt64;
@@ -21,6 +13,10 @@ public class PassHash {
         this.salt64 = salt64;
     }
 
+    /*
+        Generate random salt
+        password + random -> newHash
+    */
     public static PassHash hashing(String password) {
         byte[]  ranSalt = new byte[12];
         new Random().nextBytes(ranSalt);
@@ -29,7 +25,8 @@ public class PassHash {
         String salt64 = Base64.getEncoder().encodeToString(ranSalt);
         return new PassHash(hash64, salt64);
     }
-
+    
+    // Core Function (pass + salt -> hash)
     private static String findHash64(String password, byte[] saltLs) {
         MessageDigest sha256;
         try {
@@ -43,9 +40,17 @@ public class PassHash {
         return Base64.getEncoder().encodeToString(hashLs);
     }
 
+    // x + salt -> xHash
     public static boolean checkPass(String password, String hash64, String salt64) {
         byte[] saltLs = Base64.getDecoder().decode(salt64);
         String hashCp = PassHash.findHash64(password, saltLs);
         return hashCp.equals(hash64);
+        
+    /*
+        input(password) + salt64 = xHash
+        xHash == hash64
+        if (true){success}
+        else{failed}
+    */
     }
 }

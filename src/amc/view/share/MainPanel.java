@@ -45,7 +45,6 @@ public class MainPanel extends javax.swing.JPanel {
         btnLogin = new amc.view.comp.AmcButton();
         picAvatar = new amc.view.comp.AmcPicture();
         bodyPanel = new javax.swing.JPanel();
-        homePanel1 = new amc.view.share.HomePanel();
 
         setBackground(Theme.C1_BG);
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -258,8 +257,6 @@ public class MainPanel extends javax.swing.JPanel {
         add(menuBarPanel, java.awt.BorderLayout.PAGE_START);
 
         bodyPanel.setLayout(new java.awt.CardLayout());
-        bodyPanel.add(homePanel1, "card2");
-
         add(bodyPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,7 +281,6 @@ public class MainPanel extends javax.swing.JPanel {
     private amc.view.comp.AmcButton btnLogin;
     private javax.swing.JPanel cusBarPanel;
     private javax.swing.JPanel docBarPanel;
-    private amc.view.share.HomePanel homePanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JPanel mngBarPanel;

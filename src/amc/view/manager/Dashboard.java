@@ -40,30 +40,32 @@ public class Dashboard extends javax.swing.JPanel {
         filter.setPreferredSize(new java.awt.Dimension(200, 100));
         filter.setLayout(new java.awt.BorderLayout());
 
-        filler2.setBackground(new java.awt.Color(255, 255, 255));
+        filler2.setBackground(new java.awt.Color(245, 253, 253));
         filler2.setOpaque(true);
         filter.add(filler2, java.awt.BorderLayout.LINE_END);
 
-        filler3.setBackground(new java.awt.Color(255, 255, 255));
+        filler3.setBackground(new java.awt.Color(243, 253, 253));
         filler3.setOpaque(true);
         filter.add(filler3, java.awt.BorderLayout.PAGE_END);
 
-        filler5.setBackground(new java.awt.Color(255, 255, 255));
+        filler5.setBackground(new java.awt.Color(245, 253, 253));
         filler5.setOpaque(true);
         filter.add(filler5, java.awt.BorderLayout.LINE_START);
 
-        filterDetails.setBackground(new java.awt.Color(255, 255, 255));
+        filterDetails.setBackground(new java.awt.Color(245, 253, 253));
         filterDetails.setMinimumSize(new java.awt.Dimension(98, 60));
 
-        lblSelectReport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblSelectReport.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lblSelectReport.setText("Select Report Type");
 
+        cbxReportType.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         cbxReportType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income Report", "Patients Number Report", "Doctor Performance Report" }));
         cbxReportType.setPreferredSize(new java.awt.Dimension(110, 22));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel3.setText("Select Year");
 
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +106,7 @@ public class Dashboard extends javax.swing.JPanel {
         reports.setBackground(new java.awt.Color(255, 255, 255));
         reports.setLayout(new java.awt.CardLayout());
 
-        patientNumberReport.setBackground(new java.awt.Color(255, 204, 204));
+        patientNumberReport.setBackground(new java.awt.Color(0, 255, 102));
 
         javax.swing.GroupLayout patientNumberReportLayout = new javax.swing.GroupLayout(patientNumberReport);
         patientNumberReport.setLayout(patientNumberReportLayout);
@@ -119,7 +121,7 @@ public class Dashboard extends javax.swing.JPanel {
 
         reports.add(patientNumberReport, "card3");
 
-        incomeReport.setBackground(new java.awt.Color(204, 204, 255));
+        incomeReport.setBackground(new java.awt.Color(0, 204, 204));
 
         javax.swing.GroupLayout incomeReportLayout = new javax.swing.GroupLayout(incomeReport);
         incomeReport.setLayout(incomeReportLayout);
@@ -134,7 +136,7 @@ public class Dashboard extends javax.swing.JPanel {
 
         reports.add(incomeReport, "incomeReport");
 
-        doctorRanking.setBackground(new java.awt.Color(102, 255, 204));
+        doctorRanking.setBackground(new java.awt.Color(0, 255, 204));
         reports.add(doctorRanking, "card4");
 
         main.add(reports, java.awt.BorderLayout.CENTER);
