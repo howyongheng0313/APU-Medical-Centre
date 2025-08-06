@@ -15,7 +15,7 @@ public class BookingPanel extends javax.swing.JPanel {
      */
     public BookingPanel() {
         initComponents();
-        this.jScrollPane1.getVerticalScrollBar().setUnitIncrement(8);
+        this.jScrollPane1.getVerticalScrollBar().setUnitIncrement(12);
     }
 
     /**
