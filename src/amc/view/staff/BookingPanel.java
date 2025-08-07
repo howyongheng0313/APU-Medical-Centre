@@ -103,6 +103,7 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         add(jPanel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
