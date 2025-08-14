@@ -7,11 +7,18 @@ public class DbMan {
     public static interface Query<T> {
         boolean apply(T model);
     }
+    
     @FunctionalInterface
     public static interface Alter<T> {
         T apply(T model);
     }
 
+    public static Query<MyModel> checkEmail(String email){
+        return model ->  {
+            return model.getEmail().equals(email);
+        };
+    }
+    
     public static Query<MyModel> checkId(int id) {
         return model -> model.getUuid() == id;
     }
