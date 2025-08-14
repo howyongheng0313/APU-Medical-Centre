@@ -13,8 +13,11 @@ public class MainPageDoctor extends javax.swing.JPanel {
     /**
      * Creates new form Doctor
      */
+    Appointment apt = new Appointment();
     public MainPageDoctor() {
         initComponents();
+
+        apt.view_appointment(jTable1,"current");
     }
 
     /**
@@ -71,6 +74,11 @@ public class MainPageDoctor extends javax.swing.JPanel {
         jButton3.setMaximumSize(new java.awt.Dimension(0, 0));
         jButton3.setMinimumSize(new java.awt.Dimension(0, 0));
         jButton3.setPreferredSize(new java.awt.Dimension(0, 0));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -90,6 +98,8 @@ public class MainPageDoctor extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.getTableHeader().setResizingAllowed(false);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -107,8 +117,12 @@ public class MainPageDoctor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        apt.view_appointment(jTable1, "current");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        apt.view_appointment(jTable1, "past");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
