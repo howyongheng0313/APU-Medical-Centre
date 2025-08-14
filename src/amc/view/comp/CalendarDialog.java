@@ -145,7 +145,7 @@ public class CalendarDialog extends javax.swing.JDialog {
         jPanel1Layout.rowWeights = new double[] {1.0};
         jPanel1.setLayout(jPanel1Layout);
 
-        jLabel1.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("⮜");
@@ -165,7 +165,7 @@ public class CalendarDialog extends javax.swing.JDialog {
         jLabel2.setText("February 2025");
         jPanel1.add(jLabel2, new java.awt.GridBagConstraints());
 
-        jLabel5.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("⮞");

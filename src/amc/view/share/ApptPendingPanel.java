@@ -1,5 +1,7 @@
 package amc.view.share;
 
+import amc.view.Theme;
+
 public class ApptPendingPanel extends javax.swing.JPanel {
 
     /**
@@ -27,10 +29,10 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        amcButton1 = new amc.view.comp.AmcButton();
+        amcButton2 = new amc.view.comp.AmcButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(Theme.C1_INTER);
         setPreferredSize(new java.awt.Dimension(554, 100));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.rowHeights = new int[] {30, 5, 0, 0};
@@ -39,6 +41,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         setLayout(layout);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(Theme.C1_FG);
         jLabel1.setText("APT-001");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
@@ -47,6 +50,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         add(jLabel1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(Theme.C1_FG);
         jLabel2.setText("27 July 2025");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
@@ -54,10 +58,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
         add(jLabel2, gridBagConstraints);
 
-        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setToolTipText("");
-        jSeparator1.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -66,7 +67,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         add(jSeparator1, gridBagConstraints);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
         jPanel1Layout.columnWidths = new int[] {30, 0};
         jPanel1Layout.columnWeights = new double[] {0.0, 1.0};
@@ -87,7 +88,10 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(amcPicture4, gridBagConstraints);
 
+        jLabel3.setForeground(Theme.C1_FG);
         jLabel3.setText("Patient Steve");
+        jLabel3.setMaximumSize(new java.awt.Dimension(210, 30));
+        jLabel3.setMinimumSize(new java.awt.Dimension(210, 30));
         jLabel3.setPreferredSize(new java.awt.Dimension(210, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -98,6 +102,8 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         jPanel1.add(jLabel3, gridBagConstraints);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setMaximumSize(new java.awt.Dimension(210, 30));
+        jComboBox1.setMinimumSize(new java.awt.Dimension(210, 30));
         jComboBox1.setPreferredSize(new java.awt.Dimension(210, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -114,6 +120,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 5, 0);
         add(jPanel1, gridBagConstraints);
 
+        jLabel4.setForeground(Theme.C1_FG);
         jLabel4.setText("09 : 27 am");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -122,22 +129,19 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
         add(jLabel4, gridBagConstraints);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setOpaque(false);
         jPanel3.setPreferredSize(new java.awt.Dimension(165, 30));
         jPanel3.setLayout(new java.awt.GridLayout(1, 2, 5, 0));
 
-        jButton1.setText("Confirm");
-        jButton1.setPreferredSize(new java.awt.Dimension(80, 30));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton1);
+        amcButton1.setBackground(Theme.DONE_BG);
+        amcButton1.setText("Confirm");
+        amcButton1.set$hoverBackground(Theme.DONE_BG_SELECT);
+        jPanel3.add(amcButton1);
 
-        jButton2.setText("Reject");
-        jButton2.setPreferredSize(new java.awt.Dimension(80, 30));
-        jPanel3.add(jButton2);
+        amcButton2.setBackground(Theme.WARN_BG);
+        amcButton2.setText("Reject");
+        amcButton2.set$hoverBackground(Theme.WARN_BG_SELECT);
+        jPanel3.add(amcButton2);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -147,16 +151,12 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         add(jPanel3, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private amc.view.comp.AmcButton amcButton1;
+    private amc.view.comp.AmcButton amcButton2;
     private amc.view.comp.AmcPicture amcPicture3;
     private amc.view.comp.AmcPicture amcPicture4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
