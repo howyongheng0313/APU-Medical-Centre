@@ -29,19 +29,4 @@ public class DbMan {
             return model;
         };
     }
-    
-    /*
-    UserType.txt
-        1. Email
-        2. User role (Manager/ Doctor/ Staff/ Customer)
-    
-    if email exist {get data[1]}
-    String role = data[1]
-    switch(role):
-    case "Manager" -> ...;
-    case "Doctor" -> ...;
-    case "Staff" -> ...;
-    case "Customer" -> ...;
-    */
-    
 }

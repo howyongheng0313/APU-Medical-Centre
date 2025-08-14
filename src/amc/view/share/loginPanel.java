@@ -1,7 +1,10 @@
 package amc.view.share;
+
 import amc.view.Theme;
 import java.awt.*;
-
+import amc.model.MyModel;
+import javax.swing.JOptionPane;
+import amc.view.manager.Dashboard;
 
 public class loginPanel extends javax.swing.JPanel {
 
@@ -22,8 +25,9 @@ public class loginPanel extends javax.swing.JPanel {
         lblNoAccount = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         jtfLoginEmail = new java.awt.TextField();
-        jtfLoginPassword = new java.awt.TextField();
         btnForgetPassword = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jpfPassword = new javax.swing.JPasswordField();
         lblLogo = new amc.view.comp.AmcPicture();
         sign_up = new javax.swing.JPanel();
         signup_content = new javax.swing.JPanel();
@@ -87,7 +91,7 @@ public class loginPanel extends javax.swing.JPanel {
         lblNoAccount.setText("Don't have an account?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         jPanel2.add(lblNoAccount, gridBagConstraints);
@@ -105,11 +109,12 @@ public class loginPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         jPanel2.add(btnRegister, gridBagConstraints);
 
-        jtfLoginEmail.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jtfLoginEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jtfLoginEmail.setPreferredSize(new java.awt.Dimension(8, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -118,20 +123,6 @@ public class loginPanel extends javax.swing.JPanel {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(jtfLoginEmail, gridBagConstraints);
-
-        jtfLoginPassword.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jtfLoginPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfLoginPasswordActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel2.add(jtfLoginPassword, gridBagConstraints);
 
         btnForgetPassword.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnForgetPassword.setForeground(new java.awt.Color(255, 102, 102));
@@ -142,11 +133,35 @@ public class loginPanel extends javax.swing.JPanel {
         btnForgetPassword.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         jPanel2.add(btnForgetPassword, gridBagConstraints);
+
+        jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jButton1.setText("Sign In");
+        jButton1.setBorder(null);
+        jButton1.setPreferredSize(new java.awt.Dimension(38, 30));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel2.add(jButton1, gridBagConstraints);
+
+        jpfPassword.setPreferredSize(new java.awt.Dimension(8, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel2.add(jpfPassword, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -374,9 +389,31 @@ public class loginPanel extends javax.swing.JPanel {
         layout.show (this, "sign_up_page");
     }//GEN-LAST:event_btnRegisterActionPerformed
 
-    private void jtfLoginPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfLoginPasswordActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfLoginPasswordActionPerformed
+        String login_email = jtfLoginEmail.getText().trim();
+        String login_password = new String(jpfPassword.getPassword());
+        
+        MyModel user = MyModel.login(login_email, login_password);
+        if(user != null){
+            JOptionPane.showMessageDialog(this, "Login successfull! Role" + user.getRole());
+            
+            switch (user.getRole()){
+                case "Manager" -> {
+                    
+                }
+                case "Doctor" -> {
+                    
+                }
+                case "Staff" -> {
+                    
+                }
+                default -> {
+                    
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private amc.view.comp.AmcPicture amcPicture1;
@@ -384,14 +421,15 @@ public class loginPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnSignup;
     private javax.swing.Box.Filler filler10;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> jcbGender;
+    private javax.swing.JPasswordField jpfPassword;
     private javax.swing.JTextField jtfContact;
     private javax.swing.JTextField jtfCustomerName;
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfICnumber;
     private java.awt.TextField jtfLoginEmail;
-    private java.awt.TextField jtfLoginPassword;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblLogin;
     private amc.view.comp.AmcPicture lblLogo;

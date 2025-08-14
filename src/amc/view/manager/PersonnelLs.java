@@ -1,11 +1,13 @@
 package amc.view.manager;
+
+import amc.view.comp.AmcComboBox;
 import java.awt.Color;
 
 public class PersonnelLs extends javax.swing.JPanel {
 
     public PersonnelLs() {
         initComponents();
-        UiUtils.styleComboBox(jcbUsers);
+        AmcComboBox.styleComboBox(jcbUsers);
     }
 
     @SuppressWarnings("unchecked")
