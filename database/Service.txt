@@ -1,0 +1,51 @@
+SEQ
+SVC-001|Hypertension Follow-up|MYR70.00|DPT-001
+SVC-002|Blood Sugar Monitoring|MYR60.00|DPT-001
+SVC-003|Chronic Cough Evaluation|MYR90.00|DPT-001
+SVC-004|Lipid Profile Check|MYR80.00|DPT-001
+SVC-005|ECG Interpretation|MYR75.00|DPT-001
+SVC-006|Hernia Repair Surgery|MYR2500.00|DPT-002
+SVC-007|Gallbladder Removal|MYR3200.00|DPT-002
+SVC-008|Minor Lump Removal|MYR600.00|DPT-002
+SVC-009|Surgical Wound Inspection|MYR120.00|DPT-002
+SVC-010|Post-surgery Dressing Change|MYR100.00|DPT-002
+SVC-011|Routine Immunization|MYR70.00|DPT-003
+SVC-012|Childhood Asthma Review|MYR90.00|DPT-003
+SVC-013|Pediatric Nutrition Counseling|MYR110.00|DPT-003
+SVC-014|Newborn Jaundice Check|MYR100.00|DPT-003
+SVC-015|Developmental Milestone Check|MYR80.00|DPT-003
+SVC-016|Rash & Allergy Evaluation|MYR100.00|DPT-004
+SVC-017|Skin Tag Removal|MYR180.00|DPT-004
+SVC-018|Fungal Skin Treatment|MYR120.00|DPT-004
+SVC-019|Acne Scar Treatment|MYR250.00|DPT-004
+SVC-020|UV Light Skin Therapy|MYR200.00|DPT-004
+SVC-021|Diabetic Retinopathy Screening|MYR120.00|DPT-005
+SVC-022|Vision Loss Evaluation|MYR140.00|DPT-005
+SVC-023|Cataract Pre-op Assessment|MYR160.00|DPT-005
+SVC-024|Eye Pressure Measurement|MYR100.00|DPT-005
+SVC-025|Red Eye Management|MYR90.00|DPT-005
+SVC-026|Sinus Endoscopy|MYR280.00|DPT-006
+SVC-027|Earwax Blockage Removal|MYR70.00|DPT-006
+SVC-028|Nasal Allergy Treatment|MYR100.00|DPT-006
+SVC-029|Hoarseness Evaluation|MYR130.00|DPT-006
+SVC-030|Swallowing Difficulty Assessment|MYR140.00|DPT-006
+SVC-031|Scaling & Polishing|MYR100.00|DPT-007
+SVC-032|Wisdom Tooth Extraction|MYR400.00|DPT-007
+SVC-033|Dental X-ray|MYR80.00|DPT-007
+SVC-034|Braces Consultation|MYR60.00|DPT-007
+SVC-035|Dental Sealants for Children|MYR120.00|DPT-007
+SVC-036|Routine Pap Smear|MYR100.00|DPT-008
+SVC-037|First Trimester Ultrasound|MYR160.00|DPT-008
+SVC-038|Fertility Counseling|MYR150.00|DPT-008
+SVC-039|Irregular Period Treatment|MYR130.00|DPT-008
+SVC-040|Hormone Replacement Therapy|MYR180.00|DPT-008
+SVC-041|TCM Body Constitution Diagnosis|MYR70.00|DPT-009
+SVC-042|Herbal Soup Prescription|MYR60.00|DPT-009
+SVC-043|Acupressure Therapy|MYR80.00|DPT-009
+SVC-044|Meridian Massage (Tuina)|MYR90.00|DPT-009
+SVC-045|Insomnia Herbal Treatment|MYR75.00|DPT-009
+SVC-046|Fever & Flu Treatment|MYR60.00|DPT-010
+SVC-047|Minor Injuries Care|MYR70.00|DPT-010
+SVC-048|Routine Health Check-up|MYR80.00|DPT-010
+SVC-049|Travel Vaccination|MYR90.00|DPT-010
+SVC-050|Sick Leave Certificate|MYR30.00|DPT-010

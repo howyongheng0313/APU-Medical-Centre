@@ -2,9 +2,6 @@ package amc.view.share;
 
 import amc.view.Theme;
 import java.awt.*;
-import amc.model.MyModel;
-import javax.swing.JOptionPane;
-import amc.view.manager.Dashboard;
 
 public class loginPanel extends javax.swing.JPanel {
 
@@ -28,11 +25,9 @@ public class loginPanel extends javax.swing.JPanel {
         btnForgetPassword = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jpfPassword = new javax.swing.JPasswordField();
-        lblLogo = new amc.view.comp.AmcPicture();
         sign_up = new javax.swing.JPanel();
         signup_content = new javax.swing.JPanel();
         logo = new javax.swing.JPanel();
-        amcPicture1 = new amc.view.comp.AmcPicture();
         signup_detail = new javax.swing.JPanel();
         signup_details = new javax.swing.JPanel();
         jtfICnumber = new javax.swing.JTextField();
@@ -143,11 +138,6 @@ public class loginPanel extends javax.swing.JPanel {
         jButton1.setText("Sign In");
         jButton1.setBorder(null);
         jButton1.setPreferredSize(new java.awt.Dimension(38, 30));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -171,15 +161,6 @@ public class loginPanel extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.5;
         sign_in.add(jPanel2, gridBagConstraints);
 
-        lblLogo.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/logo_clover.png"))); // NOI18N
-        lblLogo.set$maxSize(new java.awt.Dimension(400, 400));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(17, 17, 17, 17);
-        sign_in.add(lblLogo, gridBagConstraints);
-
         add(sign_in, "card3");
 
         sign_up.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -192,10 +173,6 @@ public class loginPanel extends javax.swing.JPanel {
         logo.setForeground(new java.awt.Color(255, 255, 255));
         logo.setPreferredSize(new java.awt.Dimension(829, 250));
         logo.setLayout(new java.awt.BorderLayout());
-
-        amcPicture1.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/logo_clover.png"))); // NOI18N
-        logo.add(amcPicture1, java.awt.BorderLayout.CENTER);
-
         signup_content.add(logo, java.awt.BorderLayout.PAGE_START);
 
         signup_detail.setBackground(new java.awt.Color(245, 253, 253));
@@ -389,34 +366,7 @@ public class loginPanel extends javax.swing.JPanel {
         layout.show (this, "sign_up_page");
     }//GEN-LAST:event_btnRegisterActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String login_email = jtfLoginEmail.getText().trim();
-        String login_password = new String(jpfPassword.getPassword());
-        
-        MyModel user = MyModel.login(login_email, login_password);
-        if(user != null){
-            JOptionPane.showMessageDialog(this, "Login successfull! Role" + user.getRole());
-            
-            switch (user.getRole()){
-                case "Manager" -> {
-                    
-                }
-                case "Doctor" -> {
-                    
-                }
-                case "Staff" -> {
-                    
-                }
-                default -> {
-                    
-                }
-            }
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.comp.AmcPicture amcPicture1;
     private javax.swing.JButton btnForgetPassword;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnSignup;
@@ -432,7 +382,6 @@ public class loginPanel extends javax.swing.JPanel {
     private java.awt.TextField jtfLoginEmail;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblLogin;
-    private amc.view.comp.AmcPicture lblLogo;
     private javax.swing.JLabel lblNoAccount;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JPanel logo;

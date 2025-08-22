@@ -1,0 +1,6 @@
+SEQ
+MNG-001|How Yong-Heng|2005-03-13|Male|howyongheng@gmail.com|01121673204
+MNG-002|Ng Yan Hong|2004-06-14|Male|yanhongng@gmail.com|01121673205
+MNG-003|Tan Ti Kang|1998-08-15|Male|tikangtan@gmail.com|01121673206
+MNG-004|Pang Wei Meng|1986-10-16|Male|weimengpang@gmail.com|01121673207
+MNG-005|Kevin Hoh|2001-11-17|Male|kevinhoh@gmail.com|01121673208

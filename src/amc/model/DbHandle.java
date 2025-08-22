@@ -14,10 +14,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DbHandle<T> {
-    
     // Class-level variable
     private static final String SEPARATOR = "|";
     private static final Path TEMP_DIR; 
+    private static final Pattern UNESC_PTN = Pattern.compile("\\\\[\\\\n"+SEPARATOR+"]|\\"+SEPARATOR+"");
+
+    // Object-level variable
+    private final Path path; 
+    private final DbAdapter<T> rowAdapter;
+    private final DbTrigger<T> dbTrigger = new DbTrigger<>();
+
     static {
         Path path = Path.of("./temp");
         try {
@@ -26,7 +32,17 @@ public class DbHandle<T> {
         TEMP_DIR = path;
     }
 
-    private static final Pattern UNESC_PTN = Pattern.compile("\\\\[\\\\n"+SEPARATOR+"]|\\"+SEPARATOR+"");
+    /*
+    ** Type: Constructor
+    ** Description: Create a databasehandler
+    ** Parameters:
+    **    1. rowAdpater: Convert string to model || Convert model to string
+    **    2. file path: The text file we handling
+    */
+    public DbHandle(DbAdapter<T> rowAdapter, Path path) {
+        this.rowAdapter = rowAdapter;
+        this.path = path;
+    }
 
     /*
     ** Type: Static method
@@ -77,40 +93,25 @@ public class DbHandle<T> {
         return strb.toString();
     }
 
-    // Object-level variable
-    private final Path path; 
-    private final DbAdapter<T> rowAdapter; 
-    
-    /*
-    ** Type: Constructor
-    ** Description: Create a databasehandler
-    ** Parameters:
-    **    1. rowAdpater: Convert string to model || Convert model to string
-    **    2. file path: The text file we handling
-    */
-    public DbHandle(DbAdapter<T> rowAdapter, Path path) {
-        this.rowAdapter = rowAdapter;
-        this.path = path;
-    }
-
     // Insert
     public boolean insert(List<T> modelLs) {
+        boolean result;
         try (BufferedWriter writer = Files.newBufferedWriter(this.path, StandardOpenOption.APPEND)) {
             for (T model: modelLs) {
                 List<String> row = this.rowAdapter.getRow(model);
                 writer.write(esc_bind(row));
                 writer.newLine();
             }
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
+            result = true;
+        } catch (IOException e) { result = false; }
+        if (result) this.dbTrigger.fire();
+        return result;
     }
 
-    //Select
+    // Select
     public List<T> select(int limit, DbMan.Query<T> query) {
+        List<T> modelLs = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(this.path)) {
-            List<T> modelLs = new ArrayList<>();
             int selected = 0;
             String line;
             reader.readLine();
@@ -122,10 +123,8 @@ public class DbHandle<T> {
                     selected++;
                 }
             }
-            return modelLs;
-        } catch (IOException e) {
-            return null;
-        }
+        } catch (IOException e) { modelLs = null; }
+        return modelLs;
     }
 
     /* 
@@ -156,16 +155,17 @@ public class DbHandle<T> {
             }
         }
         Files.move(tmp, this.path, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+        this.dbTrigger.fire();
         return updated;
     }
 
     // Update
     public int update(int limit, DbMan.Query<T> query, DbMan.Alter<T> alter) {
+        int result;
         try {
-            return this.modify(limit, query, alter);
-        } catch (IOException e) {
-            return -1;
-        }
+            result = this.modify(limit, query, alter);
+        } catch (IOException e) { result = -1; }
+        return result;
     }
 
     // Delete
@@ -173,27 +173,7 @@ public class DbHandle<T> {
         return this.update(limit, query, model -> null);
     }
 
-    public static DbHandle<MyModel> MYMODEL = new DbHandle<> (
-        DbAdapter.MYMODEL, Path.of("./database/MyModel.txt")
-    );
-
-    public static DbHandle<List<String>> ROLEMAP = new DbHandle<> (
-        DbAdapter.DEFAULT, Path.of("./database/RoleMap.txt")
-    );
-
-    public static DbHandle<Customer> CUSTOMER = new DbHandle<> (
-        DbAdapter.CUSTOMER, Path.of("./database/Customer.txt")
-    );
-    
-    public static DbHandle<Manager> MANAGER = new DbHandle<> (
-        DbAdapter.MANAGER, Path.of("./database/Manager.txt")
-    );
-    
-    public static DbHandle<Doctor> DOCTOR = new DbHandle<> (
-        DbAdapter.DOCTOR, Path.of("./database/Doctor.txt")
-    );
-    
-    public static DbHandle<Staff> DOCTOR = new DbHandle<> (
-        DbAdapter.STAFF, Path.of("./database/Staff.txt")
-    );
+    public void addTblListener(Runnable handler) {
+        this.dbTrigger.register(handler);
+    }
 }
