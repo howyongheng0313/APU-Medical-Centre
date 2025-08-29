@@ -1,9 +1,25 @@
 package amc.model.entity;
 
+import java.util.List;
 import java.time.LocalDate;
+
+import amc.model.DbHandle;
+import amc.model.DbMan;
+import amc.model.db_impl.Db;
+import amc.model.entity.UserAuth.Role;
 
 public abstract class User {
     public enum Gender { Male, Female; }
+
+    public record LoginContext(String email, String password) {}
+
+    public record SignupContext(
+        String icNumber,
+        String userName,
+        String email,
+        String contact,
+        Gender gender
+    ) {}
 
     protected String    userId;
     protected String    userName;
@@ -25,6 +41,26 @@ public abstract class User {
         this.gender      = gender;
         this.email       = email;
         this.contact     = contact;
+    }
+
+    public static User login(LoginContext loginCtx) {
+        List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserRole(loginCtx.email));
+        if (authLs.isEmpty()) return null;
+
+        UserAuth auth = authLs.getFirst();
+        if (!auth.getPassword().verify(loginCtx.password)) return null;
+
+        DbHandle<? extends User> userHandle = switch (auth.getRole()) {
+            case Role.Customer -> Db.Customer;
+            case Role.Doctor   -> Db.Doctor;
+            case Role.Manager  -> Db.Manager;
+            case Role.Staff    -> Db.Staff;
+            default -> null;
+        };
+        if (userHandle == null) return null;
+
+        List<? extends User> userLs = userHandle.select(1, DbMan.checkUser(loginCtx.email));
+        return userLs.getFirst();
     }
 
     public String    getUserId() { return userId; }

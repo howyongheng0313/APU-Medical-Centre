@@ -1,6 +1,5 @@
 package amc.model;
 
-import amc.controller.DbMan;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class DbHandle<T> {
     // Object-level variable
     private final Path path; 
     private final DbAdapter<T> rowAdapter;
-    private final DbTrigger<T> dbTrigger = new DbTrigger<>();
+    private final EventTrigger eventTrigger = new EventTrigger();
 
     static {
         Path path = Path.of("./temp");
@@ -104,7 +103,7 @@ public class DbHandle<T> {
             }
             result = true;
         } catch (IOException e) { result = false; }
-        if (result) this.dbTrigger.fire();
+        if (result) this.eventTrigger.fire();
         return result;
     }
 
@@ -155,7 +154,7 @@ public class DbHandle<T> {
             }
         }
         Files.move(tmp, this.path, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
-        this.dbTrigger.fire();
+        this.eventTrigger.fire();
         return updated;
     }
 
@@ -174,6 +173,6 @@ public class DbHandle<T> {
     }
 
     public void addTblListener(Runnable handler) {
-        this.dbTrigger.register(handler);
+        this.eventTrigger.register(handler);
     }
 }

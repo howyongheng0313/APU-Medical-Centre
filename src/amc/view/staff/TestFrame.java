@@ -26,10 +26,8 @@ public class TestFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        payLsPanel1 = new amc.view.staff.PayLsPanel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(payLsPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().setLayout(new java.awt.GridLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -60,6 +58,5 @@ public class TestFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.staff.PayLsPanel payLsPanel1;
     // End of variables declaration//GEN-END:variables
 }

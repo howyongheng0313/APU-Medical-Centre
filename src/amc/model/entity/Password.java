@@ -1,13 +1,9 @@
 package amc.model.entity;
 
-import amc.model.DbHandle;
-import amc.model.db_impl.Adapt;
-import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.List;
 import java.util.Random;
 
 public class Password {

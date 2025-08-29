@@ -4,14 +4,14 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbTrigger<T> {
+public class EventTrigger {
     private class WeakListener extends WeakReference<Runnable> {
         public WeakListener(Runnable referent) { super(referent); }
     }
 
     private final List<WeakListener> listenerLs = new ArrayList<> ();
 
-    public DbTrigger() {}
+    public EventTrigger() {}
 
     public void register(Runnable handler) {
         listenerLs.add(new WeakListener(handler));

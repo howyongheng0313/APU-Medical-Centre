@@ -285,7 +285,7 @@ public class MedicineEdit extends javax.swing.JPanel {
         medicineFilter.setBackground(new java.awt.Color(245, 253, 253));
         medicineFilter.setForeground(new java.awt.Color(224, 247, 247));
         medicineFilter.setPreferredSize(new java.awt.Dimension(864, 50));
-        medicineFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        medicineFilter.setLayout(new java.awt.GridBagLayout());
 
         jtfSearch.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtfSearch.setForeground(new java.awt.Color(153, 153, 153));
@@ -299,7 +299,13 @@ public class MedicineEdit extends javax.swing.JPanel {
                 jtfSearchFocusLost(evt);
             }
         });
-        medicineFilter.add(jtfSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 300, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 232;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 15, 0);
+        medicineFilter.add(jtfSearch, gridBagConstraints);
 
         btnSearch.setBackground(new java.awt.Color(0, 139, 139));
         btnSearch.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -312,7 +318,14 @@ public class MedicineEdit extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-        medicineFilter.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 32;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 15, 333);
+        medicineFilter.add(btnSearch, gridBagConstraints);
 
         medicineLabel.add(medicineFilter, java.awt.BorderLayout.PAGE_START);
 

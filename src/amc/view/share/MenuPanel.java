@@ -1,13 +1,16 @@
 package amc.view.share;
 
 import amc.view.Theme;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
-public class MainPanel extends javax.swing.JPanel {
+public class MenuPanel extends javax.swing.JPanel {
+    private JPanel userPage = null;
 
     /**
      * Creates new form MainPanel
      */
-    public MainPanel() {
+    public MenuPanel() {
         initComponents();
     }
 
@@ -45,6 +48,8 @@ public class MainPanel extends javax.swing.JPanel {
         btnLogin = new amc.view.comp.AmcButton();
         picAvatar = new amc.view.comp.AmcPicture();
         bodyPanel = new javax.swing.JPanel();
+        homePanel1 = new amc.view.share.HomePanel();
+        jPanel1 = new javax.swing.JPanel();
 
         setBackground(Theme.C1_BG);
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -257,9 +262,28 @@ public class MainPanel extends javax.swing.JPanel {
         add(menuBarPanel, java.awt.BorderLayout.PAGE_START);
 
         bodyPanel.setLayout(new java.awt.CardLayout());
+        bodyPanel.add(homePanel1, "Home");
+        bodyPanel.add(jPanel1, "User");
+
         add(bodyPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    public HomePanel getHomePage() {
+        return this.homePanel1;
+    }
+
+    public void setUserPage(JPanel page) {
+        if (this.userPage != null) bodyPanel.remove(this.userPage);
+        this.userPage = page;
+
+        if (page == null) return;
+        bodyPanel.add(page, "User");
+        this.switch2Home(false);
+    }
+
+    public void switch2Home(boolean option) {
+        ((CardLayout) bodyPanel.getLayout()).show(bodyPanel, option ? "Home" : "User");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accountPanel;
@@ -278,9 +302,11 @@ public class MainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel bodyPanel;
     private amc.view.comp.AmcButton btnDepts;
     private amc.view.comp.AmcButton btnDocs;
-    private amc.view.comp.AmcButton btnLogin;
+    public amc.view.comp.AmcButton btnLogin;
     private javax.swing.JPanel cusBarPanel;
     private javax.swing.JPanel docBarPanel;
+    private amc.view.share.HomePanel homePanel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel menuBarPanel;
     private javax.swing.JPanel mngBarPanel;

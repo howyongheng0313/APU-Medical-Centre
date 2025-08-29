@@ -7,10 +7,9 @@ package amc.view.customer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -22,7 +21,7 @@ public class Customer {
     private String Password;
     private String Status;
 
-        public void update_profile(String Customer_Name, String Customer_ID, int Conatct, String Email, String Password) {
+    public void update_profile(String Customer_Name, String Customer_ID, int Conatct, String Email, String Password) {
         this.Customer_ID = Customer_ID;
         this.Customer_Name = Customer_Name;
         this.Contact = Contact;
@@ -30,9 +29,9 @@ public class Customer {
         this.Password = Password;
         
         ////////////////
-        }
-        
-        public void view_complete_appointment(JTable jTable1){
+    }
+
+    public void view_complete_appointment(JTable jTable1){
         String filepath = "filepath";
         DefaultTableModel table = new DefaultTableModel();
         table.setColumnIdentifiers(new String[] {
@@ -50,11 +49,11 @@ public class Customer {
         catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
 
-            }
-        //jTable1.setModel(table);
         }
+        //jTable1.setModel(table);
+    }
         
-        public void view_incomplete_appointment(JTable jTable1){
+    public void view_incomplete_appointment(JTable jTable1){
         String filepath = "filepath";
         DefaultTableModel table = new DefaultTableModel();
         table.setColumnIdentifiers(new String[] {
@@ -72,22 +71,22 @@ public class Customer {
         catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
 
-            }
+        }
         //jTable1.setModel(table);
-        }
-        
-        public void book_appointment(JTable table, JTextField customerID_txt){
-        table.getSelectionModel().addListSelectionListener(e -> {
-        if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1) {
-            int row = table.getSelectedRow();
+    }
 
-            customerID_txt.setText(table.getValueAt(row, 0).toString());
-            //txtDoctorName.setText(table.getValueAt(row, 1).toString());
-            //txtStaffName.setText(table.getValueAt(row, 2).toString());
-            //txtService.setText(table.getValueAt(row, 3).toString());
-            //txtPrescription.setText(table.getValueAt(row, 4).toString());
-            //txtFee.setText(table.getValueAt(row, 5).toString());
-        }
-    });
- }    
+    public void book_appointment(JTable table, JTextField customerID_txt){
+        table.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1) {
+                int row = table.getSelectedRow();
+
+                customerID_txt.setText(table.getValueAt(row, 0).toString());
+                //txtDoctorName.setText(table.getValueAt(row, 1).toString());
+                //txtStaffName.setText(table.getValueAt(row, 2).toString());
+                //txtService.setText(table.getValueAt(row, 3).toString());
+                //txtPrescription.setText(table.getValueAt(row, 4).toString());
+                //txtFee.setText(table.getValueAt(row, 5).toString());
+            }
+        });
+    }
 }
