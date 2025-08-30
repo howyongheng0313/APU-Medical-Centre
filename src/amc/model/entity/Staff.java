@@ -12,4 +12,7 @@ public class Staff extends Employee {
         String contact) {
         super(userId, userName, dateOfBirth, gender, email, contact);
     }
+
+    @Override
+    public Role getRole() { return Role.Staff; }
 }

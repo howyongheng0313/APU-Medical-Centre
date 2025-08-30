@@ -2,7 +2,7 @@ package amc.model.entity;
 
 import java.time.LocalDate;
 
-public class Employee extends User {
+public abstract class Employee extends User {
     public Employee(
         String    userId,
         String    userName,

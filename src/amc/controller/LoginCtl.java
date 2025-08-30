@@ -1,31 +1,21 @@
 package amc.controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import amc.model.entity.User;
 import amc.view.share.LoginPanel;
 
 public class LoginCtl extends AbstractSubCtl {
-    private LoginPanel viewLogin = new LoginPanel();
+    private final LoginPanel viewLogin = new LoginPanel();
 
     protected LoginCtl(AmcCtl ROOT) {
         super(ROOT);
-        viewLogin.btnLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                login();
-            }
+        viewLogin.btnLogin.addActionListener((ActionEvent evt) -> {
+            login();
         });
-        viewLogin.btnSignup.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-            }
+        viewLogin.btnSignup.addActionListener((ActionEvent evt) -> {
         });
-        viewLogin.btnForgot.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-            }
+        viewLogin.btnForgot.addActionListener((ActionEvent evt) -> {
         });
     }
 

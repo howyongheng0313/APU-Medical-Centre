@@ -3,6 +3,7 @@ package amc.model.db_impl;
 import amc.model.DataUtil;
 import amc.model.DbAdapter;
 import amc.model.entity.Password;
+import amc.model.entity.Role;
 import amc.model.entity.UserAuth;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class UserAuthAdapt extends DbAdapter<UserAuth> {
     public UserAuth getMod(List<String> row) {
         UserAuth model = new UserAuth(
             row.get(0),
-            UserAuth.Role.valueOf(row.get(1)),
+            Role.valueOf(row.get(1)),
             new Password(row.get(2), row.get(3))
         );
         return model;

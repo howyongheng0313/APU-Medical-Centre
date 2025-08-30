@@ -1,8 +1,6 @@
 package amc.model.entity;
 
 public class UserAuth {
-    public enum Role { Customer, Manager, Staff, Doctor; }
-
     private String   email;
     private Role     role;
     private Password password;

@@ -1,12 +1,7 @@
 package amc.controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import amc.model.entity.Customer;
-import amc.model.entity.Manager;
-import amc.model.entity.Doctor;
-import amc.model.entity.Staff;
+import amc.model.entity.User;
 import amc.view.share.MenuPanel;
 
 public class MenuCtl extends AbstractSubCtl {
@@ -14,30 +9,23 @@ public class MenuCtl extends AbstractSubCtl {
 
     public MenuCtl(AmcCtl ROOT) {
         super(ROOT);
-        viewMenu.btnLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                gotoLogin();
-            }
+        viewMenu.btnLogin.addActionListener((ActionEvent evt) -> {
+            gotoLogin();
         });
-        getROOT().UserChange.register(()->{
+        getROOT().UserChange.register(() -> {
             loadUser();
         });
     }
 
     private void loadUser() {
-        if (getROOT().getCurrentUser() == null) {
+        User user = getROOT().getCurrentUser();
+        if (user == null) {
             viewMenu.switch2Home(true);
             viewMenu.setUserPage(null);
             return;
         }
-//        int a = switch (getROOT().getCurrentUser().getClass()) {
-//            case Customer.class -> 0;
-//            case Manager.class  -> 0;
-//            case Docctor.class  -> 0;
-//            case Staff.class    -> 0;
-//            default -> 0;
-//        };
+        UserCtl userCtl = user.getRole().newCtl(getROOT());
+        // TO BE CONTINUE
     }
 
     private void gotoLogin() {

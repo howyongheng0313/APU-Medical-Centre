@@ -12,4 +12,7 @@ public class Customer extends User {
         String    contact) {
         super(userId, userName, dateOfBirth, gender, email, contact);
     }
+
+    @Override
+    public Role getRole() { return Role.Customer; }
 }

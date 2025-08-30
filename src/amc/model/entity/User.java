@@ -3,10 +3,8 @@ package amc.model.entity;
 import java.util.List;
 import java.time.LocalDate;
 
-import amc.model.DbHandle;
 import amc.model.DbMan;
 import amc.model.db_impl.Db;
-import amc.model.entity.UserAuth.Role;
 
 public abstract class User {
     public enum Gender { Male, Female; }
@@ -50,18 +48,11 @@ public abstract class User {
         UserAuth auth = authLs.getFirst();
         if (!auth.getPassword().verify(loginCtx.password)) return null;
 
-        DbHandle<? extends User> userHandle = switch (auth.getRole()) {
-            case Role.Customer -> Db.Customer;
-            case Role.Doctor   -> Db.Doctor;
-            case Role.Manager  -> Db.Manager;
-            case Role.Staff    -> Db.Staff;
-            default -> null;
-        };
-        if (userHandle == null) return null;
-
-        List<? extends User> userLs = userHandle.select(1, DbMan.checkUser(loginCtx.email));
+        List<? extends User> userLs = auth.getRole().getHandle().select(1, DbMan.checkUser(loginCtx.email));
         return userLs.getFirst();
     }
+
+    public abstract Role getRole();
 
     public String    getUserId() { return userId; }
     public String    getUserName() { return userName; }

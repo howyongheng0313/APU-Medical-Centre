@@ -12,4 +12,7 @@ public class Doctor extends Employee {
         String contact) {
         super(userId, userName, dateOfBirth, gender, email, contact);
     }
+
+    @Override
+    public Role getRole() { return Role.Doctor; }
 }
