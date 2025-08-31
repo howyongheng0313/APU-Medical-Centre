@@ -1,0 +1,11 @@
+SEQ
+DPT-001|Internal Medicine
+DPT-002|Surgery
+DPT-003|Pediatrics
+DPT-004|Dermatology
+DPT-005|Ophthalmology
+DPT-006|ENT (Ear, Nose, Throat)
+DPT-007|Dentistry
+DPT-008|Gynecology
+DPT-009|General Chinese Medicine
+DPT-010|General Practice

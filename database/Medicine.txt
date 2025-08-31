@@ -1,0 +1,34 @@
+SEQ
+MDC-001|Amlodipine|MYR25.00
+MDC-002|Metformin|MYR20.00
+MDC-003|Bromhexine|MYR18.00
+MDC-004|Atorvastatin|MYR30.00
+MDC-005|Ceftriaxone (IV)|MYR60.00
+MDC-006|Tramadol|MYR40.00
+MDC-007|Paracetamol|MYR10.00
+MDC-008|Mupirocin Ointment|MYR25.00
+MDC-009|Povidone-Iodine|MYR8.00
+MDC-010|DTaP-IPV-Hib Vaccine|MYR90.00
+MDC-011|Salbutamol Inhaler|MYR35.00
+MDC-012|Multivitamin Syrup|MYR22.00
+MDC-013|Loratadine|MYR18.00
+MDC-014|Clotrimazole Cream|MYR20.00
+MDC-015|Tretinoin Gel|MYR40.00
+MDC-016|Lubricant Eye Drops|MYR12.00
+MDC-017|Timolol Eye Drops|MYR25.00
+MDC-018|Chloramphenicol Drops|MYR15.00
+MDC-019|Carbamide Peroxide|MYR10.00
+MDC-020|Fluticasone Spray|MYR35.00
+MDC-021|Amoxicillin|MYR30.00
+MDC-022|Folic Acid|MYR15.00
+MDC-023|Clomiphene|MYR45.00
+MDC-024|Norethisterone|MYR30.00
+MDC-025|Estradiol Tablets|MYR50.00
+MDC-026|Herbal Pack|MYR20.00
+MDC-027|Dang Shen |MYR25.00
+MDC-028|Goji Mix|MYR25.00
+MDC-029|Suan Zao Ren Decoction|MYR28.00
+MDC-030|Antiseptic Spray|MYR10.00
+MDC-031|Typhoid Vaccine|MYR85.00
+MDC-032|Paracetamol |MYR18.00
+MDC-033|Loratadine|MYR18.00

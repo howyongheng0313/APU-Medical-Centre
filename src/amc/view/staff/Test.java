@@ -1,7 +1,6 @@
 package amc.view.staff;
 
 import java.time.LocalDate;
-import java.time.Period;
 
 public class Test {
     public static void main(String[] args) {

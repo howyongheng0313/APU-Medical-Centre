@@ -1,0 +1,6 @@
+SEQ
+050313690069|Chong Zi Yern|2005-03-13|Male|chongziyern@gmail.com|0123815073
+070812870908|Muhammad Ali|2007-08-12|Male|alimuhammad@gmail.com|0133815074
+071222658890|Nee Zhen Mei|2007-12-22|Female|neezhenmei@gmail.com|0143815075
+031002760089|Hun Tian Di|2003-10-02|Male|huntiandi@gmail.com|0163815076
+060421657709|Xiao Xun Er|2006-04-21|Female|xuner12@gmail.com|0193815077

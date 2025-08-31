@@ -1,0 +1,11 @@
+SEQ
+STF-001|Kuek Zheng Yu|2004-08-21|Male|kuekzhengyu@gmail.com|01123467890|DPT-001
+STF-002|Kuo Tai Ming|2001-08-22|Male|taimingkuo@gmail.com|01724674891|DPT-002
+STF-003|Kok Fu Cheng|2003-08-23|Male|fuchengkok@gmail.com|01923781892|DPT-003
+STF-004|Kuek Gai|2002-08-24|Male|gaikuek@gmail.com|01423767293|DPT-004
+STF-005|Kuek Er Cheng|1986-08-25|Male|erchengkuek@gmail.com|01323467894|DPT-005
+STF-006|Bai Xiao Chun|1986-08-26|Male|xiaochunbai@gmail.com|01323467895|DPT-006
+STF-007|Deng Li Jun|1986-08-27|Female|lijundeng@gmail.com|01323467896|DPT-007
+STF-008|Lin Jun Jie|1986-08-28|Male|jjlin@gmail.com|01323467897|DPT-008
+STF-009|Deng Zi Qi|1986-08-29|Female|ziqideng@gmail.com|01323467898|DPT-009
+STF-010|Zhou Shen|1986-08-30|Male|zhoushen@gmail.com|01323467899|DPT-010

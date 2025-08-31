@@ -4,6 +4,8 @@
  */
 package amc.view.staff;
 
+import amc.view.Theme;
+
 /**
  *
  * @author kzy
@@ -23,22 +25,113 @@ public class PayLsPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        amcButton1 = new amc.view.comp.AmcButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        setBackground(Theme.C1_BG);
         setPreferredSize(new java.awt.Dimension(800, 500));
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {10, 200, 10};
+        layout.rowHeights = new int[] {0, 0};
+        layout.columnWeights = new double[] {0.2, 0.6, 0.2};
+        layout.rowWeights = new double[] {0.0, 1.0};
+        setLayout(layout);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setOpaque(false);
+        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
+        jPanel1Layout.columnWidths = new int[] {0, 120};
+        jPanel1Layout.rowHeights = new int[] {30, 30, 30};
+        jPanel1Layout.columnWeights = new double[] {1.0, 0.0};
+        jPanel1Layout.rowWeights = new double[] {0.0, 0.0, 0.0};
+        jPanel1.setLayout(jPanel1Layout);
+
+        jTextField1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jTextField1.setForeground(Theme.C1_FG);
+        jTextField1.setText("Appointment ID");
+        jTextField1.setMaximumSize(new java.awt.Dimension(100, 30));
+        jTextField1.setMinimumSize(new java.awt.Dimension(100, 30));
+        jTextField1.setPreferredSize(new java.awt.Dimension(100, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jTextField1, gridBagConstraints);
+
+        jTextField2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jTextField2.setForeground(Theme.C1_FG);
+        jTextField2.setText("Customer Emial / ID");
+        jTextField2.setMaximumSize(new java.awt.Dimension(100, 30));
+        jTextField2.setMinimumSize(new java.awt.Dimension(100, 30));
+        jTextField2.setPreferredSize(new java.awt.Dimension(100, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jTextField2, gridBagConstraints);
+
+        amcButton1.setText("Search");
+        amcButton1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(amcButton1, gridBagConstraints);
+
+        jComboBox1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jComboBox1.setForeground(Theme.C1_FG);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setMaximumSize(new java.awt.Dimension(100, 30));
+        jComboBox1.setMinimumSize(new java.awt.Dimension(100, 30));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(100, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jComboBox1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        add(jPanel1, gridBagConstraints);
+
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(100, 100));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(100, 100));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 10, 0);
+        add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private amc.view.comp.AmcButton amcButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
