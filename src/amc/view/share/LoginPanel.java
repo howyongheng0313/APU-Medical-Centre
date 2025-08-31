@@ -311,7 +311,7 @@ public class LoginPanel extends javax.swing.JPanel {
     public final User.LoginContext getLoginContext() {
         return new User.LoginContext(
             DataUtil.formatEmail(txtLoginEmail.getText()),
-            Arrays.toString(pwdPassword.getPassword())
+            new String(pwdPassword.getPassword())
         );
     }
 

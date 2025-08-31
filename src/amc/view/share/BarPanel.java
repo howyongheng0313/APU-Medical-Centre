@@ -1,8 +1,8 @@
 package amc.view.share;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.util.Arrays;
+import javax.swing.Box;
 
 public class BarPanel extends javax.swing.JPanel {
 
@@ -12,20 +12,22 @@ public class BarPanel extends javax.swing.JPanel {
      */
     public BarPanel(BarButton... buttons) {
         initComponents();
-        int length = buttons.length;
-        GridBagLayout gbl = ((GridBagLayout) this.getLayout());
-        gbl.columnWidths  = new int[length + 1];
-        gbl.columnWeights = new double[length + 1];
-        Arrays.fill(gbl.columnWidths , 100);
-        gbl.columnWidths[length]  = 0;
-        gbl.columnWeights[length] = 1;
-        
+
         GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
         for (BarButton btn: buttons) {
-            gbc = new GridBagConstraints();
-            gbc.fill = GridBagConstraints.BOTH;
             this.add(btn, gbc);
         }
+
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1;
+        this.add(new Box.Filler(
+            new Dimension(0, 0),
+            new Dimension(0, 0),
+            new Dimension(32767, 0)
+        ), gbc);
     }
 
     /**
@@ -34,22 +36,13 @@ public class BarPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
-
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
         setOpaque(false);
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.rowWeights = new double[] {1.0};
         setLayout(layout);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        add(filler1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.Box.Filler filler1;
     // End of variables declaration//GEN-END:variables
 }

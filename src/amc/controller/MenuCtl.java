@@ -2,6 +2,7 @@ package amc.controller;
 
 import java.awt.event.ActionEvent;
 import amc.model.entity.User;
+import amc.view.share.BarPanel;
 import amc.view.share.MenuPanel;
 import javax.swing.JPanel;
 
@@ -13,6 +14,7 @@ public class MenuCtl extends AbstractSubCtl {
         viewMenu.btnLogin.addActionListener((ActionEvent evt) -> {
             gotoLogin();
         });
+
         getROOT().UserChange.register(() -> {
             loadUser();
         });
@@ -25,9 +27,9 @@ public class MenuCtl extends AbstractSubCtl {
             viewMenu.setUserPage(null, null);
             return;
         }
-        UserCtl userCtl  = user.getRole().newCtl(getROOT());
-        JPanel  viewBody = userCtl.getViewBody();
-        JPanel  viewBar  = userCtl.getViewBar();
+        UserCtl  userCtl  = user.getRole().newCtl(getROOT());
+        JPanel   viewBody = userCtl.getViewBody();
+        BarPanel viewBar  = userCtl.getViewBar();
         viewMenu.setUserPage(viewBody, viewBar);
     }
 

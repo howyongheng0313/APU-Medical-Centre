@@ -27,31 +27,14 @@ public class MenuPanel extends javax.swing.JPanel {
         picHomeLogo = new amc.view.comp.AmcPicture();
         btnDepts = new amc.view.comp.AmcButton();
         btnDocs = new amc.view.comp.AmcButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        barPanel = new javax.swing.JPanel();
-        cusBarPanel = new javax.swing.JPanel();
-        amcButton1 = new amc.view.comp.AmcButton();
-        amcButton2 = new amc.view.comp.AmcButton();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
-        mngBarPanel = new javax.swing.JPanel();
-        amcButton3 = new amc.view.comp.AmcButton();
-        amcButton4 = new amc.view.comp.AmcButton();
-        amcButton5 = new amc.view.comp.AmcButton();
-        amcButton6 = new amc.view.comp.AmcButton();
-        amcButton7 = new amc.view.comp.AmcButton();
-        amcButton8 = new amc.view.comp.AmcButton();
-        stfBarPanel = new javax.swing.JPanel();
-        amcButton9 = new amc.view.comp.AmcButton();
-        amcButton10 = new amc.view.comp.AmcButton();
-        amcButton11 = new amc.view.comp.AmcButton();
-        docBarPanel = new javax.swing.JPanel();
-        amcButton12 = new amc.view.comp.AmcButton();
+        sepSplitBar = new javax.swing.JSeparator();
+        userBarContainer = new javax.swing.JPanel();
         accountPanel = new javax.swing.JPanel();
         btnLogin = new amc.view.comp.AmcButton();
         picAvatar = new amc.view.comp.AmcPicture();
         bodyPanel = new javax.swing.JPanel();
-        homePanel1 = new amc.view.share.HomePanel();
-        jPanel1 = new javax.swing.JPanel();
+        homePanel = new amc.view.share.HomePanel();
+        userBodyContainer = new javax.swing.JPanel();
 
         setBackground(Theme.C1_BG);
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -88,165 +71,19 @@ public class MenuPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         menuBarPanel.add(btnDocs, gridBagConstraints);
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        sepSplitBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
-        menuBarPanel.add(jSeparator1, gridBagConstraints);
+        menuBarPanel.add(sepSplitBar, gridBagConstraints);
 
-        barPanel.setAutoscrolls(true);
-        barPanel.setOpaque(false);
-        barPanel.setLayout(new java.awt.CardLayout());
-
-        cusBarPanel.setOpaque(false);
-        java.awt.GridBagLayout cusBarPanelLayout = new java.awt.GridBagLayout();
-        cusBarPanelLayout.columnWidths = new int[] {100};
-        cusBarPanelLayout.rowWeights = new double[] {1.0};
-        cusBarPanel.setLayout(cusBarPanelLayout);
-
-        amcButton1.setText("Appointments");
-        amcButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton1.setMaximumSize(null);
-        amcButton1.setMinimumSize(null);
-        amcButton1.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        cusBarPanel.add(amcButton1, gridBagConstraints);
-
-        amcButton2.setText("Book Appt");
-        amcButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton2.setMaximumSize(null);
-        amcButton2.setMinimumSize(null);
-        amcButton2.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        cusBarPanel.add(amcButton2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        cusBarPanel.add(filler1, gridBagConstraints);
-
-        barPanel.add(cusBarPanel, "CusBar");
-
-        mngBarPanel.setOpaque(false);
-        java.awt.GridBagLayout mngBarPanelLayout = new java.awt.GridBagLayout();
-        mngBarPanelLayout.columnWidths = new int[] {100, 100, 100, 100, 100, 100, 0};
-        mngBarPanelLayout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
-        mngBarPanelLayout.rowWeights = new double[] {1.0};
-        mngBarPanel.setLayout(mngBarPanelLayout);
-
-        amcButton3.setText("DashBoard");
-        amcButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton3.setMaximumSize(null);
-        amcButton3.setMinimumSize(null);
-        amcButton3.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mngBarPanel.add(amcButton3, gridBagConstraints);
-
-        amcButton4.setText("Personnels");
-        amcButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton4.setMaximumSize(null);
-        amcButton4.setMinimumSize(null);
-        amcButton4.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mngBarPanel.add(amcButton4, gridBagConstraints);
-
-        amcButton5.setText("Comments");
-        amcButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton5.setMaximumSize(null);
-        amcButton5.setMinimumSize(null);
-        amcButton5.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mngBarPanel.add(amcButton5, gridBagConstraints);
-
-        amcButton6.setText("Appts");
-        amcButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton6.setMaximumSize(null);
-        amcButton6.setMinimumSize(null);
-        amcButton6.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mngBarPanel.add(amcButton6, gridBagConstraints);
-
-        amcButton7.setText("Services");
-        amcButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton7.setMaximumSize(null);
-        amcButton7.setMinimumSize(null);
-        amcButton7.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mngBarPanel.add(amcButton7, gridBagConstraints);
-
-        amcButton8.setText("Medicines");
-        amcButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton8.setMaximumSize(null);
-        amcButton8.setMinimumSize(null);
-        amcButton8.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mngBarPanel.add(amcButton8, gridBagConstraints);
-
-        barPanel.add(mngBarPanel, "MngBar");
-
-        stfBarPanel.setOpaque(false);
-        java.awt.GridBagLayout staffBarPanelLayout = new java.awt.GridBagLayout();
-        staffBarPanelLayout.columnWidths = new int[] {100, 100, 100, 0};
-        staffBarPanelLayout.columnWeights = new double[] {0.0, 0.0, 0.0, 1.0};
-        staffBarPanelLayout.rowWeights = new double[] {1.0};
-        stfBarPanel.setLayout(staffBarPanelLayout);
-
-        amcButton9.setText("Bookings");
-        amcButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton9.setMaximumSize(null);
-        amcButton9.setMinimumSize(null);
-        amcButton9.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        stfBarPanel.add(amcButton9, gridBagConstraints);
-
-        amcButton10.setText("Customers");
-        amcButton10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton10.setMaximumSize(null);
-        amcButton10.setMinimumSize(null);
-        amcButton10.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        stfBarPanel.add(amcButton10, gridBagConstraints);
-
-        amcButton11.setText("Paying");
-        amcButton11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        amcButton11.setMaximumSize(null);
-        amcButton11.setMinimumSize(null);
-        amcButton11.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        stfBarPanel.add(amcButton11, gridBagConstraints);
-
-        barPanel.add(stfBarPanel, "StfBar");
-
-        docBarPanel.setOpaque(false);
-        java.awt.GridBagLayout docBarPanelLayout = new java.awt.GridBagLayout();
-        docBarPanelLayout.columnWidths = new int[] {100, 0};
-        docBarPanelLayout.columnWeights = new double[] {0.0, 1.0};
-        docBarPanelLayout.rowWeights = new double[] {1.0};
-        docBarPanel.setLayout(docBarPanelLayout);
-
-        amcButton12.setText("Appointments");
-        amcButton12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        docBarPanel.add(amcButton12, gridBagConstraints);
-
-        barPanel.add(docBarPanel, "DocBar");
-
+        userBarContainer.setAutoscrolls(true);
+        userBarContainer.setOpaque(false);
+        userBarContainer.setLayout(new java.awt.BorderLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        menuBarPanel.add(barPanel, gridBagConstraints);
+        menuBarPanel.add(userBarContainer, gridBagConstraints);
 
         accountPanel.setOpaque(false);
         accountPanel.setLayout(new java.awt.CardLayout());
@@ -268,25 +105,30 @@ public class MenuPanel extends javax.swing.JPanel {
         add(menuBarPanel, java.awt.BorderLayout.PAGE_START);
 
         bodyPanel.setLayout(new java.awt.CardLayout());
-        bodyPanel.add(homePanel1, "Home");
-        bodyPanel.add(jPanel1, "User");
+        bodyPanel.add(homePanel, "Home");
+
+        userBodyContainer.setOpaque(false);
+        userBodyContainer.setLayout(new java.awt.BorderLayout());
+        bodyPanel.add(userBodyContainer, "User");
 
         add(bodyPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     public HomePanel getHomePage() {
-        return this.homePanel1;
+        return this.homePanel;
     }
 
-    public void setUserPage(JPanel body, JPanel bar) {
-        if (this.userBody != null) bodyPanel.remove(this.userBody);
-        if (this.userBar  != null) barPanel.remove(this.userBar);
+    public void setUserPage(JPanel body, BarPanel bar) {
+        if (this.userBody != null) userBodyContainer.remove(this.userBody);
+        if (this.userBar  != null) userBarContainer.remove(this.userBar);
         this.userBody = body;
         this.userBar  = bar;
 
         if (body == null || bar == null) return;
-        bodyPanel.add(body, "User");
-        barPanel.add(bar);
+        System.out.println(body);
+        System.out.println(bar);
+        userBodyContainer.add(userBody);
+        userBarContainer.add(bar);
         this.switch2Home(false);
     }
 
@@ -296,33 +138,16 @@ public class MenuPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accountPanel;
-    private amc.view.comp.AmcButton amcButton1;
-    private amc.view.comp.AmcButton amcButton10;
-    private amc.view.comp.AmcButton amcButton11;
-    private amc.view.comp.AmcButton amcButton12;
-    private amc.view.comp.AmcButton amcButton2;
-    private amc.view.comp.AmcButton amcButton3;
-    private amc.view.comp.AmcButton amcButton4;
-    private amc.view.comp.AmcButton amcButton5;
-    private amc.view.comp.AmcButton amcButton6;
-    private amc.view.comp.AmcButton amcButton7;
-    private amc.view.comp.AmcButton amcButton8;
-    private amc.view.comp.AmcButton amcButton9;
-    private javax.swing.JPanel barPanel;
     private javax.swing.JPanel bodyPanel;
     private amc.view.comp.AmcButton btnDepts;
     private amc.view.comp.AmcButton btnDocs;
     public amc.view.comp.AmcButton btnLogin;
-    private javax.swing.JPanel cusBarPanel;
-    private javax.swing.JPanel docBarPanel;
-    private javax.swing.Box.Filler filler1;
-    private amc.view.share.HomePanel homePanel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
+    private amc.view.share.HomePanel homePanel;
     private javax.swing.JPanel menuBarPanel;
-    private javax.swing.JPanel mngBarPanel;
     private amc.view.comp.AmcPicture picAvatar;
     private amc.view.comp.AmcPicture picHomeLogo;
-    private javax.swing.JPanel stfBarPanel;
+    private javax.swing.JSeparator sepSplitBar;
+    private javax.swing.JPanel userBarContainer;
+    private javax.swing.JPanel userBodyContainer;
     // End of variables declaration//GEN-END:variables
 }
