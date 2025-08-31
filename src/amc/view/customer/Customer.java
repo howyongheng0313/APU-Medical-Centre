@@ -24,7 +24,6 @@ public class Customer {
     public void update_profile(String Customer_Name, String Customer_ID, int Conatct, String Email, String Password) {
         this.Customer_ID = Customer_ID;
         this.Customer_Name = Customer_Name;
-        this.Contact = Contact;
         this.Email = Email;
         this.Password = Password;
         

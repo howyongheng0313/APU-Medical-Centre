@@ -3,6 +3,7 @@ package amc.controller;
 import java.awt.event.ActionEvent;
 import amc.model.entity.User;
 import amc.view.share.MenuPanel;
+import javax.swing.JPanel;
 
 public class MenuCtl extends AbstractSubCtl {
     private final MenuPanel viewMenu = new MenuPanel();
@@ -21,11 +22,13 @@ public class MenuCtl extends AbstractSubCtl {
         User user = getROOT().getCurrentUser();
         if (user == null) {
             viewMenu.switch2Home(true);
-            viewMenu.setUserPage(null);
+            viewMenu.setUserPage(null, null);
             return;
         }
-        UserCtl userCtl = user.getRole().newCtl(getROOT());
-        // TO BE CONTINUE
+        UserCtl userCtl  = user.getRole().newCtl(getROOT());
+        JPanel  viewBody = userCtl.getViewBody();
+        JPanel  viewBar  = userCtl.getViewBar();
+        viewMenu.setUserPage(viewBody, viewBar);
     }
 
     private void gotoLogin() {

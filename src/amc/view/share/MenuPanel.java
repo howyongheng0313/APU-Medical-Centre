@@ -5,7 +5,8 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 public class MenuPanel extends javax.swing.JPanel {
-    private JPanel userPage = null;
+    private JPanel userBody = null;
+    private JPanel userBar  = null;
 
     /**
      * Creates new form MainPanel
@@ -27,10 +28,11 @@ public class MenuPanel extends javax.swing.JPanel {
         btnDepts = new amc.view.comp.AmcButton();
         btnDocs = new amc.view.comp.AmcButton();
         jSeparator1 = new javax.swing.JSeparator();
-        userBarPanel = new javax.swing.JPanel();
+        barPanel = new javax.swing.JPanel();
         cusBarPanel = new javax.swing.JPanel();
         amcButton1 = new amc.view.comp.AmcButton();
         amcButton2 = new amc.view.comp.AmcButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         mngBarPanel = new javax.swing.JPanel();
         amcButton3 = new amc.view.comp.AmcButton();
         amcButton4 = new amc.view.comp.AmcButton();
@@ -92,14 +94,13 @@ public class MenuPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         menuBarPanel.add(jSeparator1, gridBagConstraints);
 
-        userBarPanel.setAutoscrolls(true);
-        userBarPanel.setOpaque(false);
-        userBarPanel.setLayout(new java.awt.CardLayout());
+        barPanel.setAutoscrolls(true);
+        barPanel.setOpaque(false);
+        barPanel.setLayout(new java.awt.CardLayout());
 
         cusBarPanel.setOpaque(false);
         java.awt.GridBagLayout cusBarPanelLayout = new java.awt.GridBagLayout();
-        cusBarPanelLayout.columnWidths = new int[] {100, 100, 0};
-        cusBarPanelLayout.columnWeights = new double[] {0.0, 0.0, 1.0};
+        cusBarPanelLayout.columnWidths = new int[] {100};
         cusBarPanelLayout.rowWeights = new double[] {1.0};
         cusBarPanel.setLayout(cusBarPanelLayout);
 
@@ -120,8 +121,13 @@ public class MenuPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         cusBarPanel.add(amcButton2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        cusBarPanel.add(filler1, gridBagConstraints);
 
-        userBarPanel.add(cusBarPanel, "CusBar");
+        barPanel.add(cusBarPanel, "CusBar");
 
         mngBarPanel.setOpaque(false);
         java.awt.GridBagLayout mngBarPanelLayout = new java.awt.GridBagLayout();
@@ -184,7 +190,7 @@ public class MenuPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mngBarPanel.add(amcButton8, gridBagConstraints);
 
-        userBarPanel.add(mngBarPanel, "MngBar");
+        barPanel.add(mngBarPanel, "MngBar");
 
         stfBarPanel.setOpaque(false);
         java.awt.GridBagLayout staffBarPanelLayout = new java.awt.GridBagLayout();
@@ -220,7 +226,7 @@ public class MenuPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         stfBarPanel.add(amcButton11, gridBagConstraints);
 
-        userBarPanel.add(stfBarPanel, "StfBar");
+        barPanel.add(stfBarPanel, "StfBar");
 
         docBarPanel.setOpaque(false);
         java.awt.GridBagLayout docBarPanelLayout = new java.awt.GridBagLayout();
@@ -235,12 +241,12 @@ public class MenuPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         docBarPanel.add(amcButton12, gridBagConstraints);
 
-        userBarPanel.add(docBarPanel, "DocBar");
+        barPanel.add(docBarPanel, "DocBar");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        menuBarPanel.add(userBarPanel, gridBagConstraints);
+        menuBarPanel.add(barPanel, gridBagConstraints);
 
         accountPanel.setOpaque(false);
         accountPanel.setLayout(new java.awt.CardLayout());
@@ -272,12 +278,15 @@ public class MenuPanel extends javax.swing.JPanel {
         return this.homePanel1;
     }
 
-    public void setUserPage(JPanel page) {
-        if (this.userPage != null) bodyPanel.remove(this.userPage);
-        this.userPage = page;
+    public void setUserPage(JPanel body, JPanel bar) {
+        if (this.userBody != null) bodyPanel.remove(this.userBody);
+        if (this.userBar  != null) barPanel.remove(this.userBar);
+        this.userBody = body;
+        this.userBar  = bar;
 
-        if (page == null) return;
-        bodyPanel.add(page, "User");
+        if (body == null || bar == null) return;
+        bodyPanel.add(body, "User");
+        barPanel.add(bar);
         this.switch2Home(false);
     }
 
@@ -299,12 +308,14 @@ public class MenuPanel extends javax.swing.JPanel {
     private amc.view.comp.AmcButton amcButton7;
     private amc.view.comp.AmcButton amcButton8;
     private amc.view.comp.AmcButton amcButton9;
+    private javax.swing.JPanel barPanel;
     private javax.swing.JPanel bodyPanel;
     private amc.view.comp.AmcButton btnDepts;
     private amc.view.comp.AmcButton btnDocs;
     public amc.view.comp.AmcButton btnLogin;
     private javax.swing.JPanel cusBarPanel;
     private javax.swing.JPanel docBarPanel;
+    private javax.swing.Box.Filler filler1;
     private amc.view.share.HomePanel homePanel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
@@ -313,6 +324,5 @@ public class MenuPanel extends javax.swing.JPanel {
     private amc.view.comp.AmcPicture picAvatar;
     private amc.view.comp.AmcPicture picHomeLogo;
     private javax.swing.JPanel stfBarPanel;
-    private javax.swing.JPanel userBarPanel;
     // End of variables declaration//GEN-END:variables
 }
