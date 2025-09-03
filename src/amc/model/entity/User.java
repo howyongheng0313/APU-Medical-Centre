@@ -32,7 +32,8 @@ public abstract class User {
         LocalDate dateOfBirth,
         Gender    gender,
         String    email,
-        String    contact) {
+        String    contact
+    ) {
         this.userId      = userId;
         this.userName    = userName;
         this.dateOfBirth = dateOfBirth;

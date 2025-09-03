@@ -1,12 +1,13 @@
 package amc.view.comp;
+
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import javax.swing.JComponent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.awt.Dimension;
 
 public class AmcPicture extends JComponent {
     private Icon $image;

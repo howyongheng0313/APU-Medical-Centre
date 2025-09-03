@@ -30,7 +30,8 @@ public class Comment {
         String appointmentId,
         String targetId,
         Rating rating,
-        String content) {
+        String content
+    ) {
         this.commentId = commentId;
         this.appointmentId = appointmentId;
         this.targetId = targetId;

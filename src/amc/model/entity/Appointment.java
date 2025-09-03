@@ -35,7 +35,8 @@ public class Appointment {
         String customerId,
         String departmentId,
         LocalDateTime dateTime,
-        Status status) {
+        Status status
+    ) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.departmentId = departmentId;

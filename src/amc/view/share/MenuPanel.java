@@ -2,6 +2,7 @@ package amc.view.share;
 
 import amc.view.Theme;
 import java.awt.CardLayout;
+import java.awt.Cursor;
 import javax.swing.JPanel;
 
 public class MenuPanel extends javax.swing.JPanel {
@@ -13,6 +14,8 @@ public class MenuPanel extends javax.swing.JPanel {
      */
     public MenuPanel() {
         initComponents();
+        this.picHomeLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.picAvatar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     /**
@@ -93,10 +96,11 @@ public class MenuPanel extends javax.swing.JPanel {
         btnLogin.setMaximumSize(null);
         btnLogin.setMinimumSize(null);
         btnLogin.setPreferredSize(null);
-        accountPanel.add(btnLogin, "card2");
+        accountPanel.add(btnLogin, "Login");
 
         picAvatar.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/avatar_doctor.png"))); // NOI18N
-        accountPanel.add(picAvatar, "card3");
+        picAvatar.set$maxSize(new java.awt.Dimension(45, 45));
+        accountPanel.add(picAvatar, "Avatar");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -113,10 +117,6 @@ public class MenuPanel extends javax.swing.JPanel {
 
         add(bodyPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
-    public HomePanel getHomePage() {
-        return this.homePanel;
-    }
 
     public void setUserPage(JPanel body, BarPanel bar) {
         if (this.userBody != null) userBodyContainer.remove(this.userBody);

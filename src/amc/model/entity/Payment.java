@@ -10,7 +10,8 @@ public class Payment {
     public Payment(
         String paymentId,
         String appointmentId,
-        Method paymentMethod) {
+        Method paymentMethod
+    ) {
         this.paymentId = paymentId;
         this.appointmentId = appointmentId;
         this.paymentMethod = paymentMethod;

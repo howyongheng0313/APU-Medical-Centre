@@ -10,7 +10,8 @@ public class Service {
         String serviceId,
         String serviceName,
         double fee,
-        String departmentId) {
+        String departmentId
+    ) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.fee = fee;

@@ -9,7 +9,8 @@ public class Staff extends Employee {
         LocalDate dateOfBirth,
         Gender gender,
         String email,
-        String contact) {
+        String contact
+    ) {
         super(userId, userName, dateOfBirth, gender, email, contact);
     }
 

@@ -10,7 +10,8 @@ public class ApptMedicine {
         String appointmentId,
         String medicineId,
         double price,
-        int    quantity) {
+        int    quantity
+    ) {
         this.appointmentId = appointmentId;
         this.medicineId = medicineId;
         this.price = price;

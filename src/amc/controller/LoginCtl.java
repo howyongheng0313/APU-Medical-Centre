@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 
 import amc.model.entity.User;
 import amc.view.share.LoginPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginCtl extends AbstractSubCtl {
     private final LoginPanel viewLogin = new LoginPanel();
@@ -16,6 +18,12 @@ public class LoginCtl extends AbstractSubCtl {
         viewLogin.btnSignup.addActionListener((ActionEvent evt) -> {
         });
         viewLogin.btnForgot.addActionListener((ActionEvent evt) -> {
+        });
+        viewLogin.picLoginUndo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                getROOT().popPage(viewLogin);
+            }
         });
     }
 
