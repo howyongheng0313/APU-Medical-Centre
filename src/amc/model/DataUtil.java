@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public final class DataUtil {
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy:MM:dd");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
     private static final DecimalFormat AMOUNT_FORMAT;
 
@@ -20,11 +20,11 @@ public final class DataUtil {
     private DataUtil() {}
 
     public static LocalDate str2date(String date) {
-        return (LocalDate) DATE_FORMAT.parse(date);
+        return LocalDate.from(DATE_FORMAT.parse(date));
     }
 
     public static LocalTime str2time(String time) {
-        return (LocalTime) TIME_FORMAT.parse(time);
+        return LocalTime.from(TIME_FORMAT.parse(time));
     }
 
     public static String date2str(LocalDate date) {

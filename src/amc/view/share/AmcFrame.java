@@ -1,5 +1,7 @@
 package amc.view.share;
 
+import amc.view.Theme;
+
 public class AmcFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AmcFrame.class.getName());
@@ -18,6 +20,7 @@ public class AmcFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(Theme.C1_BG);
         getContentPane().setLayout(new java.awt.CardLayout());
         getContentPane().add(jPanel1, "card2");
 
