@@ -41,6 +41,7 @@ public abstract class User {
         this.contact     = contact;
     }
 
+    // 身份验证
     public static User login(LoginContext loginCtx) {
         List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserRole(loginCtx.email));
         if (authLs.isEmpty()) return null;

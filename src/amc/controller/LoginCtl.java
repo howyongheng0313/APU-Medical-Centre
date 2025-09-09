@@ -19,13 +19,14 @@ public class LoginCtl extends AbstractSubCtl {
         });
     }
 
+    // 切换到login panel
     public void startView() {
         getROOT().pushPage(viewLogin);
     }
-
+    
     public void login() {
         User.LoginContext loginCtx = viewLogin.getLoginContext();
-        User loggedUser = User.login(loginCtx);
+        User loggedUser = User.login(loginCtx);  
         getROOT().setCurrentUser(loggedUser);
         getROOT().UserChange.fire();
         getROOT().popPage(viewLogin);

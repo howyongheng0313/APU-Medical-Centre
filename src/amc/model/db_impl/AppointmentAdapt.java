@@ -20,11 +20,13 @@ public class AppointmentAdapt extends DbAdapter<Appointment> {
                 DataUtil.str2date(row.get(5)),
                 DataUtil.str2time(row.get(6))
             ),
-            Appointment.Status.valueOf(row.get(7))
+            // Map numeric status code to enum via step
+            Appointment.Status.valueOf(Integer.parseInt(row.get(7)))
         );
-        if (row.get(2).isEmpty()) model.setDoctorId(row.get(2));
-        if (row.get(3).isEmpty()) model.setStaffId(row.get(3));
-        if (row.get(8).isEmpty()) model.setFeedback(row.get(8));
+        // Set optional fields only when NOT empty
+        if (!row.get(2).isEmpty()) model.setDoctorId(row.get(2));
+        if (!row.get(3).isEmpty()) model.setStaffId(row.get(3));
+        if (!row.get(8).isEmpty()) model.setFeedback(row.get(8));
         return model;
     }
 

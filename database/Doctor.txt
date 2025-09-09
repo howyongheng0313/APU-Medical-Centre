@@ -2,7 +2,7 @@ SEQ
 DOC-001|Gan Ting Yong|2005-07-06|Male|gantingyong@gmail.com|01623767890|DPT-001|MMC 27666
 DOC-002|Jay Chou|2005-07-07|Male|jaychou@gmail.com|01623767891|DPT-002|MMC 27667
 DOC-003|Wang Li Hong|2005-07-08|Male|lihongwang@gmail.com|01623767892|DPT-003|MMC 27668
-DOC-004|Cai Xu Kun|2005-07-09|Mlae|woailanqiu@gmail.com|01623767893|DPT-004|MMC 27669
+DOC-004|Cai Xu Kun|2005-07-09|Male|woailanqiu@gmail.com|01623767893|DPT-004|MMC 27669
 DOC-005|Yang Chao Yue|2005-07-10|Female|rocketgirl@gmail.com|01623767894|DPT-005|MMC 27670
 DOC-006|Meng Mei Qi|2005-07-11|Female|meiqimeng@gmail.com|01623767895|DPT-006|MMC 27671
 DOC-007|Zhou Ke Yu|2005-07-12|Male|keyuzhou@gmail.com|01623767896|DPT-007|MMC 27672
