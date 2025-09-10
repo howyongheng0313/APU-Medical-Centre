@@ -1,6 +1,6 @@
 package amc.view.manager;
 
-import amc.model.entity.ReportData;
+import amc.model.entity.ReportsDTO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -20,7 +20,7 @@ public class PatientNumberReportPanel extends JPanel {
         initComponents();
     }
 
-    public void displayReport(ReportData.PatientNumberReport report) {
+    public void displayReport(ReportsDTO.PatientNumberReport report) {
         // 设置标签
         yearLabel.setText("Patient Number Report for " + report.getYear());
         totalPatientsLabel.setText("Total Unique Patients: " + report.getTotalPatients());
@@ -31,7 +31,7 @@ public class PatientNumberReportPanel extends JPanel {
         // 显示月度病人数据
         DefaultTableModel mModel = (DefaultTableModel) monthlyPatientsTable.getModel();
         mModel.setRowCount(0);
-        for (ReportData.MonthlyPatients m : report.getMonthlyPatients()) {
+        for (ReportsDTO.MonthlyPatients m : report.getMonthlyPatients()) {
             mModel.addRow(new Object[]{
                 months[m.getMonth() - 1],
                 m.getPatientCount(),
@@ -42,7 +42,7 @@ public class PatientNumberReportPanel extends JPanel {
         // 显示科室病人数据
         DefaultTableModel dModel = (DefaultTableModel) departmentPatientsTable.getModel();
         dModel.setRowCount(0);
-        for (ReportData.DepartmentPatients d : report.getDepartmentPatients()) {
+        for (ReportsDTO.DepartmentPatients d : report.getDepartmentPatients()) {
             dModel.addRow(new Object[]{ 
                 d.getDepartmentName(), 
                 d.getPatientCount() 

@@ -1,6 +1,6 @@
 package amc.view.manager;
 
-import amc.model.entity.ReportData;
+import amc.model.entity.ReportsDTO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class IncomeReportPanel extends JPanel {
         initComponents();
     }
 
-    public void displayReport(ReportData.IncomeReport report) {
+    public void displayReport(ReportsDTO.IncomeReport report) {
         yearLabel.setText("Income Report for " + report.getYear());
         totalIncomeLabel.setText("Total Income: " + formatCurrency(report.getTotalIncome()));
 
@@ -26,7 +26,7 @@ public class IncomeReportPanel extends JPanel {
         DefaultTableModel monthlyModel = (DefaultTableModel) monthlyIncomeTable.getModel();
         monthlyModel.setRowCount(0);
         String[] months = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-        for (ReportData.MonthlyIncome m : report.getMonthlyIncomes()) {
+        for (ReportsDTO.MonthlyIncome m : report.getMonthlyIncomes()) {
             monthlyModel.addRow(new Object[]{ 
                 months[m.getMonth() - 1], 
                 formatCurrency(m.getIncome()), 
@@ -37,7 +37,7 @@ public class IncomeReportPanel extends JPanel {
         // 支付方法表格
         DefaultTableModel payModel = (DefaultTableModel) paymentMethodTable.getModel();
         payModel.setRowCount(0);
-        for (ReportData.PaymentBreakdown pb : report.getPaymentBreakdown()) {
+        for (ReportsDTO.PaymentBreakdown pb : report.getPaymentBreakdown()) {
             payModel.addRow(new Object[]{ 
                 pb.getMethod().toString(), 
                 formatCurrency(pb.getAmount()), 

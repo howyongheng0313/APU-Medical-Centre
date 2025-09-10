@@ -34,12 +34,9 @@ public class ManagerPanel extends javax.swing.JPanel {
         cardLayout.show(this, cardName);
     }
     
-    public Dashboard getDashboard(){
-        return dashboardPanel;
-    }
+    public Dashboard getDashboard(){ return dashboardPanel; }
+    public CommentLs getCommentsPanel() { return commentsPanel; }
     
-    
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

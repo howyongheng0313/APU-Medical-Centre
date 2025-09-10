@@ -2,7 +2,7 @@ package amc.model.entity;
 
 import java.util.List;
 
-public class ReportData {
+public class ReportsDTO {
     
     public static class IncomeReport {
         private final int year;

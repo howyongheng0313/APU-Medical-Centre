@@ -1,6 +1,6 @@
 package amc.view.manager;
 
-import amc.model.entity.ReportData;
+import amc.model.entity.ReportsDTO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -18,12 +18,12 @@ public class DoctorPerformanceReportPanel extends JPanel {
         initComponents();
     }
 
-    public void displayReport(ReportData.DocterPerformanceReport report) {
+    public void displayReport(ReportsDTO.DocterPerformanceReport report) {
         yearLabel.setText("Doctor Performance Report for " + report.getYear());
 
         DefaultTableModel model = (DefaultTableModel) doctorPerformanceTable.getModel();
         model.setRowCount(0);
-        for (ReportData.DoctorPerformance d : report.getDoctorPerformances()) {
+        for (ReportsDTO.DoctorPerformance d : report.getDoctorPerformances()) {
             model.addRow(new Object[]{
                 d.getDoctorName(),
                 d.getTotalAppointments(),

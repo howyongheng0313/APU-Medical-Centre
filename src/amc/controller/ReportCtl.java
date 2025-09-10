@@ -1,3 +1,9 @@
+/*
+** 现在这个不完全属于Controller
+** 现在是Controller + Services
+** Services处理数据后返回DTO,也就是Report.java
+*/
+
 package amc.controller;
 
 import amc.model.entity.*;
@@ -11,7 +17,7 @@ public class ReportCtl extends AbstractSubCtl{
     }
     
     // IncomeReport Report
-    public ReportData.IncomeReport generateIncomeReport(int year){
+    public ReportsDTO.IncomeReport generateIncomeReport(int year){
         // Get all appointment for the year
         List<Appointment> appointments = Db.Appointment.select(-1 , apt ->
                 apt.getDateTime().getYear() == year && apt.getStatus() == Appointment.Status.Completed
@@ -45,11 +51,11 @@ public class ReportCtl extends AbstractSubCtl{
             monthlyCountMap.merge(month, 1, Integer::sum);
         }
         
-        List<ReportData.MonthlyIncome> monthlyIncomes = new ArrayList<>();
+        List<ReportsDTO.MonthlyIncome> monthlyIncomes = new ArrayList<>();
         for(int month = 1; month <= 12; month++){
             double income = monthlyIncomeMap.getOrDefault(month, 0.0);
             int count = monthlyCountMap.getOrDefault(month, 0);
-            monthlyIncomes.add(new ReportData.MonthlyIncome(month, income, count));
+            monthlyIncomes.add(new ReportsDTO.MonthlyIncome(month, income, count));
         }
         
         // Calculate payment method breakdown
@@ -85,21 +91,21 @@ public class ReportCtl extends AbstractSubCtl{
             }
         }
         
-        List<ReportData.PaymentBreakdown> paymentBreakdown = paymentAmountMap.entrySet().stream()
-                .map(entry -> new ReportData.PaymentBreakdown(
+        List<ReportsDTO.PaymentBreakdown> paymentBreakdown = paymentAmountMap.entrySet().stream()
+                .map(entry -> new ReportsDTO.PaymentBreakdown(
                         entry.getKey(), 
                         entry.getValue(), 
                         paymentCountMap.get(entry.getKey())
                 ))
                 .collect(Collectors.toList());
         
-        double totalIncome = monthlyIncomes.stream().mapToDouble(ReportData.MonthlyIncome::getIncome).sum();
+        double totalIncome = monthlyIncomes.stream().mapToDouble(ReportsDTO.MonthlyIncome::getIncome).sum();
         
-        return new ReportData.IncomeReport(year, totalIncome, monthlyIncomes, paymentBreakdown);
+        return new ReportsDTO.IncomeReport(year, totalIncome, monthlyIncomes, paymentBreakdown);
     }
     
     // Patient Number Report
-    public ReportData.PatientNumberReport generatePatientNumberReport(int year){
+    public ReportsDTO.PatientNumberReport generatePatientNumberReport(int year){
         // Get all appointment for the year
         List<Appointment> appointments = Db.Appointment.select(-1, apt ->
                 apt.getDateTime().getYear() == year
@@ -135,11 +141,11 @@ public class ReportCtl extends AbstractSubCtl{
         }  
         
         // Construct monthly patients report (total patients + new patients)
-        List<ReportData.MonthlyPatients> monthlyPatients = new ArrayList<>();
+        List<ReportsDTO.MonthlyPatients> monthlyPatients = new ArrayList<>();
         for (int month = 1; month <= 12; month++) {
             int patientCount = monthlyPatientMap.getOrDefault(month, new HashSet<>()).size();
             int newPatients = monthlyNewPatientMap.getOrDefault(month, new HashSet<>()).size();
-            monthlyPatients.add(new ReportData.MonthlyPatients(month, patientCount, newPatients));
+            monthlyPatients.add(new ReportsDTO.MonthlyPatients(month, patientCount, newPatients));
         }
         
         // Calculate department patient counts
@@ -150,8 +156,8 @@ public class ReportCtl extends AbstractSubCtl{
             departmentPatientMap.computeIfAbsent(deptId, k -> new HashSet<>()).add(customerId);
         }
         
-        // Convert to ReportData Object
-        List<ReportData.DepartmentPatients> departmentPatients = new ArrayList<>();
+        // Convert to ReportsDTO Object
+        List<ReportsDTO.DepartmentPatients> departmentPatients = new ArrayList<>();
         for (Map.Entry<String, Set<String>> entry : departmentPatientMap.entrySet()) {
             String deptId = entry.getKey();
             int patientCount = entry.getValue().size();
@@ -160,15 +166,15 @@ public class ReportCtl extends AbstractSubCtl{
             List<Department> departments = Db.Department.select(1, d -> d.getDepartmentId().equals(deptId));
             String deptName = departments.isEmpty() ? "Unknown" : departments.get(0).getDepartmentName();
             
-            departmentPatients.add(new ReportData.DepartmentPatients(deptId, deptName, patientCount));
+            departmentPatients.add(new ReportsDTO.DepartmentPatients(deptId, deptName, patientCount));
         }
         
         // Return Object
-        return new ReportData.PatientNumberReport(year, uniquePatients.size(), monthlyPatients, departmentPatients);
+        return new ReportsDTO.PatientNumberReport(year, uniquePatients.size(), monthlyPatients, departmentPatients);
     }
     
     // Docter Performance Report
-    public ReportData.DocterPerformanceReport generateDoctorPerformanceReport(int year) {
+    public ReportsDTO.DocterPerformanceReport generateDoctorPerformanceReport(int year) {
         // Get all appointments for the year
         List<Appointment> appointments = Db.Appointment.select(-1, apt -> 
             apt.getDateTime().getYear() == year && apt.getDoctorId() != null
@@ -178,7 +184,7 @@ public class ReportCtl extends AbstractSubCtl{
         Map<String, List<Appointment>> doctorAppointments = appointments.stream()
             .collect(Collectors.groupingBy(Appointment::getDoctorId));
         
-        List<ReportData.DoctorPerformance> doctorPerformances = new ArrayList<>();
+        List<ReportsDTO.DoctorPerformance> doctorPerformances = new ArrayList<>();
         
         for (Map.Entry<String, List<Appointment>> entry : doctorAppointments.entrySet()) {
             String doctorId = entry.getKey();
@@ -220,7 +226,7 @@ public class ReportCtl extends AbstractSubCtl{
                 totalRevenue += serviceRevenue + medicineRevenue;
             }
             
-            doctorPerformances.add(new ReportData.DoctorPerformance(
+            doctorPerformances.add(new ReportsDTO.DoctorPerformance(
                 doctorId, doctorName, totalAppointments, completedAppointments, 
                 averageRating, totalRevenue
             ));
@@ -229,6 +235,6 @@ public class ReportCtl extends AbstractSubCtl{
         // Sort by total revenue descending
         doctorPerformances.sort((a, b) -> Double.compare(b.getTotalRevenue(), a.getTotalRevenue()));
         
-        return new ReportData.DocterPerformanceReport(year, doctorPerformances);      
+        return new ReportsDTO.DocterPerformanceReport(year, doctorPerformances);      
     }  
 }
