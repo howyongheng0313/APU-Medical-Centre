@@ -44,14 +44,20 @@ public class AmcRoundBox extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
+        int solidCorner = this.$cornerRound + (this.$borderWidth << 1);
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(this.getBackground());
-        g2.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), this.$cornerRound, this.$cornerRound);
+        g2.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), solidCorner, solidCorner);
         if (this.$borderColor != null && this.$borderWidth > 0) {
             g2.setColor(this.$borderColor);
-            g2.setStroke(new BasicStroke(this.$borderWidth));
-            g2.drawRoundRect(this.$borderWidth, this.$borderWidth, this.getWidth()-(this.$borderWidth<<1), this.getHeight()-(this.$borderWidth<<1), this.$cornerRound, this.$cornerRound);
+            g2.setStroke(new BasicStroke(this.$borderWidth << 1));
+            g2.drawRoundRect(
+                this.$borderWidth, this.$borderWidth,
+                this.getWidth() - (this.$borderWidth << 1),
+                this.getHeight()- (this.$borderWidth << 1),
+                this.$cornerRound, this.$cornerRound
+            );
         }
         g2.dispose();
         super.paintComponent(g);

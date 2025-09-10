@@ -18,7 +18,8 @@ public class StaffAdapt extends DbAdapter<Staff> {
             DataUtil.str2date(row.get(2)),
             User.Gender.valueOf(row.get(3)),
             row.get(4),
-            row.get(5)
+            row.get(5),
+            row.get(6)
         );
         return model;
     }
@@ -31,7 +32,8 @@ public class StaffAdapt extends DbAdapter<Staff> {
             DataUtil.date2str(model.getDateOfBirth()),
             model.getGender().name(),
             DataUtil.formatEmail(model.getEmail()),
-            model.getContact()
+            model.getContact(),
+            model.getDepartmentId()
         );
         return row;
     }

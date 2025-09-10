@@ -9,9 +9,10 @@ public class Staff extends Employee {
         LocalDate dateOfBirth,
         Gender gender,
         String email,
-        String contact
+        String contact,
+        String departmentId
     ) {
-        super(userId, userName, dateOfBirth, gender, email, contact);
+        super(userId, userName, dateOfBirth, gender, email, contact, departmentId);
     }
 
     @Override

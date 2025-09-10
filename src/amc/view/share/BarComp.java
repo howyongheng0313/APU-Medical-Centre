@@ -1,16 +1,20 @@
 package amc.view.share;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
 import javax.swing.Box;
+import javax.swing.JPanel;
 
-public class BarPanel extends javax.swing.JPanel {
+public class BarComp extends javax.swing.JPanel {
 
     /**
      * Creates new form BarPanel
+     * @param card
      * @param buttons
      */
-    public BarPanel(BarButton... buttons) {
+    public BarComp(JPanel card, BarButton... buttons) {
         initComponents();
 
         GridBagConstraints gbc;
@@ -18,6 +22,9 @@ public class BarPanel extends javax.swing.JPanel {
         gbc.fill = GridBagConstraints.BOTH;
         for (BarButton btn: buttons) {
             this.add(btn, gbc);
+            btn.addActionListener((ActionEvent evt) -> {
+                ((CardLayout) card.getLayout()).show(card, btn.getPage());
+            });
         }
 
         gbc = new GridBagConstraints();

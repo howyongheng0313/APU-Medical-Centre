@@ -2,8 +2,10 @@ package amc.controller;
 
 import java.awt.event.ActionEvent;
 import amc.model.entity.User;
-import amc.view.share.BarPanel;
+import amc.view.share.BarComp;
 import amc.view.share.MenuPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 public class MenuCtl extends AbstractSubCtl {
@@ -13,6 +15,15 @@ public class MenuCtl extends AbstractSubCtl {
         super(ROOT);
         viewMenu.btnLogin.addActionListener((ActionEvent evt) -> {
             gotoLogin();
+        });
+
+        viewMenu.picAvatar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (getROOT().getCurrentUser() == null) return;
+                ProfileCtl profileCtl = new ProfileCtl(getROOT());
+                profileCtl.startView();
+            }
         });
 
         getROOT().UserChange.register(() -> {
@@ -29,7 +40,7 @@ public class MenuCtl extends AbstractSubCtl {
         }
         UserCtl  userCtl  = user.getRole().newCtl(getROOT());
         JPanel   viewBody = userCtl.getViewBody();
-        BarPanel viewBar  = userCtl.getViewBar();
+        BarComp  viewBar  = userCtl.getViewBar();
         viewMenu.setUserPage(viewBody, viewBar);
     }
 

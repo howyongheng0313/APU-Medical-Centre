@@ -1,5 +1,7 @@
 package amc.view.share;
 
+import amc.view.Theme;
+
 public class ApptViewPanel extends javax.swing.JPanel {
 
     public ApptViewPanel() {
@@ -25,7 +27,7 @@ public class ApptViewPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         amcPicture5 = new amc.view.comp.AmcPicture();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(Theme.C1_INTER);
         setPreferredSize(new java.awt.Dimension(554, 200));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.rowHeights = new int[] {30, 30, 5, 0, 0, 0};
@@ -51,10 +53,8 @@ public class ApptViewPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
         add(jLabel2, gridBagConstraints);
 
-        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setToolTipText("");
-        jSeparator1.setOpaque(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -63,7 +63,7 @@ public class ApptViewPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
         add(jSeparator1, gridBagConstraints);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
         jPanel1Layout.columnWidths = new int[] {30, 0};
         jPanel1Layout.columnWeights = new double[] {0.0, 1.0};
@@ -138,7 +138,7 @@ public class ApptViewPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
         add(jLabel4, gridBagConstraints);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setOpaque(false);
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
         jPanel2Layout.columnWidths = new int[] {0, 30};
         jPanel2Layout.columnWeights = new double[] {1.0, 0.0};
