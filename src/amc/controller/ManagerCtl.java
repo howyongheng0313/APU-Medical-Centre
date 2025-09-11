@@ -121,7 +121,7 @@ public class ManagerCtl extends UserCtl {
     // Load and display comment summaries
     private void loadCommentSummary() {
         try {
-            var summaries = commentCtl.getCommentSummary();
+            var summaries = commentCtl.getCommentSummarys();
             viewBody.getCommentsPanel().showCommentSummary(summaries);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(

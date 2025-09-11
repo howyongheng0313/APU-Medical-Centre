@@ -31,10 +31,10 @@ public class CommentLs extends javax.swing.JPanel {
         };
         for (CommentsDTO.CommentSummary summary : summaries) {
             model.addRow(new Object[]{
-                summary.recipientName,
+                summary.getRecipientName(),
                 summary.recipientType.name(),
-                summary.commentCount,
-                String.format("%.1f", summary.averageRating)
+                summary.getCommentCount(),
+                String.format("%.1f", summary.getAverageRating())
             });
         }
         tblComments.setModel(model);

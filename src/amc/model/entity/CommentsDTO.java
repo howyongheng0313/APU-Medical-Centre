@@ -9,34 +9,12 @@ public final class CommentsDTO {
     // Represents an aggregated summary of comments for a specific recipient (Doctor or Staff)
     public static class CommentSummary {
         public final String recipientId;
-        public final String recipientName;
-        public final RecipientType recipientType;
-        public final int commentCount;
-        public final double averageRating;
-
-        public CommentSummary(
-            String recipientId,
-            String recipientName,
-            RecipientType recipientType,
-            int commentCount,
-            double averageRating
-        ) {
-            this.recipientId   = recipientId;
-            this.recipientName = recipientName;
-            this.recipientType = recipientType;
-            this.commentCount  = commentCount;
-            this.averageRating = averageRating;
-        }
-    }
-
-    public static class _CommentSummary {
-        public final String recipientId;
         public final RecipientType recipientType;
         private String recipientName = null;
         private int    commentCount  = 0;
         private int    totalRating   = 0;
 
-        public _CommentSummary(
+        public CommentSummary(
             String recipientId,
             RecipientType recipientType
         ) {
