@@ -14,12 +14,50 @@ public final class CommentsDTO {
         public final int commentCount;
         public final double averageRating;
 
-        public CommentSummary(String recipientId, String recipientName, RecipientType recipientType, int commentCount, double averageRating) {
-            this.recipientId = recipientId;
+        public CommentSummary(
+            String recipientId,
+            String recipientName,
+            RecipientType recipientType,
+            int commentCount,
+            double averageRating
+        ) {
+            this.recipientId   = recipientId;
             this.recipientName = recipientName;
             this.recipientType = recipientType;
-            this.commentCount = commentCount;
+            this.commentCount  = commentCount;
             this.averageRating = averageRating;
+        }
+    }
+
+    public static class _CommentSummary {
+        public final String recipientId;
+        public final RecipientType recipientType;
+        private String recipientName = null;
+        private int    commentCount  = 0;
+        private int    totalRating   = 0;
+
+        public _CommentSummary(
+            String recipientId,
+            RecipientType recipientType
+        ) {
+            this.recipientId   = recipientId;
+            this.recipientType = recipientType;
+        }
+
+        public String getRecipientName() { return recipientName; }
+        public int    getCommentCount() { return commentCount; }
+        public int    getTotalRating() { return totalRating; }
+        public double getAverageRating() {
+            return ((double) totalRating) / commentCount;
+        }
+
+        public void setRecipientName(String name) {
+            if (recipientName == null) recipientName = name;
+        }
+
+        public void addCount(Comment.Rating rating) {
+            totalRating += rating.getLevel();
+            commentCount ++;
         }
     }
 
