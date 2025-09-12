@@ -6,7 +6,7 @@ import amc.view.share.BarComp;
 import javax.swing.JPanel;
 
 public class ManagerCtl extends UserCtl {
-    private final BarButton dashBoardBarBtn    = new BarButton("DashBoard", "DashBoard");
+    private final BarButton dashBoardBarBtn    = new BarButton("DashBoard", "Report");
     private final BarButton employeesBarBtn    = new BarButton("Employees", "Employees");
     private final BarButton commentsBarBtn     = new BarButton("Comments" , "Comments");
     private final BarButton appointmentsBarBtn = new BarButton("Appts    ", "Appointments");
@@ -22,8 +22,15 @@ public class ManagerCtl extends UserCtl {
         medicinesBarBtn
     );
 
+    // Constructor
     public ManagerCtl(AmcCtl ROOT) {
         super(ROOT);
+
+        // Initialize features
+        ReportCtl    reportCtl    = new ReportCtl(getROOT());
+        CommentLsCtl commentLsCtl = new CommentLsCtl(getROOT());
+        viewBody.add(reportCtl.getView()   , "Report");
+        viewBody.add(commentLsCtl.getView(), "Comments");
     }
 
     @Override

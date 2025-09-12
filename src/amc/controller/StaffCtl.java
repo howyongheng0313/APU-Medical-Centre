@@ -18,6 +18,14 @@ public class StaffCtl extends UserCtl {
 
     public StaffCtl(AmcCtl ROOT) {
         super(ROOT);
+        bookingsBarBtn.addActionListener((ActionEvent e) -> {
+        });
+
+        customersBarBtn.addActionListener(((ActionEvent e) -> {
+        }));
+
+        payingsBarBtn.addActionListener((ActionEvent e) -> {
+        });
     }
 
     @Override

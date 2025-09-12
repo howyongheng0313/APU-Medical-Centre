@@ -2,9 +2,9 @@ package amc.view.manager;
 
 import java.awt.Color;
 
-public class ServiceEdit extends javax.swing.JPanel {
+public class ServiceLsPanel extends javax.swing.JPanel {
 
-    public ServiceEdit() {
+    public ServiceLsPanel() {
         initComponents();
     }
 

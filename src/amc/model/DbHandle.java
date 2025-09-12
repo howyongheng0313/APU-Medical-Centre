@@ -108,7 +108,7 @@ public class DbHandle<T> {
     }
 
     // Select
-    public List<T> select(int limit, DbMan.Query<T> query) {
+    public List<T> select(int limit, DbMan.Query<? super T> query) {
         List<T> modelLs = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(this.path)) {
             int selected = 0;
@@ -130,7 +130,7 @@ public class DbHandle<T> {
     ** Core modify function
     ** Applied in update() and delete()
     */
-    private int modify(int limit, DbMan.Query<T> query, DbMan.Alter<T> alter) throws IOException {
+    private int modify(int limit, DbMan.Query<? super T> query, DbMan.Alter<T> alter) throws IOException {
         int updated = 0;
         Path tmp = Files.createTempFile(TEMP_DIR, "update-", ".tmp");
         try (
@@ -159,7 +159,7 @@ public class DbHandle<T> {
     }
 
     // Update
-    public int update(int limit, DbMan.Query<T> query, DbMan.Alter<T> alter) {
+    public int update(int limit, DbMan.Query<? super T> query, DbMan.Alter<T> alter) {
         int result;
         try {
             result = this.modify(limit, query, alter);
@@ -168,7 +168,7 @@ public class DbHandle<T> {
     }
 
     // Delete
-    public int delete(int limit, DbMan.Query<T> query) {
+    public int delete(int limit, DbMan.Query<? super T> query) {
         return this.update(limit, query, model -> null);
     }
 

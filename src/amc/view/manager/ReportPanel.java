@@ -1,10 +1,25 @@
 package amc.view.manager;
+
 import java.awt.*;
 
-public class Dashboard extends javax.swing.JPanel {
-
-    public Dashboard() {
+public class ReportPanel extends javax.swing.JPanel {    
+    public ReportPanel() {
         initComponents();
+        ((CardLayout) reports.getLayout()).show(reports, "IncomeReport" );
+    }
+
+    // Get selected year
+    public int getSelectedYear() {
+        return Integer.parseInt((String) cbxYear.getSelectedItem());
+    }
+    
+    // Get selected report type
+    public String getSelectedReportType() {
+        return (String) cbxReportType.getSelectedItem();
+    }
+
+    public void switchReport(String page) {
+        ((CardLayout) reports.getLayout()).show(reports, page);
     }
 
     @SuppressWarnings("unchecked")
@@ -20,11 +35,12 @@ public class Dashboard extends javax.swing.JPanel {
         lblSelectReport = new javax.swing.JLabel();
         cbxReportType = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnGenerate = new javax.swing.JButton();
+        cbxYear = new javax.swing.JComboBox<>();
         reports = new javax.swing.JPanel();
-        patientNumberReport = new javax.swing.JPanel();
-        incomeReport = new javax.swing.JPanel();
-        doctorRanking = new javax.swing.JPanel();
+        incomeReportPanel1 = new amc.view.manager.IncomeReportPanel();
+        patientNumberReportPanel1 = new amc.view.manager.PatientNumberReportPanel();
+        doctorPerformanceReportPanel1 = new amc.view.manager.DoctorPerformanceReportPanel();
 
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new java.awt.BorderLayout());
@@ -60,25 +76,23 @@ public class Dashboard extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel3.setText("Select Year");
 
-        jButton1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        btnGenerate.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        btnGenerate.setText("Generate Report");
+
+        cbxYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2025", "2024", "2023", "2022", "2021" }));
 
         javax.swing.GroupLayout filterDetailsLayout = new javax.swing.GroupLayout(filterDetails);
         filterDetails.setLayout(filterDetailsLayout);
         filterDetailsLayout.setHorizontalGroup(
             filterDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(filterDetailsLayout.createSequentialGroup()
-                .addGroup(filterDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSelectReport, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxReportType, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(filterDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbxYear, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSelectReport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxReportType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGenerate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         filterDetailsLayout.setVerticalGroup(
             filterDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,8 +103,10 @@ public class Dashboard extends javax.swing.JPanel {
                 .addComponent(cbxReportType, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxYear, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
@@ -100,78 +116,30 @@ public class Dashboard extends javax.swing.JPanel {
 
         reports.setBackground(new java.awt.Color(255, 255, 255));
         reports.setLayout(new java.awt.CardLayout());
-
-        patientNumberReport.setBackground(new java.awt.Color(0, 255, 102));
-
-        javax.swing.GroupLayout patientNumberReportLayout = new javax.swing.GroupLayout(patientNumberReport);
-        patientNumberReport.setLayout(patientNumberReportLayout);
-        patientNumberReportLayout.setHorizontalGroup(
-            patientNumberReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
-        );
-        patientNumberReportLayout.setVerticalGroup(
-            patientNumberReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
-        );
-
-        reports.add(patientNumberReport, "card3");
-
-        incomeReport.setBackground(new java.awt.Color(0, 204, 204));
-
-        javax.swing.GroupLayout incomeReportLayout = new javax.swing.GroupLayout(incomeReport);
-        incomeReport.setLayout(incomeReportLayout);
-        incomeReportLayout.setHorizontalGroup(
-            incomeReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
-        );
-        incomeReportLayout.setVerticalGroup(
-            incomeReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
-        );
-
-        reports.add(incomeReport, "incomeReport");
-
-        doctorRanking.setBackground(new java.awt.Color(0, 255, 204));
-        reports.add(doctorRanking, "card4");
+        reports.add(incomeReportPanel1, "incomeReport");
+        reports.add(patientNumberReportPanel1, "patientNumberReport");
+        reports.add(doctorPerformanceReportPanel1, "doctorPerformanceReport");
 
         main.add(reports, java.awt.BorderLayout.CENTER);
 
         add(main, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String selected = (String) cbxReportType.getSelectedItem();
-        String cardName = "";
-
-        // Map selection to card name
-        switch (selected) {
-            case "Income Report" -> cardName = "incomeReport";
-            case "Patients Number Report" -> cardName = "card3";
-            case "Doctor Performance Report" -> cardName = "card4";
-        }
-
-        // Show the correct card
-        CardLayout cl = (CardLayout)(reports.getLayout());
-        cl.show(reports, cardName);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-   
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnGenerate;
     private javax.swing.JComboBox<String> cbxReportType;
-    private javax.swing.JPanel doctorRanking;
+    private javax.swing.JComboBox<String> cbxYear;
+    public amc.view.manager.DoctorPerformanceReportPanel doctorPerformanceReportPanel1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler5;
     private javax.swing.JPanel filter;
     private javax.swing.JPanel filterDetails;
-    private javax.swing.JPanel incomeReport;
-    private javax.swing.JButton jButton1;
+    public amc.view.manager.IncomeReportPanel incomeReportPanel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblSelectReport;
     private javax.swing.JPanel main;
-    private javax.swing.JPanel patientNumberReport;
+    public amc.view.manager.PatientNumberReportPanel patientNumberReportPanel1;
     private javax.swing.JPanel reports;
     // End of variables declaration//GEN-END:variables
 }

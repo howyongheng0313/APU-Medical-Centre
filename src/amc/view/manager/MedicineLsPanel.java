@@ -1,9 +1,9 @@
 package amc.view.manager;
 import java.awt.Color;
 
-public class MedicineEdit extends javax.swing.JPanel {
+public class MedicineLsPanel extends javax.swing.JPanel {
 
-    public MedicineEdit() {
+    public MedicineLsPanel() {
         initComponents();
     }
 
