@@ -10,12 +10,12 @@ import amc.view.Theme;
  *
  * @author kzy
  */
-public class PayLsPanel extends javax.swing.JPanel {
+public class PayingsPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form PayLsPanel
      */
-    public PayLsPanel() {
+    public PayingsPanel() {
         initComponents();
     }
 

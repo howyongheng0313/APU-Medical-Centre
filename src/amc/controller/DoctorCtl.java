@@ -14,8 +14,6 @@ public class DoctorCtl extends UserCtl {
 
     public DoctorCtl(AmcCtl ROOT) {
         super(ROOT);
-        appointmentsBarBtn.addActionListener((ActionEvent e) -> {
-        });
     }
 
     @Override

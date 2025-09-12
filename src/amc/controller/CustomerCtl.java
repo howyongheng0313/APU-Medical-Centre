@@ -16,11 +16,6 @@ public class CustomerCtl extends UserCtl {
 
     public CustomerCtl(AmcCtl ROOT) {
         super(ROOT);
-        appointmentsBarBtn.addActionListener((ActionEvent e) -> {
-        });
-
-        bookApptBarBtn.addActionListener((ActionEvent e) -> {
-        });
     }
 
     @Override

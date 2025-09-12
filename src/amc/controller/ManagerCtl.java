@@ -1,8 +1,8 @@
 package amc.controller;
 
-import amc.view.manager.ManagerPanel;
 import amc.view.share.BarButton;
 import amc.view.share.BarComp;
+import amc.view.share.UserPanel;
 import javax.swing.JPanel;
 
 public class ManagerCtl extends UserCtl {
@@ -12,8 +12,8 @@ public class ManagerCtl extends UserCtl {
     private final BarButton appointmentsBarBtn = new BarButton("Appts    ", "Appointments");
     private final BarButton servicesBarBtn     = new BarButton("Services" , "Services");
     private final BarButton medicinesBarBtn    = new BarButton("Medicines", "Medicines");
-    private final ManagerPanel viewBody = new ManagerPanel();
-    private final BarComp      viewBar  = new BarComp(viewBody,
+    private final UserPanel viewBody = new UserPanel();
+    private final BarComp   viewBar  = new BarComp(viewBody,
         dashBoardBarBtn,
         employeesBarBtn,
         commentsBarBtn,
@@ -27,8 +27,8 @@ public class ManagerCtl extends UserCtl {
         super(ROOT);
 
         // Initialize features
-        ReportCtl    reportCtl    = new ReportCtl(getROOT());
-        CommentLsCtl commentLsCtl = new CommentLsCtl(getROOT());
+        ReportCtl   reportCtl    = new ReportCtl(getROOT());
+        CommentsCtl commentLsCtl = new CommentsCtl(getROOT());
         viewBody.add(reportCtl.getView()   , "Report");
         viewBody.add(commentLsCtl.getView(), "Comments");
     }

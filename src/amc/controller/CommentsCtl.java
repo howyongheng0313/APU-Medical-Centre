@@ -3,7 +3,7 @@ package amc.controller;
 import amc.model.DbMan;
 import amc.model.db_impl.Db;
 import amc.model.entity.*;
-import amc.view.manager.CommentLsPanel;
+import amc.view.manager.CommentsPanel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class CommentLsCtl extends AbstractSubCtl {
-    private final CommentLsPanel viewCommentLs = new CommentLsPanel();
+public class CommentsCtl extends AbstractSubCtl {
+    private final CommentsPanel viewCommentLs = new CommentsPanel();
     
-    public CommentLsCtl(AmcCtl ROOT){
+    public CommentsCtl(AmcCtl ROOT){
         super(ROOT);
         setupCommentFeature();
     }
