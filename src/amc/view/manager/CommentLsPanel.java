@@ -1,18 +1,19 @@
 package amc.view.manager;
 
 import amc.model.entity.CommentsDTO;
+import amc.model.entity.Role;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-public class CommentLs extends javax.swing.JPanel {
+public class CommentLsPanel extends javax.swing.JPanel {
 
-    private boolean isShowingDetails = false;
-    private String  currentRecipientName = "";
-    private String  selectedRecipientId = "";
-    private CommentsDTO.RecipientType selectedRecipientType = CommentsDTO.RecipientType.Doctor;
+    private boolean isShowingDetails      = false;
+    private String  currentRecipientName  = "";
+    private String  selectedRecipientId   = "";
+    private Role    selectedRecipientType = Role.Doctor;
 
     // Constructor
-    public CommentLs() {
+    public CommentLsPanel() {
         initComponents();
         btnReturn.setVisible(false);
         showEmptyState();
@@ -26,8 +27,8 @@ public class CommentLs extends javax.swing.JPanel {
         
         String[] columns = {"Recipient", "Type", "Comment Count", "Avg Rating"};
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
-            @Override public boolean isCellEditable(int r, int c) 
-            { return false; }
+            @Override
+            public boolean isCellEditable(int r, int c) { return false; }
         };
         for (CommentsDTO.CommentSummary summary : summaries) {
             model.addRow(new Object[]{
@@ -51,8 +52,8 @@ public class CommentLs extends javax.swing.JPanel {
 
         String[] columns = {"Date", "Customer", "Rating", "Comment"};
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
-            @Override public boolean isCellEditable(int r, int c) 
-            { return false; }
+            @Override
+            public boolean isCellEditable(int r, int c) { return false; }
         };
         for (CommentsDTO.CommentDetail detail : details) {
             model.addRow(new Object[]{
@@ -70,8 +71,8 @@ public class CommentLs extends javax.swing.JPanel {
     private void showEmptyState() {
         String[] columns = {"Recipient", "Type", "Comment Count", "Avg Rating"};
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
-            @Override public boolean isCellEditable(int r, int c) 
-            { return false; }
+            @Override
+            public boolean isCellEditable(int r, int c) { return false; }
         };
         tblComments.setModel(model);
         lblSubtitle.setText("No comment data available");
@@ -93,7 +94,7 @@ public class CommentLs extends javax.swing.JPanel {
 
     // Getters
     public String getSelectedRecipientId() { return selectedRecipientId; } 
-    public CommentsDTO.RecipientType getSelectedRecipientType() { return selectedRecipientType; }
+    public Role getSelectedRecipientType() { return selectedRecipientType; }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

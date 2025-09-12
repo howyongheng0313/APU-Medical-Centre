@@ -8,14 +8,56 @@ package amc.controller;
 
 import amc.model.entity.*;
 import amc.model.db_impl.Db;
+import amc.view.manager.ReportPanel;
 import java.util.*;
 import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class ReportCtl extends AbstractSubCtl{
+    private final ReportPanel viewReport = new ReportPanel();
+
     public ReportCtl(AmcCtl ROOT){
         super(ROOT);
+        setupReportGeneration();
     }
-    
+
+    // Setup report generation: listens to dashboard events and loads report data
+    private void setupReportGeneration(){
+        viewReport.btnGenerate.addActionListener(evt -> {
+            String type = viewReport.getSelectedReportType();
+            int year = viewReport.getSelectedYear();
+
+            try {
+                String card = switch(type){
+                    case "Income Report" -> {
+                        var rData = this.generateIncomeReport(year);
+                        viewReport.incomeReportPanel1.displayReport(rData);
+                        yield "incomeReport";
+                    }
+                    case "Patients Number Report" -> {
+                        var rData = this.generatePatientNumberReport(year);
+                        viewReport.patientNumberReportPanel1.displayReport(rData);
+                        yield "patientNumberReport";
+                    }
+                    case "Doctor Performance Report" -> {
+                        var rData = this.generateDoctorPerformanceReport(year);
+                        viewReport.doctorPerformanceReportPanel1.displayReport(rData);
+                        yield "doctorPerformanceReport";
+                    }
+                    default -> "";
+                };
+                if (card.isEmpty()) return;
+                viewReport.switchReport(card);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(
+                    viewReport, "Error: " + ex.getMessage(), 
+                    "Report Error:", JOptionPane.ERROR_MESSAGE
+                );
+            }
+        });
+    }
+
     // IncomeReport Report
     public ReportsDTO.IncomeReport generateIncomeReport(int year){
         // Get all appointment for the year
@@ -103,7 +145,7 @@ public class ReportCtl extends AbstractSubCtl{
         
         return new ReportsDTO.IncomeReport(year, totalIncome, monthlyIncomes, paymentBreakdown);
     }
-    
+
     // Patient Number Report
     public ReportsDTO.PatientNumberReport generatePatientNumberReport(int year){
         // Get all appointment for the year
@@ -172,7 +214,7 @@ public class ReportCtl extends AbstractSubCtl{
         // Return Object
         return new ReportsDTO.PatientNumberReport(year, uniquePatients.size(), monthlyPatients, departmentPatients);
     }
-    
+
     // Docter Performance Report
     public ReportsDTO.DocterPerformanceReport generateDoctorPerformanceReport(int year) {
         // Get all appointments for the year
@@ -236,5 +278,7 @@ public class ReportCtl extends AbstractSubCtl{
         doctorPerformances.sort((a, b) -> Double.compare(b.getTotalRevenue(), a.getTotalRevenue()));
         
         return new ReportsDTO.DocterPerformanceReport(year, doctorPerformances);      
-    }  
+    }
+
+    public JPanel getView() { return viewReport; }
 }

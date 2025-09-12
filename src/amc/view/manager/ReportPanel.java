@@ -2,8 +2,8 @@ package amc.view.manager;
 
 import java.awt.*;
 
-public class Dashboard extends javax.swing.JPanel {    
-    public Dashboard() {
+public class ReportPanel extends javax.swing.JPanel {    
+    public ReportPanel() {
         initComponents();
         ((CardLayout) reports.getLayout()).show(reports, "IncomeReport" );
     }

@@ -4,19 +4,19 @@ public final class CommentsDTO {
     private CommentsDTO() {}
 
     // Defines the type of recipient that a comment can be addressed to
-    public enum RecipientType { Doctor, Staff }
+//    public enum RecipientType { Doctor, Staff }
 
     // Represents an aggregated summary of comments for a specific recipient (Doctor or Staff)
     public static class CommentSummary {
         public final String recipientId;
-        public final RecipientType recipientType;
+        public final Role   recipientType;
         private String recipientName = null;
         private int    commentCount  = 0;
         private int    totalRating   = 0;
 
         public CommentSummary(
             String recipientId,
-            RecipientType recipientType
+            Role   recipientType
         ) {
             this.recipientId   = recipientId;
             this.recipientType = recipientType;
@@ -47,7 +47,7 @@ public final class CommentsDTO {
         public final String customerName;
         public final String recipientId;
         public final String recipientName;
-        public final RecipientType recipientType;
+        public final Role   recipientType;
         public final Comment.Rating rating;
         public final String content;
         public final String appointmentDate;
@@ -59,7 +59,7 @@ public final class CommentsDTO {
             String customerName,
             String recipientId,
             String recipientName,
-            RecipientType recipientType,
+            Role   recipientType,
             Comment.Rating rating,
             String content,
             String appointmentDate

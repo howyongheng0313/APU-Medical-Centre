@@ -3,15 +3,62 @@ package amc.controller;
 import amc.model.DbMan;
 import amc.model.db_impl.Db;
 import amc.model.entity.*;
+import amc.view.manager.CommentLsPanel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-public class CommentCtl extends AbstractSubCtl {
+public class CommentLsCtl extends AbstractSubCtl {
+    private final CommentLsPanel viewCommentLs = new CommentLsPanel();
     
-    public CommentCtl(AmcCtl ROOT){
+    public CommentLsCtl(AmcCtl ROOT){
         super(ROOT);
+        setupCommentFeature();
+    }
+
+    // Setup comment feature: Handles switching between summary and details view
+    private void setupCommentFeature() {
+        // From summary → show details
+        viewCommentLs.addPropertyChangeListener("showDetails", evt -> {
+            String id = viewCommentLs.getSelectedRecipientId();
+            Role type = viewCommentLs.getSelectedRecipientType();
+            if (id != null && !id.isEmpty()) loadCommentDetails(id, type);
+        });
+
+        // From details → return to summary
+        viewCommentLs.addPropertyChangeListener("returnToSummary", evt -> {
+            loadCommentSummary();
+        });
+    }
+
+    // Load and display comment summaries
+    private void loadCommentSummary() {
+        try {
+            var summaries = this.getCommentSummarys();
+            viewCommentLs.showCommentSummary(summaries);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                viewCommentLs, "Error loading comment summary: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    // Load and display detailed comments for a specific recipient.
+    private void loadCommentDetails(String recipientId, Role recipientType) {
+        try {
+            var details = this.getCommentDetails(recipientId, recipientType);
+            String name = details.isEmpty() ? "Unknown" : details.get(0).recipientName;
+            viewCommentLs.showCommentDetails(name, details);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                viewCommentLs, "Error loading comment details: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     // Get comment summaries for both Doctor and Staff
@@ -23,8 +70,7 @@ public class CommentCtl extends AbstractSubCtl {
             DbMan.Query<Comment> smrCountEach = (Comment model) -> {
                 smrMap.computeIfAbsent(model.getTargetId(), k -> new CommentsDTO.CommentSummary(
                     model.getTargetId(),
-                    model.getTargetId().startsWith("DOC") ?
-                        CommentsDTO.RecipientType.Doctor : CommentsDTO.RecipientType.Staff
+                    model.getTargetId().startsWith("DOC") ? Role.Doctor : Role.Staff
                 )).addCount(model.getRating());
                 return false;
             };
@@ -50,7 +96,7 @@ public class CommentCtl extends AbstractSubCtl {
     }
 
     // Get detailed comments for a specific recipient
-    public List<CommentsDTO.CommentDetail> getCommentDetails(String recipientId, CommentsDTO.RecipientType type) {
+    public List<CommentsDTO.CommentDetail> getCommentDetails(String recipientId, Role type) {
         try {
             // Load required data
             List<Comment> comments = Db.Comment.select(-1, c -> true);
@@ -74,31 +120,28 @@ public class CommentCtl extends AbstractSubCtl {
             // Collect matching comments
             List<CommentsDTO.CommentDetail> output = new ArrayList<>();
             for (Comment comment : comments) {
-                Appointment apt = apptMap.get(comment.getAppointmentId());
-                if (apt == null) continue;
+                Appointment appt = apptMap.get(comment.getAppointmentId());
+                if (appt == null) continue;
 
                 // Check if comment belongs to this recipient
-                boolean match = switch (type) {
-                    case Doctor -> recipientId.equals(apt.getDoctorId());
-                    case Staff  -> recipientId.equals(apt.getStaffId());
-                };
-                if (!match) continue;
+                String checkId = type == Role.Doctor ? appt.getDoctorId() : appt.getStaffId();
+                if (!recipientId.equals(checkId)) continue;
 
                 // Get customer name
-                Customer cust = custMap.get(apt.getCustomerId());
+                Customer cust = custMap.get(appt.getCustomerId());
                 String custName = cust != null ? cust.getUserName() : "Unknown";
 
                 output.add(new CommentsDTO.CommentDetail(
                     comment.getCommentId(),
                     comment.getAppointmentId(),
-                    apt.getCustomerId(),
+                    appt.getCustomerId(),
                     custName,
                     recipientId,
                     recipientName,
                     type,
                     comment.getRating(),
                     comment.getContent(),
-                    apt.getDateTime().toLocalDate().toString()
+                    appt.getDateTime().toLocalDate().toString()
                 ));
             }
 
@@ -111,23 +154,8 @@ public class CommentCtl extends AbstractSubCtl {
         }
     }
 
-    // Helper method to get recipient name
-    private String getRecipientName(CommentsDTO.RecipientType type, String id, 
-                                   Map<String, Doctor> doctorMap, Map<String, Staff> staffMap) {
-        return switch (type) {
-            case Doctor -> {
-                Doctor d = doctorMap.get(id);
-                yield d != null ? d.getUserName() : "Unknown Doctor";
-            }
-            case Staff -> {
-                Staff s = staffMap.get(id);
-                yield s != null ? s.getUserName() : "Unknown Staff";
-            }
-        };
-    }
-
     // Helper method to get recipient name (for details method)
-    private String getRecipientName(String recipientId, CommentsDTO.RecipientType type) {
+    private String getRecipientName(String recipientId, Role type) {
         return switch (type) {
             case Doctor -> {
                 List<Doctor> ls = Db.Doctor.select(1, d -> d.getUserId().equals(recipientId));
@@ -137,6 +165,9 @@ public class CommentCtl extends AbstractSubCtl {
                 List<Staff> ls = Db.Staff.select(1, s -> s.getUserId().equals(recipientId));
                 yield ls.isEmpty() ? "Unknown Staff" : ls.get(0).getUserName();
             }
+            default -> null;
         };
     }
+
+    public JPanel getView() { return viewCommentLs; }
 }
