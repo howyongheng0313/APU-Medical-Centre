@@ -5,7 +5,7 @@ import amc.model.entity.Role;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-public class CommentLsPanel extends javax.swing.JPanel {
+public class CommentsPanel extends javax.swing.JPanel {
 
     private boolean isShowingDetails      = false;
     private String  currentRecipientName  = "";
@@ -13,7 +13,7 @@ public class CommentLsPanel extends javax.swing.JPanel {
     private Role    selectedRecipientType = Role.Doctor;
 
     // Constructor
-    public CommentLsPanel() {
+    public CommentsPanel() {
         initComponents();
         btnReturn.setVisible(false);
         showEmptyState();

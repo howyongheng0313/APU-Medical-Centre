@@ -1,8 +1,8 @@
 package amc.view.manager;
 
-public class ApptLsPanel extends javax.swing.JPanel {
+public class AppointmentsPanel extends javax.swing.JPanel {
 
-    public ApptLsPanel() {
+    public AppointmentsPanel() {
         initComponents();
         this.jScrollPane1.getVerticalScrollBar().setUnitIncrement(8);
     }

@@ -3,12 +3,12 @@ package amc.view.staff;
 import amc.view.Theme;
 import java.awt.Cursor;
 
-public class CustomerLsPanel extends javax.swing.JPanel {
+public class CustomersPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form CommentLsPanel
      */
-    public CustomerLsPanel() {
+    public CustomersPanel() {
         initComponents();
         this.amcPicture1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         this.amcPicture2.setCursor(new Cursor(Cursor.HAND_CURSOR));

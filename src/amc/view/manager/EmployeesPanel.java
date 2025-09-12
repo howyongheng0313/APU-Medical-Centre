@@ -3,9 +3,9 @@ package amc.view.manager;
 import amc.view.comp.AmcComboBox;
 import java.awt.Color;
 
-public class EmployeeLsPanel extends javax.swing.JPanel {
+public class EmployeesPanel extends javax.swing.JPanel {
 
-    public EmployeeLsPanel() {
+    public EmployeesPanel() {
         initComponents();
         AmcComboBox.styleComboBox(jcbUsers);
     }
