@@ -18,7 +18,7 @@ import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-public class CalendarDialog extends javax.swing.JDialog {
+public final class CalendarDialog extends javax.swing.JDialog {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CalendarDialog.class.getName());
     private Consumer<LocalDate> $outHandle;
     private LocalDate $currentDate;
@@ -42,6 +42,9 @@ public class CalendarDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form CalendarDialog
+     * @param parent
+     * @param $startDate
+     * @param $outHandle
      */
     public CalendarDialog(java.awt.Frame parent, LocalDate $startDate, Consumer<LocalDate> $outHandle) {
         super(parent, false);
@@ -95,7 +98,6 @@ public class CalendarDialog extends javax.swing.JDialog {
             public void columnSelectionChanged(ListSelectionEvent e) {
                 CalendarDialog.this.jTable1ListSelection(e);
             }
-            
         });
 
         this.$outHandle = $outHandle;

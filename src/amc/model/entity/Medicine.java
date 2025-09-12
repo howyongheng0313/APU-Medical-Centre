@@ -8,7 +8,8 @@ public class Medicine {
     public Medicine(
         String medicineId,
         String medicineName,
-        double price) {
+        double price
+    ) {
         this.medicineId = medicineId;
         this.medicineName = medicineName;
         this.price = price;

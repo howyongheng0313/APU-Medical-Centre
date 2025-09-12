@@ -4,13 +4,15 @@ import amc.model.DataUtil;
 import amc.model.entity.User;
 import amc.view.Theme;
 import java.awt.CardLayout;
-import java.util.Arrays;
+import java.awt.Cursor;
 
 public class LoginPanel extends javax.swing.JPanel {
 
     public LoginPanel() {
         initComponents();
         this.switch2Login(true);
+        this.picLoginUndo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.picSignupUndo.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @SuppressWarnings("unchecked")
@@ -19,7 +21,8 @@ public class LoginPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         loginPage = new javax.swing.JPanel();
-        picLogo1 = new amc.view.comp.AmcPicture();
+        picLoginUndo = new amc.view.comp.AmcPicture();
+        picLogoinLogo = new amc.view.comp.AmcPicture();
         loginForm = new javax.swing.JPanel();
         lblLogin = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
@@ -31,7 +34,8 @@ public class LoginPanel extends javax.swing.JPanel {
         lblNoAccount = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         signupPage = new javax.swing.JPanel();
-        picLogo2 = new amc.view.comp.AmcPicture();
+        picSignupUndo = new amc.view.comp.AmcPicture();
+        picSignupLogo = new amc.view.comp.AmcPicture();
         signupForm = new javax.swing.JPanel();
         txtIcNumber = new amc.view.comp.AmcPlaceHolder();
         txtCustomerName = new amc.view.comp.AmcPlaceHolder();
@@ -41,6 +45,7 @@ public class LoginPanel extends javax.swing.JPanel {
         btnSignup = new amc.view.comp.AmcButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new java.awt.CardLayout());
 
@@ -52,11 +57,24 @@ public class LoginPanel extends javax.swing.JPanel {
         sign_inLayout.rowWeights = new double[] {1.0};
         loginPage.setLayout(sign_inLayout);
 
-        picLogo1.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/logo_clover.png"))); // NOI18N
-        picLogo1.set$maxSize(new java.awt.Dimension(350, 350));
+        picLoginUndo.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/icon_undo.png"))); // NOI18N
+        picLoginUndo.setMaximumSize(new java.awt.Dimension(35, 35));
+        picLoginUndo.setMinimumSize(new java.awt.Dimension(35, 35));
+        picLoginUndo.setPreferredSize(new java.awt.Dimension(35, 36));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
+        loginPage.add(picLoginUndo, gridBagConstraints);
+
+        picLogoinLogo.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/logo_clover.png"))); // NOI18N
+        picLogoinLogo.set$maxSize(new java.awt.Dimension(350, 350));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        loginPage.add(picLogo1, gridBagConstraints);
+        loginPage.add(picLogoinLogo, gridBagConstraints);
 
         loginForm.setBackground(Theme.C2_BG);
         loginForm.setLayout(new java.awt.GridBagLayout());
@@ -129,6 +147,7 @@ public class LoginPanel extends javax.swing.JPanel {
         btnForgot.setBorder(null);
         btnForgot.setBorderPainted(false);
         btnForgot.setContentAreaFilled(false);
+        btnForgot.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnForgot.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -138,7 +157,7 @@ public class LoginPanel extends javax.swing.JPanel {
         loginForm.add(btnForgot, gridBagConstraints);
 
         lblNoAccount.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        lblNoAccount.setForeground(Theme.C2_FG_DISABLE);
+        lblNoAccount.setForeground(Theme.C2_BG_SELECT);
         lblNoAccount.setText("Don't have an account?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -152,6 +171,7 @@ public class LoginPanel extends javax.swing.JPanel {
         btnRegister.setBorder(null);
         btnRegister.setBorderPainted(false);
         btnRegister.setContentAreaFilled(false);
+        btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisterActionPerformed(evt);
@@ -179,14 +199,31 @@ public class LoginPanel extends javax.swing.JPanel {
         signupPageLayout.rowWeights = new double[] {0.3, 0.7};
         signupPage.setLayout(signupPageLayout);
 
-        picLogo2.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/logo_clover.png"))); // NOI18N
-        picLogo2.set$maxSize(new java.awt.Dimension(350, 350));
-        picLogo2.setMaximumSize(new java.awt.Dimension(100, 200));
-        picLogo2.setMinimumSize(new java.awt.Dimension(100, 200));
+        picSignupUndo.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/icon_undo.png"))); // NOI18N
+        picSignupUndo.setMaximumSize(new java.awt.Dimension(35, 35));
+        picSignupUndo.setMinimumSize(new java.awt.Dimension(35, 35));
+        picSignupUndo.setPreferredSize(new java.awt.Dimension(35, 36));
+        picSignupUndo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                picSignupUndoMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
+        signupPage.add(picSignupUndo, gridBagConstraints);
+
+        picSignupLogo.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/logo_clover.png"))); // NOI18N
+        picSignupLogo.set$maxSize(new java.awt.Dimension(350, 350));
+        picSignupLogo.setMaximumSize(new java.awt.Dimension(100, 200));
+        picSignupLogo.setMinimumSize(new java.awt.Dimension(100, 200));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        signupPage.add(picLogo2, gridBagConstraints);
+        signupPage.add(picSignupLogo, gridBagConstraints);
 
         signupForm.setBackground(new java.awt.Color(245, 253, 253));
         signupForm.setForeground(new java.awt.Color(255, 255, 255));
@@ -293,6 +330,11 @@ public class LoginPanel extends javax.swing.JPanel {
         this.switch2Login(false);
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void picSignupUndoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_picSignupUndoMouseClicked
+        // TODO add your handling code here:
+        this.switch2Login(true);
+    }//GEN-LAST:event_picSignupUndoMouseClicked
+
     private void resetForm() {
         txtLoginEmail.setText("");
         pwdPassword.setText("");
@@ -337,8 +379,10 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JPanel loginForm;
     private javax.swing.JPanel loginPage;
-    private amc.view.comp.AmcPicture picLogo1;
-    private amc.view.comp.AmcPicture picLogo2;
+    public amc.view.comp.AmcPicture picLoginUndo;
+    private amc.view.comp.AmcPicture picLogoinLogo;
+    private amc.view.comp.AmcPicture picSignupLogo;
+    private amc.view.comp.AmcPicture picSignupUndo;
     private javax.swing.JPasswordField pwdPassword;
     private javax.swing.JPanel signupForm;
     private javax.swing.JPanel signupPage;

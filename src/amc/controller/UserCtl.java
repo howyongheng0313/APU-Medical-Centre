@@ -1,6 +1,6 @@
 package amc.controller;
 
-import amc.view.share.BarPanel;
+import amc.view.share.BarComp;
 import javax.swing.JPanel;
 
 public abstract class UserCtl extends AbstractSubCtl {
@@ -9,5 +9,5 @@ public abstract class UserCtl extends AbstractSubCtl {
     }
 
     public abstract JPanel getViewBody();
-    public abstract BarPanel getViewBar();
+    public abstract BarComp getViewBar();
 }

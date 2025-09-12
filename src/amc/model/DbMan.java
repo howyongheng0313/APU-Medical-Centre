@@ -26,4 +26,10 @@ public final class DbMan {
             return model.getEmail().equals(DataUtil.formatEmail(email));
         };
     }
+
+    public static Query<Department> getDepartment(String departmentId) {
+        return (model) -> {
+            return model.getDepartmentId().equals(departmentId);
+        };
+    }
 }

@@ -5,11 +5,24 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JTextField;
 
 public class AmcPlaceHolder extends JTextField {
     private String $hint;
     private Color $holderColor;
+
+    public AmcPlaceHolder() {
+        super();
+        this.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) { AmcPlaceHolder.this.repaint(); }
+
+            @Override
+            public void focusLost(FocusEvent e) { AmcPlaceHolder.this.repaint(); }
+        });
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

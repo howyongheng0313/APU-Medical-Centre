@@ -103,6 +103,7 @@ public class HomePanel extends javax.swing.JPanel {
         this.picResizing = true;
         this.amcPicture1.setPreferredSize(new Dimension(0, (int)(parentW * scale)));
         this.picResizing = false;
+        this.amcPicture1.repaint();
     }//GEN-LAST:event_amcPicture1ComponentResized
 
 

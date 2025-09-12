@@ -2,6 +2,7 @@ package amc.view.share;
 
 import amc.view.Theme;
 import java.awt.CardLayout;
+import java.awt.Cursor;
 import javax.swing.JPanel;
 
 public class MenuPanel extends javax.swing.JPanel {
@@ -13,6 +14,8 @@ public class MenuPanel extends javax.swing.JPanel {
      */
     public MenuPanel() {
         initComponents();
+        this.picHomeLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.picAvatar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     /**
@@ -93,10 +96,11 @@ public class MenuPanel extends javax.swing.JPanel {
         btnLogin.setMaximumSize(null);
         btnLogin.setMinimumSize(null);
         btnLogin.setPreferredSize(null);
-        accountPanel.add(btnLogin, "card2");
+        accountPanel.add(btnLogin, "Login");
 
         picAvatar.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/avatar_doctor.png"))); // NOI18N
-        accountPanel.add(picAvatar, "card3");
+        picAvatar.set$maxSize(new java.awt.Dimension(45, 45));
+        accountPanel.add(picAvatar, "Avatar");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -114,20 +118,17 @@ public class MenuPanel extends javax.swing.JPanel {
         add(bodyPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    public HomePanel getHomePage() {
-        return this.homePanel;
-    }
-
-    public void setUserPage(JPanel body, BarPanel bar) {
+    public void setUserPage(JPanel body, BarComp bar) {
         if (this.userBody != null) userBodyContainer.remove(this.userBody);
         if (this.userBar  != null) userBarContainer.remove(this.userBar);
         this.userBody = body;
         this.userBar  = bar;
 
-        if (body == null || bar == null) return;
-        System.out.println(body);
-        System.out.println(bar);
-        userBodyContainer.add(userBody);
+        boolean isLogout = body == null || bar == null;
+        ((CardLayout) accountPanel.getLayout()).show(accountPanel, isLogout ? "Login" : "Avatar");
+        if (isLogout) return;
+
+        userBodyContainer.add(body);
         userBarContainer.add(bar);
         this.switch2Home(false);
     }
@@ -144,7 +145,7 @@ public class MenuPanel extends javax.swing.JPanel {
     public amc.view.comp.AmcButton btnLogin;
     private amc.view.share.HomePanel homePanel;
     private javax.swing.JPanel menuBarPanel;
-    private amc.view.comp.AmcPicture picAvatar;
+    public amc.view.comp.AmcPicture picAvatar;
     private amc.view.comp.AmcPicture picHomeLogo;
     private javax.swing.JSeparator sepSplitBar;
     private javax.swing.JPanel userBarContainer;

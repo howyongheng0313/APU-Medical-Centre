@@ -1,8 +1,9 @@
 package amc.view.share;
 
 import amc.view.Theme;
+import amc.view.comp.AmcRoundBox;
 
-public class ApptPendingPanel extends javax.swing.JPanel {
+public class ApptPendingPanel extends AmcRoundBox {
 
     /**
      * Creates new form Processing
@@ -33,6 +34,8 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         amcButton2 = new amc.view.comp.AmcButton();
 
         setBackground(Theme.C1_INTER);
+        set$borderWidth(0);
+        set$cornerRound(15);
         setPreferredSize(new java.awt.Dimension(554, 100));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.rowHeights = new int[] {30, 5, 0, 0};
@@ -40,7 +43,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         layout.rowWeights = new double[] {0.0, 0.0, 0.5, 0.5};
         setLayout(layout);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel1.setForeground(Theme.C1_FG);
         jLabel1.setText("APT-001");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -49,7 +52,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         add(jLabel1, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel2.setForeground(Theme.C1_FG);
         jLabel2.setText("27 July 2025");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -88,6 +91,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(amcPicture4, gridBagConstraints);
 
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel3.setForeground(Theme.C1_FG);
         jLabel3.setText("Patient Steve");
         jLabel3.setMaximumSize(new java.awt.Dimension(210, 30));
@@ -101,6 +105,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         jPanel1.add(jLabel3, gridBagConstraints);
 
+        jComboBox1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setMaximumSize(new java.awt.Dimension(210, 30));
         jComboBox1.setMinimumSize(new java.awt.Dimension(210, 30));
@@ -120,6 +125,7 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 5, 0);
         add(jPanel1, gridBagConstraints);
 
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel4.setForeground(Theme.C1_FG);
         jLabel4.setText("09 : 27 am");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -136,11 +142,13 @@ public class ApptPendingPanel extends javax.swing.JPanel {
         amcButton1.setBackground(Theme.DONE_BG);
         amcButton1.setText("Confirm");
         amcButton1.set$hoverBackground(Theme.DONE_BG_SELECT);
+        amcButton1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jPanel3.add(amcButton1);
 
         amcButton2.setBackground(Theme.WARN_BG);
         amcButton2.setText("Reject");
         amcButton2.set$hoverBackground(Theme.WARN_BG_SELECT);
+        amcButton2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jPanel3.add(amcButton2);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

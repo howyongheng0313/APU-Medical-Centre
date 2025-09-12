@@ -2,15 +2,14 @@ package amc.controller;
 
 import amc.view.customer.CustomerPanel;
 import amc.view.share.BarButton;
-import amc.view.share.BarPanel;
-import java.awt.event.ActionEvent;
+import amc.view.share.BarComp;
 import javax.swing.JPanel;
 
 public class CustomerCtl extends UserCtl {
-    private final BarButton appointmentsBarBtn = new BarButton("Appointments");
-    private final BarButton bookApptBarBtn     = new BarButton("Book Appt");
+    private final BarButton appointmentsBarBtn = new BarButton("Appointments", "Appointments");
+    private final BarButton bookApptBarBtn     = new BarButton("Book Appt"   , "BookAppt");
     private final CustomerPanel viewBody = new CustomerPanel(); 
-    private final BarPanel      viewBar  = new BarPanel(
+    private final BarComp       viewBar  = new BarComp(viewBody, 
         appointmentsBarBtn,
         bookApptBarBtn
     );
@@ -28,5 +27,5 @@ public class CustomerCtl extends UserCtl {
     public JPanel getViewBody() { return viewBody; }
 
     @Override
-    public BarPanel getViewBar() { return viewBar; }
+    public BarComp getViewBar() { return viewBar; }
 }
