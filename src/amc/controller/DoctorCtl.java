@@ -1,14 +1,14 @@
 package amc.controller;
 
-import amc.view.doctor.DoctorPanel;
 import amc.view.share.BarButton;
 import amc.view.share.BarComp;
+import amc.view.share.UserPanel;
 import javax.swing.JPanel;
 
 public class DoctorCtl extends UserCtl {
     private final BarButton appointmentsBarBtn = new BarButton("Appointments", "Appointments");
-    private final DoctorPanel viewBody = new DoctorPanel();
-    private final BarComp     viewBar  = new BarComp(viewBody,
+    private final UserPanel viewBody = new UserPanel();
+    private final BarComp   viewBar  = new BarComp(viewBody,
         appointmentsBarBtn
     );
 
