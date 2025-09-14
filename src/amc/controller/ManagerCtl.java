@@ -29,8 +29,10 @@ public class ManagerCtl extends UserCtl {
         // Initialize features
         ReportCtl   reportCtl    = new ReportCtl(getROOT());
         CommentsCtl commentLsCtl = new CommentsCtl(getROOT());
+        ServiceCtl serviceCtl = new ServiceCtl(getROOT());
         viewBody.add(reportCtl.getView()   , "Report");
         viewBody.add(commentLsCtl.getView(), "Comments");
+        viewBody.add(serviceCtl.getView(), "Services");
     }
 
     @Override
