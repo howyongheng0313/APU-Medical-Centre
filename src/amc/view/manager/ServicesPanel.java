@@ -1,36 +1,142 @@
 package amc.view.manager;
 
+import amc.model.entity.ServiceDTO;
+import javax.swing.table.DefaultTableModel;
+import amc.model.DataUtil;
+import java.util.List;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 
 public class ServicesPanel extends javax.swing.JPanel {
+    
+    private String selectedServiceId = "";
+    private List<ServiceDTO> currentServices = new ArrayList<>();
 
+    // Constructor
     public ServicesPanel() {
         initComponents();
+        showEmptyState();
+        setupTableSelection();
     }
-
+    
+    // Table selection handling
+    private void setupTableSelection(){
+        jTable1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()){
+                int selectedRow = jTable1.getSelectedRow();
+                if(selectedRow >= 0){
+                    selectedServiceId = String.valueOf(selectedRow);
+                } else{
+                    selectedServiceId = "";
+                }
+            }
+        });
+    }
+    
+    // Show services
+    public void showServices(List<ServiceDTO> services){
+        this.currentServices = services; 
+        String[] columns = {"Services", "Fee", "Department"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int r, int c) {return false;}
+        };
+        
+        for(ServiceDTO service : services) {
+            model.addRow(new Object[]{
+                service.getServiceName(),
+                DataUtil.amount2str(service.getFee()),
+                service.getDepartmentName()
+            });
+        }
+        
+        jTable1.setModel(model);
+    }
+    
+    // Show empty state when there is no data
+    private void showEmptyState(){
+        String[] columns = {"Service Name", "Department", "Fee"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int r, int c) { return false; }
+        };
+        jTable1.setModel(model);
+    }
+    
+    // Display selected row information to update form
+    private void populateUpdateForm(){
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow >= 0) {
+            String serviceName = (String) jTable1.getValueAt(selectedRow, 0);
+            String feeText = (String) jTable1.getValueAt(selectedRow, 1);
+            String departmentName = (String) jTable1.getValueAt(selectedRow, 2);
+                
+            // Set department
+            for (int i = 0; i < jcbDepartment1.getItemCount(); i++) {
+                if (departmentName.equals(jcbDepartment1.getItemAt(i))) {
+                    jcbDepartment1.setSelectedIndex(i);
+                    break;
+                }
+            }
+            
+            // Set service name
+            ftfServiceName1.setText(serviceName);
+            ftfServiceName1.setForeground(Color.BLACK);
+            
+            // Set fee
+            ftfServiceFee1.setText(feeText);
+            ftfServiceFee1.setForeground(Color.BLACK);
+        }
+    }
+    
+    // Get selected row serviceId
+    public String getSelectedServiceId() {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow >= 0 && selectedRow < currentServices.size()) {
+            return currentServices.get(selectedRow).getServiceId();
+        }
+        return "";
+    }
+    
+    // Get selected department (View)
+    public String getSelectedDepartment() {
+        return (String) jcbDepartment.getSelectedItem();
+    }
+    
+    // Get search input (View)
+    public String getSearchInput() {
+        String text = jtfSearch.getText();
+        return "Search service".equals(text) ? "" : text;
+    }
+    
+    // Close dialog after create service
+    public void closeCreateDialog(){
+        createService.setVisible(false);
+    }
+    
+    // Close dialog after update services
+    public void closeUpdateDialog() {
+        updateService.setVisible(false);
+    }
+    
+    // Getter for create dialog
+    public String getCreateDepartment() {return (String)jcbDepartment0.getSelectedItem();}
+    public String getCreateServiceName() {return ftfServiceName.getText();}
+    public String getCreateServiceFee() {return ftfServiceFee.getText();}
+    
+    // Getter for update dialog
+    public String getUpdateDepartment() {return (String)jcbDepartment1.getSelectedItem();}
+    public String getUpdateServiceName() {return ftfServiceName1.getText();}
+    public String getUpdateServiceFee() {return ftfServiceFee1.getText();}
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        createService = new javax.swing.JDialog();
-        main = new javax.swing.JPanel();
-        title = new javax.swing.JPanel();
-        lblAddService = new javax.swing.JLabel();
-        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(48, 0), new java.awt.Dimension(32767, 0));
-        form = new javax.swing.JPanel();
-        right = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(32767, 0));
-        left = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(32767, 0));
-        createServiceInfo = new javax.swing.JPanel();
-        lblInstruction = new javax.swing.JLabel();
-        lblDepartment = new javax.swing.JLabel();
-        jcbDepartment0 = new javax.swing.JComboBox<>();
-        lblServiceName = new javax.swing.JLabel();
-        ftfServiceName = new javax.swing.JFormattedTextField();
-        lblServiceFee = new javax.swing.JLabel();
-        ftfServiceFee = new javax.swing.JFormattedTextField();
-        button = new javax.swing.JPanel();
-        btnAdd = new javax.swing.JButton();
         updateService = new javax.swing.JDialog();
         main1 = new javax.swing.JPanel();
         title1 = new javax.swing.JPanel();
@@ -49,10 +155,29 @@ public class ServicesPanel extends javax.swing.JPanel {
         ftfServiceFee1 = new javax.swing.JFormattedTextField();
         button1 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
+        createService = new javax.swing.JDialog();
+        main = new javax.swing.JPanel();
+        title = new javax.swing.JPanel();
+        lblAddService = new javax.swing.JLabel();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(48, 0), new java.awt.Dimension(32767, 0));
+        form = new javax.swing.JPanel();
+        right = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(32767, 0));
+        left = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(32767, 0));
+        createServiceInfo = new javax.swing.JPanel();
+        lblInstruction = new javax.swing.JLabel();
+        lblDepartment = new javax.swing.JLabel();
+        jcbDepartment0 = new javax.swing.JComboBox<>();
+        lblServiceName = new javax.swing.JLabel();
+        ftfServiceName = new javax.swing.JFormattedTextField();
+        lblServiceFee = new javax.swing.JLabel();
+        ftfServiceFee = new javax.swing.JFormattedTextField();
+        button = new javax.swing.JPanel();
+        btnAdd = new javax.swing.JButton();
         servicesFilter = new javax.swing.JPanel();
         jcbDepartment = new javax.swing.JComboBox<>();
         jtfSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        btnSearch1 = new javax.swing.JButton();
         crudButtons = new javax.swing.JPanel();
         btnCreate = new amc.view.comp.AmcButton();
         btnUpdate = new amc.view.comp.AmcButton();
@@ -64,94 +189,6 @@ public class ServicesPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 32767));
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 32767));
-
-        main.setMaximumSize(new java.awt.Dimension(500, 700));
-        main.setPreferredSize(new java.awt.Dimension(500, 700));
-        main.setLayout(new java.awt.BorderLayout());
-
-        title.setMaximumSize(new java.awt.Dimension(500, 50));
-        title.setPreferredSize(new java.awt.Dimension(500, 50));
-        title.setLayout(new java.awt.BorderLayout());
-
-        lblAddService.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        lblAddService.setText("Add New Service");
-        title.add(lblAddService, java.awt.BorderLayout.CENTER);
-        title.add(filler7, java.awt.BorderLayout.LINE_START);
-
-        main.add(title, java.awt.BorderLayout.PAGE_START);
-
-        form.setLayout(new java.awt.BorderLayout());
-        form.add(right, java.awt.BorderLayout.LINE_END);
-        form.add(left, java.awt.BorderLayout.LINE_START);
-
-        createServiceInfo.setLayout(new java.awt.GridLayout(13, 2, 5, 0));
-
-        lblInstruction.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblInstruction.setText("Please fill out this form");
-        createServiceInfo.add(lblInstruction);
-
-        lblDepartment.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblDepartment.setText("Department");
-        createServiceInfo.add(lblDepartment);
-
-        jcbDepartment0.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Internel Medicine", "Surgery", "Pediatrics", "Dermatology", "Ophthalmology", "ENT (Ear, Nose, Threat)", "Dentistry", "Gynecology", "General Chinese Medicine", "General Pratice" }));
-        createServiceInfo.add(jcbDepartment0);
-
-        lblServiceName.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblServiceName.setText("Service Name");
-        createServiceInfo.add(lblServiceName);
-
-        ftfServiceName.setForeground(new java.awt.Color(153, 153, 153));
-        ftfServiceName.setText("Enter service name");
-        ftfServiceName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ftfServiceNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ftfServiceNameFocusLost(evt);
-            }
-        });
-        createServiceInfo.add(ftfServiceName);
-
-        lblServiceFee.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblServiceFee.setText("Service Fee");
-        createServiceInfo.add(lblServiceFee);
-
-        ftfServiceFee.setForeground(new java.awt.Color(153, 153, 153));
-        ftfServiceFee.setText("Enter service fee");
-        ftfServiceFee.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ftfServiceFeeFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ftfServiceFeeFocusLost(evt);
-            }
-        });
-        createServiceInfo.add(ftfServiceFee);
-
-        form.add(createServiceInfo, java.awt.BorderLayout.CENTER);
-
-        button.setPreferredSize(new java.awt.Dimension(418, 75));
-        button.setLayout(new java.awt.GridBagLayout());
-
-        btnAdd.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        btnAdd.setText("Add");
-        button.add(btnAdd, new java.awt.GridBagConstraints());
-
-        form.add(button, java.awt.BorderLayout.PAGE_END);
-
-        main.add(form, java.awt.BorderLayout.CENTER);
-
-        javax.swing.GroupLayout createServiceLayout = new javax.swing.GroupLayout(createService.getContentPane());
-        createService.getContentPane().setLayout(createServiceLayout);
-        createServiceLayout.setHorizontalGroup(
-            createServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
-        );
-        createServiceLayout.setVerticalGroup(
-            createServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
-        );
 
         main1.setMaximumSize(new java.awt.Dimension(500, 700));
         main1.setPreferredSize(new java.awt.Dimension(500, 700));
@@ -183,7 +220,7 @@ public class ServicesPanel extends javax.swing.JPanel {
         updateServiceInfo.add(lblDepartment1);
 
         jcbDepartment1.setForeground(new java.awt.Color(153, 153, 153));
-        jcbDepartment1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Internel Medicine", "Surgery", "Pediatrics", "Dermatology", "Ophthalmology", "ENT (Ear, Nose, Threat)", "Dentistry", "Gynecology", "General Chinese Medicine", "General Pratice" }));
+        jcbDepartment1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Internal Medicine", "Surgery", "Pediatrics", "Dermatology", "Ophthalmology", "ENT (Ear, Nose, Throat)", "Dentistry", "Gynecology", "General Chinese Medicine", "General Pratice" }));
         updateServiceInfo.add(jcbDepartment1);
 
         lblServiceName1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
@@ -225,6 +262,11 @@ public class ServicesPanel extends javax.swing.JPanel {
 
         btnSave.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
         button1.add(btnSave, new java.awt.GridBagConstraints());
 
         form1.add(button1, java.awt.BorderLayout.PAGE_END);
@@ -242,6 +284,99 @@ public class ServicesPanel extends javax.swing.JPanel {
             .addComponent(main1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
         );
 
+        main.setMaximumSize(new java.awt.Dimension(500, 700));
+        main.setPreferredSize(new java.awt.Dimension(500, 700));
+        main.setLayout(new java.awt.BorderLayout());
+
+        title.setMaximumSize(new java.awt.Dimension(500, 50));
+        title.setPreferredSize(new java.awt.Dimension(500, 50));
+        title.setLayout(new java.awt.BorderLayout());
+
+        lblAddService.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        lblAddService.setText("Add New Service");
+        title.add(lblAddService, java.awt.BorderLayout.CENTER);
+        title.add(filler7, java.awt.BorderLayout.LINE_START);
+
+        main.add(title, java.awt.BorderLayout.PAGE_START);
+
+        form.setLayout(new java.awt.BorderLayout());
+        form.add(right, java.awt.BorderLayout.LINE_END);
+        form.add(left, java.awt.BorderLayout.LINE_START);
+
+        createServiceInfo.setLayout(new java.awt.GridLayout(13, 2, 5, 0));
+
+        lblInstruction.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        lblInstruction.setText("Please fill out this form");
+        createServiceInfo.add(lblInstruction);
+
+        lblDepartment.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        lblDepartment.setText("Department");
+        createServiceInfo.add(lblDepartment);
+
+        jcbDepartment0.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Internal Medicine", "Surgery", "Pediatrics", "Dermatology", "Ophthalmology", "ENT (Ear, Nose, Throat)", "Dentistry", "Gynecology", "General Chinese Medicine", "General Pratice" }));
+        createServiceInfo.add(jcbDepartment0);
+
+        lblServiceName.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        lblServiceName.setText("Service Name");
+        createServiceInfo.add(lblServiceName);
+
+        ftfServiceName.setForeground(new java.awt.Color(153, 153, 153));
+        ftfServiceName.setText("Enter service name");
+        ftfServiceName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ftfServiceNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftfServiceNameFocusLost(evt);
+            }
+        });
+        createServiceInfo.add(ftfServiceName);
+
+        lblServiceFee.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        lblServiceFee.setText("Service Fee");
+        createServiceInfo.add(lblServiceFee);
+
+        ftfServiceFee.setForeground(new java.awt.Color(153, 153, 153));
+        ftfServiceFee.setText("Enter service fee");
+        ftfServiceFee.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ftfServiceFeeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftfServiceFeeFocusLost(evt);
+            }
+        });
+        createServiceInfo.add(ftfServiceFee);
+
+        form.add(createServiceInfo, java.awt.BorderLayout.CENTER);
+
+        button.setPreferredSize(new java.awt.Dimension(418, 75));
+        button.setLayout(new java.awt.GridBagLayout());
+
+        btnAdd.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        button.add(btnAdd, new java.awt.GridBagConstraints());
+
+        form.add(button, java.awt.BorderLayout.PAGE_END);
+
+        main.add(form, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout createServiceLayout = new javax.swing.GroupLayout(createService.getContentPane());
+        createService.getContentPane().setLayout(createServiceLayout);
+        createServiceLayout.setHorizontalGroup(
+            createServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+        );
+        createServiceLayout.setVerticalGroup(
+            createServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+        );
+
         setBackground(new java.awt.Color(245, 253, 253));
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new java.awt.BorderLayout());
@@ -251,7 +386,7 @@ public class ServicesPanel extends javax.swing.JPanel {
         servicesFilter.setPreferredSize(new java.awt.Dimension(864, 70));
 
         jcbDepartment.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jcbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Internel Medicine", "Surgery", "Pediatrics", "Dermatology", "Ophthalmology", "ENT (Ear, Nose, Threat)", "Dentistry", "Gynecology", "General Chinese Medicine", "General Pratice" }));
+        jcbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Internal Medicine", "Surgery", "Pediatrics", "Dermatology", "Ophthalmology", "ENT (Ear, Nose, Throat)", "Dentistry", "Gynecology", "General Chinese Medicine", "General Pratice" }));
         jcbDepartment.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         jcbDepartment.setPreferredSize(new java.awt.Dimension(150, 22));
 
@@ -279,14 +414,29 @@ public class ServicesPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSearch1.setBackground(new java.awt.Color(0, 153, 153));
+        btnSearch1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnSearch1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearch1.setText("Search");
+        btnSearch1.setBorder(null);
+        btnSearch1.setPreferredSize(new java.awt.Dimension(72, 25));
+        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout servicesFilterLayout = new javax.swing.GroupLayout(servicesFilter);
         servicesFilter.setLayout(servicesFilterLayout);
         servicesFilterLayout.setHorizontalGroup(
             servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(servicesFilterLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(servicesFilterLayout.createSequentialGroup()
+                        .addComponent(jcbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(servicesFilterLayout.createSequentialGroup()
                         .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -297,12 +447,14 @@ public class ServicesPanel extends javax.swing.JPanel {
             servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(servicesFilterLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jcbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         add(servicesFilter, java.awt.BorderLayout.PAGE_START);
@@ -363,14 +515,6 @@ public class ServicesPanel extends javax.swing.JPanel {
         filler2.setOpaque(true);
         servicesTable.add(filler2, java.awt.BorderLayout.LINE_START);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
-            }
-        ));
         jScrollPane1.setViewportView(jTable1);
 
         servicesTable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -476,6 +620,14 @@ public class ServicesPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        if (selectedServiceId == null || selectedServiceId.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, "Please select a service to update", 
+            "No Selection", javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+        populateUpdateForm();
         updateService.pack();
         updateService.setLocationRelativeTo(null);
         updateService.setVisible(true);
@@ -483,13 +635,35 @@ public class ServicesPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        
+        firePropertyChange("deleteService", false, true);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        String searchText = getSearchInput();
+        if(searchText != null && !searchText.trim().isEmpty()) {
+            firePropertyChange("searchByText", false, true);
+        }
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
+        // TODO add your handling code here:
+        String department = getSelectedDepartment();
+        if (department != null && !department.isEmpty()) {
+            firePropertyChange("searchByDepartment", false, true);
+        }
+    }//GEN-LAST:event_btnSearch1ActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        firePropertyChange("createService", false, true);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        firePropertyChange("updateService", false, true);
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -497,6 +671,7 @@ public class ServicesPanel extends javax.swing.JPanel {
     private amc.view.comp.AmcButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearch1;
     private amc.view.comp.AmcButton btnUpdate;
     private javax.swing.JPanel button;
     private javax.swing.JPanel button1;

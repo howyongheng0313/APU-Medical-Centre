@@ -17,6 +17,7 @@ public class CommentsCtl extends AbstractSubCtl {
     public CommentsCtl(AmcCtl ROOT){
         super(ROOT);
         setupCommentFeature();
+        loadCommentSummary();
     }
 
     // Setup comment feature: Handles switching between summary and details view

@@ -7,11 +7,11 @@ public class ApptService {
 
     public ApptService(
         String appointmentId,
-        String serverId,
+        String serviceId,
         double fee
     ) {
         this.appointmentId = appointmentId;
-        this.serviceId = serverId;
+        this.serviceId = serviceId;
         this.fee = fee;
     }
 
