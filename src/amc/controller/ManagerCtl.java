@@ -30,9 +30,15 @@ public class ManagerCtl extends UserCtl {
         ReportCtl   reportCtl    = new ReportCtl(getROOT());
         CommentsCtl commentLsCtl = new CommentsCtl(getROOT());
         ServiceCtl serviceCtl = new ServiceCtl(getROOT());
+        EmployeeCtl employeeCtl = new EmployeeCtl(getROOT());
+        MedicineCtl medicineCtl = new MedicineCtl(getROOT());
+        AppointmentCtl appointmentCtl = new AppointmentCtl(getROOT());
         viewBody.add(reportCtl.getView()   , "Report");
         viewBody.add(commentLsCtl.getView(), "Comments");
         viewBody.add(serviceCtl.getView(), "Services");
+        viewBody.add(employeeCtl.getView(), "Employees");
+        viewBody.add(medicineCtl.getView(), "Medicines");
+        viewBody.add(appointmentCtl.getView(), "Appointments");
     }
 
     @Override
