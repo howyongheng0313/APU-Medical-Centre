@@ -6,8 +6,6 @@ import amc.model.DataUtil;
 import java.util.List;
 import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 
 public class ServicesPanel extends javax.swing.JPanel {
     
@@ -121,6 +119,12 @@ public class ServicesPanel extends javax.swing.JPanel {
         updateService.setVisible(false);
     }
     
+    // Reset search field
+    public void resetSearchField() {
+        jtfSearch.setText("Search service");
+        jtfSearch.setForeground(new Color(153, 153, 153));
+    }
+    
     // Getter for create dialog
     public String getCreateDepartment() {return (String)jcbDepartment0.getSelectedItem();}
     public String getCreateServiceName() {return ftfServiceName.getText();}
@@ -177,7 +181,6 @@ public class ServicesPanel extends javax.swing.JPanel {
         jcbDepartment = new javax.swing.JComboBox<>();
         jtfSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        btnSearch1 = new javax.swing.JButton();
         crudButtons = new javax.swing.JPanel();
         btnCreate = new amc.view.comp.AmcButton();
         btnUpdate = new amc.view.comp.AmcButton();
@@ -389,6 +392,11 @@ public class ServicesPanel extends javax.swing.JPanel {
         jcbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Internal Medicine", "Surgery", "Pediatrics", "Dermatology", "Ophthalmology", "ENT (Ear, Nose, Throat)", "Dentistry", "Gynecology", "General Chinese Medicine", "General Pratice" }));
         jcbDepartment.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         jcbDepartment.setPreferredSize(new java.awt.Dimension(150, 22));
+        jcbDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbDepartmentActionPerformed(evt);
+            }
+        });
 
         jtfSearch.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtfSearch.setText("Search service");
@@ -414,29 +422,14 @@ public class ServicesPanel extends javax.swing.JPanel {
             }
         });
 
-        btnSearch1.setBackground(new java.awt.Color(0, 153, 153));
-        btnSearch1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnSearch1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSearch1.setText("Search");
-        btnSearch1.setBorder(null);
-        btnSearch1.setPreferredSize(new java.awt.Dimension(72, 25));
-        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout servicesFilterLayout = new javax.swing.GroupLayout(servicesFilter);
         servicesFilter.setLayout(servicesFilterLayout);
         servicesFilterLayout.setHorizontalGroup(
             servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(servicesFilterLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(servicesFilterLayout.createSequentialGroup()
-                        .addComponent(jcbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(servicesFilterLayout.createSequentialGroup()
                         .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -447,14 +440,12 @@ public class ServicesPanel extends javax.swing.JPanel {
             servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(servicesFilterLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jcbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(servicesFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         add(servicesFilter, java.awt.BorderLayout.PAGE_START);
@@ -640,20 +631,8 @@ public class ServicesPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String searchText = getSearchInput();
-        if(searchText != null && !searchText.trim().isEmpty()) {
-            firePropertyChange("searchByText", false, true);
-        }
-        
+        firePropertyChange("searchByText", false, true);
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
-        // TODO add your handling code here:
-        String department = getSelectedDepartment();
-        if (department != null && !department.isEmpty()) {
-            firePropertyChange("searchByDepartment", false, true);
-        }
-    }//GEN-LAST:event_btnSearch1ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
@@ -665,13 +644,17 @@ public class ServicesPanel extends javax.swing.JPanel {
         firePropertyChange("updateService", false, true);
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void jcbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDepartmentActionPerformed
+        // TODO add your handling code here:
+        firePropertyChange("searchByDepartment", false, true);
+    }//GEN-LAST:event_jcbDepartmentActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private amc.view.comp.AmcButton btnCreate;
     private amc.view.comp.AmcButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearch1;
     private amc.view.comp.AmcButton btnUpdate;
     private javax.swing.JPanel button;
     private javax.swing.JPanel button1;

@@ -33,9 +33,11 @@ public class ServiceCtl extends AbstractSubCtl {
         
         // Text search 
         viewServices.addPropertyChangeListener("searchByText", evt ->{
-            String searchText = viewServices.getSearchInput();
-            if(searchText != null && !searchText.trim().isEmpty()) {
-                loadServicesBySearch(searchText);
+        String searchText = viewServices.getSearchInput();
+            if(searchText != null && !searchText.trim().isEmpty() && !searchText.equals("Search service")) {
+                this.loadServicesBySearch(searchText);
+            } else {
+                this.loadAllServices();
             }
         });
         
@@ -60,6 +62,7 @@ public class ServiceCtl extends AbstractSubCtl {
         try {
             var services = this.getAllServices();
             viewServices.showServices(services);
+            viewServices.resetSearchField();
         } catch(Exception ex) {
             JOptionPane.showMessageDialog(
                     viewServices, 
@@ -88,13 +91,18 @@ public class ServiceCtl extends AbstractSubCtl {
         try {
             var services = this.getServicesBySearch(searchText);
             viewServices.showServices(services);
+            viewServices.resetSearchField();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
                 viewServices, "Error searching services: " + e.getMessage(),
                 "Error", JOptionPane.ERROR_MESSAGE
             );
         }
-    }
+    } 
+    
+    
+    
+    
     
     // Create new service
     private void createService(){
@@ -219,18 +227,14 @@ public class ServiceCtl extends AbstractSubCtl {
             }
             if (serviceName == null || serviceName.trim().isEmpty() || "Enter new service name".equals(serviceName)) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please enter a service name", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                        viewServices, "Please enter a service name", 
+                        "Validation Error", JOptionPane.WARNING_MESSAGE
                 );
             } 
             if (feeText == null || feeText.trim().isEmpty() || "Enter new service fee".equals(feeText)) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please enter a service fee", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                        viewServices, "Please enter a service fee", 
+                        "Validation Error", JOptionPane.WARNING_MESSAGE
                 );
             }
             
@@ -351,6 +355,10 @@ public class ServiceCtl extends AbstractSubCtl {
             );
         }
     }
+    
+    
+    
+    
     
     // Get all services with department names
     private List<ServiceDTO> getAllServices(){
