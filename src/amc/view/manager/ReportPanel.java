@@ -45,7 +45,7 @@ public class ReportPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(800, 500));
         setLayout(new java.awt.BorderLayout());
 
-        main.setBackground(new java.awt.Color(255, 255, 255));
+        main.setBackground(new java.awt.Color(243, 253, 253));
         main.setLayout(new java.awt.BorderLayout());
 
         filter.setPreferredSize(new java.awt.Dimension(200, 100));
@@ -114,10 +114,14 @@ public class ReportPanel extends javax.swing.JPanel {
 
         main.add(filter, java.awt.BorderLayout.LINE_START);
 
-        reports.setBackground(new java.awt.Color(255, 255, 255));
+        reports.setBackground(new java.awt.Color(243, 253, 253));
         reports.setLayout(new java.awt.CardLayout());
         reports.add(incomeReportPanel1, "incomeReport");
+
+        patientNumberReportPanel1.setBackground(new java.awt.Color(243, 253, 253));
         reports.add(patientNumberReportPanel1, "patientNumberReport");
+
+        doctorPerformanceReportPanel1.setBackground(new java.awt.Color(255, 255, 255));
         reports.add(doctorPerformanceReportPanel1, "doctorPerformanceReport");
 
         main.add(reports, java.awt.BorderLayout.CENTER);

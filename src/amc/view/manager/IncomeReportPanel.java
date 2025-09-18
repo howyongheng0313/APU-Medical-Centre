@@ -1,4 +1,4 @@
-package amc.view.manager;
+/*package amc.view.manager;
 
 import amc.model.entity.ReportsDTO;
 import javax.swing.*;
@@ -94,5 +94,129 @@ public class IncomeReportPanel extends JPanel {
         content.add(payScroll, gbc);
 
         add(content, BorderLayout.CENTER);
+    }
+}*/
+
+package amc.view.manager;
+
+import amc.model.entity.ReportsDTO;
+import amc.model.DataUtil;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.text.NumberFormat;
+
+/*
+** IncomeReportPanel:
+**      Monthly income (bar chart)
+**      Payment method distribution (pie chart)
+*/
+public class IncomeReportPanel extends JPanel {
+
+    private final JLabel titleLabel  = new JLabel("", SwingConstants.CENTER);
+    private final JLabel totalLabel  = new JLabel("", SwingConstants.CENTER);
+    private final JPanel chartContainer = new JPanel(new GridLayout(1, 2, 10, 0)); // two charts side by side
+
+    public IncomeReportPanel() {
+        setLayout(new BorderLayout());
+        setBackground(Color.WHITE); // panel background
+
+        // Header Section 
+        JPanel header = new JPanel(new GridLayout(2, 1));
+        header.setBackground(new Color(245, 253, 253));       // soft teal background
+        header.setBorder(new EmptyBorder(10, 10, 10, 10));    // padding around labels
+
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+        totalLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+        header.add(titleLabel);
+        header.add(totalLabel);
+        add(header, BorderLayout.NORTH);
+
+        // Chart Container 
+        chartContainer.setBackground(Color.WHITE);
+        add(chartContainer, BorderLayout.CENTER);
+    }
+
+    // Populate the panel with a specific report.
+    public void displayReport(ReportsDTO.IncomeReport report) {
+        // Update header text
+        titleLabel.setText("Income Report for " + report.getYear());
+        totalLabel.setText("Total Income: " + DataUtil.amount2str(report.getTotalIncome()));
+
+        // Clear old charts and add new ones
+        chartContainer.removeAll();
+        chartContainer.add(createMonthlyIncomeBar(report));
+        chartContainer.add(createPaymentMethodPie(report));
+
+        chartContainer.revalidate();
+        chartContainer.repaint();
+    }
+
+    // Creates a bar chart showing monthly income.
+    private ChartPanel createMonthlyIncomeBar(ReportsDTO.IncomeReport report) {
+        // Build dataset
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        String[] months = {"Jan","Feb","Mar","Apr","May","Jun",
+                           "Jul","Aug","Sep","Oct","Nov","Dec"};
+        for (ReportsDTO.MonthlyIncome m : report.getMonthlyIncomes()) {
+            data.addValue(m.getIncome(), "Income", months[m.getMonth() - 1]);
+        }
+
+        // Create chart with no title (we already show it in the header)
+        JFreeChart chart = ChartFactory.createBarChart(
+                "", "Month", "Income (MYR)", data);
+
+        // Customize plot appearance
+        CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setRangeGridlinesVisible(true);
+        plot.setDomainGridlinesVisible(true);
+        plot.getRenderer().setSeriesPaint(0, new Color(79, 129, 189)); // blue bars
+        plot.getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.UP_45); // rotate labels
+
+        // Wrap in ChartPanel
+        ChartPanel panel = new ChartPanel(chart);
+        panel.setPreferredSize(new Dimension(0, 400));
+        panel.setBorder(new EmptyBorder(0,0,0,0));
+        panel.setBackground(Color.WHITE);
+        return panel;
+    }
+
+    // Creates a pie chart showing payment method breakdown.
+    private ChartPanel createPaymentMethodPie(ReportsDTO.IncomeReport report) {
+        // Build dataset
+        DefaultPieDataset data = new DefaultPieDataset();
+        for (ReportsDTO.PaymentBreakdown pb : report.getPaymentBreakdown()) {
+            data.setValue(pb.getMethod().toString(), pb.getAmount());
+        }
+
+        // Create chart with no title
+        JFreeChart chart = ChartFactory.createPieChart("", data, true, true, false);
+
+        // Customize plot appearance
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setOutlineVisible(false);
+        plot.setLabelGenerator(new org.jfree.chart.labels.StandardPieSectionLabelGenerator(
+                "{0}: {2}",
+                NumberFormat.getNumberInstance(),
+                NumberFormat.getPercentInstance()
+        ));
+
+        // Wrap in ChartPanel
+        ChartPanel panel = new ChartPanel(chart);
+        panel.setPreferredSize(new Dimension(0, 400));
+        panel.setBorder(new EmptyBorder(0,0,0,0));
+        panel.setBackground(Color.WHITE);
+        return panel;
     }
 }
