@@ -278,8 +278,10 @@ public class ReportCtl extends AbstractSubCtl{
 }*/
 
 
-package amc.controller;
+package amc.controller.Manager;
 
+import amc.controller.AbstractSubCtl;
+import amc.controller.AmcCtl;
 import amc.model.entity.*;
 import amc.model.db_impl.Db;
 import amc.view.manager.ReportPanel;

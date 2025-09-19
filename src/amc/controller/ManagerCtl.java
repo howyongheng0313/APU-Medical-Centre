@@ -1,5 +1,11 @@
 package amc.controller;
 
+import amc.controller.Manager.ServiceCtl;
+import amc.controller.Manager.ReportCtl;
+import amc.controller.Manager.MedicineCtl;
+import amc.controller.Manager.EmployeeCtl;
+import amc.controller.Manager.CommentsCtl;
+import amc.controller.Manager.AppointmentCtl;
 import amc.view.share.BarButton;
 import amc.view.share.BarComp;
 import amc.view.share.UserPanel;

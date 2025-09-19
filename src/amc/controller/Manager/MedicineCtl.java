@@ -1,5 +1,7 @@
-package amc.controller;
+package amc.controller.Manager;
 
+import amc.controller.AbstractSubCtl;
+import amc.controller.AmcCtl;
 import amc.model.db_impl.Db;
 import amc.model.entity.Medicine;
 import amc.view.manager.MedicinesPanel;
