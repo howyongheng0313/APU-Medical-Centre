@@ -1,10 +1,59 @@
 package amc.view.manager;
 
+import amc.model.entity.AppointmentDTO;
+import amc.view.share.ApptViewPanel;
+import java.awt.GridBagConstraints;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AppointmentsPanel extends javax.swing.JPanel {
+
+    private final List<ApptViewPanel> appointmentPanels = new ArrayList<>();
 
     public AppointmentsPanel() {
         initComponents();
         this.jScrollPane1.getVerticalScrollBar().setUnitIncrement(8);
+    }
+    
+     public void updateAppointments(List<AppointmentDTO> appointments) {
+        this.clearAppointmentPanels();
+        
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.weightx = 1.0;
+        
+        for (int i = 0; i < appointments.size(); i++) {
+            AppointmentDTO appointment = appointments.get(i);
+            ApptViewPanel appointmentPanel = new ApptViewPanel();
+            appointmentPanel.setAppointmentData(appointment);
+            
+            gridBagConstraints.gridy = i;
+            gridBagConstraints.weighty = 0.0;
+            jPanel3.add(appointmentPanel, gridBagConstraints);
+            appointmentPanels.add(appointmentPanel);
+        }
+        
+        // Add filler at the end
+        gridBagConstraints.gridy = appointments.size();
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        jPanel3.add(filler1, gridBagConstraints);
+        
+        // Refresh display
+        jPanel3.revalidate();
+        jPanel3.repaint();
+        jScrollPane1.revalidate();
+        jScrollPane1.repaint();
+    }
+    
+    private void clearAppointmentPanels() {
+        for (ApptViewPanel panel : appointmentPanels) {
+            jPanel3.remove(panel);
+        }
+        appointmentPanels.clear();
+        jPanel3.remove(filler1);
     }
 
     @SuppressWarnings("unchecked")
@@ -14,8 +63,6 @@ public class AppointmentsPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        viewApptPanel2 = new amc.view.share.ApptViewPanel();
-        viewApptPanel3 = new amc.view.share.ApptViewPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jPanel1 = new javax.swing.JPanel();
 
@@ -38,19 +85,6 @@ public class AppointmentsPanel extends javax.swing.JPanel {
         java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
         jPanel3Layout.columnWeights = new double[] {1.0};
         jPanel3.setLayout(jPanel3Layout);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        jPanel3.add(viewApptPanel2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        jPanel3.add(viewApptPanel3, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.weighty = 1.0;
@@ -80,7 +114,5 @@ public class AppointmentsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private amc.view.share.ApptViewPanel viewApptPanel2;
-    private amc.view.share.ApptViewPanel viewApptPanel3;
     // End of variables declaration//GEN-END:variables
 }

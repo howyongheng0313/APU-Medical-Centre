@@ -24,7 +24,7 @@
     <Container class="javax.swing.JPanel" name="main">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+          <Color blue="fd" green="fd" red="f3" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -234,7 +234,7 @@
         <Container class="javax.swing.JPanel" name="reports">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="fd" green="fd" red="f3" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -256,6 +256,11 @@
               </Constraints>
             </Component>
             <Component class="amc.view.manager.PatientNumberReportPanel" name="patientNumberReportPanel1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="fd" green="fd" red="f3" type="rgb"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -266,6 +271,11 @@
               </Constraints>
             </Component>
             <Component class="amc.view.manager.DoctorPerformanceReportPanel" name="doctorPerformanceReportPanel1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>

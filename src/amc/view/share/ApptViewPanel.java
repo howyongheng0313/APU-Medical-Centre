@@ -1,11 +1,44 @@
 package amc.view.share;
 
+import amc.model.entity.AppointmentDTO;
 import amc.view.Theme;
+import java.time.format.DateTimeFormatter;
 
 public class ApptViewPanel extends javax.swing.JPanel {
 
     public ApptViewPanel() {
         initComponents();
+    }
+    
+public void setAppointmentData(AppointmentDTO appointmentDTO) {
+        if (appointmentDTO == null) return;
+        
+        // Set appointment ID
+        lblApptId.setText(appointmentDTO.getAppointmentId());
+        
+        // Set date and time
+        if (appointmentDTO.getDateTime() != null) {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            lblApptDate.setText(appointmentDTO.getDateTime().format(dateFormatter));
+            
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            lblApptTime.setText(appointmentDTO.getDateTime().format(timeFormatter));
+        }
+        
+        // Set patient name
+        lblPatient.setText(appointmentDTO.getCustomerName() != null ? 
+            appointmentDTO.getCustomerName() : "Unknown Patient");
+        
+        // Set doctor name  
+        lblDoctor.setText(appointmentDTO.getDoctorName() != null ? 
+            appointmentDTO.getDoctorName() : "No Doctor");
+        
+        // Set staff name
+        lblStaff.setText(appointmentDTO.getStaffName() != null ? 
+            appointmentDTO.getStaffName() : "No Staff");
+        
+        System.out.println("Set data for card: " + appointmentDTO.getAppointmentId() + 
+            " - " + appointmentDTO.getCustomerName());
     }
 
     @SuppressWarnings("unchecked")
@@ -13,19 +46,19 @@ public class ApptViewPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblApptId = new javax.swing.JLabel();
+        lblApptDate = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        amcPicture3 = new amc.view.comp.AmcPicture();
-        amcPicture4 = new amc.view.comp.AmcPicture();
-        amcPicture1 = new amc.view.comp.AmcPicture();
-        jLabel4 = new javax.swing.JLabel();
+        lblPatient = new javax.swing.JLabel();
+        lblDoctor = new javax.swing.JLabel();
+        lblStaff = new javax.swing.JLabel();
+        imgStaff = new amc.view.comp.AmcPicture();
+        imgDoctor = new amc.view.comp.AmcPicture();
+        imgPatient = new amc.view.comp.AmcPicture();
+        lblApptTime = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        amcPicture5 = new amc.view.comp.AmcPicture();
+        imgStatus = new amc.view.comp.AmcPicture();
 
         setBackground(Theme.C1_INTER);
         setPreferredSize(new java.awt.Dimension(554, 200));
@@ -35,23 +68,23 @@ public class ApptViewPanel extends javax.swing.JPanel {
         layout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.5, 0.5, 0.5};
         setLayout(layout);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("APT-001");
+        lblApptId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblApptId.setText("APT-001");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        add(jLabel1, gridBagConstraints);
+        add(lblApptId, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("27 July 2025");
+        lblApptDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblApptDate.setText("27 July 2025");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        add(jLabel2, gridBagConstraints);
+        add(lblApptDate, gridBagConstraints);
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setToolTipText("");
@@ -70,57 +103,57 @@ public class ApptViewPanel extends javax.swing.JPanel {
         jPanel1Layout.rowWeights = new double[] {0.5, 0.5, 0.5};
         jPanel1.setLayout(jPanel1Layout);
 
-        jLabel3.setText("Patient Steve");
-        jLabel3.setPreferredSize(new java.awt.Dimension(210, 30));
+        lblPatient.setText("Patient Steve");
+        lblPatient.setPreferredSize(new java.awt.Dimension(210, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
-        jPanel1.add(jLabel3, gridBagConstraints);
+        jPanel1.add(lblPatient, gridBagConstraints);
 
-        jLabel5.setText("Doctor Gan");
-        jLabel5.setMaximumSize(new java.awt.Dimension(68, 16));
-        jLabel5.setMinimumSize(new java.awt.Dimension(68, 16));
+        lblDoctor.setText("Doctor Gan");
+        lblDoctor.setMaximumSize(new java.awt.Dimension(68, 16));
+        lblDoctor.setMinimumSize(new java.awt.Dimension(68, 16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
-        jPanel1.add(jLabel5, gridBagConstraints);
+        jPanel1.add(lblDoctor, gridBagConstraints);
 
-        jLabel6.setText("Staff Kuek");
+        lblStaff.setText("Staff Kuek");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 0);
-        jPanel1.add(jLabel6, gridBagConstraints);
+        jPanel1.add(lblStaff, gridBagConstraints);
 
-        amcPicture3.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_staff_30.png"))); // NOI18N
+        imgStaff.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_staff_30.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(amcPicture3, gridBagConstraints);
+        jPanel1.add(imgStaff, gridBagConstraints);
 
-        amcPicture4.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor_30.png"))); // NOI18N
+        imgDoctor.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor_30.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(amcPicture4, gridBagConstraints);
+        jPanel1.add(imgDoctor, gridBagConstraints);
 
-        amcPicture1.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient_30.png"))); // NOI18N
+        imgPatient.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient_30.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(amcPicture1, gridBagConstraints);
+        jPanel1.add(imgPatient, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -130,13 +163,13 @@ public class ApptViewPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(1, 10, 5, 1);
         add(jPanel1, gridBagConstraints);
 
-        jLabel4.setText("09 : 27 am");
+        lblApptTime.setText("09 : 27 am");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        add(jLabel4, gridBagConstraints);
+        add(lblApptTime, gridBagConstraints);
 
         jPanel2.setOpaque(false);
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
@@ -145,12 +178,12 @@ public class ApptViewPanel extends javax.swing.JPanel {
         jPanel2Layout.rowWeights = new double[] {1.0};
         jPanel2.setLayout(jPanel2Layout);
 
-        amcPicture5.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/status_pending_30.png"))); // NOI18N
+        imgStatus.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/status_pending_30.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(amcPicture5, gridBagConstraints);
+        jPanel2.add(imgStatus, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -163,18 +196,18 @@ public class ApptViewPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.comp.AmcPicture amcPicture1;
-    private amc.view.comp.AmcPicture amcPicture3;
-    private amc.view.comp.AmcPicture amcPicture4;
-    private amc.view.comp.AmcPicture amcPicture5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private amc.view.comp.AmcPicture imgDoctor;
+    private amc.view.comp.AmcPicture imgPatient;
+    private amc.view.comp.AmcPicture imgStaff;
+    private amc.view.comp.AmcPicture imgStatus;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblApptDate;
+    private javax.swing.JLabel lblApptId;
+    private javax.swing.JLabel lblApptTime;
+    private javax.swing.JLabel lblDoctor;
+    private javax.swing.JLabel lblPatient;
+    private javax.swing.JLabel lblStaff;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,7 @@
-package amc.controller;
+package amc.controller.Manager;
 
+import amc.controller.AbstractSubCtl;
+import amc.controller.AmcCtl;
 import amc.model.DbMan;
 import amc.model.db_impl.Db;
 import amc.model.entity.*;
@@ -131,6 +133,11 @@ public class CommentsCtl extends AbstractSubCtl {
                 // Get customer name
                 Customer cust = custMap.get(appt.getCustomerId());
                 String custName = cust != null ? cust.getUserName() : "Unknown";
+                
+                String doctorFeedback = appt.getFeedback();
+                if(doctorFeedback == null || doctorFeedback.trim().isEmpty()){
+                    doctorFeedback = "No feedback provided";
+                }
 
                 output.add(new CommentsDTO.CommentDetail(
                     comment.getCommentId(),
@@ -142,7 +149,8 @@ public class CommentsCtl extends AbstractSubCtl {
                     type,
                     comment.getRating(),
                     comment.getContent(),
-                    appt.getDateTime().toLocalDate().toString()
+                    appt.getDateTime().toLocalDate().toString(),
+                    doctorFeedback
                 ));
             }
 

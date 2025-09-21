@@ -50,7 +50,7 @@ public class CommentsPanel extends javax.swing.JPanel {
         currentRecipientName = recipientName;
         btnReturn.setVisible(true);
 
-        String[] columns = {"Date", "Customer", "Rating", "Comment"};
+        String[] columns = {"Date", "Customer", "Rating", "Patient Comment", "Doctor Feedback"};
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int r, int c) { return false; }
@@ -60,7 +60,8 @@ public class CommentsPanel extends javax.swing.JPanel {
                 detail.appointmentDate,
                 detail.customerName,
                 detail.rating.name() + " (" + detail.rating.getLevel() + ")",
-                detail.content
+                detail.content,
+                detail.doctorFeedback
             });
         }
         tblComments.setModel(model);
