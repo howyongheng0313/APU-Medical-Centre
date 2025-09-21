@@ -14,8 +14,11 @@ public class DoctorCtl extends UserCtl {
 
     public DoctorCtl(AmcCtl ROOT) {
         super(ROOT);
+        AppointmentCtl appointmentCtl = new AppointmentCtl(getROOT());  
+        
+        viewBody.add(appointmentCtl.getView(), "Appointments");
     }
-
+    
     @Override
     public JPanel getViewBody() { return viewBody; }
 

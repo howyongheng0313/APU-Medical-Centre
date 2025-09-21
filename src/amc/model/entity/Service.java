@@ -17,6 +17,11 @@ public class Service {
         this.fee = fee;
         this.departmentId = departmentId;
     }
+    
+    @Override
+    public String toString() {
+        return serviceName + " RM: " + fee + " Department ID: "+ departmentId;
+    }
 
     public String getServiceId() { return serviceId; }
     public String getServiceName() { return serviceName; }

@@ -1,14 +1,20 @@
 package amc.controller;
 
+import amc.model.DbMan;
 import amc.model.db_impl.Db;
 import amc.model.entity.*;
 import amc.view.manager.ServicesPanel;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListModel;
 
 public class ServiceCtl extends AbstractSubCtl {
     
@@ -19,6 +25,40 @@ public class ServiceCtl extends AbstractSubCtl {
         super(ROOT);
         setupServiceFeature();
         loadAllServices();
+    }
+    
+    public List<Service> loadServiceByDepartment(JList listName){
+        try{
+            Set<String> departmentIds = new HashSet<>();
+            List<Service> services = new ArrayList<>();
+            
+            User currentUser = getROOT().getCurrentUser();
+            
+            DbMan.Query<Doctor> doctorEach = (doctor) -> {
+                if (doctor.getUserId().equals(currentUser.getUserId())){
+                departmentIds.add(doctor.getDepartmentId());}
+                return false;
+            };
+            Db.Doctor.select(-1, doctorEach);
+            
+            DbMan.Query<Service> serviceEach = (service) -> {
+            if (departmentIds.contains(service.getDepartmentId())) {
+                services.add(service);
+            }
+            return false;
+            };
+            Db.Service.select(-1, serviceEach);
+            
+            DefaultListModel<Service> model = new DefaultListModel<>();
+            for (Service s : services){
+                model.addElement(s);
+            }
+            listName.setModel((ListModel)model);
+            return services;
+        }
+        catch (Exception e){
+            return new ArrayList<>();
+        }
     }
     
     // Setup service features
@@ -380,6 +420,10 @@ public class ServiceCtl extends AbstractSubCtl {
         } catch(Exception ex){
             return new ArrayList<>();
         }
+    }
+    
+    public List<ServiceDTO> fetchAllServices(){
+        return getAllServices();
     }
     
     private List<ServiceDTO> getServicesByDepartment(String department){
