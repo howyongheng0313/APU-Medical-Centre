@@ -1,5 +1,5 @@
 package amc.controller;
-import amc.view.doctor.Appointment;
+import amc.view.doctor.AppointmentReadWrite;
 import amc.model.entity.User;
 import amc.view.doctor.MainPageDoctor;
 import javax.swing.JPanel;

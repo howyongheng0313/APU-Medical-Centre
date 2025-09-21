@@ -14,13 +14,13 @@ import amc.model.entity.User;
  * @author Administrator
  */
 public class MainPageDoctor extends javax.swing.JPanel {
-    private final Appointment apt;
+    private final AppointmentReadWrite apt;
     private final AmcCtl ROOT;
     
     public MainPageDoctor(AmcCtl ROOT,User currentUser) {
         initComponents();
         this.ROOT = ROOT;
-        this.apt = new Appointment(currentUser);
+        this.apt = new AppointmentReadWrite(currentUser);
         apt.view_appointment(jTable1,"current");
     }
 
