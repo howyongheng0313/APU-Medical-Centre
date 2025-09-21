@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package amc.view.doctor;
-import amc.controller.ServiceCtl;
-import amc.model.entity.Service;
+import amc.controller.Manager.ServiceCtl;
+import amc.model.entity.Doctor;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -13,17 +13,19 @@ import javax.swing.JOptionPane;
  * @author Administrator
  */
 public class Consultation extends javax.swing.JPanel {
+    private final Doctor currentDoctor;
     MedicineReadWrite mrw = new MedicineReadWrite();
-    ServiceReadWrite srw = new ServiceReadWrite();
+    private final ServiceReadWrite srw;
     FeedbackReadWrite frw = new FeedbackReadWrite();
     private final String appointmentId;
-    
-    public Consultation(ServiceCtl serviceCtl, String appointmentId) {
+
+    public Consultation(ServiceCtl serviceCtl, String appointmentId, Doctor currentDoctor) {
         initComponents();
         this.appointmentId = appointmentId;
-        serviceCtl.loadServiceByDepartment(jList3);
+        this.currentDoctor = currentDoctor;
+        this.srw = new ServiceReadWrite(currentDoctor);
         mrw.listAllMedicine(jList2);
-
+        srw.listAllService(jList3);
     }
     
     
@@ -251,7 +253,7 @@ public class Consultation extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        List<Service> selectedServiceRow = jList3.getSelectedValuesList();
+        List<String> selectedServiceRow = jList3.getSelectedValuesList();
         if(selectedServiceRow.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please select service.");
         }
@@ -287,7 +289,7 @@ public class Consultation extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jList2;
-    private javax.swing.JList<Service> jList3;
+    private javax.swing.JList<String> jList3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

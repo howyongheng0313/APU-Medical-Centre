@@ -19,10 +19,15 @@ public class Doctor extends Employee {
         this.license = license;
     }
 
+
+
     @Override
     public Role getRole() { return Role.Doctor; }
 
     public String getLicense() { return license; }
 
     public void setLicense(String license) { this.license = license; }
+    
+    @Override
+    public String getDepartmentId() { return departmentId; }
 }

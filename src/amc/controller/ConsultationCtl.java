@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package amc.controller;
+import amc.controller.Manager.ServiceCtl;
 import amc.view.doctor.Consultation;
 import javax.swing.JPanel;
 /**
@@ -15,7 +16,7 @@ public class ConsultationCtl extends AbstractSubCtl{
     public ConsultationCtl(AmcCtl ROOT){
         super(ROOT);
         ServiceCtl serviceCtl = new ServiceCtl(ROOT);
-        this.viewConsultation = new Consultation(serviceCtl, null);
+        this.viewConsultation = new Consultation(serviceCtl, null, null);
     }
 
     public JPanel getView(){

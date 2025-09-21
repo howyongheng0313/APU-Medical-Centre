@@ -5,7 +5,8 @@
 package amc.view.doctor;
 import amc.controller.AmcCtl;
 import javax.swing.JPanel;
-import amc.controller.ServiceCtl;
+import amc.controller.Manager.ServiceCtl;
+import amc.model.entity.Doctor;
 import amc.model.entity.User;
 
 
@@ -16,11 +17,14 @@ import amc.model.entity.User;
 public class MainPageDoctor extends javax.swing.JPanel {
     private final AppointmentReadWrite apt;
     private final AmcCtl ROOT;
-    
-    public MainPageDoctor(AmcCtl ROOT,User currentUser) {
+    private final User currentUser;
+    private final Doctor currentDoctor;
+    public MainPageDoctor(AmcCtl ROOT,User currentUser, Doctor currentDoctor) {
         initComponents();
         this.ROOT = ROOT;
         this.apt = new AppointmentReadWrite(currentUser);
+        this.currentUser = currentUser;
+        this.currentDoctor = currentDoctor;
         apt.view_appointment(jTable1,"current");
     }
 
@@ -142,7 +146,7 @@ public class MainPageDoctor extends javax.swing.JPanel {
 
             // Create the Consultation panel
             ServiceCtl serviceCtl = new ServiceCtl(ROOT); 
-            JPanel consultationPanel = new Consultation(serviceCtl, aptId);
+            JPanel consultationPanel = new Consultation(serviceCtl, aptId, currentDoctor);
 
             // Put it inside a popup dialog
             javax.swing.JDialog dialog = new javax.swing.JDialog((java.awt.Frame) null, "Consultation", true);

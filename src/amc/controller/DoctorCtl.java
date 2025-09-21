@@ -1,5 +1,8 @@
 package amc.controller;
 
+import amc.controller.Doctor.AppointmentDoctorCtl;
+import amc.model.entity.Doctor;
+import amc.model.entity.User;
 import amc.view.share.BarButton;
 import amc.view.share.BarComp;
 import amc.view.share.UserPanel;
@@ -14,11 +17,12 @@ public class DoctorCtl extends UserCtl {
 
     public DoctorCtl(AmcCtl ROOT) {
         super(ROOT);
-        AppointmentCtl appointmentCtl = new AppointmentCtl(getROOT());  
-        
+        User currentUser = (User) ROOT.getCurrentUser();
+        Doctor currentDoctor = (Doctor) ROOT.getCurrentUser();
+        AppointmentDoctorCtl appointmentCtl = new AppointmentDoctorCtl(ROOT, currentUser, currentDoctor);  
         viewBody.add(appointmentCtl.getView(), "Appointments");
     }
-    
+
     @Override
     public JPanel getViewBody() { return viewBody; }
 

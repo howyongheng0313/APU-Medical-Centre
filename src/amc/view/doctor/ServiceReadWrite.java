@@ -8,7 +8,8 @@ import amc.model.entity.Service;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JList;
-
+import amc.model.entity.Doctor;
+import javax.swing.DefaultListModel;
 /**
  *
  * @author Administrator
@@ -16,6 +17,26 @@ import javax.swing.JList;
 public class ServiceReadWrite {
     FileLocation fl = new FileLocation();
     FileReaderWriter frw = new FileReaderWriter();
+    private final Doctor currentDoctor;
+    DefaultListModel<String> listModel = new DefaultListModel<>();
+    
+    public ServiceReadWrite(Doctor currentDoctor){
+        this.currentDoctor = currentDoctor;
+    }
+    
+    public void listAllService(JList<String> listName) {
+        List<String[]> readRows = frw.readFile(fl.getServiceFile());
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+
+        for (String[] row : readRows) {
+            String departmentId = row[3];  
+            if (departmentId.equals(currentDoctor.getDepartmentId())) {
+                String rowString = String.join(" | ", row);
+                listModel.addElement(rowString);
+            }
+        }
+        listName.setModel(listModel);
+    }
     
     public void writeApptService (JList<?> listName, String appointmentId){
         List<?> selectedRow = listName.getSelectedValuesList();
