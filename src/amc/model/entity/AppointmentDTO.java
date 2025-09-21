@@ -1,63 +1,59 @@
 package amc.model.entity;
 
-public final class AppointmentDTO {
-    private AppointmentDTO() {}
+import java.time.LocalDateTime;
 
-    public static class AppointmentSummary {
-        public final String appointmentID;
-        public final String customerID;
-        private String recipientName = null;
-        private int appointmentCount = 0;
-
-        public AppointmentSummary(String appointmentID, String customerID) {
-            this.appointmentID = appointmentID;
-            this.customerID = customerID;
-        }
-
-        public String getRecipientName() { return recipientName; }
-        public int getAppointmentCount() { return appointmentCount; }
-
-        public void setRecipientName(String name) {
-            if (recipientName == null) recipientName = name;
-        }
-
-        public void addAppointment() {
-            appointmentCount++;
-        }
+public class AppointmentDTO {
+    private final String appointmentId;
+    private final String customerId;
+    private final String customerName;
+    private final String doctorId;
+    private final String doctorName;
+    private final String staffId;
+    private final String staffName;
+    private final String departmentId;
+    private final String departmentName;
+    private final LocalDateTime dateTime;
+    private final Appointment.Status status;
+    private final String feedback;
+    
+    public AppointmentDTO(
+        String appointmentId,
+        String customerId,
+        String customerName,
+        String doctorId,
+        String doctorName,
+        String staffId,
+        String staffName,
+        String departmentId,
+        String departmentName,
+        LocalDateTime dateTime,
+        Appointment.Status status,
+        String feedback
+    ) {
+        this.appointmentId = appointmentId;
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.doctorId = doctorId;
+        this.doctorName = doctorName;
+        this.staffId = staffId;
+        this.staffName = staffName;
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.dateTime = dateTime;
+        this.status = status;
+        this.feedback = feedback;
     }
-
-    // Detailed view of a single appointment
-    public static class AppointmentDetail {
-        public final String appointmentId;
-        public final String customerId;
-        public final String doctorId;
-        public final String staffId;
-        public final String departmentId;
-        public final String date;
-        public final String time;
-        public final int status;
-        public final String notes;
-
-        public AppointmentDetail(
-                String appointmentId,
-                String customerId,
-                String doctorId,
-                String staffId,
-                String departmentId,
-                String date,
-                String time,
-                int status,
-                String notes
-        ) {
-            this.appointmentId = appointmentId;
-            this.customerId = customerId;
-            this.doctorId = doctorId;
-            this.staffId = staffId;
-            this.departmentId = departmentId;
-            this.date = date;
-            this.time = time;
-            this.status = status;
-            this.notes = notes;
-        }
-    }
+    
+    public String getAppointmentId() { return appointmentId; }
+    public String getCustomerId() { return customerId; }
+    public String getCustomerName() { return customerName; }
+    public String getDoctorId() { return doctorId; }
+    public String getDoctorName() { return doctorName; }
+    public String getStaffId() { return staffId; }
+    public String getStaffName() { return staffName; }
+    public String getDepartmentId() { return departmentId; }
+    public String getDepartmentName() { return departmentName; }
+    public LocalDateTime getDateTime() { return dateTime; }
+    public Appointment.Status getStatus() { return status; }
+    public String getFeedback() { return feedback; }
 }
