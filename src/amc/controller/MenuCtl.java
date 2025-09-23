@@ -20,8 +20,11 @@ public class MenuCtl extends AbstractSubCtl {
         viewMenu.picAvatar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                if (getROOT().getCurrentUser() == null) return;
-                ProfileCtl profileCtl = new ProfileCtl(getROOT());
+                User logged = getROOT().getCurrentUser();
+                if (logged == null) return;
+                ProfileCtl profileCtl = new ProfileCtl(
+                    getROOT(), logged, logged.getRole().getProfileNode()
+                );
                 profileCtl.startView();
             }
         });

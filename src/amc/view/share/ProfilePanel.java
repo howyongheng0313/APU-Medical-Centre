@@ -1,5 +1,6 @@
 package amc.view.share;
 
+import amc.controller.ProfileNode;
 import amc.model.entity.User;
 import amc.view.Theme;
 import java.awt.Dimension;
@@ -11,6 +12,7 @@ public class ProfilePanel extends javax.swing.JPanel {
      */
     public ProfilePanel() {
         initComponents();
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(12);
 
         btnEdit.setVisible(false);
         btnLogout.setVisible(false);
@@ -373,6 +375,16 @@ public class ProfilePanel extends javax.swing.JPanel {
         jPanel1.revalidate();
     }//GEN-LAST:event_jPanel1AncestorResized
 
+    public void showInit(ProfileNode node) {
+        if (node.isEditLogout) {
+            btnEdit.setVisible(true);
+            btnLogout.setVisible(true);
+        }
+        sendCmtPanel.setVisible(node.isSendComment);
+        feedbackPanel.setVisible(node.isShowCusFeedback);
+        commentPanel.setVisible(node.isShowEmpComment);
+    }
+
     public void renderDetail(User user) {
         lblUserName.setText(user.getUserName());
         lblUserId.setText(user.getUserId());
@@ -383,22 +395,23 @@ public class ProfilePanel extends javax.swing.JPanel {
     }
 
     public void renderEmpDetail(String department, String license) {
-        if (!department.isEmpty()) {
+        if (department != null) {
             lblDept.setText(department);
             lblDept.setVisible(true);
             lblTitleDept.setVisible(true);
         }
-        if (!license.isEmpty()) {
+        if (license != null) {
             lblLicense.setText(license);
             lblLicense.setVisible(true);
             lblTitleLicense.setVisible(true);
         }
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private amc.view.comp.AmcRoundBox amcRoundBox1;
-    private amc.view.comp.AmcButton btnEdit;
-    private amc.view.comp.AmcButton btnLogout;
+    public amc.view.comp.AmcButton btnEdit;
+    public amc.view.comp.AmcButton btnLogout;
     private amc.view.comp.AmcButton btnSend;
     private javax.swing.JPanel commentPanel;
     private javax.swing.JPanel detailPanel;

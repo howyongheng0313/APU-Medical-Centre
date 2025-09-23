@@ -49,7 +49,7 @@ public abstract class User {
         UserAuth auth = authLs.getFirst();
         if (!auth.getPassword().verify(loginCtx.password)) return null;
 
-        List<? extends User> userLs = auth.getRole().getHandle().select(1, DbMan.checkUser(loginCtx.email));
+        List<? extends User> userLs = auth.getRole().getHandle().select(1, DbMan.checkUserEmail(loginCtx.email));
         return userLs.getFirst();
     }
 

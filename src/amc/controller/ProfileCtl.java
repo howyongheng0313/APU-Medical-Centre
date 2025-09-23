@@ -9,42 +9,47 @@ import amc.view.share.ProfilePanel;
 
 public class ProfileCtl extends AbstractSubCtl {
     private final ProfilePanel viewProfile = new ProfilePanel();
+    private final User target;
+    private final ProfileNode node;
 
-    public ProfileCtl(AmcCtl ROOT) {
+    public ProfileCtl(AmcCtl ROOT, User target, ProfileNode node) {
         super(ROOT);
-        User loggedUser  = getROOT().getCurrentUser();
-        ProfileNode node = loggedUser.getRole().getProfileNode();
-        viewProfile.renderDetail(loggedUser);
+        this.target = target;
+        this.node   = node;
+        showInit();
+        if (node.isEditLogout)      editLogoutProc();
+        if (node.isSendComment)     sendCmtProc();
+        if (node.isShowCusFeedback) cusFeedbackProc();
+        if (node.isShowEmpComment)  empCommentProc();
+    }
+
+    private void showInit() {
+        viewProfile.showInit(node);
+        viewProfile.renderDetail(target);
 
         String department = null;
         String license    = null;
-        if (loggedUser.getRole() == Role.Doctor || loggedUser.getRole() == Role.Staff) {
-            String deptId = ((Employee) loggedUser).getDepartmentId();
+        if (target.getRole() == Role.Doctor || target.getRole() == Role.Staff) {
+            String deptId = ((Employee) target).getDepartmentId();
             department = Department.getById(deptId).getDepartmentName();
         }
-        if (loggedUser.getRole() == Role.Doctor) {
-            license = ((Doctor) loggedUser).getLicense();
+        if (target.getRole() == Role.Doctor) {
+            license = ((Doctor) target).getLicense();
         }
         viewProfile.renderEmpDetail(department, license);
-
-        // NEXT STEP
     }
 
-//    public ProfileCtl(AmcCtl ROOT, User looker, User owner, ProfileNode node) {
-//        super(ROOT);
-//    }
-//
-//    public ProfileCtl(AmcCtl ROOT, User looker, User owner, ProfileNode node) {
-//        super(ROOT);
-//    }
-//
-//    public ProfileCtl(AmcCtl ROOT, User looker, User owner, ProfileNode node) {
-//        super(ROOT);
-//    }
-//
-//    public ProfileCtl(AmcCtl ROOT, User looker, User owner, ProfileNode node) {
-//        super(ROOT);
-//    }
+    private void editLogoutProc() {
+    }
+
+    private void sendCmtProc() {
+    }
+
+    private void cusFeedbackProc() {
+    }
+
+    private void empCommentProc() {
+    }
 
     public void startView() {
         getROOT().pushPage(viewProfile);

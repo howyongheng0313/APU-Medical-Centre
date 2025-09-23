@@ -4,21 +4,29 @@ import java.time.LocalDateTime;
 
 public class Appointment {
     public enum Status {
-        Pending(0),
-        Booked(1),
-        EndCons(2),
-        Completed(3),
-        Cancelled(-1);
+        Pending  ( 0, "/amc/image/status_pending_30.png"),
+        Booked   ( 1, "/amc/image/status_booked_30.png"),
+        EndCons  ( 2, "/amc/image/status_end_con_30.png"),
+        Completed( 3, "/amc/image/status_completed.png"),
+        Cancelled(-1, "/amc/image/status_rejected.png");
 
         private final int step;
-        private Status(int step) { this.step = step; }
+        private final String iconPath;
+
+        private Status(int step, String iconPath) {
+            this.step = step;
+            this.iconPath = iconPath;
+        }
+
         public static Status valueOf(int step) {
             for (Status s: Status.values()) {
                 if (s.getStep() == step) return s;
             }
             return Status.Pending;
         }
+
         public int getStep() { return step; }
+        public String getIconPath() { return iconPath; }
     }
 
     private String appointmentId;
