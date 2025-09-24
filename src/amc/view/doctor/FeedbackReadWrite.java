@@ -41,7 +41,7 @@ public class FeedbackReadWrite {
         }
 
         for (String[] row : readRows) {
-            if (row[0].trim().equals(appointmentId) && row.length == 8 && !row[7].equals("-1")) {
+            if (row[0].trim().equals(appointmentId) && row.length <= 9) {
                 String updatedRow = String.join("|", row) + "|" + feedback;
                 updatedRows.add(updatedRow);
             } else {

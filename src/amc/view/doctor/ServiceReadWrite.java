@@ -38,16 +38,22 @@ public class ServiceReadWrite {
         listName.setModel(listModel);
     }
     
-    public void writeApptService (JList<?> listName, String appointmentId){
-        List<?> selectedRow = listName.getSelectedValuesList();
+    public void writeApptService(JList<String> listName, String appointmentId) {
+        List<String> selectedRow = listName.getSelectedValuesList();
         List<String> columnToWrite = new ArrayList<>();
-        for (Object row : selectedRow){
-            if (row instanceof Service service){
-                String serviceId = service.getServiceId();
-                double servicePrice = service.getFee();
-                columnToWrite.add(appointmentId + "|" + serviceId + "|" + "MYR" +servicePrice);
-            }
+
+    for (String row : selectedRow) {
+        String[] parts = row.split("\\|");
+        String serviceId = parts[0].trim();
+        String fee = parts[2].trim();
+        columnToWrite.add(appointmentId + "|" + serviceId + fee);
+    }
+
+        for (String row : columnToWrite) {
+            System.out.println("Writing: " + row);
         }
+
         frw.writeFile(fl.getAppointmentServiceFile(), columnToWrite);
     }
+
 }

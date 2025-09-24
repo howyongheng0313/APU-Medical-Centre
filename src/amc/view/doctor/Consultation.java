@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class Consultation extends javax.swing.JPanel {
     private final Doctor currentDoctor;
+    private final AppointmentReadWrite arw;
     MedicineReadWrite mrw = new MedicineReadWrite();
     private final ServiceReadWrite srw;
     FeedbackReadWrite frw = new FeedbackReadWrite();
@@ -24,6 +25,8 @@ public class Consultation extends javax.swing.JPanel {
         this.appointmentId = appointmentId;
         this.currentDoctor = currentDoctor;
         this.srw = new ServiceReadWrite(currentDoctor);
+        this.arw = new AppointmentReadWrite(currentDoctor);
+        arw.view_appt_details(appointmentId, jTable1);
         mrw.listAllMedicine(jList2);
         srw.listAllService(jList3);
     }
@@ -51,6 +54,9 @@ public class Consultation extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(224, 247, 247));
         setLayout(new java.awt.BorderLayout());
@@ -113,7 +119,7 @@ public class Consultation extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -147,7 +153,7 @@ public class Consultation extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -230,12 +236,37 @@ public class Consultation extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         jPanel1.add(jPanel3, gridBagConstraints);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jPanel5.add(jScrollPane3, new java.awt.GridBagConstraints());
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 0, 20);
+        jPanel1.add(jPanel5, gridBagConstraints);
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -260,6 +291,7 @@ public class Consultation extends javax.swing.JPanel {
         else {
             srw.writeApptService(jList3, appointmentId);
         }
+        arw.view_appt_details(appointmentId, jTable1);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -273,10 +305,12 @@ public class Consultation extends javax.swing.JPanel {
         else {
             mrw.writeApptMedicine(jList2, jTextField1, appointmentId);
         }
+        arw.view_appt_details(appointmentId, jTable1);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         frw.writeApptFeedback(textArea1, appointmentId);
+        arw.view_appt_details(appointmentId, jTable1);
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
@@ -294,8 +328,11 @@ public class Consultation extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private java.awt.TextArea textArea1;
     // End of variables declaration//GEN-END:variables
