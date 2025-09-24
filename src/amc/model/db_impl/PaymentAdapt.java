@@ -20,7 +20,7 @@ public class PaymentAdapt extends DbAdapter<Payment> {
     @Override
     public List<String> getRow(Payment model) {
         List<String> row = List.of(
-            model.getPaymentId(),
+            model.getId(),
             model.getAppointmentId(),
             model.getPaymentMethod().name()
         );

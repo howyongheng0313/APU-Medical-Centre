@@ -387,7 +387,7 @@ public class ProfilePanel extends javax.swing.JPanel {
 
     public void renderDetail(User user) {
         lblUserName.setText(user.getUserName());
-        lblUserId.setText(user.getUserId());
+        lblUserId.setText(user.getId());
         lblGender.setText(user.getGender().toString());
         lblDateOfBirth.setText(user.getDateOfBirth().toString());
         lblEmail.setText(user.getEmail());

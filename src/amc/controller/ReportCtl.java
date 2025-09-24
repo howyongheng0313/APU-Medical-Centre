@@ -74,14 +74,14 @@ public class ReportCtl extends AbstractSubCtl{
             
             // Calculate income from services
             List<ApptService> services = Db.ApptService.select(-1, s ->
-                    s.getAppointmentId().equals(apt.getAppointmentId())
+                    s.getAppointmentId().equals(apt.getId())
             );
 
             double serviceIncome = services.stream().mapToDouble(ApptService::getFee).sum();
             
             //Calculate income from medicine
             List<ApptMedicine> medicines = Db.ApptMedicine.select(-1, m ->
-                    m.getAppointmentId().equals(apt.getAppointmentId())
+                    m.getAppointmentId().equals(apt.getId())
             );
             double medicineIncome = medicines.stream()
                     .mapToDouble(m -> m.getPrice() * m.getQuantity())
@@ -102,7 +102,7 @@ public class ReportCtl extends AbstractSubCtl{
         
         // Calculate payment method breakdown
         List<Payment> payments = Db.Payment.select(-1, p ->
-                appointments.stream().anyMatch(apt -> apt.getAppointmentId().equals(p.getAppointmentId()))
+                appointments.stream().anyMatch(apt -> apt.getId().equals(p.getAppointmentId()))
         );
         
         Map<Payment.Method, Double> paymentAmountMap = new HashMap<>();
@@ -111,7 +111,7 @@ public class ReportCtl extends AbstractSubCtl{
         for(Payment payment: payments){
             String aptId = payment.getAppointmentId();
             Optional<Appointment> apt = appointments.stream()
-                    .filter(a ->  a.getAppointmentId().equals(aptId))
+                    .filter(a ->  a.getId().equals(aptId))
                     .findAny();
             
             if(apt.isPresent()){
@@ -205,7 +205,7 @@ public class ReportCtl extends AbstractSubCtl{
             int patientCount = entry.getValue().size();
             
             // Get department name
-            List<Department> departments = Db.Department.select(1, d -> d.getDepartmentId().equals(deptId));
+            List<Department> departments = Db.Department.select(1, d -> d.getId().equals(deptId));
             String deptName = departments.isEmpty() ? "Unknown" : departments.get(0).getDepartmentName();
             
             departmentPatients.add(new ReportsDTO.DepartmentPatients(deptId, deptName, patientCount));
@@ -233,7 +233,7 @@ public class ReportCtl extends AbstractSubCtl{
             List<Appointment> doctorAppts = entry.getValue();
             
             // Get doctor name
-            List<Doctor> doctors = Db.Doctor.select(1, d -> d.getUserId().equals(doctorId));
+            List<Doctor> doctors = Db.Doctor.select(1, d -> d.getId().equals(doctorId));
             String doctorName = doctors.isEmpty() ? "Unknown" : doctors.get(0).getUserName();
             
             int totalAppointments = doctorAppts.size();
@@ -243,7 +243,7 @@ public class ReportCtl extends AbstractSubCtl{
             
             // Calculate average rating
             List<Comment> comments = Db.Comment.select(-1, c -> 
-                doctorAppts.stream().anyMatch(apt -> apt.getAppointmentId().equals(c.getAppointmentId())) &&
+                doctorAppts.stream().anyMatch(apt -> apt.getId().equals(c.getAppointmentId())) &&
                 c.getTargetId().equals(doctorId)
             );
             
@@ -254,10 +254,10 @@ public class ReportCtl extends AbstractSubCtl{
             double totalRevenue = 0.0;
             for (Appointment apt : doctorAppts) {
                 List<ApptService> services = Db.ApptService.select(-1, s -> 
-                    s.getAppointmentId().equals(apt.getAppointmentId())
+                    s.getAppointmentId().equals(apt.getId())
                 );
                 List<ApptMedicine> medicines = Db.ApptMedicine.select(-1, m -> 
-                    m.getAppointmentId().equals(apt.getAppointmentId())
+                    m.getAppointmentId().equals(apt.getId())
                 );
                 
                 double serviceRevenue = services.stream().mapToDouble(ApptService::getFee).sum();

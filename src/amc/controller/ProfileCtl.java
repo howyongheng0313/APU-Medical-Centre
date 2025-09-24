@@ -1,6 +1,6 @@
 package amc.controller;
 
-import amc.model.entity.Department;
+import amc.model.db_impl.Db;
 import amc.model.entity.Doctor;
 import amc.model.entity.Employee;
 import amc.model.entity.Role;
@@ -31,7 +31,7 @@ public class ProfileCtl extends AbstractSubCtl {
         String license    = null;
         if (target.getRole() == Role.Doctor || target.getRole() == Role.Staff) {
             String deptId = ((Employee) target).getDepartmentId();
-            department = Department.getById(deptId).getDepartmentName();
+            department = Db.Department.getById(deptId).getDepartmentName();
         }
         if (target.getRole() == Role.Doctor) {
             license = ((Doctor) target).getLicense();

@@ -1413,12 +1413,9 @@
                               <Connection code="Theme.C1_BG" type="code"/>
                             </Property>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="2" rowCount="2">
+                              <Table columnCount="2" rowCount="0">
                                 <Column editable="false" title="Service" type="java.lang.String"/>
-                                <Column editable="true" title="Select" type="java.lang.Boolean">
-                                  <Data value="false"/>
-                                  <Data value="null"/>
-                                </Column>
+                                <Column editable="true" title="Select" type="java.lang.Boolean"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -3233,6 +3230,9 @@
                       <Dimension value="[100, 60]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                       <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="10" anchor="10" weightX="0.0" weightY="0.0"/>
@@ -3280,6 +3280,9 @@
                       <Dimension value="[100, 60]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                       <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="10" anchor="10" weightX="0.0" weightY="0.0"/>
@@ -3327,6 +3330,9 @@
                       <Dimension value="[100, 60]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                       <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="10" anchor="10" weightX="0.0" weightY="0.0"/>
@@ -3500,7 +3506,7 @@
                   </StatementProvider>
                   <Parameters>
                     <CodeExpression id="163_btnPayCash">
-                      <CodeVariable name="btnPayCash" type="8194" declaredType="amc.view.comp.AmcButton"/>
+                      <CodeVariable name="btnPayCash" type="8193" declaredType="amc.view.comp.AmcButton"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
                           <ComponentRef name="btnPayCash"/>
@@ -3616,7 +3622,7 @@
                   </StatementProvider>
                   <Parameters>
                     <CodeExpression id="171_btnPayCard">
-                      <CodeVariable name="btnPayCard" type="8194" declaredType="amc.view.comp.AmcButton"/>
+                      <CodeVariable name="btnPayCard" type="8193" declaredType="amc.view.comp.AmcButton"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
                           <ComponentRef name="btnPayCard"/>
@@ -3732,7 +3738,7 @@
                   </StatementProvider>
                   <Parameters>
                     <CodeExpression id="179_btnPayEwallet">
-                      <CodeVariable name="btnPayEwallet" type="8194" declaredType="amc.view.comp.AmcButton"/>
+                      <CodeVariable name="btnPayEwallet" type="8193" declaredType="amc.view.comp.AmcButton"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
                           <ComponentRef name="btnPayEwallet"/>

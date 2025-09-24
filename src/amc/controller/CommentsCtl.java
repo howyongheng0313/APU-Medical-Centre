@@ -77,7 +77,7 @@ public class CommentsCtl extends AbstractSubCtl {
             };
 
             DbMan.Query<Employee> smrNameEach = (model) -> {
-                CommentsDTO.CommentSummary smr = smrMap.get(model.getUserId());
+                CommentsDTO.CommentSummary smr = smrMap.get(model.getId());
                 if (smr != null) smr.setRecipientName(model.getUserName());
                 return false;
             };
@@ -107,12 +107,12 @@ public class CommentsCtl extends AbstractSubCtl {
             // Build lookup maps
             Map<String, Appointment> apptMap = new HashMap<>();
             for (Appointment apt : appts) {
-                apptMap.put(apt.getAppointmentId(), apt);
+                apptMap.put(apt.getId(), apt);
             }
 
             Map<String, Customer> custMap = new HashMap<>();
             for (Customer cust : customers) {
-                custMap.put(cust.getUserId(), cust);
+                custMap.put(cust.getId(), cust);
             }
 
             // Get recipient name
@@ -133,7 +133,7 @@ public class CommentsCtl extends AbstractSubCtl {
                 String custName = cust != null ? cust.getUserName() : "Unknown";
 
                 output.add(new CommentsDTO.CommentDetail(
-                    comment.getCommentId(),
+                    comment.getId(),
                     comment.getAppointmentId(),
                     appt.getCustomerId(),
                     custName,
@@ -159,11 +159,11 @@ public class CommentsCtl extends AbstractSubCtl {
     private String getRecipientName(String recipientId, Role type) {
         return switch (type) {
             case Doctor -> {
-                List<Doctor> ls = Db.Doctor.select(1, d -> d.getUserId().equals(recipientId));
+                List<Doctor> ls = Db.Doctor.select(1, d -> d.getId().equals(recipientId));
                 yield ls.isEmpty() ? "Unknown Doctor" : ls.get(0).getUserName();
             }
             case Staff -> {
-                List<Staff> ls = Db.Staff.select(1, s -> s.getUserId().equals(recipientId));
+                List<Staff> ls = Db.Staff.select(1, s -> s.getId().equals(recipientId));
                 yield ls.isEmpty() ? "Unknown Staff" : ls.get(0).getUserName();
             }
             default -> null;

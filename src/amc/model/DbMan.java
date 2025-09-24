@@ -27,15 +27,9 @@ public final class DbMan {
         };
     }
 
-    public static <T extends User> Query<T> checkUserID(String id) {
+    public static <T extends WithId> Query<T> checkById(String id) {
         return (model) -> {
-            return model.getUserId().equals(id);
-        };
-    }
-
-    public static Query<Department> getDepartment(String departmentId) {
-        return (model) -> {
-            return model.getDepartmentId().equals(departmentId);
+            return model.getId().equals(id);
         };
     }
 }

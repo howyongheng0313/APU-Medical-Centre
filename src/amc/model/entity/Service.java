@@ -1,30 +1,41 @@
 package amc.model.entity;
 
-public class Service {
-    private String serviceId;
+import amc.model.db_impl.Db;
+
+public class Service extends WithId {
     private String serviceName;
     private double fee;
     private String departmentId;
 
+    private Department department = null;
+
     public Service(
-        String serviceId,
+        String id,
         String serviceName,
         double fee,
         String departmentId
     ) {
-        this.serviceId = serviceId;
+        super(id);
         this.serviceName = serviceName;
         this.fee = fee;
         this.departmentId = departmentId;
     }
 
-    public String getServiceId() { return serviceId; }
     public String getServiceName() { return serviceName; }
     public double getFee() { return fee; }
     public String getDepartmentId() { return departmentId; }
 
-    public void setServiceId(String serviceId) { this.serviceId = serviceId; }
     public void setServiceName(String serviceName) { this.serviceName = serviceName; }
     public void setFee(double fee) { this.fee = fee; }
     public void setDepartmentId(String departmentId) { this.departmentId = departmentId; }
+
+    public Department getDepartment() {
+        if (department == null) department = Db.Department.getById(departmentId);
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        if (departmentId == null || !departmentId.equals(department.getId())) return;
+        this.department = department;
+    }
 }

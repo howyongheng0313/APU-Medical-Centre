@@ -262,7 +262,7 @@ public class ServiceCtl extends AbstractSubCtl {
             // Update service in database
             int updated = Db.Service.update(
                     1, 
-                    s -> s.getServiceId().equals(serviceId), 
+                    s -> s.getId().equals(serviceId), 
                     s -> {
                         s.setServiceName(serviceName);
                         s.setFee(fee);
@@ -322,7 +322,7 @@ public class ServiceCtl extends AbstractSubCtl {
             
             if (result == JOptionPane.YES_OPTION) {
                 // Delete from database
-                int deleted = Db.Service.delete(1, s -> s.getServiceId().equals(serviceId));
+                int deleted = Db.Service.delete(1, s -> s.getId().equals(serviceId));
                 
                 if (deleted > 0) {
                     JOptionPane.showMessageDialog(
@@ -362,7 +362,7 @@ public class ServiceCtl extends AbstractSubCtl {
             // Build department lookup map
             Map<String, String> deptMap = new HashMap<>();
             for(Department department: departments){
-                deptMap.put(department.getDepartmentId(), department.getDepartmentName());
+                deptMap.put(department.getId(), department.getDepartmentName());
             }
             
             // Convert to ServiceDTO
@@ -370,7 +370,7 @@ public class ServiceCtl extends AbstractSubCtl {
             for (Service service: services){
                 String departmentName = deptMap.getOrDefault(service.getDepartmentId(), "Unknown Department");
                 result.add(new ServiceDTO(
-                        service.getServiceId(),
+                        service.getId(),
                         service.getServiceName(),
                         service.getFee(),
                         departmentName
@@ -394,7 +394,7 @@ public class ServiceCtl extends AbstractSubCtl {
                 return new ArrayList<>();
             }
             
-            String departmentId = departments.get(0).getDepartmentId();
+            String departmentId = departments.get(0).getId();
             
             // Load services for this department
             List<Service> services = Db.Service.select(-1, s -> s.getDepartmentId().equals(departmentId));
@@ -403,7 +403,7 @@ public class ServiceCtl extends AbstractSubCtl {
             List<ServiceDTO> result = new ArrayList();
             for(Service service : services){
                 result.add(new ServiceDTO(
-                        service.getServiceId(),
+                        service.getId(),
                         service.getServiceName(),
                         service.getFee(),
                         department
@@ -427,7 +427,7 @@ public class ServiceCtl extends AbstractSubCtl {
             // Build department lookup map
             Map<String, String> deptMap = new HashMap<>();
             for (Department dept : departments) {
-                deptMap.put(dept.getDepartmentId(), dept.getDepartmentName());
+                deptMap.put(dept.getId(), dept.getDepartmentName());
             }
             
             // Convert to DTOs
@@ -435,7 +435,7 @@ public class ServiceCtl extends AbstractSubCtl {
             for (Service service : services) {
                 String deptName = deptMap.getOrDefault(service.getDepartmentId(), "Unknown Department");
                 result.add(new ServiceDTO(
-                    service.getServiceId(),
+                    service.getId(),
                     service.getServiceName(),
                     service.getFee(),
                     deptName
@@ -455,7 +455,7 @@ public class ServiceCtl extends AbstractSubCtl {
             int maxId = 0;
             
             for(Service service: services){
-                String id = service.getServiceId();
+                String id = service.getId();
                 if (id.startsWith("SVC-")){
                     int num = Integer.parseInt(id.substring(4));
                     maxId = Math.max(maxId, num);
@@ -472,7 +472,7 @@ public class ServiceCtl extends AbstractSubCtl {
     private String getDepartmentIdByName(String departmentName){
         try{
             List<Department> departments = Db.Department.select(-1, d -> d.getDepartmentName().equals(departmentName));
-            return departments.isEmpty() ? null : departments.get(0).getDepartmentId();
+            return departments.isEmpty() ? null : departments.get(0).getId();
         } catch (Exception ex) {
             return null;
         }

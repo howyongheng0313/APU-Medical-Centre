@@ -6,7 +6,7 @@ public class Doctor extends Employee {
     private String license;
 
     public Doctor(
-        String userId,
+        String id,
         String userName,
         LocalDate dateOfBirth,
         Gender gender,
@@ -15,7 +15,7 @@ public class Doctor extends Employee {
         String departmentId,
         String license
     ) {
-        super(userId, userName, dateOfBirth, gender, email, contact, departmentId);
+        super(id, userName, dateOfBirth, gender, email, contact, departmentId);
         this.license = license;
     }
 

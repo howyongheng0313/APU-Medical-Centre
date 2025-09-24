@@ -22,7 +22,7 @@ public class CommentAdapt extends DbAdapter<Comment> {
     @Override
     public List<String> getRow(Comment model) {
         List<String> row = List.of(
-            model.getCommentId(),
+            model.getId(),
             model.getAppointmentId(),
             model.getTargetId(),
             String.valueOf(model.getRating().getLevel()),

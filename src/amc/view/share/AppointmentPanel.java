@@ -1,13 +1,26 @@
 package amc.view.share;
 
 import amc.controller.ApptNode;
+import amc.model.DataUtil;
 import amc.model.entity.Appointment;
+import amc.model.entity.ApptMedicine;
+import amc.model.entity.ApptService;
+import amc.model.entity.Medicine;
+import amc.model.entity.Service;
 import java.awt.Dimension;
 import amc.view.Theme;
 import java.awt.CardLayout;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 public class AppointmentPanel extends javax.swing.JPanel {
+    public record EndConsultContext(
+        Vector<Vector> serviceChooseList,
+        Vector<Vector> medicineChooseList,
+        String feedback
+    ) {}
 
     /**
      * Creates new form AppointmentPanel
@@ -311,8 +324,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         tblConService.setBackground(Theme.C1_BG);
         tblConService.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null,  new Boolean(false)},
-                {null, null}
+
             },
             new String [] {
                 "Service", "Select"
@@ -763,7 +775,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
     }
 
     public void renderDetail(Appointment appt) {
-        lblApptId.setText(appt.getAppointmentId());
+        lblApptId.setText(appt.getId());
         lblDate.setText(appt.getDateTime().toLocalDate().toString());
         lblTime.setText(appt.getDateTime().toLocalTime().toString());
         picStatus.set$image(new ImageIcon(getClass().getResource(appt.getStatus().getIconPath())));
@@ -787,14 +799,66 @@ public class AppointmentPanel extends javax.swing.JPanel {
         }
     }
 
+    public void renderConsultPage(List<Service> allService, List<Medicine> allMedicine) {
+        DefaultTableModel serviceTbm = (DefaultTableModel) tblConService.getModel();
+        for (Service service: allService) {
+            serviceTbm.addRow(new Object[] {
+                service.getServiceName(), Boolean.FALSE, service
+            });
+        }
+
+        DefaultTableModel medicineTbm = (DefaultTableModel) tblConMedicine.getModel();
+        for (Medicine medicine: allMedicine) {
+            medicineTbm.addRow(new Object[] {
+                medicine.getMedicineName(), Integer.valueOf(0), medicine
+            });
+        }
+    }
+
+    public EndConsultContext getEndConsultContext() {
+        DefaultTableModel serviceTbm  = (DefaultTableModel) tblConService.getModel();
+        DefaultTableModel medicineTbm = (DefaultTableModel) tblConMedicine.getModel();
+        return new EndConsultContext(
+            serviceTbm.getDataVector(),
+            medicineTbm.getDataVector(),
+            txtConFeedback.getText()
+        );
+    }
+
+    public void renderResultPage(
+        List<ApptService> allApptService,
+        List<ApptMedicine> allApptMedicine,
+        double total, String feedback
+    ) {
+        DefaultTableModel serviceTbm = (DefaultTableModel) tblReService.getModel();
+        for (ApptService apptService: allApptService) {
+            serviceTbm.addRow(new Object[] {
+                apptService.getService().getServiceName(),
+                apptService.getFee()
+            });
+        }
+
+        DefaultTableModel medicineTbm = (DefaultTableModel) tblReMedicine.getModel();
+        for (ApptMedicine apptMedicine: allApptMedicine) {
+            medicineTbm.addRow(new Object[] {
+                apptMedicine.getMedicine().getMedicineName(),
+                apptMedicine.getQuantity(),
+                apptMedicine.getTotalPrice()
+            });
+        }
+
+        lblTotal.setText(DataUtil.amount2str(total));
+        txtReFeedback.setText(feedback);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private amc.view.comp.AmcRoundBox amcRoundBox1;
     private amc.view.comp.AmcButton btnConMedicine;
     private amc.view.comp.AmcButton btnConService;
     public amc.view.comp.AmcButton btnEndCon;
-    private amc.view.comp.AmcButton btnPayCard;
-    private amc.view.comp.AmcButton btnPayCash;
-    private amc.view.comp.AmcButton btnPayEwallet;
+    public amc.view.comp.AmcButton btnPayCard;
+    public amc.view.comp.AmcButton btnPayCash;
+    public amc.view.comp.AmcButton btnPayEwallet;
     private amc.view.comp.AmcButton btnReMedicine;
     private amc.view.comp.AmcButton btnReService;
     private javax.swing.JPanel conListCard;

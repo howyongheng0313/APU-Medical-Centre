@@ -1,4 +1,4 @@
-SEQ
+010
 STF-001|Kuek Zheng Yu|2004-08-21|Male|kuekzhengyu@gmail.com|01123467890|DPT-001
 STF-002|Kuo Tai Ming|2001-08-22|Male|taimingkuo@gmail.com|01724674891|DPT-002
 STF-003|Kok Fu Cheng|2003-08-23|Male|fuchengkok@gmail.com|01923781892|DPT-003

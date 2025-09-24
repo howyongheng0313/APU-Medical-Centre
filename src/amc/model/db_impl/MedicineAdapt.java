@@ -21,7 +21,7 @@ public class MedicineAdapt extends DbAdapter<Medicine> {
     @Override
     public List<String> getRow(Medicine model) {
         List<String> row = List.of(
-            model.getMedicineId(),
+            model.getId(),
             model.getMedicineName(),
             DataUtil.amount2str(model.getPrice())
         );

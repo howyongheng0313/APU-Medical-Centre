@@ -1,4 +1,4 @@
-SEQ
+005
 CMT-001|APT-001|DOC-001|5|The doctor is professional
 CMT-002|APT-003|DOC-003|4|The doctor is friendly
 CMT-003|APT-004|DOC-004|4|The doctor is kind
