@@ -42,9 +42,17 @@ public class FeedbackReadWrite {
 
         for (String[] row : readRows) {
             if (row[0].trim().equals(appointmentId) && row.length <= 9) {
-                String updatedRow = String.join("|", row) + "|" + feedback;
-                updatedRows.add(updatedRow);
-            } else {
+                if (row.length == 9) {
+                row[8] = feedback;
+                updatedRows.add(String.join("|", row));
+                }
+                else{
+                    String updatedRow = String.join("|", row) + "|" + feedback;
+                    updatedRows.add(updatedRow);
+                }
+                
+            }
+            else {
                 updatedRows.add(String.join("|", row));
             }
         }
