@@ -2,13 +2,13 @@ package amc.controller.share;
 
 import amc.controller.AbstractSubCtl;
 import amc.controller.AmcCtl;
-import amc.controller.share.ProfileNode;
 import amc.model.db_impl.Db;
 import amc.model.entity.Doctor;
 import amc.model.entity.Employee;
 import amc.model.entity.Role;
 import amc.model.entity.User;
 import amc.view.share.ProfilePanel;
+import java.awt.event.ActionEvent;
 
 public class ProfileCtl extends AbstractSubCtl {
     private final ProfilePanel viewProfile = new ProfilePanel();
@@ -43,6 +43,13 @@ public class ProfileCtl extends AbstractSubCtl {
     }
 
     private void editLogoutProc() {
+        viewProfile.btnEdit.addActionListener((ActionEvent evt) -> {
+            
+        });
+        viewProfile.btnLogout.addActionListener((ActionEvent evt) -> {
+            getROOT().setCurrentUser(null);
+            getROOT().UserChange.fire();
+        });
     }
 
     private void sendCmtProc() {

@@ -3,7 +3,7 @@ package amc.controller;
 import amc.controller.share.MenuCtl;
 import amc.model.EventTrigger;
 import amc.model.entity.User;
-import amc.view.share.AmcFrame;
+import amc.view.AmcFrame;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.util.ArrayList;

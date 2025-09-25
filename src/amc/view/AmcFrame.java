@@ -1,4 +1,4 @@
-package amc.view.share;
+package amc.view;
 
 import amc.view.Theme;
 
