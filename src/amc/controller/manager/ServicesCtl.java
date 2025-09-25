@@ -400,7 +400,7 @@ public class ServicesCtl extends AbstractSubCtl {
             List<Service> services = Db.Service.select(-1, s -> s.getDepartmentId().equals(departmentId));
             
             // Convert to DTO
-            List<ServiceDTO> result = new ArrayList();
+            List<ServiceDTO> result = new ArrayList<>();
             for(Service service : services){
                 result.add(new ServiceDTO(
                     service.getId(),
