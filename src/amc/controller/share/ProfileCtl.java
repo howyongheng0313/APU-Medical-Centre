@@ -1,5 +1,8 @@
-package amc.controller;
+package amc.controller.share;
 
+import amc.controller.AbstractSubCtl;
+import amc.controller.AmcCtl;
+import amc.controller.share.ProfileNode;
 import amc.model.db_impl.Db;
 import amc.model.entity.Doctor;
 import amc.model.entity.Employee;

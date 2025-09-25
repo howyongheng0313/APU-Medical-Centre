@@ -1,4 +1,4 @@
-package amc.controller;
+package amc.controller.share;
 
 public class JumpTree {
     public static final ProfileNode UsrSelf = new ProfileNode(

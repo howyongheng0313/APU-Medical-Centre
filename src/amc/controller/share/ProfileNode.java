@@ -1,4 +1,4 @@
-package amc.controller;
+package amc.controller.share;
 
 public class ProfileNode {
     public static final int EDIT_LOG  = 1<<0;

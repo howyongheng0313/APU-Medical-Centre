@@ -1,5 +1,6 @@
 package amc.controller;
 
+import amc.controller.share.MenuCtl;
 import amc.model.EventTrigger;
 import amc.model.entity.User;
 import amc.view.share.AmcFrame;

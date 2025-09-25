@@ -1,4 +1,4 @@
-package amc.controller;
+package amc.controller.share;
 
 public class ApptNode {
     public static final int SHOW_CUS = 1<<0;

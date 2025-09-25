@@ -1,5 +1,8 @@
-package amc.controller;
+package amc.controller.share;
 
+import amc.controller.AbstractSubCtl;
+import amc.controller.AmcCtl;
+import amc.controller.UserCtl;
 import java.awt.event.ActionEvent;
 import amc.model.entity.User;
 import amc.view.share.BarComp;

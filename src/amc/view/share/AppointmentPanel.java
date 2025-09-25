@@ -1,6 +1,6 @@
 package amc.view.share;
 
-import amc.controller.ApptNode;
+import amc.controller.share.ApptNode;
 import amc.model.DataUtil;
 import amc.model.entity.Appointment;
 import amc.model.entity.ApptMedicine;

@@ -1,6 +1,6 @@
 package amc.view.share;
 
-import amc.controller.ProfileNode;
+import amc.controller.share.ProfileNode;
 import amc.model.entity.User;
 import amc.view.Theme;
 import java.awt.Dimension;

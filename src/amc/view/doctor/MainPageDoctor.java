@@ -5,7 +5,7 @@
 package amc.view.doctor;
 import amc.controller.AmcCtl;
 import javax.swing.JPanel;
-import amc.controller.Manager.ServiceCtl;
+import amc.controller.manager.ServicesCtl;
 import amc.model.entity.Doctor;
 import amc.model.entity.User;
 
@@ -25,7 +25,7 @@ public class MainPageDoctor extends javax.swing.JPanel {
         this.apt = new AppointmentReadWrite(currentUser);
         this.currentUser = currentUser;
         this.currentDoctor = currentDoctor;
-        apt.view_appointment(jTable1,"current");
+        apt.view_appointment(jTable1, true);
     }
 
     /**
@@ -130,11 +130,11 @@ public class MainPageDoctor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        apt.view_appointment(jTable1, "current");
+        apt.view_appointment(jTable1, true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        apt.view_appointment(jTable1, "past");
+        apt.view_appointment(jTable1, false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
@@ -145,15 +145,16 @@ public class MainPageDoctor extends javax.swing.JPanel {
             String aptId = value.toString();
 
             // Create the Consultation panel
-            ServiceCtl serviceCtl = new ServiceCtl(ROOT); 
-            JPanel consultationPanel = new Consultation(serviceCtl, aptId, currentDoctor);
-
-            // Put it inside a popup dialog
-            javax.swing.JDialog dialog = new javax.swing.JDialog((java.awt.Frame) null, "Consultation", true);
-            dialog.getContentPane().add(consultationPanel);
-            dialog.pack();
-            dialog.setLocationRelativeTo(this);
-            dialog.setVisible(true);
+            ServicesCtl servicesCtl = new ServicesCtl(ROOT);
+            // TODO-kzy show consultation
+//            JPanel consultationPanel = new Consultation(servicesCtl, aptId, currentDoctor);
+//
+//            // Put it inside a popup dialog
+//            javax.swing.JDialog dialog = new javax.swing.JDialog((java.awt.Frame) null, "Consultation", true);
+//            dialog.getContentPane().add(consultationPanel);
+//            dialog.pack();
+//            dialog.setLocationRelativeTo(this);
+//            dialog.setVisible(true);
         }
     }//GEN-LAST:event_jTable1MouseReleased
 

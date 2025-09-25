@@ -1,6 +1,8 @@
-package amc.controller;
+package amc.controller.doctor;
 
-import amc.controller.Doctor.AppointmentDoctorCtl;
+import amc.controller.AmcCtl;
+import amc.controller.UserCtl;
+import amc.controller.doctor.AppointmentDoctorCtl;
 import amc.model.entity.Doctor;
 import amc.model.entity.User;
 import amc.view.share.BarButton;
