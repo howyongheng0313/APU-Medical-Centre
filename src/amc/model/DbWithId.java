@@ -12,9 +12,10 @@ import java.util.List;
 public class DbWithId<T extends WithId> extends DbHandle<T> {
     private final String idPrefix;
     private int sequence = 0;
+
     public DbWithId(DbAdapter<T> rowAdapter, Path path, String idPrefix) {
-        this.idPrefix = idPrefix;
         super(rowAdapter, path);
+        this.idPrefix = idPrefix;
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             String seq = reader.readLine();
             sequence = Integer.parseInt(seq);
