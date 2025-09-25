@@ -20,6 +20,11 @@ public class Service extends WithId {
         this.fee = fee;
         this.departmentId = departmentId;
     }
+    
+    @Override
+    public String toString() {
+        return serviceName + " RM: " + fee + " Department ID: "+ departmentId;
+    }
 
     public String getServiceName() { return serviceName; }
     public double getFee() { return fee; }
