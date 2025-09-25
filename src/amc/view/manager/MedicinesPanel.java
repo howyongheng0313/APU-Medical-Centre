@@ -1,12 +1,144 @@
 package amc.view.manager;
+import amc.model.entity.Medicine;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class MedicinesPanel extends javax.swing.JPanel {
-
+    
+    private Medicine selectedMedicine;
+    
     public MedicinesPanel() {
         initComponents();
+        setupTable();
     }
-
+    
+    // Setup table
+    private void setupTable() {
+        String[] columnNames = {"Medicine ID", "Medicine Name", "Price"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        jTable1.setModel(model);
+        
+        // Selection listener
+        jTable1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow >= 0) {
+                    String medicineId = (String) jTable1.getValueAt(selectedRow, 0);
+                    String medicineName = (String) jTable1.getValueAt(selectedRow, 1);
+                    String priceStr = (String) jTable1.getValueAt(selectedRow, 2);
+                    double price = Double.parseDouble(priceStr.replaceAll("MYR", ""));
+                    
+                    selectedMedicine = new Medicine(medicineId, medicineName, price);
+                    
+                    // Pre-populate update form
+                    ftfMedicineName1.setText(medicineName);
+                    ftfMedicineFee1.setText(String.valueOf(price));
+                    ftfMedicineName1.setForeground(new Color(153,153,153));
+                    ftfMedicineFee1.setForeground(new Color(153,153,153));
+                }
+            } else {
+                selectedMedicine = null;
+            }
+        });
+    }
+    
+    // Show medicines
+    public void showMedicines(List<Medicine> medicines) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        //Reset selection when table data changes
+        selectedMedicine = null;
+        jTable1.clearSelection();
+        
+        for (Medicine medicine : medicines) {
+            Object[] row = {
+                medicine.getMedicineId(),
+                medicine.getMedicineName(),
+                String.format("MYR%.2f", medicine.getPrice())
+            };
+            model.addRow(row);
+        }
+    }
+    
+    // Get search input
+    public String getSearchInput() { 
+        String text = jtfSearch.getText().trim();
+        return text.equals("Search medicine") ? "" : text;
+    }
+    
+    // Get create medicine name
+    public String getCreateMedicineName() { 
+        String text = ftfMedicineName.getText().trim();
+        return text.equals("Enter medicine name") ? "" : text;
+    }
+    
+    // Get create medicine price
+    public double getCreateMedicinePrice() { 
+         try {
+            String text = ftfMedicineFee.getText().trim();
+            if (text.equals("Enter medicine price")) return 0;
+            return Double.parseDouble(text);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+    
+    // Get update medicine name
+    public String getUpdateMedicineName() { 
+        String text = ftfMedicineName1.getText().trim();
+        return text.equals("Enter new medicine name") ? "" : text;
+    }
+    
+    // Get update medicine price
+    public double getUpdateMedicinePrice() { 
+        try {
+            String text = ftfMedicineFee1.getText().trim();
+            if (text.equals("Enter new medicine price")) return 0;
+            return Double.parseDouble(text);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+    
+    // Get selected medicine
+    public Medicine getSelectedMedicine() {  return selectedMedicine; }
+    
+    // Hide create dialog
+    public void hideCreateDialog() { createMedicine.setVisible(false); }
+    
+    // Hide update dialog
+    public void hideUpdateDialog() { updateMedicine.setVisible(false); }
+    
+    // Clear create form
+    public void clearCreateForm() {
+        ftfMedicineName.setText("Enter medicine name");
+        ftfMedicineName.setForeground(new Color(153, 153, 153));
+        ftfMedicineFee.setText("Enter medicine price");
+        ftfMedicineFee.setForeground(new Color(153, 153, 153));
+    }
+    
+    // Clear update form
+    public void clearUpdateForm() {
+        ftfMedicineName1.setText("Enter new medicine name");
+        ftfMedicineName1.setForeground(new Color(153, 153, 153));
+        ftfMedicineFee1.setText("Enter new medicine price");
+        ftfMedicineFee1.setForeground(new Color(153, 153, 153));
+    }
+    
+    // Reset search field
+    public void resetSearchField() {
+        jtfSearch.setText("Search medicine");
+        jtfSearch.setForeground(new Color(153, 153, 153));
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -28,7 +160,7 @@ public class MedicinesPanel extends javax.swing.JPanel {
         ftfMedicineFee = new javax.swing.JFormattedTextField();
         button = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
-        updateService = new javax.swing.JDialog();
+        updateMedicine = new javax.swing.JDialog();
         main1 = new javax.swing.JPanel();
         title1 = new javax.swing.JPanel();
         lblUpdateMedicine = new javax.swing.JLabel();
@@ -104,11 +236,11 @@ public class MedicinesPanel extends javax.swing.JPanel {
         createMedicineInfo.add(ftfMedicineName);
 
         lblMedicineFee.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblMedicineFee.setText("Medicine Fee");
+        lblMedicineFee.setText("Medicine Price");
         createMedicineInfo.add(lblMedicineFee);
 
         ftfMedicineFee.setForeground(new java.awt.Color(153, 153, 153));
-        ftfMedicineFee.setText("Enter medicine fee");
+        ftfMedicineFee.setText("Enter medicine price");
         ftfMedicineFee.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 ftfMedicineFeeFocusGained(evt);
@@ -126,6 +258,11 @@ public class MedicinesPanel extends javax.swing.JPanel {
 
         btnAdd.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
         button.add(btnAdd, new java.awt.GridBagConstraints());
 
         form.add(button, java.awt.BorderLayout.PAGE_END);
@@ -185,22 +322,17 @@ public class MedicinesPanel extends javax.swing.JPanel {
         updateServiceInfo.add(ftfMedicineName1);
 
         lblMedicineFee1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblMedicineFee1.setText("Medicine Fee");
+        lblMedicineFee1.setText("Medicine Price");
         updateServiceInfo.add(lblMedicineFee1);
 
         ftfMedicineFee1.setForeground(new java.awt.Color(153, 153, 153));
-        ftfMedicineFee1.setText("Enter new medicine fee");
+        ftfMedicineFee1.setText("Enter new medicine price");
         ftfMedicineFee1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 ftfMedicineFee1FocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 ftfMedicineFee1FocusLost(evt);
-            }
-        });
-        ftfMedicineFee1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ftfMedicineFee1ActionPerformed(evt);
             }
         });
         updateServiceInfo.add(ftfMedicineFee1);
@@ -212,20 +344,25 @@ public class MedicinesPanel extends javax.swing.JPanel {
 
         btnSave.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
         button1.add(btnSave, new java.awt.GridBagConstraints());
 
         form1.add(button1, java.awt.BorderLayout.PAGE_END);
 
         main1.add(form1, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout updateServiceLayout = new javax.swing.GroupLayout(updateService.getContentPane());
-        updateService.getContentPane().setLayout(updateServiceLayout);
-        updateServiceLayout.setHorizontalGroup(
-            updateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout updateMedicineLayout = new javax.swing.GroupLayout(updateMedicine.getContentPane());
+        updateMedicine.getContentPane().setLayout(updateMedicineLayout);
+        updateMedicineLayout.setHorizontalGroup(
+            updateMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(main1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
         );
-        updateServiceLayout.setVerticalGroup(
-            updateServiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        updateMedicineLayout.setVerticalGroup(
+            updateMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(main1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
         );
 
@@ -289,6 +426,7 @@ public class MedicinesPanel extends javax.swing.JPanel {
 
         jtfSearch.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtfSearch.setForeground(new java.awt.Color(153, 153, 153));
+        jtfSearch.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jtfSearch.setText("Search medicine");
         jtfSearch.setPreferredSize(new java.awt.Dimension(85, 25));
         jtfSearch.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -303,8 +441,9 @@ public class MedicinesPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 232;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 20, 15, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 5);
         medicineFilter.add(jtfSearch, gridBagConstraints);
 
         btnSearch.setBackground(new java.awt.Color(0, 139, 139));
@@ -322,9 +461,9 @@ public class MedicinesPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 32;
-        gridBagConstraints.ipady = 9;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 15, 333);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         medicineFilter.add(btnSearch, gridBagConstraints);
 
         medicineLabel.add(medicineFilter, java.awt.BorderLayout.PAGE_START);
@@ -343,22 +482,6 @@ public class MedicinesPanel extends javax.swing.JPanel {
         medicineTable.setBackground(new java.awt.Color(255, 255, 255));
         medicineTable.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null}
-            },
-            new String [] {
-                "Medicine ID", "Medicine Name", "Price"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
 
         medicineTable.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -412,10 +535,6 @@ public class MedicinesPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ftfMedicineName1FocusLost
 
-    private void ftfMedicineFee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfMedicineFee1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ftfMedicineFee1ActionPerformed
-
     private void jtfSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfSearchFocusGained
         // TODO add your handling code here:
         if(jtfSearch.getText().equals("Search medicine")){
@@ -434,7 +553,7 @@ public class MedicinesPanel extends javax.swing.JPanel {
 
     private void ftfMedicineFeeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftfMedicineFeeFocusGained
         // TODO add your handling code here:
-        if(ftfMedicineFee.getText().equals("Enter medicine fee")){
+        if(ftfMedicineFee.getText().equals("Enter medicine price")){
             ftfMedicineFee.setText("");
             ftfMedicineFee.setForeground(new Color(153,153,153));
         }
@@ -443,14 +562,14 @@ public class MedicinesPanel extends javax.swing.JPanel {
     private void ftfMedicineFeeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftfMedicineFeeFocusLost
         // TODO add your handling code here:
         if(ftfMedicineFee.getText().equals("")){
-            ftfMedicineFee.setText("Enter medicine fee");
+            ftfMedicineFee.setText("Enter medicine price");
             ftfMedicineFee.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_ftfMedicineFeeFocusLost
 
     private void ftfMedicineFee1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftfMedicineFee1FocusGained
         // TODO add your handling code here:
-        if(ftfMedicineFee1.getText().equals("Enter new medicine fee")){
+        if(ftfMedicineFee1.getText().equals("Enter new medicine price")){
             ftfMedicineFee1.setText("");
             ftfMedicineFee1.setForeground(new Color(153,153,153));
         }
@@ -459,13 +578,14 @@ public class MedicinesPanel extends javax.swing.JPanel {
     private void ftfMedicineFee1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftfMedicineFee1FocusLost
         // TODO add your handling code here:
         if(ftfMedicineFee1.getText().equals("")){
-            ftfMedicineFee1.setText("Enter new medicine fee");
+            ftfMedicineFee1.setText("Enter new medicine price");
             ftfMedicineFee1.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_ftfMedicineFee1FocusLost
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        firePropertyChange("searchByText", false, true);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
@@ -477,14 +597,43 @@ public class MedicinesPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        updateService.pack();
-        updateService.setLocationRelativeTo(null);
-        updateService.setVisible(true);
+        if (selectedMedicine == null) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "Please select a medicine to update", 
+                    "No Selection", 
+                    JOptionPane.WARNING_MESSAGE
+            );
+        }  else {
+            updateMedicine.pack();
+            updateMedicine.setLocationRelativeTo(null);
+            updateMedicine.setVisible(true);
+        }  
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        if (selectedMedicine == null) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "Please select a medicine to delete", 
+                    "No Selection", 
+                    JOptionPane.WARNING_MESSAGE
+            );
+        } else {
+            firePropertyChange("deleteMedicine", false, true);
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        firePropertyChange("createMedicine", false, true);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        firePropertyChange("updateMedicine", false, true);
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -535,7 +684,7 @@ public class MedicinesPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler right1;
     private javax.swing.JPanel title;
     private javax.swing.JPanel title1;
-    private javax.swing.JDialog updateService;
+    private javax.swing.JDialog updateMedicine;
     private javax.swing.JPanel updateServiceInfo;
     // End of variables declaration//GEN-END:variables
 }

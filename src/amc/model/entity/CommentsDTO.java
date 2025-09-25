@@ -51,6 +51,7 @@ public final class CommentsDTO {
         public final Comment.Rating rating;
         public final String content;
         public final String appointmentDate;
+        public final String doctorFeedback;
 
         public CommentDetail(
             String commentId,
@@ -62,7 +63,8 @@ public final class CommentsDTO {
             Role   recipientType,
             Comment.Rating rating,
             String content,
-            String appointmentDate
+            String appointmentDate,
+            String doctorFeedback
         ){
             this.commentId = commentId;
             this.appointmentId = appointmentId;
@@ -74,6 +76,7 @@ public final class CommentsDTO {
             this.rating = rating;
             this.content = content;
             this.appointmentDate = appointmentDate;
+            this.doctorFeedback = doctorFeedback;
         }
     }
 }

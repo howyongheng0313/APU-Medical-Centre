@@ -1,4 +1,4 @@
-package amc.view.manager;
+/*package amc.view.manager;
 
 import amc.model.entity.ReportsDTO;
 import javax.swing.*;
@@ -89,5 +89,124 @@ public class PatientNumberReportPanel extends JPanel {
         content.add(deptScroll, gbc);
 
         add(content, BorderLayout.CENTER);
+    }
+}*/
+
+package amc.view.manager;
+
+import amc.model.entity.ReportsDTO;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.text.NumberFormat;
+
+/*
+** Panel showing: 
+**   1) Monthly patient numbers (bar chart)
+**   2) Department distribution (pie chart)
+*/
+public class PatientNumberReportPanel extends JPanel {
+
+    // Header labels
+    private final JLabel titleLabel = new JLabel("", SwingConstants.CENTER);
+    private final JLabel totalLabel = new JLabel("", SwingConstants.CENTER);
+
+    // Container for both charts
+    private final JPanel chartContainer = new JPanel(new GridLayout(1, 2, 10, 0));
+
+    public PatientNumberReportPanel() {
+        setLayout(new BorderLayout());
+        setBackground(Color.WHITE);
+
+        // Header
+        JPanel header = new JPanel(new GridLayout(2, 1));
+        header.setBackground(new Color(245, 253, 253));
+        header.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+        totalLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        header.add(titleLabel);
+        header.add(totalLabel);
+        add(header, BorderLayout.NORTH);
+
+        // Charts
+        chartContainer.setBackground(Color.WHITE);
+        add(chartContainer, BorderLayout.CENTER);
+    }
+
+    // Refresh the panel with a new report.
+    public void displayReport(ReportsDTO.PatientNumberReport report) {
+        titleLabel.setText("Patient Number Report for " + report.getYear());
+        totalLabel.setText("Total Unique Patients: " + report.getTotalPatients());
+
+        // Replace old charts
+        chartContainer.removeAll();
+        ChartPanel bar = createBarChart(report);
+        ChartPanel pie = createPieChart(report);
+
+        // Ensure equal height for perfect horizontal alignment
+        int height = 400;
+        bar.setPreferredSize(new Dimension(0, height));
+        pie.setPreferredSize(new Dimension(0, height));
+
+        chartContainer.add(bar);
+        chartContainer.add(pie);
+        chartContainer.revalidate();
+        chartContainer.repaint();
+    }
+
+    // Build monthly patient bar chart. 
+    private ChartPanel createBarChart(ReportsDTO.PatientNumberReport report) {
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        String[] months = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        for (ReportsDTO.MonthlyPatients m : report.getMonthlyPatients()) {
+            data.addValue(m.getPatientCount(), "Total Patients", months[m.getMonth() - 1]);
+            data.addValue(m.getNewPatients(),   "New Patients",   months[m.getMonth() - 1]);
+        }
+
+        JFreeChart chart = ChartFactory.createBarChart("", "Month", "Number of Patients", data);
+        CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setRangeGridlinesVisible(true);
+        plot.setDomainGridlinesVisible(true);
+        plot.getRenderer().setSeriesPaint(0, new Color(79,129,189)); // blue
+        plot.getRenderer().setSeriesPaint(1, new Color(192,80,77));  // red
+        plot.getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.UP_45);
+
+        ChartPanel panel = new ChartPanel(chart);
+        panel.setBorder(new EmptyBorder(0,0,0,0));
+        panel.setBackground(Color.WHITE);
+        return panel;
+    }
+
+    // Build department distribution pie chart.
+    private ChartPanel createPieChart(ReportsDTO.PatientNumberReport report) {
+        DefaultPieDataset data = new DefaultPieDataset();
+        for (ReportsDTO.DepartmentPatients d : report.getDepartmentPatients()) {
+            data.setValue(d.getDepartmentName(), d.getPatientCount());
+        }
+
+        JFreeChart chart = ChartFactory.createPieChart("", data, true, true, false);
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setOutlineVisible(false);
+        plot.setLabelGenerator(new org.jfree.chart.labels.StandardPieSectionLabelGenerator(
+                "{0}: {1} ({2})",
+                NumberFormat.getIntegerInstance(),
+                NumberFormat.getPercentInstance()
+        ));
+
+        ChartPanel panel = new ChartPanel(chart);
+        panel.setBorder(new EmptyBorder(0,0,0,0));
+        panel.setBackground(Color.WHITE);
+        return panel;
     }
 }

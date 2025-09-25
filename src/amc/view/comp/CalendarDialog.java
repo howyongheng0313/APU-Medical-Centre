@@ -47,7 +47,7 @@ public final class CalendarDialog extends javax.swing.JDialog {
      * @param $outHandle
      */
     public CalendarDialog(java.awt.Frame parent, LocalDate $startDate, Consumer<LocalDate> $outHandle) {
-        super(parent, false);
+        super(parent, true); //yongheng change to true
         initComponents();
 
         DefaultTableCellRenderer headRender = new DefaultTableCellRenderer();

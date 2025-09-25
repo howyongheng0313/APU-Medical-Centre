@@ -1,5 +1,11 @@
 package amc.controller;
 
+import amc.controller.Manager.ServiceCtl;
+import amc.controller.Manager.ReportCtl;
+import amc.controller.Manager.MedicineCtl;
+import amc.controller.Manager.EmployeeCtl;
+import amc.controller.Manager.CommentsCtl;
+import amc.controller.Manager.AppointmentCtl;
 import amc.view.share.BarButton;
 import amc.view.share.BarComp;
 import amc.view.share.UserPanel;
@@ -27,12 +33,18 @@ public class ManagerCtl extends UserCtl {
         super(ROOT);
 
         // Initialize features
-        ReportCtl   reportCtl    = new ReportCtl(getROOT());
-        CommentsCtl commentLsCtl = new CommentsCtl(getROOT());
-        ServiceCtl serviceCtl = new ServiceCtl(getROOT());
-        viewBody.add(reportCtl.getView()   , "Report");
-        viewBody.add(commentLsCtl.getView(), "Comments");
-        viewBody.add(serviceCtl.getView(), "Services");
+        ReportCtl      reportCtl      = new ReportCtl(getROOT());
+        CommentsCtl    commentLsCtl   = new CommentsCtl(getROOT());
+        ServiceCtl     serviceCtl     = new ServiceCtl(getROOT());
+        EmployeeCtl    employeeCtl    = new EmployeeCtl(getROOT());
+        MedicineCtl    medicineCtl    = new MedicineCtl(getROOT());
+        AppointmentCtl appointmentCtl = new AppointmentCtl(getROOT());
+        viewBody.add(reportCtl.getView()     , "Report");
+        viewBody.add(commentLsCtl.getView()  , "Comments");
+        viewBody.add(serviceCtl.getView()    , "Services");
+        viewBody.add(employeeCtl.getView()   , "Employees");
+        viewBody.add(medicineCtl.getView()   , "Medicines");
+        viewBody.add(appointmentCtl.getView(), "Appointments");
     }
 
     @Override

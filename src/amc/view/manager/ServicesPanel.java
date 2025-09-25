@@ -6,8 +6,6 @@ import amc.model.DataUtil;
 import java.util.List;
 import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 
 public class ServicesPanel extends javax.swing.JPanel {
     
@@ -119,6 +117,12 @@ public class ServicesPanel extends javax.swing.JPanel {
     // Close dialog after update services
     public void closeUpdateDialog() {
         updateService.setVisible(false);
+    }
+    
+    // Reset search field
+    public void resetSearchField() {
+        jtfSearch.setText("Search service");
+        jtfSearch.setForeground(new Color(153, 153, 153));
     }
     
     // Getter for create dialog
@@ -389,6 +393,11 @@ public class ServicesPanel extends javax.swing.JPanel {
         jcbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Internal Medicine", "Surgery", "Pediatrics", "Dermatology", "Ophthalmology", "ENT (Ear, Nose, Throat)", "Dentistry", "Gynecology", "General Chinese Medicine", "General Pratice" }));
         jcbDepartment.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         jcbDepartment.setPreferredSize(new java.awt.Dimension(150, 22));
+        jcbDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbDepartmentActionPerformed(evt);
+            }
+        });
 
         jtfSearch.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtfSearch.setText("Search service");
@@ -640,20 +649,8 @@ public class ServicesPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String searchText = getSearchInput();
-        if(searchText != null && !searchText.trim().isEmpty()) {
-            firePropertyChange("searchByText", false, true);
-        }
-        
+        firePropertyChange("searchByText", false, true);
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
-        // TODO add your handling code here:
-        String department = getSelectedDepartment();
-        if (department != null && !department.isEmpty()) {
-            firePropertyChange("searchByDepartment", false, true);
-        }
-    }//GEN-LAST:event_btnSearch1ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
@@ -664,6 +661,11 @@ public class ServicesPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         firePropertyChange("updateService", false, true);
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void jcbDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDepartmentActionPerformed
+        // TODO add your handling code here:
+        firePropertyChange("searchByDepartment", false, true);
+    }//GEN-LAST:event_jcbDepartmentActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
