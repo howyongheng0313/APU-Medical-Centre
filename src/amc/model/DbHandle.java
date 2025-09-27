@@ -173,6 +173,6 @@ public class DbHandle<T> {
     }
 
     public void addTblListener(Runnable handler) {
-        this.eventTrigger.register(handler);
+        this.eventTrigger.listen(handler);
     }
 }

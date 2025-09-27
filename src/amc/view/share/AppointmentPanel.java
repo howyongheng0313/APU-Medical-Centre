@@ -10,6 +10,7 @@ import amc.model.entity.Service;
 import java.awt.Dimension;
 import amc.view.Theme;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.ImageIcon;
@@ -754,7 +755,12 @@ public class AppointmentPanel extends javax.swing.JPanel {
 
     private void jPanel1AncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1AncestorResized
         // TODO add your handling code here:
-        jPanel1.setPreferredSize(new Dimension(jPanel1.getParent().getWidth(), 2000));
+        int childHeight = 50;
+        for (Component child: jPanel1.getComponents()) {
+            if (!child.isVisible()) continue;
+            childHeight += child.getPreferredSize().height;
+        }
+        jPanel1.setPreferredSize(new Dimension(jPanel1.getParent().getWidth(), childHeight));
         jPanel1.revalidate();
     }//GEN-LAST:event_jPanel1AncestorResized
 

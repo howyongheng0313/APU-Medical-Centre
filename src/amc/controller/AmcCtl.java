@@ -6,14 +6,13 @@ import amc.model.entity.User;
 import amc.view.AmcFrame;
 import java.awt.CardLayout;
 import java.awt.Container;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 import javax.swing.JPanel;
 
 public class AmcCtl {
     private final AmcFrame viewAmc = new AmcFrame();
-    private final List<JPanel> pageLs = new ArrayList<>();
-    private final List<String> nameLs = new ArrayList<>();
+    private final LinkedHashMap<JPanel, String> pageMap = new LinkedHashMap<>();
     private int counter = 0;
     private User currentUser;
     public EventTrigger UserChange = new EventTrigger();
@@ -27,10 +26,13 @@ public class AmcCtl {
 
     public void pushPage(JPanel page) {
         String name = "pg" + counter++;
-        if (!pageLs.isEmpty()) pageLs.getLast().setEnabled(false);
 
-        pageLs.addLast(page);
-        nameLs.addLast(name);
+        // disable last page if exists
+        if (!pageMap.isEmpty()) {
+            pageMap.lastEntry().getKey().setEnabled(false);
+        }
+
+        pageMap.put(page, name);
 
         Container viewPane = viewAmc.getContentPane();
         viewPane.add(page, name);
@@ -38,16 +40,18 @@ public class AmcCtl {
     }
 
     public void popPage(JPanel page) {
-        if (!pageLs.getLast().equals(page)) return;
+        if (!pageMap.containsKey(page)) return;
 
         Container viewPane = viewAmc.getContentPane();
         viewPane.remove(page);
-        pageLs.removeLast();
-        nameLs.removeLast();
 
-        if (!pageLs.isEmpty()) {
-            pageLs.getLast().setEnabled(true);
-            ((CardLayout) viewPane.getLayout()).show(viewPane, nameLs.getLast());
+        boolean isLast = (page == pageMap.lastEntry().getKey());
+        pageMap.remove(page);
+
+        if (isLast && !pageMap.isEmpty()) {
+            Entry<JPanel, String> lastEntry = pageMap.lastEntry();
+            lastEntry.getKey().setEnabled(true);
+            ((CardLayout) viewPane.getLayout()).show(viewPane, lastEntry.getValue());
         }
     }
 

@@ -6,6 +6,8 @@ public class ProfileNode {
     public static final int SHOW_APPT = 1<<2;
     public static final int SEND_CMT  = 1<<3;
 
+    private String apptId;
+
     public final boolean isEditLogout;
     public final boolean isShowEmpComment;
     public final boolean isShowCusFeedback;
@@ -19,4 +21,8 @@ public class ProfileNode {
         isSendComment     = (options & SEND_CMT ) != 0;
         this.nextApptNode = nextApptNode;
     }
+
+    public void recordApptId(String apptId) { this.apptId = apptId; }
+
+    public String getRecordedAppt() { return apptId; }
 }

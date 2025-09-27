@@ -1,12 +1,16 @@
 package amc.view.share;
 
-import amc.view.comp.AmcRoundBox;
+import amc.model.entity.Appointment;
 import amc.view.Theme;
+import java.awt.Component;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
-public class ProfileFeedbackComp extends AmcRoundBox {
+public class ProfileFeedbackComp extends javax.swing.JPanel implements ListCellRenderer<Appointment>{
 
     /**
-     * Creates new form ProfileFeedbackComp
+     * Creates new form ProfileFeedbackCom
      */
     public ProfileFeedbackComp() {
         initComponents();
@@ -20,40 +24,44 @@ public class ProfileFeedbackComp extends AmcRoundBox {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        amcRoundBox1 = new amc.view.comp.AmcRoundBox();
+        lblApptId = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        amcPicture4 = new amc.view.comp.AmcPicture();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextArea1 = new javax.swing.JTextArea();
+        picDoctor = new amc.view.comp.AmcPicture();
+        lblDoctorName = new javax.swing.JLabel();
+        lblDepartment = new javax.swing.JLabel();
+        txtFeedback = new javax.swing.JTextArea();
 
-        setBackground(Theme.C1_INTER);
-        set$borderWidth(0);
-        set$cornerRound(15);
-        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
-        layout.rowHeights = new int[] {30, 5, 30, 0};
-        layout.columnWeights = new double[] {0.5, 0.5};
-        layout.rowWeights = new double[] {0.0, 0.0, 0.0, 1.0};
-        setLayout(layout);
+        setOpaque(false);
+        setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel1.setForeground(Theme.C1_FG);
-        jLabel1.setText("APT-001");
+        amcRoundBox1.setBackground(Theme.C1_INTER);
+        amcRoundBox1.set$borderWidth(0);
+        amcRoundBox1.set$cornerRound(15);
+        java.awt.GridBagLayout amcRoundBox1Layout = new java.awt.GridBagLayout();
+        amcRoundBox1Layout.rowHeights = new int[] {30, 5, 30, 0};
+        amcRoundBox1Layout.columnWeights = new double[] {0.5, 0.5};
+        amcRoundBox1Layout.rowWeights = new double[] {0.0, 0.0, 0.0, 1.0};
+        amcRoundBox1.setLayout(amcRoundBox1Layout);
+
+        lblApptId.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lblApptId.setForeground(Theme.C1_FG);
+        lblApptId.setText("APT-001");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        add(jLabel1, gridBagConstraints);
+        amcRoundBox1.add(lblApptId, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel2.setForeground(Theme.C1_FG);
-        jLabel2.setText("27 July 2025");
+        lblDate.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lblDate.setForeground(Theme.C1_FG);
+        lblDate.setText("27 July 2025");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        add(jLabel2, gridBagConstraints);
+        amcRoundBox1.add(lblDate, gridBagConstraints);
 
         jSeparator1.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -62,65 +70,87 @@ public class ProfileFeedbackComp extends AmcRoundBox {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
-        add(jSeparator1, gridBagConstraints);
+        amcRoundBox1.add(jSeparator1, gridBagConstraints);
 
-        amcPicture4.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor.png"))); // NOI18N
-        amcPicture4.setMaximumSize(new java.awt.Dimension(30, 30));
-        amcPicture4.setMinimumSize(new java.awt.Dimension(30, 30));
-        amcPicture4.setName(""); // NOI18N
-        amcPicture4.setPreferredSize(new java.awt.Dimension(31, 30));
+        picDoctor.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor.png"))); // NOI18N
+        picDoctor.setMaximumSize(new java.awt.Dimension(30, 30));
+        picDoctor.setMinimumSize(new java.awt.Dimension(30, 30));
+        picDoctor.setName(""); // NOI18N
+        picDoctor.setPreferredSize(new java.awt.Dimension(31, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        add(amcPicture4, gridBagConstraints);
+        amcRoundBox1.add(picDoctor, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel3.setText("Doctor Steve");
+        lblDoctorName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lblDoctorName.setText("Doctor Steve");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 45, 0, 0);
-        add(jLabel3, gridBagConstraints);
+        amcRoundBox1.add(lblDoctorName, gridBagConstraints);
 
-        jLabel4.setForeground(Theme.C1_FG);
-        jLabel4.setText("Department");
+        lblDepartment.setForeground(Theme.C1_FG);
+        lblDepartment.setText("Department");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        add(jLabel4, gridBagConstraints);
+        amcRoundBox1.add(lblDepartment, gridBagConstraints);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(Theme.C1_INTER);
-        jTextArea1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jTextArea1.setForeground(Theme.C1_FG);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(1);
-        jTextArea1.setText("Something here to\nSHOW!!");
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBorder(null);
-        jTextArea1.setOpaque(false);
+        txtFeedback.setEditable(false);
+        txtFeedback.setBackground(Theme.C1_INTER);
+        txtFeedback.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtFeedback.setForeground(Theme.C1_FG);
+        txtFeedback.setLineWrap(true);
+        txtFeedback.setRows(1);
+        txtFeedback.setText("Something here to\nSHOW!!");
+        txtFeedback.setWrapStyleWord(true);
+        txtFeedback.setBorder(null);
+        txtFeedback.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
-        add(jTextArea1, gridBagConstraints);
+        amcRoundBox1.add(txtFeedback, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        add(amcRoundBox1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.comp.AmcPicture amcPicture4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private amc.view.comp.AmcRoundBox amcRoundBox1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblApptId;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblDepartment;
+    private javax.swing.JLabel lblDoctorName;
+    private amc.view.comp.AmcPicture picDoctor;
+    private javax.swing.JTextArea txtFeedback;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public Component getListCellRendererComponent(
+        JList<? extends Appointment> list,
+        Appointment value, int index,
+        boolean isSelected, boolean cellHasFocus
+    ) {
+        lblApptId.setText(value.getId());
+        lblDate.setText(DateTimeFormatter.ofPattern("dd MMM yyyy").format(value.getDateTime()));
+        lblDoctorName.setText(value.getDoctor().getUserName());
+        lblDepartment.setText(value.getDepartment().getDepartmentName());
+        txtFeedback.setText(value.getFeedback());
+        return this;
+    }
 }

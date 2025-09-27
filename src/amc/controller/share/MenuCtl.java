@@ -32,7 +32,7 @@ public class MenuCtl extends AbstractSubCtl {
             }
         });
 
-        getROOT().UserChange.register(() -> {
+        getROOT().UserChange.listen(() -> {
             loadUser();
         });
     }

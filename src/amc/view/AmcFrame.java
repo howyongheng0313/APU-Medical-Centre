@@ -1,7 +1,5 @@
 package amc.view;
 
-import amc.view.Theme;
-
 public class AmcFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AmcFrame.class.getName());
@@ -22,6 +20,8 @@ public class AmcFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(Theme.C1_BG);
         getContentPane().setLayout(new java.awt.CardLayout());
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(1200, 720));
         getContentPane().add(jPanel1, "card2");
 
         pack();
