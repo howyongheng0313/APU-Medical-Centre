@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import amc.view.Theme;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.ImageIcon;
@@ -29,6 +30,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
     public AppointmentPanel() {
         initComponents();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(12);
+        picUndo.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         picStaff.setVisible(false);
         picDoctor.setVisible(false);
@@ -50,6 +52,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        picUndo = new amc.view.comp.AmcPicture();
         detailPanel = new javax.swing.JPanel();
         lblTitleDetail = new javax.swing.JLabel();
         lblApptId = new javax.swing.JLabel();
@@ -126,6 +129,17 @@ public class AppointmentPanel extends javax.swing.JPanel {
         jPanel1Layout.columnWeights = new double[] {0.15, 0.7, 0.15};
         jPanel1Layout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0};
         jPanel1.setLayout(jPanel1Layout);
+
+        picUndo.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/icon_undo.png"))); // NOI18N
+        picUndo.setMaximumSize(new java.awt.Dimension(35, 35));
+        picUndo.setMinimumSize(new java.awt.Dimension(35, 35));
+        picUndo.setPreferredSize(new java.awt.Dimension(35, 36));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
+        jPanel1.add(picUndo, gridBagConstraints);
 
         detailPanel.setOpaque(false);
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
@@ -897,6 +911,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
     private amc.view.comp.AmcPicture picPayEwallet;
     private amc.view.comp.AmcPicture picStaff;
     private amc.view.comp.AmcPicture picStatus;
+    public amc.view.comp.AmcPicture picUndo;
     private javax.swing.JPanel reListCard;
     private javax.swing.JPanel resultPanel;
     private javax.swing.JScrollPane scoConFeedback;

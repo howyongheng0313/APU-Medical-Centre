@@ -10,6 +10,7 @@ import amc.model.entity.Employee;
 import amc.model.entity.User;
 import amc.view.Theme;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.time.LocalDate;
 import java.util.List;
@@ -37,6 +38,8 @@ public class ProfilePanel extends javax.swing.JPanel {
     public ProfilePanel() {
         initComponents();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(12);
+        picUndo.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
 
         btnEdit.setVisible(false);
         btnLogout.setVisible(false);
@@ -89,6 +92,7 @@ public class ProfilePanel extends javax.swing.JPanel {
         btnEditConfirm = new amc.view.comp.AmcButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        picUndo = new amc.view.comp.AmcPicture();
         detailPanel = new javax.swing.JPanel();
         picAvatar = new amc.view.comp.AmcPicture();
         amcRoundBox1 = new amc.view.comp.AmcRoundBox();
@@ -350,6 +354,17 @@ public class ProfilePanel extends javax.swing.JPanel {
         jPanel1Layout.columnWeights = new double[] {0.1, 0.8, 0.1};
         jPanel1Layout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0};
         jPanel1.setLayout(jPanel1Layout);
+
+        picUndo.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/icon_undo.png"))); // NOI18N
+        picUndo.setMaximumSize(new java.awt.Dimension(35, 35));
+        picUndo.setMinimumSize(new java.awt.Dimension(35, 35));
+        picUndo.setPreferredSize(new java.awt.Dimension(35, 36));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
+        jPanel1.add(picUndo, gridBagConstraints);
 
         detailPanel.setMaximumSize(new java.awt.Dimension(100, 300));
         detailPanel.setMinimumSize(new java.awt.Dimension(100, 300));
@@ -825,6 +840,7 @@ public class ProfilePanel extends javax.swing.JPanel {
     public javax.swing.JList<Appointment> lstFeedback;
     public javax.swing.JList<Comment> lstSendCmt;
     private amc.view.comp.AmcPicture picAvatar;
+    public amc.view.comp.AmcPicture picUndo;
     private javax.swing.JPasswordField pwdEditConfirmPass;
     private javax.swing.JPasswordField pwdEditNewPass;
     private javax.swing.JLayeredPane sendCmtPanel;

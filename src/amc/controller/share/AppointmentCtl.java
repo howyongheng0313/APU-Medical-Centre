@@ -28,7 +28,12 @@ public class AppointmentCtl extends AbstractSubCtl {
         if (node.isShowConsult) consultProc();
         if (node.isShowResult)  resultProc();
         if (node.isShowPaying)  payingProc();
-        
+        viewAppt.picUndo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                getROOT().popPage(viewAppt);
+            }
+        });
     }
 
     private void writeNodeRecord() {

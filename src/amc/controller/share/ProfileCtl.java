@@ -35,6 +35,12 @@ public class ProfileCtl extends AbstractSubCtl {
         if (node.isSendComment)     sendCmtProc();
         if (node.isShowEmpComment)  empCommentProc();
         if (node.isShowCusFeedback) cusFeedbackProc();
+        viewProfile.picUndo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                getROOT().popPage(viewProfile);
+            }
+        });
     }
 
     private void showInit() {
