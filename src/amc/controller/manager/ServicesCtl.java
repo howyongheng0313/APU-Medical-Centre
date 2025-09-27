@@ -1,7 +1,8 @@
-package amc.controller.Manager;
+package amc.controller.manager;
 
 import amc.controller.AbstractSubCtl;
 import amc.controller.AmcCtl;
+import amc.model.DbMan;
 import amc.model.db_impl.Db;
 import amc.model.entity.*;
 import amc.view.manager.ServicesPanel;
@@ -12,18 +13,19 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class ServiceCtl extends AbstractSubCtl {
+public class ServicesCtl extends AbstractSubCtl {
     
     private final ServicesPanel viewServices = new ServicesPanel();
     
     // Constructor
-    public ServiceCtl(AmcCtl ROOT){
+    public ServicesCtl(AmcCtl ROOT){
         super(ROOT);
         setupServiceFeature();
         loadAllServices();
     }
     
-    // Setup service features
+    
+    // Main
     private void setupServiceFeature(){
         // Department search
         viewServices.addPropertyChangeListener("searchByDepartment", evt ->{
@@ -59,7 +61,6 @@ public class ServiceCtl extends AbstractSubCtl {
         });
     }
     
-    // Load all services
     private void loadAllServices(){
         try {
             var services = this.getAllServices();
@@ -67,28 +68,26 @@ public class ServiceCtl extends AbstractSubCtl {
             viewServices.resetSearchField();
         } catch(Exception ex) {
             JOptionPane.showMessageDialog(
-                    viewServices, 
-                    "Error loading services" + ex.getMessage(),
-                    "Error", 
-                    JOptionPane.ERROR_MESSAGE
+                viewServices, 
+                "Error loading services" + ex.getMessage(),
+                "Error", 
+                JOptionPane.ERROR_MESSAGE
             );
         }
     }
     
-    // Load and display services by department
     private void loadServiceByDepartment(String department){
         try {
             var services = this.getServicesByDepartment(department);
             viewServices.showServices(services);
         } catch(Exception ex) {
             JOptionPane.showMessageDialog(
-                    viewServices, "Error loading services by department" + ex.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE
+                viewServices, "Error loading services by department" + ex.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE
             );
         }
     }
     
-    // Load and display services by search text
     private void loadServicesBySearch(String searchText) {
         try {
             var services = this.getServicesBySearch(searchText);
@@ -101,12 +100,9 @@ public class ServiceCtl extends AbstractSubCtl {
             );
         }
     } 
-    
-    
-    
-    
-    
-    // Create new service
+
+
+    // CRUD
     private void createService(){
         try{
             String departmentName = viewServices.getCreateDepartment();
@@ -116,26 +112,26 @@ public class ServiceCtl extends AbstractSubCtl {
             // Validation
             if(departmentName == null || departmentName.trim().isEmpty()){
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please select a department", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Please select a department", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
             }
             if (serviceName == null || serviceName.trim().isEmpty() || "Enter service name".equals(serviceName)) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please enter a service name", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Please enter a service name", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
             } 
             if (feeText == null || feeText.trim().isEmpty() || "Enter service fee".equals(feeText)) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please enter a service fee", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Please enter a service fee", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
             }
             
@@ -145,10 +141,10 @@ public class ServiceCtl extends AbstractSubCtl {
                 fee = Double.parseDouble(feeText.replace("MYR", "").trim());
             } catch(Exception ex) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please enter a valid fee amount", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Please enter a valid fee amount", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
                 return;
             }
@@ -157,10 +153,10 @@ public class ServiceCtl extends AbstractSubCtl {
             String departmentId = getDepartmentIdByName(departmentName);
             if (departmentId == null) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Invalid department selected", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Invalid department selected", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
             }
             
@@ -175,42 +171,41 @@ public class ServiceCtl extends AbstractSubCtl {
             
             if(success){
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Service created successfully!", 
-                        "Success", 
-                        JOptionPane.INFORMATION_MESSAGE
+                    viewServices, 
+                    "Service created successfully!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE
                 );
                 viewServices.closeCreateDialog();
                 loadAllServices(); // Refresh the list
             } else {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Failed to create service", 
-                        "Error", 
-                        JOptionPane.ERROR_MESSAGE
+                    viewServices, 
+                    "Failed to create service", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE
                 );
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(
-                    viewServices, 
-                    "Error creating service: " + ex.getMessage(), 
-                    "Error", 
-                    JOptionPane.ERROR_MESSAGE
+                viewServices, 
+                "Error creating service: " + ex.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE
             );
         }
         
     }
     
-    // Update service
     private void updateService(){
         try{
             String serviceId = viewServices.getSelectedServiceId();
             if (serviceId == null || serviceId.isEmpty()) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please select a service to update", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Please select a service to update", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
             }
             
@@ -221,22 +216,22 @@ public class ServiceCtl extends AbstractSubCtl {
             // Validation
             if (departmentName == null || departmentName.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please select a department", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Please select a department", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
             }
             if (serviceName == null || serviceName.trim().isEmpty() || "Enter new service name".equals(serviceName)) {
                 JOptionPane.showMessageDialog(
-                        viewServices, "Please enter a service name", 
-                        "Validation Error", JOptionPane.WARNING_MESSAGE
+                    viewServices, "Please enter a service name", 
+                    "Validation Error", JOptionPane.WARNING_MESSAGE
                 );
             } 
             if (feeText == null || feeText.trim().isEmpty() || "Enter new service fee".equals(feeText)) {
                 JOptionPane.showMessageDialog(
-                        viewServices, "Please enter a service fee", 
-                        "Validation Error", JOptionPane.WARNING_MESSAGE
+                    viewServices, "Please enter a service fee", 
+                    "Validation Error", JOptionPane.WARNING_MESSAGE
                 );
             }
             
@@ -246,10 +241,10 @@ public class ServiceCtl extends AbstractSubCtl {
                 fee = Double.parseDouble(feeText.replace("MYR", "").trim());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please enter a valid fee amount", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Please enter a valid fee amount", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
                 return;
             }
@@ -258,62 +253,60 @@ public class ServiceCtl extends AbstractSubCtl {
             String departmentId = getDepartmentIdByName(departmentName);
             if (departmentId == null) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Invalid department selected", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Invalid department selected", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
             }
             
             // Update service in database
             int updated = Db.Service.update(
-                    1, 
-                    s -> s.getServiceId().equals(serviceId), 
-                    s -> {
-                        s.setServiceName(serviceName);
-                        s.setFee(fee);
-                        s.setDepartmentId(departmentId);
-                        return s;
-                    }
+                1, DbMan.checkById(serviceId), 
+                s -> {
+                    s.setServiceName(serviceName);
+                    s.setFee(fee);
+                    s.setDepartmentId(departmentId);
+                    return s;
+                }
             );
             
             if (updated > 0) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Service updated successfully!", 
-                        "Success", 
-                        JOptionPane.INFORMATION_MESSAGE
+                    viewServices, 
+                    "Service updated successfully!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE
                 );
                 viewServices.closeUpdateDialog();
                 loadAllServices(); // Refresh the list
             } else {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Failed to update service", 
-                        "Error", 
-                        JOptionPane.ERROR_MESSAGE
+                    viewServices, 
+                    "Failed to update service", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE
                 );
             }      
         } catch(Exception ex){
             JOptionPane.showMessageDialog(
-                    viewServices, 
-                    "Error updating service: " + ex.getMessage(), 
-                    "Error", 
-                    JOptionPane.ERROR_MESSAGE
+                viewServices, 
+                "Error updating service: " + ex.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE
             );
         }
     }
     
-    // Delete service
     private void deleteService() {
         try {
             String serviceId = viewServices.getSelectedServiceId();
             if (serviceId == null || serviceId.isEmpty()) {
                 JOptionPane.showMessageDialog(
-                        viewServices, 
-                        "Please select a service to delete", 
-                        "Validation Error", 
-                        JOptionPane.WARNING_MESSAGE
+                    viewServices, 
+                    "Please select a service to delete", 
+                    "Validation Error", 
+                    JOptionPane.WARNING_MESSAGE
                 );
                 return;
             }
@@ -328,41 +321,38 @@ public class ServiceCtl extends AbstractSubCtl {
             
             if (result == JOptionPane.YES_OPTION) {
                 // Delete from database
-                int deleted = Db.Service.delete(1, s -> s.getServiceId().equals(serviceId));
+                int deleted = Db.Service.delete(1, DbMan.checkById(serviceId));
                 
                 if (deleted > 0) {
                     JOptionPane.showMessageDialog(
-                            viewServices, 
-                            "Service deleted successfully!", 
-                            "Success", 
-                            JOptionPane.INFORMATION_MESSAGE
+                        viewServices, 
+                        "Service deleted successfully!", 
+                        "Success", 
+                        JOptionPane.INFORMATION_MESSAGE
                     );
                     loadAllServices(); // Refresh the list
                 } else {
                     JOptionPane.showMessageDialog(
-                            viewServices, 
-                            "Failed to delete service", 
-                            "Error", 
-                            JOptionPane.ERROR_MESSAGE
+                        viewServices, 
+                        "Failed to delete service", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE
                     );
                 }
             }
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
-                    viewServices, 
-                    "Error deleting service: " + e.getMessage(), 
-                    "Error", 
-                    JOptionPane.ERROR_MESSAGE
+                viewServices, 
+                "Error deleting service: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE
             );
         }
     }
-    
-    
-    
-    
-    
-    // Get all services with department names
+
+
+    // Get info from database
     private List<ServiceDTO> getAllServices(){
         try {
             // Load all services and departments
@@ -372,7 +362,7 @@ public class ServiceCtl extends AbstractSubCtl {
             // Build department lookup map
             Map<String, String> deptMap = new HashMap<>();
             for(Department department: departments){
-                deptMap.put(department.getDepartmentId(), department.getDepartmentName());
+                deptMap.put(department.getId(), department.getDepartmentName());
             }
             
             // Convert to ServiceDTO
@@ -380,10 +370,10 @@ public class ServiceCtl extends AbstractSubCtl {
             for (Service service: services){
                 String departmentName = deptMap.getOrDefault(service.getDepartmentId(), "Unknown Department");
                 result.add(new ServiceDTO(
-                        service.getServiceId(),
-                        service.getServiceName(),
-                        service.getFee(),
-                        departmentName
+                    service.getId(),
+                    service.getServiceName(),
+                    service.getFee(),
+                    departmentName
                 ));
             }
             return result;
@@ -404,19 +394,19 @@ public class ServiceCtl extends AbstractSubCtl {
                 return new ArrayList<>();
             }
             
-            String departmentId = departments.get(0).getDepartmentId();
+            String departmentId = departments.get(0).getId();
             
             // Load services for this department
             List<Service> services = Db.Service.select(-1, s -> s.getDepartmentId().equals(departmentId));
             
             // Convert to DTO
-            List<ServiceDTO> result = new ArrayList();
+            List<ServiceDTO> result = new ArrayList<>();
             for(Service service : services){
                 result.add(new ServiceDTO(
-                        service.getServiceId(),
-                        service.getServiceName(),
-                        service.getFee(),
-                        department
+                    service.getId(),
+                    service.getServiceName(),
+                    service.getFee(),
+                    department
                 ));
             }
             return result;         
@@ -425,19 +415,18 @@ public class ServiceCtl extends AbstractSubCtl {
         }
     }
     
-    // Get services by search text (searches in service name)
-    private List<ServiceDTO> getServicesBySearch(String searchText) {
+    private List<ServiceDTO> getServicesBySearch(String searchService) {
         try {
             // Load all services and departments
             List<Service> services = Db.Service.select(-1, s -> 
-                s.getServiceName().toLowerCase().contains(searchText.toLowerCase())
+                s.getServiceName().toLowerCase().contains(searchService.toLowerCase())
             );
             List<Department> departments = Db.Department.select(-1, d -> true);
             
             // Build department lookup map
             Map<String, String> deptMap = new HashMap<>();
             for (Department dept : departments) {
-                deptMap.put(dept.getDepartmentId(), dept.getDepartmentName());
+                deptMap.put(dept.getId(), dept.getDepartmentName());
             }
             
             // Convert to DTOs
@@ -445,7 +434,7 @@ public class ServiceCtl extends AbstractSubCtl {
             for (Service service : services) {
                 String deptName = deptMap.getOrDefault(service.getDepartmentId(), "Unknown Department");
                 result.add(new ServiceDTO(
-                    service.getServiceId(),
+                    service.getId(),
                     service.getServiceName(),
                     service.getFee(),
                     deptName
@@ -458,14 +447,13 @@ public class ServiceCtl extends AbstractSubCtl {
         }
     }
     
-    // Generate new Service ID
     private String generateNewServiceId(){
         try{
             List<Service> services = Db.Service.select(-1, s -> true);
             int maxId = 0;
             
             for(Service service: services){
-                String id = service.getServiceId();
+                String id = service.getId();
                 if (id.startsWith("SVC-")){
                     int num = Integer.parseInt(id.substring(4));
                     maxId = Math.max(maxId, num);
@@ -478,11 +466,10 @@ public class ServiceCtl extends AbstractSubCtl {
         }
     }
     
-    // Get department ID by name
     private String getDepartmentIdByName(String departmentName){
         try{
             List<Department> departments = Db.Department.select(-1, d -> d.getDepartmentName().equals(departmentName));
-            return departments.isEmpty() ? null : departments.get(0).getDepartmentId();
+            return departments.isEmpty() ? null : departments.get(0).getId();
         } catch (Exception ex) {
             return null;
         }

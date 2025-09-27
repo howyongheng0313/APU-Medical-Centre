@@ -28,7 +28,7 @@ public class DoctorAdapt extends DbAdapter<Doctor> {
     @Override
     public List<String> getRow(Doctor model) {
         List<String> row = List.of(
-            model.getUserId(),
+            model.getId(),
             model.getUserName(),
             DataUtil.date2str(model.getDateOfBirth()),
             model.getGender().name(),

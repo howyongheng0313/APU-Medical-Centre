@@ -21,15 +21,15 @@ public final class DbMan {
         };
     }
 
-    public static <T extends User> Query<T> checkUser(String email) {
+    public static <T extends User> Query<T> checkUserEmail(String email) {
         return (model) -> {
             return model.getEmail().equals(DataUtil.formatEmail(email));
         };
     }
 
-    public static Query<Department> getDepartment(String departmentId) {
+    public static <T extends WithId> Query<T> checkById(String id) {
         return (model) -> {
-            return model.getDepartmentId().equals(departmentId);
+            return model.getId().equals(id);
         };
     }
 }

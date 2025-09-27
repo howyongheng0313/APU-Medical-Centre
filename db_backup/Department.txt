@@ -1,4 +1,4 @@
-SEQ
+010
 DPT-001|Internal Medicine
 DPT-002|Surgery
 DPT-003|Pediatrics

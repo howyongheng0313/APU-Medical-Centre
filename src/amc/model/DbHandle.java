@@ -14,14 +14,14 @@ import java.util.regex.Pattern;
 
 public class DbHandle<T> {
     // Class-level variable
-    private static final String SEPARATOR = "|";
-    private static final Path TEMP_DIR; 
+    protected static final String SEPARATOR = "|";
+    protected static final Path TEMP_DIR; 
     private static final Pattern UNESC_PTN = Pattern.compile("\\\\[\\\\n"+SEPARATOR+"]|\\"+SEPARATOR+"");
 
     // Object-level variable
-    private final Path path; 
-    private final DbAdapter<T> rowAdapter;
-    private final EventTrigger eventTrigger = new EventTrigger();
+    protected final Path path; 
+    protected final DbAdapter<T> rowAdapter;
+    protected final EventTrigger eventTrigger = new EventTrigger();
 
     static {
         Path path = Path.of("./temp");
@@ -51,8 +51,8 @@ public class DbHandle<T> {
     */
     private static List<String> unesc_split(String line) {
         Matcher mch = UNESC_PTN.matcher(line);
-        List<String>  row = new ArrayList<>();
-        StringBuilder strb   = new StringBuilder();
+        List<String>  row  = new ArrayList<>();
+        StringBuilder strb = new StringBuilder();
         while (mch.find()) {
             String raw = mch.group();
             String esc = switch (raw) {

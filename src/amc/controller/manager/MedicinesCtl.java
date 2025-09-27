@@ -1,7 +1,8 @@
-package amc.controller.Manager;
+package amc.controller.manager;
 
 import amc.controller.AbstractSubCtl;
 import amc.controller.AmcCtl;
+import amc.model.DbMan;
 import amc.model.db_impl.Db;
 import amc.model.entity.Medicine;
 import amc.view.manager.MedicinesPanel;
@@ -11,11 +12,11 @@ import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class MedicineCtl extends AbstractSubCtl {
+public class MedicinesCtl extends AbstractSubCtl {
     
     private final MedicinesPanel viewMedicines = new MedicinesPanel();
     
-    public MedicineCtl(AmcCtl ROOT){
+    public MedicinesCtl(AmcCtl ROOT){
         super(ROOT);
         setupMedicineFeatures();
         loadAllMedicines();
@@ -128,7 +129,7 @@ public class MedicineCtl extends AbstractSubCtl {
             }
             
             Db.Medicine.update(-1, 
-                medicine -> medicine.getMedicineId().equals(selectedMedicine.getMedicineId()),
+                DbMan.checkById(selectedMedicine.getId()),
                 medicine -> {
                     medicine.setMedicineName(newName.trim());
                     medicine.setPrice(newPrice);
@@ -162,8 +163,7 @@ public class MedicineCtl extends AbstractSubCtl {
                 "Confirm Delete", JOptionPane.YES_NO_OPTION);
                 
             if (confirm == JOptionPane.YES_OPTION) {
-                Db.Medicine.delete(-1, 
-                    medicine -> medicine.getMedicineId().equals(selectedMedicine.getMedicineId()));
+                Db.Medicine.delete(-1, DbMan.checkById(selectedMedicine.getId()));
                 
                 this.loadAllMedicines(); // Load all medicines
                 
@@ -203,7 +203,7 @@ public class MedicineCtl extends AbstractSubCtl {
         int maxId = 0;
         
         for (Medicine medicine : allMedicines) {
-            String id = medicine.getMedicineId();
+            String id = medicine.getId();
             if (id.startsWith("MDC-")) {
                 try {
                     int num = Integer.parseInt(id.substring(4));

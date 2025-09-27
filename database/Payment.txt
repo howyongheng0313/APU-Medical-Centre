@@ -1,4 +1,4 @@
-SEQ
+005
 PAY-001|APT-001|EWallet
 PAY-002|APT-003|Cash
 PAY-003|APT-004|CreditDebit

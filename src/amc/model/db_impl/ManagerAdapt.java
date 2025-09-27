@@ -26,7 +26,7 @@ public class ManagerAdapt extends DbAdapter<Manager> {
     @Override
     public List<String> getRow(Manager model) {
         List<String> row = List.of(
-            model.getUserId(),
+            model.getId(),
             model.getUserName(),
             DataUtil.date2str(model.getDateOfBirth()),
             model.getGender().name(),

@@ -27,7 +27,7 @@ public class StaffAdapt extends DbAdapter<Staff> {
     @Override
     public List<String> getRow(Staff model) {
         List<String> row = List.of(
-            model.getUserId(),
+            model.getId(),
             model.getUserName(),
             DataUtil.date2str(model.getDateOfBirth()),
             model.getGender().name(),

@@ -1,5 +1,8 @@
-package amc.controller;
+package amc.controller.share;
 
+import amc.controller.AbstractSubCtl;
+import amc.controller.AmcCtl;
+import amc.controller.UserCtl;
 import java.awt.event.ActionEvent;
 import amc.model.entity.User;
 import amc.view.share.BarComp;
@@ -20,8 +23,11 @@ public class MenuCtl extends AbstractSubCtl {
         viewMenu.picAvatar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                if (getROOT().getCurrentUser() == null) return;
-                ProfileCtl profileCtl = new ProfileCtl(getROOT());
+                User logged = getROOT().getCurrentUser();
+                if (logged == null) return;
+                ProfileCtl profileCtl = new ProfileCtl(
+                    getROOT(), logged, logged.getRole().getProfileNode()
+                );
                 profileCtl.startView();
             }
         });

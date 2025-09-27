@@ -21,42 +21,20 @@ public class AmcDateField extends JTextField {
 
     public AmcDateField() {
         super();
-        this.setText(this.$date.toString()); // ------> yongheng
+        this.setText(this.$date.toString());
         this.setFocusable(false);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 Window parentWindow = SwingUtilities.getWindowAncestor(AmcDateField.this);
-                //---------> yongheng
-                if(parentWindow instanceof JFrame){
-                    CalendarDialog calendar = new CalendarDialog(
-                    (JFrame) SwingUtilities.getWindowAncestor(AmcDateField.this),
-                    AmcDateField.this.$date,
-                    AmcDateField.this::set$date
-                    );
-                    calendar.setModal(true);
-                    calendar.setLocationRelativeTo(AmcDateField.this);
-                    calendar.setVisible(true);
-                }else{
-                    CalendarDialog calendar = new CalendarDialog(
-                        null,
-                        AmcDateField.this.$date,
-                        AmcDateField.this::set$date
-                    );
-                    calendar.setModal(true);
-                    calendar.setLocationRelativeTo(AmcDateField.this);
-                    calendar.setVisible(true);
-                }  
-                
-                /*
-                //--------> Zhengyu
                 CalendarDialog calendar = new CalendarDialog(
-                    (JFrame) SwingUtilities.getWindowAncestor(AmcDateField.this),
+                    parentWindow instanceof JFrame ? (JFrame) parentWindow : null,
                     AmcDateField.this.$date,
                     AmcDateField.this::set$date
                 );
+
+                calendar.setLocationRelativeTo(AmcDateField.this);
                 calendar.setVisible(true);
-                */
             }
         });
     }

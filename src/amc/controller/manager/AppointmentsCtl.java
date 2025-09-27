@@ -1,4 +1,4 @@
-package amc.controller.Manager;
+package amc.controller.manager;
 
 import amc.controller.AbstractSubCtl;
 import amc.controller.AmcCtl;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 
-public class AppointmentCtl extends AbstractSubCtl {
+public class AppointmentsCtl extends AbstractSubCtl {
     
     private final AppointmentsPanel viewAppointments = new AppointmentsPanel();
     
-    public AppointmentCtl(AmcCtl ROOT) {
+    public AppointmentsCtl(AmcCtl ROOT) {
         super(ROOT);
         loadAllAppointments();
     }
@@ -40,7 +40,7 @@ public class AppointmentCtl extends AbstractSubCtl {
                 String customerName = "Unknown Customer";
                 try {
                     List<Customer> customers = Db.Customer.select(1, customer -> 
-                        customer.getUserId().equals(appointment.getCustomerId()));
+                        customer.getId().equals(appointment.getCustomerId()));
                     if (!customers.isEmpty()) {
                         customerName = customers.get(0).getUserName();
                     }
@@ -51,7 +51,7 @@ public class AppointmentCtl extends AbstractSubCtl {
                 if (appointment.getDoctorId() != null && !appointment.getDoctorId().isEmpty()) {
                     try {
                         List<Doctor> doctors = Db.Doctor.select(1, doctor -> 
-                            doctor.getUserId().equals(appointment.getDoctorId()));
+                            doctor.getId().equals(appointment.getDoctorId()));
                         if (!doctors.isEmpty()) {
                             doctorName = "Dr " + doctors.get(0).getUserName();
                         }
@@ -63,7 +63,7 @@ public class AppointmentCtl extends AbstractSubCtl {
                 if (appointment.getStaffId() != null && !appointment.getStaffId().isEmpty()) {
                     try {
                         List<Staff> staffList = Db.Staff.select(1, staff -> 
-                            staff.getUserId().equals(appointment.getStaffId()));
+                            staff.getId().equals(appointment.getStaffId()));
                         if (!staffList.isEmpty()) {
                             staffName = "Staff " + staffList.get(0).getUserName();
                         }
@@ -74,7 +74,7 @@ public class AppointmentCtl extends AbstractSubCtl {
                 String departmentName = "Unknown Department";
                 try {
                     List<Department> departments = Db.Department.select(1, department -> 
-                        department.getDepartmentId().equals(appointment.getDepartmentId()));
+                        department.getId().equals(appointment.getDepartmentId()));
                     if (!departments.isEmpty()) {
                         departmentName = departments.get(0).getDepartmentName();
                     }
@@ -82,7 +82,7 @@ public class AppointmentCtl extends AbstractSubCtl {
                 
                 // Create DTO
                 AppointmentDTO dto = new AppointmentDTO(
-                    appointment.getAppointmentId(),
+                    appointment.getId(),
                     appointment.getCustomerId(),
                     customerName,
                     appointment.getDoctorId(),

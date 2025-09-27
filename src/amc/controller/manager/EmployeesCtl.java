@@ -1,7 +1,8 @@
-package amc.controller.Manager;
+package amc.controller.manager;
 
 import amc.controller.AbstractSubCtl;
 import amc.controller.AmcCtl;
+import amc.model.DbMan;
 import amc.model.db_impl.Db;
 import amc.model.entity.*;
 import amc.view.manager.EmployeesPanel;
@@ -14,19 +15,15 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class EmployeeCtl extends AbstractSubCtl {
+public class EmployeesCtl extends AbstractSubCtl {
     
     private final EmployeesPanel viewEmployees = new EmployeesPanel();
     
-    public EmployeeCtl(AmcCtl ROOT){
+    public EmployeesCtl(AmcCtl ROOT){
         super(ROOT);
         setupEmployeeFeatures();
         loadAllEmployees();
     }
-    
-    
-    
-    
    
     // Setup employee management features
     private void setupEmployeeFeatures() {
@@ -113,10 +110,6 @@ public class EmployeeCtl extends AbstractSubCtl {
             );
         }
     }
-    
-    
-    
-    
     
     // Create new employee
     private void createEmployee() {
@@ -306,11 +299,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             );
         }
     }
-    
-    
-    
-    
-    
+
     // Update employee
     private void updateEmployee() {
         try {
@@ -362,7 +351,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         // Get old email for userAuth update
         String oldEmail = "";
         try{
-            List<Manager> managers = Db.Manager.select(1, m -> m.getUserId().equals(userId));
+            List<Manager> managers = Db.Manager.select(1, DbMan.checkById(userId));
             if(!managers.isEmpty()){
                 oldEmail = managers.get(0).getEmail();
             }
@@ -373,7 +362,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         // Update manager in database
         int updated = Db.Manager.update(
             1,
-            m -> m.getUserId().equals(userId),
+            DbMan.checkById(userId),
             m -> {
                 m.setUserName(name);
                 m.setDateOfBirth(birthDate);
@@ -439,7 +428,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         // Get old email for userAuth update
         String oldEmail = "";
         try{
-            List<Doctor> doctors = Db.Doctor.select(1, d -> d.getUserId().equals(userId));
+            List<Doctor> doctors = Db.Doctor.select(1, DbMan.checkById(userId));
             if(!doctors.isEmpty()){
                 oldEmail = doctors.get(0).getEmail();
             }
@@ -450,7 +439,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         // Update doctor in database
         int updated = Db.Doctor.update(
             1,
-            d -> d.getUserId().equals(userId),
+            DbMan.checkById(userId),
             d -> {
                 d.setUserName(name);
                 d.setDateOfBirth(birthDate);
@@ -512,7 +501,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         // Get old email for userAuth update
         String oldEmail = "";
         try{
-            List<Staff> staffs = Db.Staff.select(1, d -> d.getUserId().equals(userId));
+            List<Staff> staffs = Db.Staff.select(1, DbMan.checkById(userId));
             if(!staffs.isEmpty()){
                 oldEmail = staffs.get(0).getEmail();
             }
@@ -523,7 +512,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         // Update staff in database
         int updated = Db.Staff.update(
             1,
-            s -> s.getUserId().equals(userId),
+            DbMan.checkById(userId),
             s -> {
                 s.setUserName(name);
                 s.setDateOfBirth(birthDate);
@@ -553,11 +542,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             );
         }
     }
-    
-    
-    
-    
-            
+     
     // Delete employee
     private void deleteEmployee() {
         try {
@@ -576,15 +561,15 @@ public class EmployeeCtl extends AbstractSubCtl {
             String email = "";
             switch (role) {
                 case (Role.Manager) -> {
-                    List<Manager> managers = Db.Manager.select(1, m -> m.getUserId().equals(userId));
+                    List<Manager> managers = Db.Manager.select(1, DbMan.checkById(userId));
                     if (!managers.isEmpty()) email = managers.get(0).getEmail();
                 }
                 case (Role.Doctor) -> {
-                    List<Doctor> doctors = Db.Doctor.select(1, d -> d.getUserId().equals(userId));
+                    List<Doctor> doctors = Db.Doctor.select(1, DbMan.checkById(userId));
                     if (!doctors.isEmpty()) email = doctors.get(0).getEmail();
                 }
                 case (Role.Staff) -> {
-                    List<Staff> staffList = Db.Staff.select(1, s -> s.getUserId().equals(userId));
+                    List<Staff> staffList = Db.Staff.select(1, DbMan.checkById(userId));
                     if (!staffList.isEmpty()) email = staffList.get(0).getEmail();
                 }
             }
@@ -599,9 +584,9 @@ public class EmployeeCtl extends AbstractSubCtl {
                 int deleted = 0;
                 
                 switch (role) {
-                    case (Role.Manager) -> deleted = Db.Manager.delete(1, m -> m.getUserId().equals(userId));
-                    case (Role.Doctor) -> deleted = Db.Doctor.delete(1, d -> d.getUserId().equals(userId));
-                    case (Role.Staff) -> deleted = Db.Staff.delete(1, s -> s.getUserId().equals(userId));
+                    case (Role.Manager) -> deleted = Db.Manager.delete(1, DbMan.checkById(userId));
+                    case (Role.Doctor) -> deleted = Db.Doctor.delete(1, DbMan.checkById(userId));
+                    case (Role.Staff) -> deleted = Db.Staff.delete(1, DbMan.checkById(userId));
                 }
                 
                 // Delete user auth entry if employee is delete successfully
@@ -629,12 +614,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             );
         }
     }
-    
-    
-    
-    
-    
-    
+
     // Get all employees with department and role information
     private List<EmployeeDTO> getAllEmployees() {
         try {
@@ -644,14 +624,14 @@ public class EmployeeCtl extends AbstractSubCtl {
             List<Department> departments = Db.Department.select(-1, d -> true);
             Map<String, String> deptMap = new HashMap<>();
             for (Department dept : departments) {
-                deptMap.put(dept.getDepartmentId(), dept.getDepartmentName());
+                deptMap.put(dept.getId(), dept.getDepartmentName());
             }
             
             // Load managers
             List<Manager> managers = Db.Manager.select(-1, m -> true);
             for (Manager manager : managers) {
                 result.add(new EmployeeDTO(
-                    manager.getUserId(),
+                    manager.getId(),
                     manager.getUserName(),
                     manager.getDateOfBirth(),
                     manager.getGender(),
@@ -667,7 +647,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             for (Doctor doctor : doctors) {
                 String deptName = deptMap.getOrDefault(doctor.getDepartmentId(), "Unknown Department");
                 result.add(new EmployeeDTO(
-                    doctor.getUserId(),
+                    doctor.getId(),
                     doctor.getUserName(),
                     doctor.getDateOfBirth(),
                     doctor.getGender(),
@@ -684,7 +664,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             for (Staff staff : staffList) {
                 String deptName = deptMap.getOrDefault(staff.getDepartmentId(), "Unknown Department");
                 result.add(new EmployeeDTO(
-                    staff.getUserId(),
+                    staff.getId(),
                     staff.getUserName(),
                     staff.getDateOfBirth(),
                     staff.getGender(),
@@ -736,11 +716,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             return new ArrayList<>();
         }
     }
-    
-    
-    
-    
-    
+
     // Validate user input
     private boolean validateUserInput(String name, LocalDate birthDate, String gender, String email, String contact) {
         // Name validation
@@ -824,7 +800,7 @@ public class EmployeeCtl extends AbstractSubCtl {
     
         return true;
     }
-    
+
     private boolean validateDepartment(String departmentName) {
         if (departmentName == null || departmentName.trim().isEmpty()) {
             JOptionPane.showMessageDialog(
@@ -835,7 +811,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         }
         return true;
     }
-    
+
     private boolean validateLicense(String license){
         if (license == null || license.trim().isEmpty()) {
             JOptionPane.showMessageDialog(
@@ -857,10 +833,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         
         return true;
     }
-   
-    
 
-    
     // Generate new user ID
     private String generateNewUserId(String prefix) {
         try {
@@ -872,7 +845,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             
             // Check managers
             for (Manager manager : managers) {
-                String id = manager.getUserId();
+                String id = manager.getId();
                 if (id.startsWith(prefix + "-")) {
                     int num = Integer.parseInt(id.substring(prefix.length() + 1));
                     maxId = Math.max(maxId, num);
@@ -881,7 +854,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             
             // Check doctors
             for (Doctor doctor : doctors) {
-                String id = doctor.getUserId();
+                String id = doctor.getId();
                 if (id.startsWith(prefix + "-")) {
                     int num = Integer.parseInt(id.substring(prefix.length() + 1));
                     maxId = Math.max(maxId, num);
@@ -890,7 +863,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             
             // Check staff
             for (Staff staff : staffList) {
-                String id = staff.getUserId();
+                String id = staff.getId();
                 if (id.startsWith(prefix + "-")) {
                     int num = Integer.parseInt(id.substring(prefix.length() + 1));
                     maxId = Math.max(maxId, num);
@@ -902,23 +875,19 @@ public class EmployeeCtl extends AbstractSubCtl {
             return prefix + "-001";
         }
     }
-    
+
     // Get department ID by name
     private String getDepartmentIdByName(String departmentName) {
         try {
             List<Department> departments = Db.Department.select(-1, d -> d.getDepartmentName().equals(departmentName));
-            return departments.isEmpty() ? null : departments.get(0).getDepartmentId();
+            return departments.isEmpty() ? null : departments.get(0).getId();
         } catch (Exception ex) {
             return null;
         }
     }
     
     public JPanel getView() { return viewEmployees; }
-    
-    
-    
-    
-    
+
     // Generate password randomly for new employees
     private String generatePassword(){
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -931,7 +900,7 @@ public class EmployeeCtl extends AbstractSubCtl {
         }
         return password.toString();
     }
-    
+
     // Create UserAuth entry
     private void createUserAuth(String email, Role role, String password) {
         try {
@@ -945,7 +914,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             );
         }
     }
-    
+
     // Update UserAuth entry when email changes
     private void updateUserAuth(String oldEmail, String newEmail, Role role) {
         try {
@@ -968,7 +937,7 @@ public class EmployeeCtl extends AbstractSubCtl {
             );
         }
     }
-    
+
     // Delete UserAuth
     private void deleteUserAuth(String email) {
         try {

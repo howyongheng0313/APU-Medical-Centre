@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class Manager extends User {
     public Manager(
-        String    userId,
+        String    id,
         String    userName,
         LocalDate dateOfBirth,
         Gender    gender,
         String    email,
         String    contact
     ) {
-        super(userId, userName, dateOfBirth, gender, email, contact);
+        super(id, userName, dateOfBirth, gender, email, contact);
     }
 
     @Override

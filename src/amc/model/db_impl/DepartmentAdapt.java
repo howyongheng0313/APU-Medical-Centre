@@ -19,7 +19,7 @@ public class DepartmentAdapt extends DbAdapter<Department> {
     @Override
     public List<String> getRow(Department model) {
         List<String> row = List.of(
-            model.getDepartmentId(),
+            model.getId(),
             model.getDepartmentName()
         );
         return row;

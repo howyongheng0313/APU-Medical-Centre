@@ -1451,6 +1451,9 @@
                       <Dimension value="[90, 30]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                       <GridBagConstraints gridX="1" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="90" anchor="13" weightX="0.0" weightY="0.0"/>
@@ -1485,6 +1488,9 @@
                       <Dimension value="[90, 30]"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                       <GridBagConstraints gridX="1" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="13" weightX="0.0" weightY="0.0"/>
@@ -1817,7 +1823,7 @@
                   </StatementProvider>
                   <Parameters>
                     <CodeExpression id="105_btnEdit">
-                      <CodeVariable name="btnEdit" type="8194" declaredType="amc.view.comp.AmcButton"/>
+                      <CodeVariable name="btnEdit" type="8193" declaredType="amc.view.comp.AmcButton"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
                           <ComponentRef name="btnEdit"/>
@@ -1886,7 +1892,7 @@
                   </StatementProvider>
                   <Parameters>
                     <CodeExpression id="110_btnLogout">
-                      <CodeVariable name="btnLogout" type="8194" declaredType="amc.view.comp.AmcButton"/>
+                      <CodeVariable name="btnLogout" type="8193" declaredType="amc.view.comp.AmcButton"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
                           <ComponentRef name="btnLogout"/>

@@ -33,7 +33,7 @@ public class AppointmentAdapt extends DbAdapter<Appointment> {
     @Override
     public List<String> getRow(Appointment model) {
         List<String> row = List.of(
-            model.getAppointmentId(),
+            model.getId(),
             model.getCustomerId(),
             Objects.toString(model.getDoctorId(), ""),
             Objects.toString(model.getStaffId(), ""),

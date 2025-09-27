@@ -1,25 +1,22 @@
 package amc.model.entity;
 
-public class Medicine {
-    private String medicineId;
+public class Medicine extends WithId {
     private String medicineName;
     private double price;
 
     public Medicine(
-        String medicineId,
+        String id,
         String medicineName,
         double price
     ) {
-        this.medicineId = medicineId;
+        super(id);
         this.medicineName = medicineName;
         this.price = price;
     }
 
-    public String getMedicineId() { return medicineId; }
     public String getMedicineName() { return medicineName; }
     public double getPrice() { return price; }
 
-    public void setMedicineId(String medicineId) { this.medicineId = medicineId; }
     public void setMedicineName(String medicineName) { this.medicineName = medicineName; }
     public void setPrice(double price) { this.price = price; }
 }
