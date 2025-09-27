@@ -621,11 +621,11 @@ public class EmployeesCtl extends AbstractSubCtl {
             List<EmployeeDTO> result = new ArrayList<>();
             
             // Load departments for lookup
-            List<Department> departments = Db.Department.select(-1, d -> true);
             Map<String, String> deptMap = new HashMap<>();
-            for (Department dept : departments) {
+            Db.Department.select(-1, dept -> {
                 deptMap.put(dept.getId(), dept.getDepartmentName());
-            }
+                return false;
+            });
             
             // Load managers
             List<Manager> managers = Db.Manager.select(-1, m -> true);

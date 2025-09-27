@@ -10,12 +10,12 @@ import amc.view.Theme;
  *
  * @author kzy
  */
-public class BookingPanel extends javax.swing.JPanel {
+public class BookingsPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form BookingPanel
      */
-    public BookingPanel() {
+    public BookingsPanel() {
         initComponents();
         this.jScrollPane1.getVerticalScrollBar().setUnitIncrement(12);
     }
@@ -30,8 +30,8 @@ public class BookingPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        processing1 = new amc.view.share.ApptPendingPanel();
-        processing2 = new amc.view.share.ApptPendingPanel();
+        processing1 = new amc.view.staff.ApptPendingPanel();
+        processing2 = new amc.view.staff.ApptPendingPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jPanel1 = new javax.swing.JPanel();
         amcButton1 = new amc.view.comp.AmcButton();
@@ -114,7 +114,7 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private amc.view.share.ApptPendingPanel processing1;
-    private amc.view.share.ApptPendingPanel processing2;
+    private amc.view.staff.ApptPendingPanel processing1;
+    private amc.view.staff.ApptPendingPanel processing2;
     // End of variables declaration//GEN-END:variables
 }

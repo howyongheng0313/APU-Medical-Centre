@@ -8,12 +8,12 @@ package amc.view.customer;
  *
  * @author czy
  */
-public class BookingPanel extends javax.swing.JPanel {
+public class BookApptPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form bookAppointment
      */
-    public BookingPanel() {
+    public BookApptPanel() {
         initComponents();
     }
 
