@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import amc.model.DbMan;
 import amc.model.db_impl.Db;
 
-public abstract class User {
+public abstract class User extends WithId {
     public enum Gender { Male, Female; }
 
     public record LoginContext(String email, String password) {}
@@ -19,7 +19,6 @@ public abstract class User {
         Gender gender
     ) {}
 
-    protected String    userId;
     protected String    userName;
     protected LocalDate dateOfBirth;
     protected Gender    gender;
@@ -27,14 +26,14 @@ public abstract class User {
     protected String    contact;
 
     public User(
-        String    userId,
+        String    id,
         String    userName,
         LocalDate dateOfBirth,
         Gender    gender,
         String    email,
         String    contact
     ) {
-        this.userId      = userId;
+        super(id);
         this.userName    = userName;
         this.dateOfBirth = dateOfBirth;
         this.gender      = gender;
@@ -49,20 +48,18 @@ public abstract class User {
         UserAuth auth = authLs.getFirst();
         if (!auth.getPassword().verify(loginCtx.password)) return null;
 
-        List<? extends User> userLs = auth.getRole().getHandle().select(1, DbMan.checkUser(loginCtx.email));
+        List<? extends User> userLs = auth.getRole().getHandle().select(1, DbMan.checkUserEmail(loginCtx.email));
         return userLs.getFirst();
     }
 
     public abstract Role getRole();
 
-    public String    getUserId() { return userId; }
     public String    getUserName() { return userName; }
     public LocalDate getDateOfBirth() { return dateOfBirth; }
     public Gender    getGender() { return gender; }
     public String    getEmail() { return email; }
     public String    getContact() { return contact; }
 
-    public void setUserId(String userId) { this.userId = userId; }
     public void setUserName(String userName) { this.userName = userName; }
     public void setDateOfBirth(LocalDate dateOfBirth) { this.dateOfBirth = dateOfBirth; }
     public void setGender(Gender gender) { this.gender = gender; }

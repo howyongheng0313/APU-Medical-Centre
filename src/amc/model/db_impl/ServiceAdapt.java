@@ -22,7 +22,7 @@ public class ServiceAdapt extends DbAdapter<Service> {
     @Override
     public List<String> getRow(Service model) {
         List<String> row = List.of(
-            model.getServiceId(),
+            model.getId(),
             model.getServiceName(),
             DataUtil.amount2str(model.getFee()),
             model.getDepartmentId()

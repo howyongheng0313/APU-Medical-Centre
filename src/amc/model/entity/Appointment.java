@@ -1,50 +1,61 @@
 package amc.model.entity;
 
+import amc.model.db_impl.Db;
 import java.time.LocalDateTime;
 
-public class Appointment {
+public class Appointment extends WithId {
     public enum Status {
-        Pending(0),
-        Booked(1),
-        EndCons(2),
-        Completed(3),
-        Cancelled(-1);
+        Pending  ( 0, "/amc/image/status_pending_30.png"),
+        Booked   ( 1, "/amc/image/status_booked_30.png"),
+        EndCons  ( 2, "/amc/image/status_end_con_30.png"),
+        Completed( 3, "/amc/image/status_completed.png"),
+        Cancelled(-1, "/amc/image/status_rejected.png");
 
         private final int step;
-        private Status(int step) { this.step = step; }
+        private final String iconPath;
+
+        private Status(int step, String iconPath) {
+            this.step = step;
+            this.iconPath = iconPath;
+        }
+
         public static Status valueOf(int step) {
             for (Status s: Status.values()) {
                 if (s.getStep() == step) return s;
             }
             return Status.Pending;
         }
+
         public int getStep() { return step; }
+        public String getIconPath() { return iconPath; }
     }
 
-    private String appointmentId;
     private String customerId;
     private String doctorId = null;
-    private String staffId = null;
+    private String staffId  = null;
     private String departmentId;
     private LocalDateTime dateTime;
     private Status status;
     private String feedback = null;
+
+    private Customer customer = null;
+    private Doctor   doctor   = null;
+    private Staff    staff    = null;
     
     public Appointment(
-        String appointmentId,
+        String id,
         String customerId,
         String departmentId,
         LocalDateTime dateTime,
         Status status
     ) {
-        this.appointmentId = appointmentId;
+        super(id);
         this.customerId = customerId;
         this.departmentId = departmentId;
         this.dateTime = dateTime;
         this.status = status;
     }
 
-    public String getAppointmentId() { return appointmentId; }
     public String getCustomerId() { return customerId; }
     public String getDoctorId() { return doctorId; }
     public String getStaffId() { return staffId; }
@@ -53,7 +64,6 @@ public class Appointment {
     public Status getStatus() { return status; }
     public String getFeedback() { return feedback; }
 
-    public void setAppointmentId(String appointmentId) { this.appointmentId = appointmentId; }
     public void setCustomerId(String customerId) { this.customerId = customerId; }
     public void setDoctorId(String doctorId) { this.doctorId = doctorId; }
     public void setStaffId(String staffId) { this.staffId = staffId; }
@@ -61,4 +71,34 @@ public class Appointment {
     public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
     public void setStatus(Status status) { this.status = status; }
     public void setFeedback(String feedback) { this.feedback = feedback; }
+
+    public Customer getCustomer() {
+        if (customer == null) customer = Db.Customer.getById(customerId);
+        return customer;
+    }
+
+    public Doctor getDoctor() {
+        if (doctor == null) doctor = Db.Doctor.getById(doctorId);
+        return doctor;
+    }
+
+    public Staff getStaff() {
+        if (staff == null) staff = Db.Staff.getById(staffId);
+        return staff;
+    }
+
+    public void setCustomer(Customer customer) {
+        if (this.customerId == null || !customerId.equals(customer.getId())) return;
+        this.customer = customer;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        if (this.doctorId == null || !doctorId.equals(doctor.getId())) return;
+        this.doctor = doctor;
+    }
+
+    public void setStaff(Staff staff) {
+        if (this.staffId == null || !staffId.equals(staff.getId())) return;
+        this.staff = staff;
+    }
 }

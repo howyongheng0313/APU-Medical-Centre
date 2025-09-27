@@ -60,7 +60,7 @@ public class MedicinesPanel extends javax.swing.JPanel {
         
         for (Medicine medicine : medicines) {
             Object[] row = {
-                medicine.getMedicineId(),
+                medicine.getId(),
                 medicine.getMedicineName(),
                 String.format("MYR%.2f", medicine.getPrice())
             };

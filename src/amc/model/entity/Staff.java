@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Staff extends Employee {
     public Staff(
-        String userId,
+        String id,
         String userName,
         LocalDate dateOfBirth,
         Gender gender,
@@ -12,7 +12,7 @@ public class Staff extends Employee {
         String contact,
         String departmentId
     ) {
-        super(userId, userName, dateOfBirth, gender, email, contact, departmentId);
+        super(id, userName, dateOfBirth, gender, email, contact, departmentId);
     }
 
     @Override

@@ -3,21 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package amc.view.doctor;
+import amc.controller.AmcCtl;
+import javax.swing.JPanel;
+import amc.controller.manager.ServicesCtl;
+import amc.model.entity.Doctor;
+import amc.model.entity.User;
+
 
 /**
  *
  * @author Administrator
  */
 public class MainPageDoctor extends javax.swing.JPanel {
-
-    /**
-     * Creates new form Doctor
-     */
-    Appointment apt = new Appointment();
-    public MainPageDoctor() {
+    private final AppointmentReadWrite apt;
+    private final AmcCtl ROOT;
+    private final User currentUser;
+    private final Doctor currentDoctor;
+    public MainPageDoctor(AmcCtl ROOT,User currentUser, Doctor currentDoctor) {
         initComponents();
-
-        apt.view_appointment(jTable1,"current");
+        this.ROOT = ROOT;
+        this.apt = new AppointmentReadWrite(currentUser);
+        this.currentUser = currentUser;
+        this.currentDoctor = currentDoctor;
+        apt.view_appointment(jTable1, true);
     }
 
     /**
@@ -100,6 +108,11 @@ public class MainPageDoctor extends javax.swing.JPanel {
         ));
         jTable1.getTableHeader().setResizingAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -117,12 +130,33 @@ public class MainPageDoctor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        apt.view_appointment(jTable1, "current");
+        apt.view_appointment(jTable1, true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        apt.view_appointment(jTable1, "past");
+        apt.view_appointment(jTable1, false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        int selectedRow = jTable1.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            Object value = jTable1.getValueAt(selectedRow, 0);
+            String aptId = value.toString();
+
+            // Create the Consultation panel
+            ServicesCtl servicesCtl = new ServicesCtl(ROOT);
+            // TODO-kzy show consultation
+//            JPanel consultationPanel = new Consultation(servicesCtl, aptId, currentDoctor);
+//
+//            // Put it inside a popup dialog
+//            javax.swing.JDialog dialog = new javax.swing.JDialog((java.awt.Frame) null, "Consultation", true);
+//            dialog.getContentPane().add(consultationPanel);
+//            dialog.pack();
+//            dialog.setLocationRelativeTo(this);
+//            dialog.setVisible(true);
+        }
+    }//GEN-LAST:event_jTable1MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -132,4 +166,5 @@ public class MainPageDoctor extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
+    public JPanel getView() { return this; }
 }

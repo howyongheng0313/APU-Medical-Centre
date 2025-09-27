@@ -1,4 +1,4 @@
-SEQ
+010
 DOC-001|Gan Ting Yong|2005-07-06|Male|gantingyong@gmail.com|01623767890|DPT-001|MMC 27666
 DOC-002|Jay Chou|2005-07-07|Male|jaychou@gmail.com|01623767891|DPT-002|MMC 27667
 DOC-003|Wang Li Hong|2005-07-08|Male|lihongwang@gmail.com|01623767892|DPT-003|MMC 27668

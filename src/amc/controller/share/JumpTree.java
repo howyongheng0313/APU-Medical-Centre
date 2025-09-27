@@ -1,4 +1,4 @@
-package amc.controller;
+package amc.controller.share;
 
 public class JumpTree {
     public static final ProfileNode UsrSelf = new ProfileNode(
@@ -9,7 +9,7 @@ public class JumpTree {
     public static final ProfileNode DocSelf = new ProfileNode(
         ProfileNode.EDIT_LOG | ProfileNode.SHOW_CMT,
         new ApptNode(
-            ApptNode.SHOW_CUS | ApptNode.SHOW_STF,
+            ApptNode.SHOW_CUS | ApptNode.SHOW_STF | ApptNode.SHOW_RESULT,
             new ProfileNode(0, null), null, null
         )
     );
@@ -33,7 +33,7 @@ public class JumpTree {
     public static final ProfileNode MngDoctorCmt = new ProfileNode(
         ProfileNode.SHOW_CMT,
         new ApptNode(
-            ApptNode.SHOW_CUS | ApptNode.SHOW_DOC | ApptNode.SHOW_STF,
+            ApptNode.SHOW_CUS | ApptNode.SHOW_DOC | ApptNode.SHOW_STF | ApptNode.SHOW_RESULT,
             MngCustomer, null, MngEmployee
         )
     );
@@ -41,22 +41,22 @@ public class JumpTree {
     public static final ProfileNode MngStaffCmt = new ProfileNode(
         ProfileNode.SHOW_CMT,
         new ApptNode(
-            ApptNode.SHOW_CUS | ApptNode.SHOW_DOC | ApptNode.SHOW_STF,
+            ApptNode.SHOW_CUS | ApptNode.SHOW_DOC | ApptNode.SHOW_STF | ApptNode.SHOW_RESULT,
             MngCustomer, MngEmployee, null
         )
     );
 
     public static final ApptNode MngAppt = new ApptNode(
-        ApptNode.SHOW_CUS | ApptNode.SHOW_DOC | ApptNode.SHOW_STF,
+        ApptNode.SHOW_CUS | ApptNode.SHOW_DOC | ApptNode.SHOW_STF | ApptNode.SHOW_RESULT,
         MngCustomer, MngEmployee, MngEmployee
     );
 
     public static final ApptNode DocConsultation = new ApptNode(
-        ApptNode.SHOW_CUS | ApptNode.SHOW_STF,
+        ApptNode.SHOW_CUS | ApptNode.SHOW_STF | ApptNode.SHOW_CONSULT | ApptNode.SHOW_RESULT,
         new ProfileNode(
             ProfileNode.SHOW_APPT,
             new ApptNode(
-                ApptNode.SHOW_DOC | ApptNode.SHOW_STF,
+                ApptNode.SHOW_DOC | ApptNode.SHOW_STF | ApptNode.SHOW_RESULT,
                 null, null, null
             )
         ), null, null
@@ -68,7 +68,7 @@ public class JumpTree {
     );
 
     public static final ApptNode CusAppt = new ApptNode(
-        ApptNode.SHOW_DOC | ApptNode.SHOW_STF,
+        ApptNode.SHOW_DOC | ApptNode.SHOW_STF | ApptNode.SHOW_RESULT,
         null, CusEmployee, CusEmployee
     );
 }

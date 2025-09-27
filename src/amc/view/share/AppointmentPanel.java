@@ -1,18 +1,42 @@
 package amc.view.share;
 
+import amc.controller.share.ApptNode;
+import amc.model.DataUtil;
+import amc.model.entity.Appointment;
+import amc.model.entity.ApptMedicine;
+import amc.model.entity.ApptService;
+import amc.model.entity.Medicine;
+import amc.model.entity.Service;
 import java.awt.Dimension;
 import amc.view.Theme;
 import java.awt.CardLayout;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 public class AppointmentPanel extends javax.swing.JPanel {
+    public record EndConsultContext(
+        Vector<Vector> serviceChooseList,
+        Vector<Vector> medicineChooseList,
+        String feedback
+    ) {}
 
     /**
      * Creates new form AppointmentPanel
      */
     public AppointmentPanel() {
         initComponents();
-        ((CardLayout) jPanel9.getLayout()).show(jPanel9, "Medicine");
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(12);
+
+        picStaff.setVisible(false);
+        picDoctor.setVisible(false);
+        lblStaffName.setVisible(false);
+        lblDoctorName.setVisible(false);
+
+        consultPanel.setVisible(false);
+        resultPanel.setVisible(false);
+        payingPanel.setVisible(false);
     }
 
     /**
@@ -25,57 +49,57 @@ public class AppointmentPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        amcPicture1 = new amc.view.comp.AmcPicture();
+        detailPanel = new javax.swing.JPanel();
+        lblTitleDetail = new javax.swing.JLabel();
+        lblApptId = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        picStatus = new amc.view.comp.AmcPicture();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        amcPicture2 = new amc.view.comp.AmcPicture();
-        amcPicture3 = new amc.view.comp.AmcPicture();
-        amcPicture4 = new amc.view.comp.AmcPicture();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        lblTime = new javax.swing.JLabel();
+        picCustomer = new amc.view.comp.AmcPicture();
+        picStaff = new amc.view.comp.AmcPicture();
+        picDoctor = new amc.view.comp.AmcPicture();
+        lblCustomerName = new javax.swing.JLabel();
+        lblStaffName = new javax.swing.JLabel();
+        lblDoctorName = new javax.swing.JLabel();
+        consultPanel = new javax.swing.JPanel();
+        lblTitleConsult = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        amcButton2 = new amc.view.comp.AmcButton();
-        amcButton3 = new amc.view.comp.AmcButton();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        amcButton1 = new amc.view.comp.AmcButton();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        btnConService = new amc.view.comp.AmcButton();
+        btnConMedicine = new amc.view.comp.AmcButton();
+        lblTitleConFeedback = new javax.swing.JLabel();
+        conListCard = new javax.swing.JPanel();
+        scoConService = new javax.swing.JScrollPane();
+        tblConService = new javax.swing.JTable();
+        scoConMedicine = new javax.swing.JScrollPane();
+        tblConMedicine = new javax.swing.JTable();
+        scoConFeedback = new javax.swing.JScrollPane();
+        txtConFeedback = new javax.swing.JTextArea();
+        btnEndCon = new amc.view.comp.AmcButton();
+        resultPanel = new javax.swing.JPanel();
+        lblTitleResult = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        amcButton4 = new amc.view.comp.AmcButton();
-        amcButton5 = new amc.view.comp.AmcButton();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jLabel12 = new javax.swing.JLabel();
+        btnReService = new amc.view.comp.AmcButton();
+        btnReMedicine = new amc.view.comp.AmcButton();
+        lblTitleReFeedback = new javax.swing.JLabel();
+        reListCard = new javax.swing.JPanel();
+        scoReService = new javax.swing.JScrollPane();
+        tblReService = new javax.swing.JTable();
+        scoReMedicine = new javax.swing.JScrollPane();
+        tblReMedicine = new javax.swing.JTable();
+        scoReFeedback = new javax.swing.JScrollPane();
+        txtReFeedback = new javax.swing.JTextArea();
+        lblTitleTotal = new javax.swing.JLabel();
         amcRoundBox1 = new amc.view.comp.AmcRoundBox();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        amcPicture5 = new amc.view.comp.AmcPicture();
-        amcButton6 = new amc.view.comp.AmcButton();
-        amcPicture6 = new amc.view.comp.AmcPicture();
-        amcButton7 = new amc.view.comp.AmcButton();
-        amcPicture7 = new amc.view.comp.AmcPicture();
-        amcButton8 = new amc.view.comp.AmcButton();
+        lblTotal = new javax.swing.JLabel();
+        payingPanel = new javax.swing.JPanel();
+        picPayCash = new amc.view.comp.AmcPicture();
+        btnPayCash = new amc.view.comp.AmcButton();
+        picPayCard = new amc.view.comp.AmcPicture();
+        btnPayCard = new amc.view.comp.AmcButton();
+        picPayEwallet = new amc.view.comp.AmcPicture();
+        btnPayEwallet = new amc.view.comp.AmcButton();
 
         setBackground(Theme.C1_BG);
         setLayout(new java.awt.BorderLayout());
@@ -102,49 +126,49 @@ public class AppointmentPanel extends javax.swing.JPanel {
         jPanel1Layout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0};
         jPanel1.setLayout(jPanel1Layout);
 
-        jPanel2.setOpaque(false);
+        detailPanel.setOpaque(false);
         java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
         jPanel2Layout.rowHeights = new int[] {40, 30, 5, 35, 35, 35};
         jPanel2Layout.columnWeights = new double[] {0.5, 0.5};
         jPanel2Layout.rowWeights = new double[] {0.0, 0.0, 0.0, 1.0, 1.0, 1.0};
-        jPanel2.setLayout(jPanel2Layout);
+        detailPanel.setLayout(jPanel2Layout);
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel1.setForeground(Theme.C1_FG);
-        jLabel1.setText("Appointment");
+        lblTitleDetail.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        lblTitleDetail.setForeground(Theme.C1_FG);
+        lblTitleDetail.setText("Appointment");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(jLabel1, gridBagConstraints);
+        detailPanel.add(lblTitleDetail, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jLabel2.setForeground(Theme.C1_FG);
-        jLabel2.setText("APT-001");
+        lblApptId.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblApptId.setForeground(Theme.C1_FG);
+        lblApptId.setText("APT-001");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(jLabel2, gridBagConstraints);
+        detailPanel.add(lblApptId, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jLabel3.setForeground(Theme.C1_FG);
-        jLabel3.setText("13 July 2025");
+        lblDate.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblDate.setForeground(Theme.C1_FG);
+        lblDate.setText("13 July 2025");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel2.add(jLabel3, gridBagConstraints);
+        detailPanel.add(lblDate, gridBagConstraints);
 
-        amcPicture1.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/status_pending_30.png"))); // NOI18N
-        amcPicture1.setMaximumSize(new java.awt.Dimension(35, 35));
-        amcPicture1.setMinimumSize(new java.awt.Dimension(35, 35));
-        amcPicture1.setPreferredSize(new java.awt.Dimension(36, 35));
+        picStatus.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/status_pending_30.png"))); // NOI18N
+        picStatus.setMaximumSize(new java.awt.Dimension(35, 35));
+        picStatus.setMinimumSize(new java.awt.Dimension(35, 35));
+        picStatus.setPreferredSize(new java.awt.Dimension(36, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel2.add(amcPicture1, gridBagConstraints);
+        detailPanel.add(picStatus, gridBagConstraints);
 
         jSeparator1.setToolTipText("");
         jSeparator1.setMaximumSize(new java.awt.Dimension(0, 3));
@@ -154,97 +178,97 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jSeparator1, gridBagConstraints);
+        detailPanel.add(jSeparator1, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel4.setForeground(Theme.C1_FG);
-        jLabel4.setText("07:04 pm");
+        lblTime.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lblTime.setForeground(Theme.C1_FG);
+        lblTime.setText("07:04 pm");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        jPanel2.add(jLabel4, gridBagConstraints);
+        detailPanel.add(lblTime, gridBagConstraints);
 
-        amcPicture2.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient_30.png"))); // NOI18N
-        amcPicture2.setMaximumSize(new java.awt.Dimension(30, 30));
-        amcPicture2.setMinimumSize(new java.awt.Dimension(30, 30));
-        amcPicture2.setPreferredSize(new java.awt.Dimension(31, 30));
+        picCustomer.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_patient_30.png"))); // NOI18N
+        picCustomer.setMaximumSize(new java.awt.Dimension(30, 30));
+        picCustomer.setMinimumSize(new java.awt.Dimension(30, 30));
+        picCustomer.setPreferredSize(new java.awt.Dimension(31, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(amcPicture2, gridBagConstraints);
+        detailPanel.add(picCustomer, gridBagConstraints);
 
-        amcPicture3.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_staff_30.png"))); // NOI18N
-        amcPicture3.setMaximumSize(new java.awt.Dimension(30, 30));
-        amcPicture3.setMinimumSize(new java.awt.Dimension(30, 30));
-        amcPicture3.setPreferredSize(new java.awt.Dimension(31, 30));
+        picStaff.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_staff_30.png"))); // NOI18N
+        picStaff.setMaximumSize(new java.awt.Dimension(30, 30));
+        picStaff.setMinimumSize(new java.awt.Dimension(30, 30));
+        picStaff.setPreferredSize(new java.awt.Dimension(31, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(amcPicture3, gridBagConstraints);
+        detailPanel.add(picStaff, gridBagConstraints);
 
-        amcPicture4.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor_30.png"))); // NOI18N
-        amcPicture4.setMaximumSize(new java.awt.Dimension(30, 30));
-        amcPicture4.setMinimumSize(new java.awt.Dimension(30, 30));
-        amcPicture4.setPreferredSize(new java.awt.Dimension(31, 30));
+        picDoctor.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/role_doctor_30.png"))); // NOI18N
+        picDoctor.setMaximumSize(new java.awt.Dimension(30, 30));
+        picDoctor.setMinimumSize(new java.awt.Dimension(30, 30));
+        picDoctor.setPreferredSize(new java.awt.Dimension(31, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(amcPicture4, gridBagConstraints);
+        detailPanel.add(picDoctor, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel5.setForeground(Theme.C1_FG);
-        jLabel5.setText("Patient Steve");
+        lblCustomerName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lblCustomerName.setForeground(Theme.C1_FG);
+        lblCustomerName.setText("Patient Steve");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 35, 0, 0);
-        jPanel2.add(jLabel5, gridBagConstraints);
+        detailPanel.add(lblCustomerName, gridBagConstraints);
 
-        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel6.setForeground(Theme.C1_FG);
-        jLabel6.setText("Staff Ting Yong");
+        lblStaffName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lblStaffName.setForeground(Theme.C1_FG);
+        lblStaffName.setText("Staff Ting Yong");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 35, 0, 0);
-        jPanel2.add(jLabel6, gridBagConstraints);
+        detailPanel.add(lblStaffName, gridBagConstraints);
 
-        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel7.setForeground(Theme.C1_FG);
-        jLabel7.setText("Doctor Yong Heng");
+        lblDoctorName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lblDoctorName.setForeground(Theme.C1_FG);
+        lblDoctorName.setText("Doctor Yong Heng");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 35, 0, 0);
-        jPanel2.add(jLabel7, gridBagConstraints);
+        detailPanel.add(lblDoctorName, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel1.add(jPanel2, gridBagConstraints);
+        jPanel1.add(detailPanel, gridBagConstraints);
 
-        jPanel3.setOpaque(false);
+        consultPanel.setOpaque(false);
         java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
         jPanel3Layout.columnWidths = new int[] {300, 300};
         jPanel3Layout.rowHeights = new int[] {40, 30, 200, 35};
         jPanel3Layout.columnWeights = new double[] {0.6, 0.4};
-        jPanel3.setLayout(jPanel3Layout);
+        consultPanel.setLayout(jPanel3Layout);
 
-        jLabel8.setBackground(Theme.C1_FG);
-        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel8.setText("Consultation");
+        lblTitleConsult.setBackground(Theme.C1_FG);
+        lblTitleConsult.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        lblTitleConsult.setText("Consultation");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel3.add(jLabel8, gridBagConstraints);
+        consultPanel.add(lblTitleConsult, gridBagConstraints);
 
         jPanel4.setMaximumSize(new java.awt.Dimension(200, 30));
         jPanel4.setMinimumSize(new java.awt.Dimension(200, 30));
@@ -252,46 +276,55 @@ public class AppointmentPanel extends javax.swing.JPanel {
         jPanel4.setPreferredSize(new java.awt.Dimension(200, 30));
         jPanel4.setLayout(new java.awt.GridLayout(1, 2));
 
-        amcButton2.setText("Services");
-        amcButton2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jPanel4.add(amcButton2);
+        btnConService.setText("Services");
+        btnConService.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        btnConService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConServiceActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnConService);
 
-        amcButton3.setText("Medicines");
-        amcButton3.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jPanel4.add(amcButton3);
+        btnConMedicine.setText("Medicines");
+        btnConMedicine.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        btnConMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConMedicineActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnConMedicine);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
-        jPanel3.add(jPanel4, gridBagConstraints);
+        consultPanel.add(jPanel4, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jLabel9.setForeground(Theme.C1_FG);
-        jLabel9.setText("Doctor's Feedback");
+        lblTitleConFeedback.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblTitleConFeedback.setForeground(Theme.C1_FG);
+        lblTitleConFeedback.setText("Doctor's Feedback");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
-        jPanel3.add(jLabel9, gridBagConstraints);
+        consultPanel.add(lblTitleConFeedback, gridBagConstraints);
 
-        jPanel5.setBorder(new javax.swing.border.LineBorder(Theme.C2_INTER, 2, true));
-        jPanel5.setOpaque(false);
-        jPanel5.setLayout(new java.awt.CardLayout());
+        conListCard.setBorder(new javax.swing.border.LineBorder(Theme.C2_INTER, 2, true));
+        conListCard.setOpaque(false);
+        conListCard.setLayout(new java.awt.CardLayout());
 
-        jScrollPane3.setBorder(null);
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane3.setColumnHeaderView(null);
-        jScrollPane3.setMaximumSize(new java.awt.Dimension(100, 100));
-        jScrollPane3.setMinimumSize(new java.awt.Dimension(100, 100));
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(100, 100));
+        scoConService.setBorder(null);
+        scoConService.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scoConService.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scoConService.setColumnHeaderView(null);
+        scoConService.setMaximumSize(new java.awt.Dimension(100, 100));
+        scoConService.setMinimumSize(new java.awt.Dimension(100, 100));
+        scoConService.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jTable1.setBackground(Theme.C1_BG);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblConService.setBackground(Theme.C1_BG);
+        tblConService.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null,  new Boolean(false)},
-                {null, null}
+
             },
             new String [] {
                 "Service", "Select"
@@ -312,31 +345,31 @@ public class AppointmentPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(Theme.C1_INTER);
-        jTable1.setRowHeight(25);
-        jTable1.setRowSelectionAllowed(false);
-        jTable1.setShowGrid(false);
-        jTable1.setShowHorizontalLines(true);
-        jTable1.setUpdateSelectionOnSort(false);
-        jScrollPane3.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setMinWidth(40);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(40);
+        tblConService.setGridColor(Theme.C1_INTER);
+        tblConService.setRowHeight(25);
+        tblConService.setRowSelectionAllowed(false);
+        tblConService.setShowGrid(false);
+        tblConService.setShowHorizontalLines(true);
+        tblConService.setUpdateSelectionOnSort(false);
+        scoConService.setViewportView(tblConService);
+        if (tblConService.getColumnModel().getColumnCount() > 0) {
+            tblConService.getColumnModel().getColumn(1).setMinWidth(40);
+            tblConService.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tblConService.getColumnModel().getColumn(1).setMaxWidth(40);
         }
 
-        jPanel5.add(jScrollPane3, "Service");
+        conListCard.add(scoConService, "Service");
 
-        jScrollPane4.setBorder(null);
-        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane4.setColumnHeaderView(null);
-        jScrollPane4.setMaximumSize(new java.awt.Dimension(100, 100));
-        jScrollPane4.setMinimumSize(new java.awt.Dimension(100, 100));
-        jScrollPane4.setPreferredSize(new java.awt.Dimension(100, 100));
+        scoConMedicine.setBorder(null);
+        scoConMedicine.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scoConMedicine.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scoConMedicine.setColumnHeaderView(null);
+        scoConMedicine.setMaximumSize(new java.awt.Dimension(100, 100));
+        scoConMedicine.setMinimumSize(new java.awt.Dimension(100, 100));
+        scoConMedicine.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jTable2.setBackground(Theme.C1_BG);
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblConMedicine.setBackground(Theme.C1_BG);
+        tblConMedicine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null}
@@ -360,78 +393,79 @@ public class AppointmentPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setGridColor(Theme.C1_INTER);
-        jTable2.setRowHeight(25);
-        jTable2.setRowSelectionAllowed(false);
-        jTable2.setShowGrid(false);
-        jTable2.setShowHorizontalLines(true);
-        jTable2.setUpdateSelectionOnSort(false);
-        jScrollPane4.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(1).setMinWidth(40);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTable2.getColumnModel().getColumn(1).setMaxWidth(40);
+        tblConMedicine.setGridColor(Theme.C1_INTER);
+        tblConMedicine.setRowHeight(25);
+        tblConMedicine.setRowSelectionAllowed(false);
+        tblConMedicine.setShowGrid(false);
+        tblConMedicine.setShowHorizontalLines(true);
+        tblConMedicine.setUpdateSelectionOnSort(false);
+        scoConMedicine.setViewportView(tblConMedicine);
+        if (tblConMedicine.getColumnModel().getColumnCount() > 0) {
+            tblConMedicine.getColumnModel().getColumn(1).setMinWidth(40);
+            tblConMedicine.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tblConMedicine.getColumnModel().getColumn(1).setMaxWidth(40);
         }
 
-        jPanel5.add(jScrollPane4, "Medicine");
+        conListCard.add(scoConMedicine, "Medicine");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jPanel5, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        consultPanel.add(conListCard, gridBagConstraints);
 
-        jScrollPane2.setBorder(new javax.swing.border.LineBorder(Theme.C2_INTER, 2, true));
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane2.setMaximumSize(new java.awt.Dimension(100, 100));
-        jScrollPane2.setMinimumSize(new java.awt.Dimension(100, 100));
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 100));
+        scoConFeedback.setBorder(new javax.swing.border.LineBorder(Theme.C2_INTER, 2, true));
+        scoConFeedback.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scoConFeedback.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scoConFeedback.setMaximumSize(new java.awt.Dimension(100, 100));
+        scoConFeedback.setMinimumSize(new java.awt.Dimension(100, 100));
+        scoConFeedback.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jTextArea1.setBackground(Theme.C1_BG);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jTextArea1.setForeground(Theme.C1_FG);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBorder(null);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtConFeedback.setBackground(Theme.C1_BG);
+        txtConFeedback.setColumns(20);
+        txtConFeedback.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtConFeedback.setForeground(Theme.C1_FG);
+        txtConFeedback.setLineWrap(true);
+        txtConFeedback.setWrapStyleWord(true);
+        txtConFeedback.setBorder(null);
+        scoConFeedback.setViewportView(txtConFeedback);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
-        jPanel3.add(jScrollPane2, gridBagConstraints);
+        consultPanel.add(scoConFeedback, gridBagConstraints);
 
-        amcButton1.setText("End Consultation");
-        amcButton1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        amcButton1.setMaximumSize(new java.awt.Dimension(150, 30));
-        amcButton1.setMinimumSize(new java.awt.Dimension(150, 30));
-        amcButton1.setPreferredSize(new java.awt.Dimension(150, 30));
+        btnEndCon.setText("End Consultation");
+        btnEndCon.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        btnEndCon.setMaximumSize(new java.awt.Dimension(150, 30));
+        btnEndCon.setMinimumSize(new java.awt.Dimension(150, 30));
+        btnEndCon.setPreferredSize(new java.awt.Dimension(150, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel3.add(amcButton1, gridBagConstraints);
+        consultPanel.add(btnEndCon, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel1.add(jPanel3, gridBagConstraints);
+        jPanel1.add(consultPanel, gridBagConstraints);
 
-        jPanel7.setOpaque(false);
+        resultPanel.setOpaque(false);
         java.awt.GridBagLayout jPanel7Layout = new java.awt.GridBagLayout();
         jPanel7Layout.columnWidths = new int[] {300, 300};
         jPanel7Layout.rowHeights = new int[] {40, 30, 200, 35};
         jPanel7Layout.columnWeights = new double[] {0.6, 0.4};
-        jPanel7.setLayout(jPanel7Layout);
+        resultPanel.setLayout(jPanel7Layout);
 
-        jLabel10.setBackground(Theme.C1_FG);
-        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel10.setText("Consultation");
+        lblTitleResult.setBackground(Theme.C1_FG);
+        lblTitleResult.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        lblTitleResult.setText("Consultation");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel7.add(jLabel10, gridBagConstraints);
+        resultPanel.add(lblTitleResult, gridBagConstraints);
 
         jPanel8.setMaximumSize(new java.awt.Dimension(200, 30));
         jPanel8.setMinimumSize(new java.awt.Dimension(200, 30));
@@ -439,43 +473,43 @@ public class AppointmentPanel extends javax.swing.JPanel {
         jPanel8.setPreferredSize(new java.awt.Dimension(200, 30));
         jPanel8.setLayout(new java.awt.GridLayout(1, 2));
 
-        amcButton4.setText("Services");
-        amcButton4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jPanel8.add(amcButton4);
+        btnReService.setText("Services");
+        btnReService.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jPanel8.add(btnReService);
 
-        amcButton5.setText("Medicines");
-        amcButton5.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jPanel8.add(amcButton5);
+        btnReMedicine.setText("Medicines");
+        btnReMedicine.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jPanel8.add(btnReMedicine);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
-        jPanel7.add(jPanel8, gridBagConstraints);
+        resultPanel.add(jPanel8, gridBagConstraints);
 
-        jLabel11.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jLabel11.setForeground(Theme.C1_FG);
-        jLabel11.setText("Doctor's Feedback");
+        lblTitleReFeedback.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblTitleReFeedback.setForeground(Theme.C1_FG);
+        lblTitleReFeedback.setText("Doctor's Feedback");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
-        jPanel7.add(jLabel11, gridBagConstraints);
+        resultPanel.add(lblTitleReFeedback, gridBagConstraints);
 
-        jPanel9.setBorder(new javax.swing.border.LineBorder(Theme.C2_INTER, 2, true));
-        jPanel9.setOpaque(false);
-        jPanel9.setLayout(new java.awt.CardLayout());
+        reListCard.setBorder(new javax.swing.border.LineBorder(Theme.C2_INTER, 2, true));
+        reListCard.setOpaque(false);
+        reListCard.setLayout(new java.awt.CardLayout());
 
-        jScrollPane5.setBorder(null);
-        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane5.setColumnHeaderView(null);
-        jScrollPane5.setMaximumSize(new java.awt.Dimension(100, 100));
-        jScrollPane5.setMinimumSize(new java.awt.Dimension(100, 100));
-        jScrollPane5.setPreferredSize(new java.awt.Dimension(100, 100));
+        scoReService.setBorder(null);
+        scoReService.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scoReService.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scoReService.setColumnHeaderView(null);
+        scoReService.setMaximumSize(new java.awt.Dimension(100, 100));
+        scoReService.setMinimumSize(new java.awt.Dimension(100, 100));
+        scoReService.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jTable3.setBackground(Theme.C1_BG);
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblReService.setBackground(Theme.C1_BG);
+        tblReService.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", null},
                 {null, null}
@@ -499,31 +533,31 @@ public class AppointmentPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable3.setGridColor(Theme.C1_INTER);
-        jTable3.setRowHeight(25);
-        jTable3.setRowSelectionAllowed(false);
-        jTable3.setShowGrid(false);
-        jTable3.setShowHorizontalLines(true);
-        jTable3.setUpdateSelectionOnSort(false);
-        jScrollPane5.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(1).setMinWidth(150);
-            jTable3.getColumnModel().getColumn(1).setPreferredWidth(150);
-            jTable3.getColumnModel().getColumn(1).setMaxWidth(150);
+        tblReService.setGridColor(Theme.C1_INTER);
+        tblReService.setRowHeight(25);
+        tblReService.setRowSelectionAllowed(false);
+        tblReService.setShowGrid(false);
+        tblReService.setShowHorizontalLines(true);
+        tblReService.setUpdateSelectionOnSort(false);
+        scoReService.setViewportView(tblReService);
+        if (tblReService.getColumnModel().getColumnCount() > 0) {
+            tblReService.getColumnModel().getColumn(1).setMinWidth(150);
+            tblReService.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblReService.getColumnModel().getColumn(1).setMaxWidth(150);
         }
 
-        jPanel9.add(jScrollPane5, "Service");
+        reListCard.add(scoReService, "Service");
 
-        jScrollPane6.setBorder(null);
-        jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane6.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane6.setColumnHeaderView(null);
-        jScrollPane6.setMaximumSize(new java.awt.Dimension(100, 100));
-        jScrollPane6.setMinimumSize(new java.awt.Dimension(100, 100));
-        jScrollPane6.setPreferredSize(new java.awt.Dimension(100, 100));
+        scoReMedicine.setBorder(null);
+        scoReMedicine.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scoReMedicine.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scoReMedicine.setColumnHeaderView(null);
+        scoReMedicine.setMaximumSize(new java.awt.Dimension(100, 100));
+        scoReMedicine.setMinimumSize(new java.awt.Dimension(100, 100));
+        scoReMedicine.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jTable4.setBackground(Theme.C1_BG);
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblReMedicine.setBackground(Theme.C1_BG);
+        tblReMedicine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null}
@@ -547,60 +581,61 @@ public class AppointmentPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable4.setGridColor(Theme.C1_INTER);
-        jTable4.setRowHeight(25);
-        jTable4.setRowSelectionAllowed(false);
-        jTable4.setShowGrid(false);
-        jTable4.setShowHorizontalLines(true);
-        jTable4.setUpdateSelectionOnSort(false);
-        jScrollPane6.setViewportView(jTable4);
-        if (jTable4.getColumnModel().getColumnCount() > 0) {
-            jTable4.getColumnModel().getColumn(1).setMinWidth(40);
-            jTable4.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTable4.getColumnModel().getColumn(1).setMaxWidth(40);
-            jTable4.getColumnModel().getColumn(2).setMinWidth(150);
-            jTable4.getColumnModel().getColumn(2).setPreferredWidth(150);
-            jTable4.getColumnModel().getColumn(2).setMaxWidth(150);
+        tblReMedicine.setGridColor(Theme.C1_INTER);
+        tblReMedicine.setRowHeight(25);
+        tblReMedicine.setRowSelectionAllowed(false);
+        tblReMedicine.setShowGrid(false);
+        tblReMedicine.setShowHorizontalLines(true);
+        tblReMedicine.setUpdateSelectionOnSort(false);
+        scoReMedicine.setViewportView(tblReMedicine);
+        if (tblReMedicine.getColumnModel().getColumnCount() > 0) {
+            tblReMedicine.getColumnModel().getColumn(1).setMinWidth(40);
+            tblReMedicine.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tblReMedicine.getColumnModel().getColumn(1).setMaxWidth(40);
+            tblReMedicine.getColumnModel().getColumn(2).setMinWidth(150);
+            tblReMedicine.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblReMedicine.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
-        jPanel9.add(jScrollPane6, "Medicine");
+        reListCard.add(scoReMedicine, "Medicine");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel7.add(jPanel9, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        resultPanel.add(reListCard, gridBagConstraints);
 
-        jScrollPane7.setBorder(new javax.swing.border.LineBorder(Theme.C2_INTER, 2, true));
-        jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane7.setMaximumSize(new java.awt.Dimension(100, 100));
-        jScrollPane7.setMinimumSize(new java.awt.Dimension(100, 100));
-        jScrollPane7.setPreferredSize(new java.awt.Dimension(100, 100));
+        scoReFeedback.setBorder(new javax.swing.border.LineBorder(Theme.C2_INTER, 2, true));
+        scoReFeedback.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scoReFeedback.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scoReFeedback.setMaximumSize(new java.awt.Dimension(100, 100));
+        scoReFeedback.setMinimumSize(new java.awt.Dimension(100, 100));
+        scoReFeedback.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setBackground(Theme.C1_BG);
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jTextArea2.setForeground(Theme.C1_FG);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setWrapStyleWord(true);
-        jTextArea2.setBorder(null);
-        jScrollPane7.setViewportView(jTextArea2);
+        txtReFeedback.setEditable(false);
+        txtReFeedback.setBackground(Theme.C1_BG);
+        txtReFeedback.setColumns(20);
+        txtReFeedback.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtReFeedback.setForeground(Theme.C1_FG);
+        txtReFeedback.setLineWrap(true);
+        txtReFeedback.setWrapStyleWord(true);
+        txtReFeedback.setBorder(null);
+        scoReFeedback.setViewportView(txtReFeedback);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
-        jPanel7.add(jScrollPane7, gridBagConstraints);
+        resultPanel.add(scoReFeedback, gridBagConstraints);
 
-        jLabel12.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel12.setForeground(Theme.C1_FG);
-        jLabel12.setText("Total Fees :");
+        lblTitleTotal.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lblTitleTotal.setForeground(Theme.C1_FG);
+        lblTitleTotal.setText("Total Fees :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel7.add(jLabel12, gridBagConstraints);
+        resultPanel.add(lblTitleTotal, gridBagConstraints);
 
         amcRoundBox1.setBackground(Theme.C1_INTER);
         amcRoundBox1.set$borderColor(Theme.C1_FG_DISABLE);
@@ -619,101 +654,98 @@ public class AppointmentPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         amcRoundBox1.add(jLabel13, gridBagConstraints);
 
-        jLabel14.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jLabel14.setForeground(Theme.C1_FG);
-        jLabel14.setText("123.45");
+        lblTotal.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblTotal.setForeground(Theme.C1_FG);
+        lblTotal.setText("123.45");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
-        amcRoundBox1.add(jLabel14, gridBagConstraints);
+        amcRoundBox1.add(lblTotal, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 90, 0, 0);
-        jPanel7.add(amcRoundBox1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 90, 0, 5);
+        resultPanel.add(amcRoundBox1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel1.add(jPanel7, gridBagConstraints);
+        jPanel1.add(resultPanel, gridBagConstraints);
 
-        jPanel6.setMaximumSize(new java.awt.Dimension(600, 100));
-        jPanel6.setMinimumSize(new java.awt.Dimension(600, 100));
-        jPanel6.setOpaque(false);
-        jPanel6.setPreferredSize(new java.awt.Dimension(600, 100));
+        payingPanel.setMaximumSize(new java.awt.Dimension(600, 100));
+        payingPanel.setMinimumSize(new java.awt.Dimension(600, 100));
+        payingPanel.setOpaque(false);
+        payingPanel.setPreferredSize(new java.awt.Dimension(600, 100));
         java.awt.GridBagLayout jPanel6Layout = new java.awt.GridBagLayout();
         jPanel6Layout.columnWeights = new double[] {1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
         jPanel6Layout.rowWeights = new double[] {1.0};
-        jPanel6.setLayout(jPanel6Layout);
+        payingPanel.setLayout(jPanel6Layout);
 
-        amcPicture5.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/pay_cash.png"))); // NOI18N
-        amcPicture5.set$maxSize(new java.awt.Dimension(150, 100));
-        amcPicture5.setMaximumSize(new java.awt.Dimension(100, 50));
-        amcPicture5.setMinimumSize(new java.awt.Dimension(100, 50));
-        amcPicture5.setPreferredSize(new java.awt.Dimension(100, 50));
+        picPayCash.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/pay_cash.png"))); // NOI18N
+        picPayCash.set$maxSize(new java.awt.Dimension(150, 100));
+        picPayCash.setMaximumSize(new java.awt.Dimension(100, 50));
+        picPayCash.setMinimumSize(new java.awt.Dimension(100, 50));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel6.add(amcPicture5, gridBagConstraints);
+        payingPanel.add(picPayCash, gridBagConstraints);
 
-        amcButton6.setText("Cash");
-        amcButton6.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        amcButton6.setMaximumSize(new java.awt.Dimension(100, 60));
-        amcButton6.setMinimumSize(new java.awt.Dimension(100, 60));
-        amcButton6.setPreferredSize(new java.awt.Dimension(100, 60));
+        btnPayCash.setText("Cash");
+        btnPayCash.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        btnPayCash.setMaximumSize(new java.awt.Dimension(100, 60));
+        btnPayCash.setMinimumSize(new java.awt.Dimension(100, 60));
+        btnPayCash.setPreferredSize(new java.awt.Dimension(100, 60));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        jPanel6.add(amcButton6, gridBagConstraints);
+        payingPanel.add(btnPayCash, gridBagConstraints);
 
-        amcPicture6.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/pay_card.png"))); // NOI18N
-        amcPicture6.set$maxSize(new java.awt.Dimension(150, 100));
-        amcPicture6.setMaximumSize(new java.awt.Dimension(100, 50));
-        amcPicture6.setMinimumSize(new java.awt.Dimension(100, 50));
-        amcPicture6.setPreferredSize(new java.awt.Dimension(100, 50));
+        picPayCard.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/pay_card.png"))); // NOI18N
+        picPayCard.set$maxSize(new java.awt.Dimension(150, 100));
+        picPayCard.setMaximumSize(new java.awt.Dimension(100, 50));
+        picPayCard.setMinimumSize(new java.awt.Dimension(100, 50));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel6.add(amcPicture6, gridBagConstraints);
+        payingPanel.add(picPayCard, gridBagConstraints);
 
-        amcButton7.setText("Credit/Debit");
-        amcButton7.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        amcButton7.setMaximumSize(new java.awt.Dimension(100, 60));
-        amcButton7.setMinimumSize(new java.awt.Dimension(100, 60));
-        amcButton7.setPreferredSize(new java.awt.Dimension(100, 60));
+        btnPayCard.setText("Credit/Debit");
+        btnPayCard.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        btnPayCard.setMaximumSize(new java.awt.Dimension(100, 60));
+        btnPayCard.setMinimumSize(new java.awt.Dimension(100, 60));
+        btnPayCard.setPreferredSize(new java.awt.Dimension(100, 60));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        jPanel6.add(amcButton7, gridBagConstraints);
+        payingPanel.add(btnPayCard, gridBagConstraints);
 
-        amcPicture7.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/pay_ewallet.png"))); // NOI18N
-        amcPicture7.set$maxSize(new java.awt.Dimension(150, 100));
-        amcPicture7.setMaximumSize(new java.awt.Dimension(100, 50));
-        amcPicture7.setMinimumSize(new java.awt.Dimension(100, 50));
-        amcPicture7.setPreferredSize(new java.awt.Dimension(100, 50));
+        picPayEwallet.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/pay_ewallet.png"))); // NOI18N
+        picPayEwallet.set$maxSize(new java.awt.Dimension(150, 100));
+        picPayEwallet.setMaximumSize(new java.awt.Dimension(100, 50));
+        picPayEwallet.setMinimumSize(new java.awt.Dimension(100, 50));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel6.add(amcPicture7, gridBagConstraints);
+        payingPanel.add(picPayEwallet, gridBagConstraints);
 
-        amcButton8.setText("E-Wallet");
-        amcButton8.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        amcButton8.setMaximumSize(new java.awt.Dimension(100, 60));
-        amcButton8.setMinimumSize(new java.awt.Dimension(100, 60));
-        amcButton8.setPreferredSize(new java.awt.Dimension(100, 60));
+        btnPayEwallet.setText("E-Wallet");
+        btnPayEwallet.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        btnPayEwallet.setMaximumSize(new java.awt.Dimension(100, 60));
+        btnPayEwallet.setMinimumSize(new java.awt.Dimension(100, 60));
+        btnPayEwallet.setPreferredSize(new java.awt.Dimension(100, 60));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        jPanel6.add(amcButton8, gridBagConstraints);
+        payingPanel.add(btnPayEwallet, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
-        jPanel1.add(jPanel6, gridBagConstraints);
+        jPanel1.add(payingPanel, gridBagConstraints);
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -726,60 +758,152 @@ public class AppointmentPanel extends javax.swing.JPanel {
         jPanel1.revalidate();
     }//GEN-LAST:event_jPanel1AncestorResized
 
+    private void btnConServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConServiceActionPerformed
+        // TODO add your handling code here:
+        ((CardLayout) conListCard.getLayout()).show(conListCard, "Service");
+    }//GEN-LAST:event_btnConServiceActionPerformed
+
+    private void btnConMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConMedicineActionPerformed
+        // TODO add your handling code here:
+        ((CardLayout) conListCard.getLayout()).show(conListCard, "Medicine");
+    }//GEN-LAST:event_btnConMedicineActionPerformed
+
+    public void showInit(ApptNode node) {
+        consultPanel.setVisible(node.isShowConsult);
+        resultPanel.setVisible(node.isShowResult);
+        payingPanel.setVisible(node.isShowPaying);
+    }
+
+    public void renderDetail(Appointment appt) {
+        lblApptId.setText(appt.getId());
+        lblDate.setText(appt.getDateTime().toLocalDate().toString());
+        lblTime.setText(appt.getDateTime().toLocalTime().toString());
+        picStatus.set$image(new ImageIcon(getClass().getResource(appt.getStatus().getIconPath())));
+    }
+
+    public void renderUserName(String cusName, String stfName, String docName) {
+        if (cusName != null) {
+            picCustomer.setVisible(true);
+            lblCustomerName.setVisible(true);
+            lblCustomerName.setText(cusName);
+        }
+        if (stfName != null) {
+            picStaff.setVisible(true);
+            lblStaffName.setVisible(true);
+            lblStaffName.setText(stfName);
+        }
+        if (docName != null) {
+            picDoctor.setVisible(true);
+            lblDoctorName.setVisible(true);
+            lblDoctorName.setText(docName);
+        }
+    }
+
+    public void renderConsultPage(List<Service> allService, List<Medicine> allMedicine) {
+        DefaultTableModel serviceTbm = (DefaultTableModel) tblConService.getModel();
+        for (Service service: allService) {
+            serviceTbm.addRow(new Object[] {
+                service.getServiceName(), Boolean.FALSE, service
+            });
+        }
+
+        DefaultTableModel medicineTbm = (DefaultTableModel) tblConMedicine.getModel();
+        for (Medicine medicine: allMedicine) {
+            medicineTbm.addRow(new Object[] {
+                medicine.getMedicineName(), Integer.valueOf(0), medicine
+            });
+        }
+    }
+
+    public EndConsultContext getEndConsultContext() {
+        DefaultTableModel serviceTbm  = (DefaultTableModel) tblConService.getModel();
+        DefaultTableModel medicineTbm = (DefaultTableModel) tblConMedicine.getModel();
+        return new EndConsultContext(
+            serviceTbm.getDataVector(),
+            medicineTbm.getDataVector(),
+            txtConFeedback.getText()
+        );
+    }
+
+    public void renderResultPage(
+        List<ApptService> allApptService,
+        List<ApptMedicine> allApptMedicine,
+        double total, String feedback
+    ) {
+        DefaultTableModel serviceTbm = (DefaultTableModel) tblReService.getModel();
+        for (ApptService apptService: allApptService) {
+            serviceTbm.addRow(new Object[] {
+                apptService.getService().getServiceName(),
+                apptService.getFee()
+            });
+        }
+
+        DefaultTableModel medicineTbm = (DefaultTableModel) tblReMedicine.getModel();
+        for (ApptMedicine apptMedicine: allApptMedicine) {
+            medicineTbm.addRow(new Object[] {
+                apptMedicine.getMedicine().getMedicineName(),
+                apptMedicine.getQuantity(),
+                apptMedicine.getTotalPrice()
+            });
+        }
+
+        lblTotal.setText(DataUtil.amount2str(total));
+        txtReFeedback.setText(feedback);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.comp.AmcButton amcButton1;
-    private amc.view.comp.AmcButton amcButton2;
-    private amc.view.comp.AmcButton amcButton3;
-    private amc.view.comp.AmcButton amcButton4;
-    private amc.view.comp.AmcButton amcButton5;
-    private amc.view.comp.AmcButton amcButton6;
-    private amc.view.comp.AmcButton amcButton7;
-    private amc.view.comp.AmcButton amcButton8;
-    private amc.view.comp.AmcPicture amcPicture1;
-    private amc.view.comp.AmcPicture amcPicture2;
-    private amc.view.comp.AmcPicture amcPicture3;
-    private amc.view.comp.AmcPicture amcPicture4;
-    private amc.view.comp.AmcPicture amcPicture5;
-    private amc.view.comp.AmcPicture amcPicture6;
-    private amc.view.comp.AmcPicture amcPicture7;
     private amc.view.comp.AmcRoundBox amcRoundBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
+    private amc.view.comp.AmcButton btnConMedicine;
+    private amc.view.comp.AmcButton btnConService;
+    public amc.view.comp.AmcButton btnEndCon;
+    public amc.view.comp.AmcButton btnPayCard;
+    public amc.view.comp.AmcButton btnPayCash;
+    public amc.view.comp.AmcButton btnPayEwallet;
+    private amc.view.comp.AmcButton btnReMedicine;
+    private amc.view.comp.AmcButton btnReService;
+    private javax.swing.JPanel conListCard;
+    private javax.swing.JPanel consultPanel;
+    private javax.swing.JPanel detailPanel;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JLabel lblApptId;
+    public javax.swing.JLabel lblCustomerName;
+    private javax.swing.JLabel lblDate;
+    public javax.swing.JLabel lblDoctorName;
+    public javax.swing.JLabel lblStaffName;
+    private javax.swing.JLabel lblTime;
+    private javax.swing.JLabel lblTitleConFeedback;
+    private javax.swing.JLabel lblTitleConsult;
+    private javax.swing.JLabel lblTitleDetail;
+    private javax.swing.JLabel lblTitleReFeedback;
+    private javax.swing.JLabel lblTitleResult;
+    private javax.swing.JLabel lblTitleTotal;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JPanel payingPanel;
+    private amc.view.comp.AmcPicture picCustomer;
+    private amc.view.comp.AmcPicture picDoctor;
+    private amc.view.comp.AmcPicture picPayCard;
+    private amc.view.comp.AmcPicture picPayCash;
+    private amc.view.comp.AmcPicture picPayEwallet;
+    private amc.view.comp.AmcPicture picStaff;
+    private amc.view.comp.AmcPicture picStatus;
+    private javax.swing.JPanel reListCard;
+    private javax.swing.JPanel resultPanel;
+    private javax.swing.JScrollPane scoConFeedback;
+    private javax.swing.JScrollPane scoConMedicine;
+    private javax.swing.JScrollPane scoConService;
+    private javax.swing.JScrollPane scoReFeedback;
+    private javax.swing.JScrollPane scoReMedicine;
+    private javax.swing.JScrollPane scoReService;
+    private javax.swing.JTable tblConMedicine;
+    private javax.swing.JTable tblConService;
+    private javax.swing.JTable tblReMedicine;
+    private javax.swing.JTable tblReService;
+    private javax.swing.JTextArea txtConFeedback;
+    private javax.swing.JTextArea txtReFeedback;
     // End of variables declaration//GEN-END:variables
 }

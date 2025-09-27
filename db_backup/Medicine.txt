@@ -1,4 +1,4 @@
-SEQ
+033
 MDC-001|Amlodipine|MYR25.00
 MDC-002|Metformin|MYR20.00
 MDC-003|Bromhexine|MYR18.00
