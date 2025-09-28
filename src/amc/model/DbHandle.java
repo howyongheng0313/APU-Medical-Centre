@@ -93,7 +93,7 @@ public class DbHandle<T> {
     }
 
     // Insert
-    public boolean insert(List<T> modelLs) {
+    public boolean insert(List<? extends T> modelLs) {
         boolean result;
         try (BufferedWriter writer = Files.newBufferedWriter(this.path, StandardOpenOption.APPEND)) {
             for (T model: modelLs) {

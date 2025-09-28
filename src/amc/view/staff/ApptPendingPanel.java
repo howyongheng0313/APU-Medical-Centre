@@ -1,5 +1,6 @@
-package amc.view.share;
+package amc.view.staff;
 
+import amc.model.entity.Doctor;
 import amc.view.Theme;
 import amc.view.comp.AmcRoundBox;
 
@@ -106,7 +107,6 @@ public class ApptPendingPanel extends AmcRoundBox {
         jPanel1.add(jLabel3, gridBagConstraints);
 
         jComboBox1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setMaximumSize(new java.awt.Dimension(210, 30));
         jComboBox1.setMinimumSize(new java.awt.Dimension(210, 30));
         jComboBox1.setPreferredSize(new java.awt.Dimension(210, 30));
@@ -165,7 +165,7 @@ public class ApptPendingPanel extends AmcRoundBox {
     private amc.view.comp.AmcButton amcButton2;
     private amc.view.comp.AmcPicture amcPicture3;
     private amc.view.comp.AmcPicture amcPicture4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Doctor> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

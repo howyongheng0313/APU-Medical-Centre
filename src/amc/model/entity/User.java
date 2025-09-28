@@ -42,7 +42,7 @@ public abstract class User extends WithId {
     }
 
     public static User login(LoginContext loginCtx) {
-        List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserRole(loginCtx.email));
+        List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserAuth(loginCtx.email));
         if (authLs.isEmpty()) return null;
 
         UserAuth auth = authLs.getFirst();

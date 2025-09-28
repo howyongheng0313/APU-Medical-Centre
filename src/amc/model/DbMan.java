@@ -15,7 +15,7 @@ public final class DbMan {
 
     private DbMan() {}
 
-    public static Query<UserAuth> checkUserRole(String email) {
+    public static Query<UserAuth> checkUserAuth(String email) {
         return (model) -> {
             return model.getEmail().equals(DataUtil.formatEmail(email));
         };

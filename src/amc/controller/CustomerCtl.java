@@ -1,5 +1,6 @@
 package amc.controller;
 
+import amc.controller.customer.*;
 import amc.view.share.BarButton;
 import amc.view.share.BarComp;
 import amc.view.share.UserPanel;
@@ -16,6 +17,10 @@ public class CustomerCtl extends UserCtl {
 
     public CustomerCtl(AmcCtl ROOT) {
         super(ROOT);
+        AppointmentsCtl appointmentsCtl = new AppointmentsCtl(getROOT());
+        BookApptCtl     bookApptCtl     = new BookApptCtl(getROOT());
+        viewBody.add(appointmentsCtl.getView(), "Appointments");
+        viewBody.add(bookApptCtl.getView()    , "BookAppt");
     }
 
     @Override

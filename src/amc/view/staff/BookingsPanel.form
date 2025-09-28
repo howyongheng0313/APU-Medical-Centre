@@ -55,7 +55,7 @@
             </Property>
           </Properties>
           <SubComponents>
-            <Component class="amc.view.share.ApptPendingPanel" name="processing1">
+            <Component class="amc.view.staff.ApptPendingPanel" name="processing1">
               <Properties>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[0, 100]"/>
@@ -70,7 +70,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="amc.view.share.ApptPendingPanel" name="processing2">
+            <Component class="amc.view.staff.ApptPendingPanel" name="processing2">
               <Properties>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[0, 100]"/>
@@ -199,7 +199,7 @@
               </StatementProvider>
               <Parameters>
                 <CodeExpression id="8_processing1">
-                  <CodeVariable name="processing1" type="8194" declaredType="amc.view.share.ApptPendingPanel"/>
+                  <CodeVariable name="processing1" type="8194" declaredType="amc.view.staff.ApptPendingPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
                       <ComponentRef name="processing1"/>
@@ -270,7 +270,7 @@
               </StatementProvider>
               <Parameters>
                 <CodeExpression id="13_processing2">
-                  <CodeVariable name="processing2" type="8194" declaredType="amc.view.share.ApptPendingPanel"/>
+                  <CodeVariable name="processing2" type="8194" declaredType="amc.view.staff.ApptPendingPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
                       <ComponentRef name="processing2"/>

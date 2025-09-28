@@ -46,6 +46,7 @@ public void setAppointmentData(AppointmentDTO appointmentDTO) {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        imgStatus = new amc.view.comp.AmcPicture();
         lblApptId = new javax.swing.JLabel();
         lblApptDate = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -57,8 +58,6 @@ public void setAppointmentData(AppointmentDTO appointmentDTO) {
         imgDoctor = new amc.view.comp.AmcPicture();
         imgPatient = new amc.view.comp.AmcPicture();
         lblApptTime = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        imgStatus = new amc.view.comp.AmcPicture();
 
         setBackground(Theme.C1_INTER);
         setPreferredSize(new java.awt.Dimension(554, 200));
@@ -67,6 +66,16 @@ public void setAppointmentData(AppointmentDTO appointmentDTO) {
         layout.columnWeights = new double[] {0.5, 0.5};
         layout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.5, 0.5, 0.5};
         setLayout(layout);
+
+        imgStatus.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/status_pending_30.png"))); // NOI18N
+        imgStatus.setMaximumSize(new java.awt.Dimension(30, 30));
+        imgStatus.setMinimumSize(new java.awt.Dimension(30, 30));
+        imgStatus.setPreferredSize(new java.awt.Dimension(31, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 10);
+        add(imgStatus, gridBagConstraints);
 
         lblApptId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblApptId.setText("APT-001");
@@ -170,28 +179,6 @@ public void setAppointmentData(AppointmentDTO appointmentDTO) {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
         add(lblApptTime, gridBagConstraints);
-
-        jPanel2.setOpaque(false);
-        java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
-        jPanel2Layout.columnWidths = new int[] {0, 30};
-        jPanel2Layout.columnWeights = new double[] {1.0, 0.0};
-        jPanel2Layout.rowWeights = new double[] {1.0};
-        jPanel2.setLayout(jPanel2Layout);
-
-        imgStatus.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/status_pending_30.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(imgStatus, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 5, 0);
-        add(jPanel2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -201,7 +188,6 @@ public void setAppointmentData(AppointmentDTO appointmentDTO) {
     private amc.view.comp.AmcPicture imgStaff;
     private amc.view.comp.AmcPicture imgStatus;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblApptDate;
     private javax.swing.JLabel lblApptId;
