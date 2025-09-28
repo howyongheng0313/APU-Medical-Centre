@@ -48,7 +48,6 @@ public class EmployeesPanel extends javax.swing.JPanel {
             @Override
             public boolean isCellEditable(int r, int c) {return false;}
         };
-
         for(User employee : employees){
             model.addRow(new Object[]{
                 employee.getUserName(),
@@ -60,8 +59,8 @@ public class EmployeesPanel extends javax.swing.JPanel {
                 employee.getRole(),
                 (employee instanceof Doctor doc) ? doc.getLicense() : ""
             });
-        jTable1.setModel(model);
         }
+        jTable1.setModel(model);
     }
 
     // Show empty state 
@@ -173,12 +172,16 @@ public class EmployeesPanel extends javax.swing.JPanel {
     }
 
     private void deptInputVisible(boolean visible) {
+        lblCDDepartment.setVisible(visible);
         cbxCDDepartment.setVisible(visible);
+        lblUDDepartment.setVisible(visible);
         cbxUDDepartment.setVisible(visible);
     }
 
     private void licenseInputVisible(boolean visible) {
+        lblCDMedicalLicense.setVisible(visible);
         jtfCDMedicalLicense.setVisible(visible);
+        lblUDMedicalLicense.setVisible(visible);
         jtfUDMedicalLicense.setVisible(visible);
     }
 
