@@ -1,12 +1,15 @@
 package amc.view.share;
 
-import amc.view.comp.AmcRoundBox;
+import amc.model.entity.Comment;
 import amc.view.Theme;
+import java.awt.Component;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
-public class ProfileCommentComp extends AmcRoundBox {
+public class ProfileCommentComp extends javax.swing.JPanel implements ListCellRenderer<Comment> {
 
     /**
-     * Creates new form ProfileComment
+     * Creates new form ProfileCommentCom
      */
     public ProfileCommentComp() {
         initComponents();
@@ -20,60 +23,96 @@ public class ProfileCommentComp extends AmcRoundBox {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextArea1 = new javax.swing.JTextArea();
+        amcRoundBox1 = new amc.view.comp.AmcRoundBox();
+        lblUserName = new javax.swing.JLabel();
+        lblRating = new javax.swing.JLabel();
+        lblStar = new javax.swing.JLabel();
+        txtComment = new javax.swing.JTextArea();
 
-        setBackground(Theme.C1_INTER);
-        set$borderWidth(0);
-        set$cornerRound(15);
-        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
-        layout.rowHeights = new int[] {30, 0};
-        layout.columnWeights = new double[] {1.0};
-        layout.rowWeights = new double[] {0.0, 1.0};
-        setLayout(layout);
+        setOpaque(false);
+        setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel1.setForeground(Theme.C1_FG);
-        jLabel1.setText("Gan Ting Yong");
+        amcRoundBox1.setBackground(Theme.C1_INTER);
+        amcRoundBox1.set$borderWidth(0);
+        amcRoundBox1.set$cornerRound(15);
+        java.awt.GridBagLayout amcRoundBox1Layout = new java.awt.GridBagLayout();
+        amcRoundBox1Layout.rowHeights = new int[] {30, 50};
+        amcRoundBox1Layout.columnWeights = new double[] {1.0};
+        amcRoundBox1Layout.rowWeights = new double[] {0.0, 1.0};
+        amcRoundBox1.setLayout(amcRoundBox1Layout);
+
+        lblUserName.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lblUserName.setForeground(Theme.C1_FG);
+        lblUserName.setText("Gan Ting Yong");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        add(jLabel1, gridBagConstraints);
+        amcRoundBox1.add(lblUserName, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel2.setForeground(Theme.C1_FG);
-        jLabel2.setText("5 Star");
+        lblRating.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lblRating.setForeground(Theme.C1_FG);
+        lblRating.setText("5");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 30);
+        amcRoundBox1.add(lblRating, gridBagConstraints);
+
+        lblStar.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        lblStar.setForeground(Theme.C1_FG);
+        lblStar.setText("★");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        add(jLabel2, gridBagConstraints);
+        amcRoundBox1.add(lblStar, gridBagConstraints);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(Theme.C1_INTER);
-        jTextArea1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jTextArea1.setForeground(Theme.C1_FG);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(1);
-        jTextArea1.setText("Something here to\nSHOW!!");
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBorder(null);
-        jTextArea1.setOpaque(false);
+        txtComment.setEditable(false);
+        txtComment.setBackground(Theme.C1_INTER);
+        txtComment.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtComment.setForeground(Theme.C1_FG);
+        txtComment.setLineWrap(true);
+        txtComment.setRows(1);
+        txtComment.setText("Something here to\nSHOW!!");
+        txtComment.setWrapStyleWord(true);
+        txtComment.setBorder(null);
+        txtComment.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 15, 5, 15);
-        add(jTextArea1, gridBagConstraints);
+        amcRoundBox1.add(txtComment, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        add(amcRoundBox1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextArea jTextArea1;
+    private amc.view.comp.AmcRoundBox amcRoundBox1;
+    private javax.swing.JLabel lblRating;
+    private javax.swing.JLabel lblStar;
+    private javax.swing.JLabel lblUserName;
+    private javax.swing.JTextArea txtComment;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public Component getListCellRendererComponent(
+        JList<? extends Comment> list,
+        Comment value, int index,
+        boolean isSelected, boolean cellHasFocus
+    ) {
+        lblUserName.setText(value.getAppointment().getCustomer().getUserName());
+        lblRating.setText(String.valueOf(value.getRating().getLevel()));
+        txtComment.setText(value.getContent());
+        return this;
+    }
 }

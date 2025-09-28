@@ -38,9 +38,10 @@ public class Appointment extends WithId {
     private Status status;
     private String feedback = null;
 
-    private Customer customer = null;
-    private Doctor   doctor   = null;
-    private Staff    staff    = null;
+    private Customer   customer   = null;
+    private Doctor     doctor     = null;
+    private Staff      staff      = null;
+    private Department department = null;
     
     public Appointment(
         String id,
@@ -87,6 +88,11 @@ public class Appointment extends WithId {
         return staff;
     }
 
+    public Department getDepartment() {
+        if (department == null) department = Db.Department.getById(departmentId);
+        return department;
+    }
+
     public void setCustomer(Customer customer) {
         if (this.customerId == null || !customerId.equals(customer.getId())) return;
         this.customer = customer;
@@ -100,5 +106,13 @@ public class Appointment extends WithId {
     public void setStaff(Staff staff) {
         if (this.staffId == null || !staffId.equals(staff.getId())) return;
         this.staff = staff;
+    }
+
+    public void setDepartment(Department department) {
+        if (departmentId == null || !departmentId.equals(department.getId())) return;
+        this.department = department;
+    }
+    public static void main(String[] args) {
+        System.out.println(Db.Appointment.getById("APT-002").getDoctor());
     }
 }

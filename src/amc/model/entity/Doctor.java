@@ -25,4 +25,7 @@ public class Doctor extends Employee {
     public String getLicense() { return license; }
 
     public void setLicense(String license) { this.license = license; }
+
+    @Override
+    public String toString() { return userName; }
 }

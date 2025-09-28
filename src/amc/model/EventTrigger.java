@@ -13,7 +13,7 @@ public class EventTrigger {
 
     public EventTrigger() {}
 
-    public void register(Runnable handler) {
+    public void listen(Runnable handler) {
         listenerLs.add(new WeakListener(handler));
     }
 

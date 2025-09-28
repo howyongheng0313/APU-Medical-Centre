@@ -905,7 +905,7 @@ public class EmployeesCtl extends AbstractSubCtl {
     private void createUserAuth(String email, Role role, String password) {
         try {
             Password hashedPassword = Password.build(password);
-            UserAuth userAuth = new UserAuth(email, role, hashedPassword, password);
+            UserAuth userAuth = new UserAuth(email, role, hashedPassword);
             Db.UserAuth.insert(List.of(userAuth));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(
@@ -927,7 +927,7 @@ public class EmployeesCtl extends AbstractSubCtl {
                 Db.UserAuth.delete(1, auth -> auth.getEmail().equals(oldEmail));
                 
                 // Create new entry with updated email but same password and plain text
-                UserAuth newAuth = new UserAuth(newEmail, role, oldAuth.getPassword(), oldAuth.getPlainTextPassword());
+                UserAuth newAuth = new UserAuth(newEmail, role, oldAuth.getPassword());
                 Db.UserAuth.insert(List.of(newAuth));
             }
         } catch (Exception ex) {

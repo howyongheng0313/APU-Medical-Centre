@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class CommentsCtl extends AbstractSubCtl {
-    private final CommentsPanel viewCommentLs = new CommentsPanel();
+    private final CommentsPanel viewComments = new CommentsPanel();
     
     public CommentsCtl(AmcCtl ROOT){
         super(ROOT);
@@ -25,14 +25,14 @@ public class CommentsCtl extends AbstractSubCtl {
     // Setup comment feature: Handles switching between summary and details view
     private void setupCommentFeature() {
         // From summary → show details
-        viewCommentLs.addPropertyChangeListener("showDetails", evt -> {
-            String id = viewCommentLs.getSelectedRecipientId();
-            Role type = viewCommentLs.getSelectedRecipientType();
+        viewComments.addPropertyChangeListener("showDetails", evt -> {
+            String id = viewComments.getSelectedRecipientId();
+            Role type = viewComments.getSelectedRecipientType();
             if (id != null && !id.isEmpty()) loadCommentDetails(id, type);
         });
 
         // From details → return to summary
-        viewCommentLs.addPropertyChangeListener("returnToSummary", evt -> {
+        viewComments.addPropertyChangeListener("returnToSummary", evt -> {
             loadCommentSummary();
         });
     }
@@ -41,10 +41,10 @@ public class CommentsCtl extends AbstractSubCtl {
     private void loadCommentSummary() {
         try {
             var summaries = this.getCommentSummarys();
-            viewCommentLs.showCommentSummary(summaries);
+            viewComments.showCommentSummary(summaries);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
-                viewCommentLs, "Error loading comment summary: " + e.getMessage(),
+                viewComments, "Error loading comment summary: " + e.getMessage(),
                 "Error", JOptionPane.ERROR_MESSAGE
             );
         }
@@ -55,10 +55,10 @@ public class CommentsCtl extends AbstractSubCtl {
         try {
             var details = this.getCommentDetails(recipientId, recipientType);
             String name = details.isEmpty() ? "Unknown" : details.get(0).recipientName;
-            viewCommentLs.showCommentDetails(name, details);
+            viewComments.showCommentDetails(name, details);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
-                viewCommentLs, "Error loading comment details: " + e.getMessage(),
+                viewComments, "Error loading comment details: " + e.getMessage(),
                 "Error", JOptionPane.ERROR_MESSAGE
             );
         }
@@ -178,5 +178,5 @@ public class CommentsCtl extends AbstractSubCtl {
         };
     }
 
-    public JPanel getView() { return viewCommentLs; }
+    public JPanel getView() { return viewComments; }
 }

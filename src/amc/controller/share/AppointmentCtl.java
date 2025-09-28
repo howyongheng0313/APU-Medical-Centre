@@ -23,11 +23,23 @@ public class AppointmentCtl extends AbstractSubCtl {
         super(ROOT);
         this.appt = appt;
         this.node = node;
+        writeNodeRecord();
         showInit();
         if (node.isShowConsult) consultProc();
         if (node.isShowResult)  resultProc();
         if (node.isShowPaying)  payingProc();
-        
+        viewAppt.picUndo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                getROOT().popPage(viewAppt);
+            }
+        });
+    }
+
+    private void writeNodeRecord() {
+        if (node.cusProfileNode != null) node.cusProfileNode.recordApptId(appt.getId());
+        if (node.stfProfileNode != null) node.stfProfileNode.recordApptId(appt.getId());
+        if (node.docProfileNode != null) node.docProfileNode.recordApptId(appt.getId());
     }
 
     private void showInit() {

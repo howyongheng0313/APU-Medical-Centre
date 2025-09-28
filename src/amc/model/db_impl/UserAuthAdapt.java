@@ -15,8 +15,7 @@ public class UserAuthAdapt extends DbAdapter<UserAuth> {
         UserAuth model = new UserAuth(
             row.get(0),
             Role.valueOf(row.get(1)),
-            new Password(row.get(2), row.get(3)),
-            row.size() > 4 ? row.get(4) : ""
+            new Password(row.get(2), row.get(3))
         );
         return model;
     }
@@ -27,8 +26,7 @@ public class UserAuthAdapt extends DbAdapter<UserAuth> {
             DataUtil.formatEmail(model.getEmail()),
             model.getRole().name(),
             model.getPassword().getHash64(),
-            model.getPassword().getSalt64(),
-            model.getPlainTextPassword()
+            model.getPassword().getSalt64()
         );
         return row;
     }

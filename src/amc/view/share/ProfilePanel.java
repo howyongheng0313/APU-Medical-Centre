@@ -1,11 +1,36 @@
 package amc.view.share;
 
 import amc.controller.share.ProfileNode;
+import amc.model.DataUtil;
+import amc.model.entity.Appointment;
+import amc.model.entity.Comment;
+import amc.model.entity.Department;
+import amc.model.entity.Doctor;
+import amc.model.entity.Employee;
 import amc.model.entity.User;
 import amc.view.Theme;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 
 public class ProfilePanel extends javax.swing.JPanel {
+    public record EditContext(
+        String      userName,
+        LocalDate   dateOfBirth,
+        User.Gender gender,
+        String      email,
+        String      contact,
+        Department  department,
+        String      license,
+        String      newPassword,
+        String      confirmPassword
+    ) {}
+
+    public record SendCmtContext(String content, Comment.Rating rating) {}
 
     /**
      * Creates new form ProfilePanel
@@ -13,6 +38,8 @@ public class ProfilePanel extends javax.swing.JPanel {
     public ProfilePanel() {
         initComponents();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(12);
+        picUndo.setCursor(new Cursor(Cursor.HAND_CURSOR) {
+        });
 
         btnEdit.setVisible(false);
         btnLogout.setVisible(false);
@@ -25,6 +52,11 @@ public class ProfilePanel extends javax.swing.JPanel {
         sendCmtPanel.setVisible(false);
         commentPanel.setVisible(false);
         feedbackPanel.setVisible(false);
+
+        lblEditDepartment.setVisible(false);
+        cmbEditDepartment.setVisible(false);
+        lblEditLicense.setVisible(false);
+        txtEditLicense.setVisible(false);
     }
 
     /**
@@ -35,8 +67,32 @@ public class ProfilePanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        editDialog = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        lblTitleEdit = new javax.swing.JLabel();
+        editForm = new javax.swing.JPanel();
+        lblEditUserName = new javax.swing.JLabel();
+        txtEditUserName = new amc.view.comp.AmcPlaceHolder();
+        lblEditDateOfBirth = new javax.swing.JLabel();
+        datEditDateOfBirth = new amc.view.comp.AmcDateField();
+        lblEditGender = new javax.swing.JLabel();
+        cmbEditGender = new javax.swing.JComboBox<>();
+        lblEditEmail = new javax.swing.JLabel();
+        txtEditEmail = new amc.view.comp.AmcPlaceHolder();
+        lblEditContact = new javax.swing.JLabel();
+        txtEditContact = new amc.view.comp.AmcPlaceHolder();
+        lblEditDepartment = new javax.swing.JLabel();
+        cmbEditDepartment = new javax.swing.JComboBox<>();
+        lblEditLicense = new javax.swing.JLabel();
+        txtEditLicense = new amc.view.comp.AmcPlaceHolder();
+        lblEditNewPass = new javax.swing.JLabel();
+        pwdEditNewPass = new javax.swing.JPasswordField();
+        lblEditConfirnPass = new javax.swing.JLabel();
+        pwdEditConfirmPass = new javax.swing.JPasswordField();
+        btnEditConfirm = new amc.view.comp.AmcButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        picUndo = new amc.view.comp.AmcPicture();
         detailPanel = new javax.swing.JPanel();
         picAvatar = new amc.view.comp.AmcPicture();
         amcRoundBox1 = new amc.view.comp.AmcRoundBox();
@@ -55,15 +111,225 @@ public class ProfilePanel extends javax.swing.JPanel {
         lblLicense = new javax.swing.JLabel();
         btnEdit = new amc.view.comp.AmcButton();
         btnLogout = new amc.view.comp.AmcButton();
-        sendCmtPanel = new javax.swing.JPanel();
-        txtComment = new amc.view.comp.AmcPlaceHolder();
+        sendCmtPanel = new javax.swing.JLayeredPane();
+        txtSend = new javax.swing.JTextArea();
+        cmbRating = new javax.swing.JComboBox<>();
         btnSend = new amc.view.comp.AmcButton();
-        profileComment1 = new amc.view.share.ProfileCommentComp();
-        profileComment2 = new amc.view.share.ProfileCommentComp();
+        lstSendCmt = new javax.swing.JList<>();
         commentPanel = new javax.swing.JPanel();
+        lstComment = new javax.swing.JList<>();
         feedbackPanel = new javax.swing.JPanel();
-        profileFeedbackComp1 = new amc.view.share.ProfileFeedbackComp();
-        profileFeedbackComp2 = new amc.view.share.ProfileFeedbackComp();
+        lstFeedback = new javax.swing.JList<>();
+
+        editDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        editDialog.setTitle("Edit Profile");
+
+        jPanel2.setBackground(Theme.C2_BG);
+        jPanel2.setMaximumSize(new java.awt.Dimension(200, 200));
+        jPanel2.setMinimumSize(new java.awt.Dimension(200, 200));
+        java.awt.GridBagLayout jPanel2Layout1 = new java.awt.GridBagLayout();
+        jPanel2Layout1.columnWidths = new int[] {50, 200, 50};
+        jPanel2Layout1.columnWeights = new double[] {0.2, 0.6, 0.2};
+        jPanel2Layout1.rowWeights = new double[] {0.1, 0.8, 0.1};
+        jPanel2.setLayout(jPanel2Layout1);
+
+        lblTitleEdit.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        lblTitleEdit.setForeground(Theme.C2_FG);
+        lblTitleEdit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitleEdit.setText("Edit Profile");
+        lblTitleEdit.setMaximumSize(new java.awt.Dimension(150, 40));
+        lblTitleEdit.setMinimumSize(new java.awt.Dimension(150, 40));
+        lblTitleEdit.setPreferredSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        jPanel2.add(lblTitleEdit, gridBagConstraints);
+
+        editForm.setMaximumSize(new java.awt.Dimension(200, 200));
+        editForm.setMinimumSize(new java.awt.Dimension(200, 200));
+        editForm.setName(""); // NOI18N
+        editForm.setOpaque(false);
+        editForm.setPreferredSize(new java.awt.Dimension(200, 200));
+        java.awt.GridBagLayout editFormLayout = new java.awt.GridBagLayout();
+        editFormLayout.columnWeights = new double[] {0.2, 0.8};
+        editForm.setLayout(editFormLayout);
+
+        lblEditUserName.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditUserName.setText("Full Name");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditUserName, gridBagConstraints);
+
+        txtEditUserName.setBackground(Theme.C1_BG);
+        txtEditUserName.setForeground(Theme.C1_FG);
+        txtEditUserName.set$hint("@: Tan Nai-Long / Rachael");
+        txtEditUserName.set$holderColor(Theme.WARN_BG);
+        txtEditUserName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(txtEditUserName, gridBagConstraints);
+
+        lblEditDateOfBirth.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditDateOfBirth.setText("Date of Birth");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditDateOfBirth, gridBagConstraints);
+
+        datEditDateOfBirth.setBackground(Theme.C1_BG);
+        datEditDateOfBirth.setForeground(Theme.C1_FG);
+        datEditDateOfBirth.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(datEditDateOfBirth, gridBagConstraints);
+
+        lblEditGender.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditGender.setText("Gender");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditGender, gridBagConstraints);
+
+        cmbEditGender.setBackground(Theme.C1_BG);
+        cmbEditGender.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        cmbEditGender.setForeground(Theme.C1_FG);
+        cmbEditGender.setModel(new DefaultComboBoxModel<>(User.Gender.values()));
+        cmbEditGender.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(cmbEditGender, gridBagConstraints);
+
+        lblEditEmail.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditEmail.setText("Email Address");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditEmail, gridBagConstraints);
+
+        txtEditEmail.setBackground(Theme.C1_BG);
+        txtEditEmail.setForeground(Theme.C1_FG);
+        txtEditEmail.set$hint("@: xxx@gmail.com");
+        txtEditEmail.set$holderColor(Theme.WARN_BG);
+        txtEditEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(txtEditEmail, gridBagConstraints);
+
+        lblEditContact.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditContact.setText("Contact Num");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditContact, gridBagConstraints);
+
+        txtEditContact.setBackground(Theme.C1_BG);
+        txtEditContact.setForeground(Theme.C1_FG);
+        txtEditContact.set$hint("@: 0123456789 / +60123456789");
+        txtEditContact.set$holderColor(Theme.WARN_BG);
+        txtEditContact.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(txtEditContact, gridBagConstraints);
+
+        lblEditDepartment.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditDepartment.setText("Department");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditDepartment, gridBagConstraints);
+
+        cmbEditDepartment.setBackground(Theme.C1_BG);
+        cmbEditDepartment.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        cmbEditDepartment.setForeground(Theme.C1_FG);
+        cmbEditDepartment.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(cmbEditDepartment, gridBagConstraints);
+
+        lblEditLicense.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditLicense.setText("Medical License");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditLicense, gridBagConstraints);
+
+        txtEditLicense.setBackground(Theme.C1_BG);
+        txtEditLicense.setForeground(Theme.C1_FG);
+        txtEditLicense.set$hint("@: MMC|NSR|APC|LCP|...");
+        txtEditLicense.set$holderColor(Theme.WARN_BG);
+        txtEditLicense.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(txtEditLicense, gridBagConstraints);
+
+        lblEditNewPass.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditNewPass.setText("New Password");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditNewPass, gridBagConstraints);
+
+        pwdEditNewPass.setBackground(Theme.C1_BG);
+        pwdEditNewPass.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        pwdEditNewPass.setForeground(Theme.C1_FG);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(pwdEditNewPass, gridBagConstraints);
+
+        lblEditConfirnPass.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblEditConfirnPass.setText("Confirm Password");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 1.0;
+        editForm.add(lblEditConfirnPass, gridBagConstraints);
+
+        pwdEditConfirmPass.setBackground(Theme.C1_BG);
+        pwdEditConfirmPass.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        pwdEditConfirmPass.setForeground(Theme.C1_FG);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        editForm.add(pwdEditConfirmPass, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(editForm, gridBagConstraints);
+
+        btnEditConfirm.setBackground(Theme.C1_BG);
+        btnEditConfirm.setForeground(Theme.C1_FG);
+        btnEditConfirm.setText("Confirm Edit");
+        btnEditConfirm.set$hoverBackground(Theme.C1_BG_SELECT);
+        btnEditConfirm.set$hoverForeground(Theme.C1_FG_SELECT);
+        btnEditConfirm.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnEditConfirm.setMaximumSize(new java.awt.Dimension(150, 30));
+        btnEditConfirm.setMinimumSize(new java.awt.Dimension(150, 30));
+        btnEditConfirm.setPreferredSize(new java.awt.Dimension(150, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        jPanel2.add(btnEditConfirm, gridBagConstraints);
+
+        editDialog.getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         setBackground(Theme.C1_BG);
         setLayout(new java.awt.BorderLayout());
@@ -88,6 +354,17 @@ public class ProfilePanel extends javax.swing.JPanel {
         jPanel1Layout.columnWeights = new double[] {0.1, 0.8, 0.1};
         jPanel1Layout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0};
         jPanel1.setLayout(jPanel1Layout);
+
+        picUndo.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/icon_undo.png"))); // NOI18N
+        picUndo.setMaximumSize(new java.awt.Dimension(35, 35));
+        picUndo.setMinimumSize(new java.awt.Dimension(35, 35));
+        picUndo.setPreferredSize(new java.awt.Dimension(35, 36));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
+        jPanel1.add(picUndo, gridBagConstraints);
 
         detailPanel.setMaximumSize(new java.awt.Dimension(100, 300));
         detailPanel.setMinimumSize(new java.awt.Dimension(100, 300));
@@ -116,7 +393,7 @@ public class ProfilePanel extends javax.swing.JPanel {
         amcRoundBox1.setPreferredSize(new java.awt.Dimension(100, 100));
         java.awt.GridBagLayout amcRoundBox1Layout = new java.awt.GridBagLayout();
         amcRoundBox1Layout.columnWidths = new int[] {160, 100};
-        amcRoundBox1Layout.columnWeights = new double[] {0.0, 1.0};
+        amcRoundBox1Layout.columnWeights = new double[] {0.1, 0.9};
         amcRoundBox1.setLayout(amcRoundBox1Layout);
 
         lblUserName.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
@@ -276,22 +553,37 @@ public class ProfilePanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         jPanel1.add(detailPanel, gridBagConstraints);
 
-        sendCmtPanel.setMaximumSize(new java.awt.Dimension(10, 10));
-        sendCmtPanel.setOpaque(false);
-        sendCmtPanel.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout jLayeredPane1Layout = new java.awt.GridBagLayout();
+        jLayeredPane1Layout.columnWidths = new int[] {0, 100};
+        jLayeredPane1Layout.columnWeights = new double[] {1.0, 0.0};
+        sendCmtPanel.setLayout(jLayeredPane1Layout);
 
-        txtComment.set$hint("Typing comment here");
-        txtComment.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtComment.setMaximumSize(new java.awt.Dimension(100, 35));
-        txtComment.setMinimumSize(new java.awt.Dimension(100, 35));
-        txtComment.setPreferredSize(new java.awt.Dimension(100, 35));
+        txtSend.setBackground(Theme.C1_INTER);
+        txtSend.setColumns(20);
+        txtSend.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtSend.setLineWrap(true);
+        txtSend.setRows(1);
+        txtSend.setWrapStyleWord(true);
+        txtSend.setMargin(new java.awt.Insets(5, 6, 5, 6));
+        sendCmtPanel.setLayer(txtSend, javax.swing.JLayeredPane.PALETTE_LAYER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 0, 5);
+        sendCmtPanel.add(txtSend, gridBagConstraints);
+
+        cmbRating.setBackground(Theme.C1_INTER);
+        cmbRating.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        cmbRating.setModel(new DefaultComboBoxModel<Comment.Rating>(Comment.Rating.values()));
+        cmbRating.setMaximumSize(new java.awt.Dimension(100, 30));
+        cmbRating.setMinimumSize(new java.awt.Dimension(100, 30));
+        cmbRating.setPreferredSize(new java.awt.Dimension(100, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        sendCmtPanel.add(txtComment, gridBagConstraints);
+        sendCmtPanel.add(cmbRating, gridBagConstraints);
 
         btnSend.setBackground(Theme.DONE_BG);
         btnSend.setForeground(Theme.C2_FG);
@@ -299,26 +591,26 @@ public class ProfilePanel extends javax.swing.JPanel {
         btnSend.set$hoverBackground(Theme.DONE_BG_SELECT);
         btnSend.set$hoverForeground(Theme.C2_FG_SELECT);
         btnSend.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        btnSend.setMaximumSize(new java.awt.Dimension(80, 35));
-        btnSend.setMinimumSize(new java.awt.Dimension(80, 35));
-        btnSend.setPreferredSize(new java.awt.Dimension(80, 35));
+        btnSend.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnSend.setMinimumSize(new java.awt.Dimension(100, 30));
+        btnSend.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         sendCmtPanel.add(btnSend, gridBagConstraints);
+
+        lstSendCmt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstSendCmt.setCellRenderer(new ProfileCommentComp());
+        lstSendCmt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lstSendCmt.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        sendCmtPanel.add(profileComment1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        sendCmtPanel.add(profileComment2, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        sendCmtPanel.add(lstSendCmt, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -327,17 +619,17 @@ public class ProfilePanel extends javax.swing.JPanel {
         jPanel1.add(sendCmtPanel, gridBagConstraints);
 
         commentPanel.setOpaque(false);
-
-        javax.swing.GroupLayout commentPanelLayout = new javax.swing.GroupLayout(commentPanel);
+        java.awt.GridBagLayout commentPanelLayout = new java.awt.GridBagLayout();
+        commentPanelLayout.columnWeights = new double[] {1.0};
         commentPanel.setLayout(commentPanelLayout);
-        commentPanelLayout.setHorizontalGroup(
-            commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        commentPanelLayout.setVerticalGroup(
-            commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+
+        lstComment.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstComment.setCellRenderer(new ProfileCommentComp());
+        lstComment.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lstComment.setOpaque(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        commentPanel.add(lstComment, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -348,20 +640,20 @@ public class ProfilePanel extends javax.swing.JPanel {
         java.awt.GridBagLayout jPanel5Layout = new java.awt.GridBagLayout();
         jPanel5Layout.columnWeights = new double[] {1.0};
         feedbackPanel.setLayout(jPanel5Layout);
+
+        lstFeedback.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstFeedback.setCellRenderer(new ProfileFeedbackComp());
+        lstFeedback.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lstFeedback.setOpaque(false);
+        lstFeedback.setVisibleRowCount(2);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        feedbackPanel.add(profileFeedbackComp1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        feedbackPanel.add(profileFeedbackComp2, gridBagConstraints);
+        feedbackPanel.add(lstFeedback, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         jPanel1.add(feedbackPanel, gridBagConstraints);
 
         jScrollPane1.setViewportView(jPanel1);
@@ -371,7 +663,12 @@ public class ProfilePanel extends javax.swing.JPanel {
 
     private void jPanel1AncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1AncestorResized
         // TODO add your handling code here:
-        jPanel1.setPreferredSize(new Dimension(jPanel1.getParent().getWidth(), jPanel1.getHeight()));
+        int childHeight = 50;
+        for (Component child: jPanel1.getComponents()) {
+            if (!child.isVisible()) continue;
+            childHeight += child.getPreferredSize().height;
+        }
+        jPanel1.setPreferredSize(new Dimension(jPanel1.getParent().getWidth(), childHeight));
         jPanel1.revalidate();
     }//GEN-LAST:event_jPanel1AncestorResized
 
@@ -392,51 +689,165 @@ public class ProfilePanel extends javax.swing.JPanel {
         lblDateOfBirth.setText(user.getDateOfBirth().toString());
         lblEmail.setText(user.getEmail());
         lblContact.setText(user.getContact());
-    }
-
-    public void renderEmpDetail(String department, String license) {
-        if (department != null) {
-            lblDept.setText(department);
+        if (user instanceof Employee empuser) {
+            lblDept.setText(empuser.getDepartment().getDepartmentName());
             lblDept.setVisible(true);
             lblTitleDept.setVisible(true);
         }
-        if (license != null) {
-            lblLicense.setText(license);
+        if (user instanceof Doctor docUser) {
+            lblLicense.setText(docUser.getLicense());
             lblLicense.setVisible(true);
             lblTitleLicense.setVisible(true);
         }
     }
 
+    public void renderEditDialog(User user) {
+        txtEditUserName.setText(user.getUserName());
+        datEditDateOfBirth.set$date(user.getDateOfBirth());
+        cmbEditGender.setSelectedItem(user.getGender());
+        txtEditEmail.setText(user.getEmail());
+        txtEditContact.setText(user.getContact());
+
+        if (user instanceof Employee empUser) {
+            cmbEditDepartment.setSelectedItem(empUser.getDepartment());
+            cmbEditDepartment.setVisible(true);
+            lblEditDepartment.setVisible(true);
+        }
+        if (user instanceof Doctor docUser) {
+            txtEditLicense.setText(docUser.getLicense());
+            txtEditLicense.setVisible(true);
+            lblEditLicense.setVisible(true);
+        }
+        editDialog.setEnabled(true);
+        editDialog.setVisible(true);
+        editDialog.setLocationRelativeTo(this);
+    }
+
+    public void initComboDept(List<Department> deptls) {
+        Department selected = (Department) cmbEditDepartment.getSelectedItem();
+        cmbEditDepartment.setModel(new DefaultComboBoxModel<> (deptls.toArray()));
+        cmbEditDepartment.setSelectedItem(selected);
+    }
+
+    public EditContext getEditContext() {
+        return new EditContext(
+            txtEditUserName.getText(),
+            datEditDateOfBirth.get$date(),
+            (User.Gender) cmbEditGender.getSelectedItem(),
+            DataUtil.formatEmail(txtEditEmail.getText()),
+            txtEditContact.getText(),
+            (Department) cmbEditDepartment.getSelectedItem(),
+            txtEditLicense.getText(),
+            String.valueOf(pwdEditNewPass.getPassword()),
+            String.valueOf(pwdEditConfirmPass.getPassword())
+        );
+    }
+
+    public void clearEditECL(boolean kEmail, boolean kContact, boolean kLicense) {
+        if (kEmail  ) txtEditEmail.setText("");
+        if (kContact) txtEditContact.setText("");
+        if (kLicense) txtEditLicense.setText("");
+    }
+
+    public void clearEditDialog() {
+        editDialog.setEnabled(false);
+        editDialog.setVisible(false);
+
+        lblEditDepartment.setVisible(false);
+        cmbEditDepartment.setVisible(false);
+        lblEditLicense.setVisible(false);
+        txtEditLicense.setVisible(false);
+
+        txtEditUserName.setText("");
+        datEditDateOfBirth.set$date(LocalDate.EPOCH);
+        cmbEditGender.setSelectedIndex(0);
+        txtEditEmail.setText("");
+        txtEditContact.setText("");
+        cmbEditDepartment.setSelectedIndex(0);
+        cmbEditDepartment.setModel(new DefaultComboBoxModel<>());
+        txtEditLicense.setText("");
+        pwdEditNewPass.setText("");
+        pwdEditConfirmPass.setText("");
+    }
+
+    public SendCmtContext getSendCmtCtx() {
+        return new SendCmtContext(
+            txtSend.getText(),
+            (Comment.Rating) cmbRating.getSelectedItem()
+        );
+    }
+
+    public void renderSendCmtList(List<Comment> sendLs) {
+        DefaultListModel<Comment> lsModel = new DefaultListModel<>();
+        lsModel.addAll(sendLs);
+        lstSendCmt.setModel(lsModel);
+    }
+
+    public void renderCommentList(List<Comment> cmtLs) {
+        DefaultListModel<Comment> lsModel = new DefaultListModel<>();
+        lsModel.addAll(cmtLs);
+        lstComment.setModel(lsModel);
+    }
+
+    public void renderFeedbackList(List<Appointment> apptLs) {
+        DefaultListModel<Appointment> lsModel = new DefaultListModel<>();
+        lsModel.addAll(apptLs);
+        lstFeedback.setModel(lsModel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private amc.view.comp.AmcRoundBox amcRoundBox1;
     public amc.view.comp.AmcButton btnEdit;
+    public amc.view.comp.AmcButton btnEditConfirm;
     public amc.view.comp.AmcButton btnLogout;
-    private amc.view.comp.AmcButton btnSend;
+    public amc.view.comp.AmcButton btnSend;
+    private javax.swing.JComboBox<Object> cmbEditDepartment;
+    private javax.swing.JComboBox<User.Gender> cmbEditGender;
+    private javax.swing.JComboBox<Comment.Rating> cmbRating;
     private javax.swing.JPanel commentPanel;
+    private amc.view.comp.AmcDateField datEditDateOfBirth;
     private javax.swing.JPanel detailPanel;
+    private javax.swing.JDialog editDialog;
+    private javax.swing.JPanel editForm;
     private javax.swing.JPanel feedbackPanel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblContact;
     private javax.swing.JLabel lblDateOfBirth;
     private javax.swing.JLabel lblDept;
+    private javax.swing.JLabel lblEditConfirnPass;
+    private javax.swing.JLabel lblEditContact;
+    private javax.swing.JLabel lblEditDateOfBirth;
+    private javax.swing.JLabel lblEditDepartment;
+    private javax.swing.JLabel lblEditEmail;
+    private javax.swing.JLabel lblEditGender;
+    private javax.swing.JLabel lblEditLicense;
+    private javax.swing.JLabel lblEditNewPass;
+    private javax.swing.JLabel lblEditUserName;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGender;
     private javax.swing.JLabel lblLicense;
     private javax.swing.JLabel lblTitleContact;
     private javax.swing.JLabel lblTitleDateOfBirth;
     private javax.swing.JLabel lblTitleDept;
+    private javax.swing.JLabel lblTitleEdit;
     private javax.swing.JLabel lblTitleEmail;
     private javax.swing.JLabel lblTitleLicense;
     private javax.swing.JLabel lblUserId;
     private javax.swing.JLabel lblUserName;
+    public javax.swing.JList<Comment> lstComment;
+    public javax.swing.JList<Appointment> lstFeedback;
+    public javax.swing.JList<Comment> lstSendCmt;
     private amc.view.comp.AmcPicture picAvatar;
-    private amc.view.share.ProfileCommentComp profileComment1;
-    private amc.view.share.ProfileCommentComp profileComment2;
-    private amc.view.share.ProfileFeedbackComp profileFeedbackComp1;
-    private amc.view.share.ProfileFeedbackComp profileFeedbackComp2;
-    private javax.swing.JPanel sendCmtPanel;
-    private amc.view.comp.AmcPlaceHolder txtComment;
+    public amc.view.comp.AmcPicture picUndo;
+    private javax.swing.JPasswordField pwdEditConfirmPass;
+    private javax.swing.JPasswordField pwdEditNewPass;
+    private javax.swing.JLayeredPane sendCmtPanel;
+    private amc.view.comp.AmcPlaceHolder txtEditContact;
+    private amc.view.comp.AmcPlaceHolder txtEditEmail;
+    private amc.view.comp.AmcPlaceHolder txtEditLicense;
+    private amc.view.comp.AmcPlaceHolder txtEditUserName;
+    private javax.swing.JTextArea txtSend;
     // End of variables declaration//GEN-END:variables
 }

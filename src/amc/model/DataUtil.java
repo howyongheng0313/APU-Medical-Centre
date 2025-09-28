@@ -6,11 +6,23 @@ import java.text.ParsePosition;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public final class DataUtil {
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
     private static final DecimalFormat AMOUNT_FORMAT;
+
+    private static final String EMAIL_LOCALE = "[a-z0-9](?:[a-z0-9.!#$%&'*+/=?^_`{|}~-]{0,61}[a-z0-9])?";
+    private static final String EMAIL_DOMAIN = "[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?";
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+        "^(?!.*\\.\\.)" + EMAIL_LOCALE + "@" +
+        EMAIL_DOMAIN + "(?:\\." + EMAIL_DOMAIN + ")*\\.[a-z]{2,}$"
+    );
+    private static final List<String> LICENSE_CODES = List.of(
+        "MMC", "NSR", "APC", "LCP", "TCM", "AHP", "DC", "PC"
+    );
 
     static {
         AMOUNT_FORMAT = new DecimalFormat("0.00");
@@ -44,6 +56,26 @@ public final class DataUtil {
     }
 
     public static String formatEmail(String email) {
-        return email.strip().toLowerCase();
+        String lower = email.strip().toLowerCase();
+        return EMAIL_PATTERN.matcher(lower).matches() ? lower : "";
+    }
+
+    public static boolean validContact(String contact) {
+        if (contact == null || contact.length() < 7 || 15 < contact.length()) return false;
+        if (!(contact.startsWith("+") || contact.startsWith("0"))) return false;
+        if (contact.charAt(1) == '0') return false;
+        return (contact.substring(1).chars().allMatch(Character::isDigit));
+    }
+
+    public static boolean validLicense(String license) {
+        if (license == null) return false;
+        for (String code: LICENSE_CODES) {
+            if (license.startsWith(code)) return true;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(validLicense("MMC 27666"));
     }
 }
