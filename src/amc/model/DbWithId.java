@@ -23,7 +23,7 @@ public class DbWithId<T extends WithId> extends DbHandle<T> {
     }
 
     @Override
-    public boolean insert(List<T> modelLs) {
+    public boolean insert(List<? extends T> modelLs) {
         try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.WRITE)) {
             writer.write(String.format("%03d", sequence));
         } catch (IOException e) { return false; }

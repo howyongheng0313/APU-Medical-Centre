@@ -110,7 +110,7 @@ public class ProfileCtl extends AbstractSubCtl {
             boolean kContact = !DataUtil.validContact(editCtx.contact());
             boolean kLicense = (target instanceof Doctor) && !DataUtil.validLicense(editCtx.license());
             if (!editCtx.email().isEmpty()) {
-                List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserRole(editCtx.email()));
+                List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserAuth(editCtx.email()));
                 kEmail = !authLs.isEmpty();
             }
             viewProfile.clearEditECL(kEmail, kContact, kLicense);
@@ -135,7 +135,7 @@ public class ProfileCtl extends AbstractSubCtl {
             }
             if (!enableUpdate) return;
 
-            Db.UserAuth.update(1, DbMan.checkUserRole(target.getEmail()), (UserAuth model) -> {
+            Db.UserAuth.update(1, DbMan.checkUserAuth(target.getEmail()), (UserAuth model) -> {
                 model.setEmail(editCtx.email());
                 if (editCtx.newPassword() != null && !editCtx.newPassword().isEmpty()) {
                     model.setPassword(Password.build(editCtx.newPassword()));
