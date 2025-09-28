@@ -313,11 +313,11 @@ public class EmployeesCtl extends AbstractSubCtl {
             // Load managers, doctors & staffs
             List<Manager> managerLs = Db.Manager.select(-1, mgr -> true);
             List<Doctor> doctorLs = Db.Doctor.select(-1, doc -> {
-                doc.setDepartment(deptMap.get(doc.getId()));
+                doc.setDepartment(deptMap.get(doc.getDepartmentId()));
                 return true;
             });
             List<Staff> staffLs = Db.Staff.select(-1, stf -> {
-                stf.setDepartment(deptMap.get(stf.getId()));
+                stf.setDepartment(deptMap.get(stf.getDepartmentId()));
                 return true;
             });
 
