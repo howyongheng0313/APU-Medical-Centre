@@ -4,6 +4,7 @@ import amc.controller.AbstractSubCtl;
 import amc.controller.AmcCtl;
 import amc.controller.share.JumpTree;
 import amc.controller.share.ProfileCtl;
+import amc.model.DbMan;
 import amc.model.db_impl.Db;
 import amc.model.entity.Customer;
 import amc.view.staff.CustomersPanel;
@@ -31,13 +32,7 @@ public class CustomersCtl extends AbstractSubCtl {
 
     private void refreshCustomerLs() {
         String search = viewCustomers.getSearchContent().toLowerCase();
-        List<Customer> customerLs = Db.Customer.select(-1, cus -> {
-            return search.equals("") ||
-                cus.getId().equals(search) ||
-                cus.getUserName().toLowerCase().matches(search) ||
-                cus.getEmail().matches(search) ||
-                cus.getContact().equals(search);
-        });
+        List<Customer> customerLs = Db.Customer.select(-1, DbMan.searchCusInfo(search));
         viewCustomers.renderCustomerLs(customerLs);
     }
 

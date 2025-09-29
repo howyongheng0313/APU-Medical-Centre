@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class PayingsPanel extends javax.swing.JPanel {
 

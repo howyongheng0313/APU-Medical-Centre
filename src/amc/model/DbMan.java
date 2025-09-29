@@ -38,4 +38,14 @@ public final class DbMan {
             return model.getStatus() == status;
         };
     }
+
+    public static Query<Customer> searchCusInfo(String search) {
+        return cus -> {
+            return search.equals("") ||
+                cus.getId().equals(search) ||
+                cus.getUserName().toLowerCase().matches(".*"+search+".*") ||
+                cus.getEmail().matches(".*"+search+".*") ||
+                cus.getContact().equals(search);
+        };
+    }
 }
