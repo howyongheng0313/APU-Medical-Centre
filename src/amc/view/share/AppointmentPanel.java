@@ -386,8 +386,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         tblConMedicine.setBackground(Theme.C1_BG);
         tblConMedicine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Medicine", "Count"
@@ -490,10 +489,20 @@ public class AppointmentPanel extends javax.swing.JPanel {
 
         btnReService.setText("Services");
         btnReService.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        btnReService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReServiceActionPerformed(evt);
+            }
+        });
         jPanel8.add(btnReService);
 
         btnReMedicine.setText("Medicines");
         btnReMedicine.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        btnReMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReMedicineActionPerformed(evt);
+            }
+        });
         jPanel8.add(btnReMedicine);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -526,8 +535,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         tblReService.setBackground(Theme.C1_BG);
         tblReService.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", null},
-                {null, null}
+
             },
             new String [] {
                 "Service", "Fee"
@@ -556,8 +564,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         tblReService.setUpdateSelectionOnSort(false);
         scoReService.setViewportView(tblReService);
         if (tblReService.getColumnModel().getColumnCount() > 0) {
-            tblReService.getColumnModel().getColumn(1).setMinWidth(150);
-            tblReService.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblReService.getColumnModel().getColumn(1).setPreferredWidth(120);
             tblReService.getColumnModel().getColumn(1).setMaxWidth(150);
         }
 
@@ -574,8 +581,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
         tblReMedicine.setBackground(Theme.C1_BG);
         tblReMedicine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Medicine", "Count", "Price"
@@ -607,8 +613,7 @@ public class AppointmentPanel extends javax.swing.JPanel {
             tblReMedicine.getColumnModel().getColumn(1).setMinWidth(40);
             tblReMedicine.getColumnModel().getColumn(1).setPreferredWidth(40);
             tblReMedicine.getColumnModel().getColumn(1).setMaxWidth(40);
-            tblReMedicine.getColumnModel().getColumn(2).setMinWidth(150);
-            tblReMedicine.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblReMedicine.getColumnModel().getColumn(2).setPreferredWidth(120);
             tblReMedicine.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
@@ -787,6 +792,16 @@ public class AppointmentPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         ((CardLayout) conListCard.getLayout()).show(conListCard, "Medicine");
     }//GEN-LAST:event_btnConMedicineActionPerformed
+
+    private void btnReServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReServiceActionPerformed
+        // TODO add your handling code here:
+        ((CardLayout) reListCard.getLayout()).show(reListCard, "Service");
+    }//GEN-LAST:event_btnReServiceActionPerformed
+
+    private void btnReMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReMedicineActionPerformed
+        // TODO add your handling code here:
+        ((CardLayout) reListCard.getLayout()).show(reListCard, "Medicine");
+    }//GEN-LAST:event_btnReMedicineActionPerformed
 
     public void showInit(ApptNode node) {
         consultPanel.setVisible(node.isShowConsult);

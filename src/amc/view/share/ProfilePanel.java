@@ -725,7 +725,7 @@ public class ProfilePanel extends javax.swing.JPanel {
 
     public void initComboDept(List<Department> deptls) {
         Department selected = (Department) cmbEditDepartment.getSelectedItem();
-        cmbEditDepartment.setModel(new DefaultComboBoxModel<> (deptls.toArray()));
+        cmbEditDepartment.setModel(new DefaultComboBoxModel<> (deptls.toArray(Department[]::new)));
         cmbEditDepartment.setSelectedItem(selected);
     }
 
@@ -801,7 +801,7 @@ public class ProfilePanel extends javax.swing.JPanel {
     public amc.view.comp.AmcButton btnEditConfirm;
     public amc.view.comp.AmcButton btnLogout;
     public amc.view.comp.AmcButton btnSend;
-    private javax.swing.JComboBox<Object> cmbEditDepartment;
+    private javax.swing.JComboBox<Department> cmbEditDepartment;
     private javax.swing.JComboBox<User.Gender> cmbEditGender;
     private javax.swing.JComboBox<Comment.Rating> cmbRating;
     private javax.swing.JPanel commentPanel;

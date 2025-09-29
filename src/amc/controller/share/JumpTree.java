@@ -62,6 +62,15 @@ public class JumpTree {
         ), null, null
     );
 
+    public static final ApptNode StfPaying = new ApptNode(
+        ApptNode.SHOW_CUS | ApptNode.SHOW_DOC | ApptNode.SHOW_RESULT | ApptNode.SHOW_PAYING,
+        null, null, null
+    );
+
+    public static final ProfileNode StfCustomer = new ProfileNode(
+        ProfileNode.SHOW_APPT, null
+    );
+
     private static final ProfileNode CusEmployee = new ProfileNode(
         ProfileNode.SHOW_CMT | ProfileNode.SEND_CMT,
         null
