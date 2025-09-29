@@ -5,6 +5,7 @@ import amc.model.entity.User;
 import amc.view.Theme;
 import java.awt.CardLayout;
 import java.awt.Cursor;
+import java.time.LocalDate;
 
 public class LoginPanel extends javax.swing.JPanel {
 
@@ -30,7 +31,6 @@ public class LoginPanel extends javax.swing.JPanel {
         lblPassword = new javax.swing.JLabel();
         pwdPassword = new javax.swing.JPasswordField();
         btnLogin = new amc.view.comp.AmcButton();
-        btnForgot = new javax.swing.JButton();
         lblNoAccount = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         signupPage = new javax.swing.JPanel();
@@ -140,21 +140,6 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridwidth = 2;
         loginForm.add(btnLogin, gridBagConstraints);
-
-        btnForgot.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btnForgot.setForeground(new java.awt.Color(153, 0, 0));
-        btnForgot.setText("Forgot Password?");
-        btnForgot.setBorder(null);
-        btnForgot.setBorderPainted(false);
-        btnForgot.setContentAreaFilled(false);
-        btnForgot.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnForgot.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        loginForm.add(btnForgot, gridBagConstraints);
 
         lblNoAccount.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lblNoAccount.setForeground(Theme.C2_BG_SELECT);
@@ -361,14 +346,19 @@ public class LoginPanel extends javax.swing.JPanel {
         return new User.SignupContext(
             txtIcNumber.getText(),
             txtCustomerName.getText(),
+            LocalDate.EPOCH,
             DataUtil.formatEmail(txtLoginEmail.getText()),
             txtContact.getText(),
             User.Gender.valueOf(cmbGender.getSelectedItem().toString())
         );
     }
 
+    public void clearEmailContact(boolean kEmail, boolean kContact) {
+        if (kEmail) txtSignupEmail.setText("");
+        if (kContact) txtContact.setText("");
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnForgot;
     public amc.view.comp.AmcButton btnLogin;
     private javax.swing.JButton btnRegister;
     public amc.view.comp.AmcButton btnSignup;

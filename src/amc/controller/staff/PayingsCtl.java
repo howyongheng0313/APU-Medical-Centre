@@ -39,12 +39,13 @@ public class PayingsCtl extends AbstractSubCtl {
         String sCusInfo = viewPayings.getSearchCusInfo();
         String sDeptId  = viewPayings.getSearchDepartment();
         List<Appointment> apptLs = Db.Appointment.select(-1, appt -> {
-            return (sApptId.isEmpty() || appt.getId().equals(sApptId)) &&
+            return (appt.getStatus() == Appointment.Status.EndCons) &&
+                (sApptId.isEmpty() || appt.getId().equals(sApptId)) && 
                 (sDeptId.isEmpty() || appt.getDepartmentId().equals(sDeptId)) &&
                 (sCusInfo.isEmpty() ||
                     appt.getCustomerId().equals(sCusInfo) ||
-                    appt.getCustomer().getUserName().matches(sCusInfo) ||
-                    appt.getCustomer().getEmail().matches(sCusInfo)
+                    appt.getCustomer().getUserName().matches(".*"+sCusInfo+".*") ||
+                    appt.getCustomer().getEmail().matches(".*"+sCusInfo+".*")
                 );
         });
         viewPayings.renderPayAppt(apptLs);

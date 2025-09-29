@@ -14,6 +14,7 @@ public abstract class User extends WithId {
     public record SignupContext(
         String icNumber,
         String userName,
+        LocalDate dateOfBirth,
         String email,
         String contact,
         Gender gender
@@ -50,6 +51,22 @@ public abstract class User extends WithId {
 
         List<? extends User> userLs = auth.getRole().getHandle().select(1, DbMan.checkUserEmail(loginCtx.email));
         return userLs.getFirst();
+    }
+
+    public static User signup(SignupContext signupCtx) {
+        List<UserAuth> existAuthLs = Db.UserAuth.select(1, DbMan.checkUserAuth(signupCtx.email));
+        Customer existCustomer = Db.Customer.getById(signupCtx.icNumber);
+        if (!existAuthLs.isEmpty() || existCustomer != null) return null;
+
+        Customer newCus = new Customer(
+            signupCtx.icNumber,
+            signupCtx.userName,
+            signupCtx.dateOfBirth,
+            signupCtx.gender,
+            signupCtx.email,
+            signupCtx.contact
+        );
+        return Db.Customer.insert(List.of(newCus)) ? newCus : null;
     }
 
     public abstract Role getRole();

@@ -138,13 +138,13 @@ public class EmployeesCtl extends AbstractSubCtl {
                 return;
             }
 
-            String name = viewEmployees.getUpdateName();
-            LocalDate birthDate = viewEmployees.getUpdateBirthDate();
-            User.Gender gender = viewEmployees.getUpdateGender();
-            String email = viewEmployees.getUpdateEmail();
-            String contact = viewEmployees.getUpdateContact();
-            Department department = viewEmployees.getUpdateDepartment();
-            String license = viewEmployees.getUpdateLicense();
+            String name = viewEmployees.getCreateName();
+            LocalDate birthDate = viewEmployees.getCreateBirthDate();
+            User.Gender gender = viewEmployees.getCreateGender();
+            String email = viewEmployees.getCreateEmail();
+            String contact = viewEmployees.getCreateContact();
+            Department department = viewEmployees.getCreateDepartment();
+            String license = viewEmployees.getCreateLicense();
 
             String formattedLicense = "MMC" + license;
             if (
