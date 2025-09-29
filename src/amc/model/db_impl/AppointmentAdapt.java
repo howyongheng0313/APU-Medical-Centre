@@ -40,7 +40,7 @@ public class AppointmentAdapt extends DbAdapter<Appointment> {
             model.getDepartmentId(),
             DataUtil.date2str(model.getDateTime().toLocalDate()),
             DataUtil.time2str(model.getDateTime().toLocalTime()),
-            model.getStatus().name(),
+            String.valueOf(model.getStatus().getStep()),
             Objects.toString(model.getFeedback(), "")
         );
         return row;

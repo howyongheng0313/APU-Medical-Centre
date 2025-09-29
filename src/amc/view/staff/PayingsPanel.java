@@ -1,15 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package amc.view.staff;
 
+import amc.model.entity.Appointment;
+import amc.model.entity.Department;
 import amc.view.Theme;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-/**
- *
- * @author kzy
- */
 public class PayingsPanel extends javax.swing.JPanel {
 
     /**
@@ -17,6 +16,44 @@ public class PayingsPanel extends javax.swing.JPanel {
      */
     public PayingsPanel() {
         initComponents();
+    }
+
+    public void renderComboDept(List<Department> deptLs) {
+        Department selected = (Department)cmbDept.getSelectedItem();
+        DefaultComboBoxModel<Department> cmbModel = new DefaultComboBoxModel<>();
+        cmbModel.addAll(deptLs);
+        cmbModel.addAll(0, List.of(new Department("", "#ALL")));
+        cmbDept.setModel(cmbModel);
+        cmbDept.setSelectedItem(selected);
+    }
+
+    public void renderPayAppt(List<Appointment> apptLs) {
+        DefaultTableModel tbModel = (DefaultTableModel)tblPayAppt.getModel();
+        tbModel.setRowCount(0);
+        for (Appointment appt: apptLs) {
+            tbModel.addRow(new Object[] {
+                appt.getId(),
+                appt.getCustomer().getUserName(),
+                appt.getCustomer().getEmail(),
+                appt.getDepartment().getDepartmentName(),
+                appt.getDateTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"))
+            });
+        }
+    }
+
+    public String getSearchApptId() { return txtApptId.getText(); }
+
+    public String getSearchCusInfo() { return txtCusInfo.getText(); }
+
+    public String getSearchDepartment() {
+        if (cmbDept.getSelectedItem() == null) return "";
+        return ((Department) cmbDept.getSelectedItem()).getId();
+    }
+
+    public void resetSearch() {
+        txtApptId.setText("");
+        txtCusInfo.setText("");
+        cmbDept.setSelectedItem(null);
     }
 
     /**
@@ -28,12 +65,12 @@ public class PayingsPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        amcButton1 = new amc.view.comp.AmcButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtApptId = new amc.view.comp.AmcPlaceHolder();
+        txtCusInfo = new amc.view.comp.AmcPlaceHolder();
+        btnSearch = new amc.view.comp.AmcButton();
+        cmbDept = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPayAppt = new javax.swing.JTable();
 
         setBackground(Theme.C1_BG);
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -52,47 +89,42 @@ public class PayingsPanel extends javax.swing.JPanel {
         jPanel1Layout.rowWeights = new double[] {0.0, 0.0, 0.0};
         jPanel1.setLayout(jPanel1Layout);
 
-        jTextField1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jTextField1.setForeground(Theme.C1_FG);
-        jTextField1.setText("Appointment ID");
-        jTextField1.setMaximumSize(new java.awt.Dimension(100, 30));
-        jTextField1.setMinimumSize(new java.awt.Dimension(100, 30));
-        jTextField1.setPreferredSize(new java.awt.Dimension(100, 30));
+        txtApptId.set$hint("Appointment ID");
+        txtApptId.setMaximumSize(new java.awt.Dimension(100, 30));
+        txtApptId.setMinimumSize(new java.awt.Dimension(100, 30));
+        txtApptId.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(jTextField1, gridBagConstraints);
+        jPanel1.add(txtApptId, gridBagConstraints);
 
-        jTextField2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jTextField2.setForeground(Theme.C1_FG);
-        jTextField2.setText("Customer Emial / ID");
-        jTextField2.setMaximumSize(new java.awt.Dimension(100, 30));
-        jTextField2.setMinimumSize(new java.awt.Dimension(100, 30));
-        jTextField2.setPreferredSize(new java.awt.Dimension(100, 30));
+        txtCusInfo.set$hint("Customer Name/Email/ID");
+        txtCusInfo.setMaximumSize(new java.awt.Dimension(100, 30));
+        txtCusInfo.setMinimumSize(new java.awt.Dimension(100, 30));
+        txtCusInfo.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(jTextField2, gridBagConstraints);
+        jPanel1.add(txtCusInfo, gridBagConstraints);
 
-        amcButton1.setText("Search");
-        amcButton1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(amcButton1, gridBagConstraints);
+        jPanel1.add(btnSearch, gridBagConstraints);
 
-        jComboBox1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jComboBox1.setForeground(Theme.C1_FG);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setMaximumSize(new java.awt.Dimension(100, 30));
-        jComboBox1.setMinimumSize(new java.awt.Dimension(100, 30));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(100, 30));
+        cmbDept.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        cmbDept.setForeground(Theme.C1_FG);
+        cmbDept.setMaximumSize(new java.awt.Dimension(100, 30));
+        cmbDept.setMinimumSize(new java.awt.Dimension(100, 30));
+        cmbDept.setPreferredSize(new java.awt.Dimension(100, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(jComboBox1, gridBagConstraints);
+        jPanel1.add(cmbDept, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -104,18 +136,31 @@ public class PayingsPanel extends javax.swing.JPanel {
         jScrollPane1.setMinimumSize(new java.awt.Dimension(100, 100));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPayAppt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Appt ID", "Patient", "Email", "Department", "DateTime"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblPayAppt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jScrollPane1.setViewportView(tblPayAppt);
+        if (tblPayAppt.getColumnModel().getColumnCount() > 0) {
+            tblPayAppt.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tblPayAppt.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblPayAppt.getColumnModel().getColumn(2).setPreferredWidth(300);
+            tblPayAppt.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tblPayAppt.getColumnModel().getColumn(4).setPreferredWidth(160);
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -126,12 +171,12 @@ public class PayingsPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.comp.AmcButton amcButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    public amc.view.comp.AmcButton btnSearch;
+    private javax.swing.JComboBox<Department> cmbDept;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    public javax.swing.JTable tblPayAppt;
+    private amc.view.comp.AmcPlaceHolder txtApptId;
+    private amc.view.comp.AmcPlaceHolder txtCusInfo;
     // End of variables declaration//GEN-END:variables
 }

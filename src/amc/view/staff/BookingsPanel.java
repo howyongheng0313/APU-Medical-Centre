@@ -1,15 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package amc.view.staff;
 
 import amc.view.Theme;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.util.List;
 
-/**
- *
- * @author kzy
- */
 public class BookingsPanel extends javax.swing.JPanel {
 
     /**
@@ -18,6 +14,18 @@ public class BookingsPanel extends javax.swing.JPanel {
     public BookingsPanel() {
         initComponents();
         this.jScrollPane1.getVerticalScrollBar().setUnitIncrement(12);
+    }
+
+    public void renderBookingList(List<ApptPendingComp> bookingLs) {
+        bookLsPanel.removeAll();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill   = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx  = 0;
+        for (ApptPendingComp booking: bookingLs) {
+            bookLsPanel.add(booking, gbc);
+        }
+        bookLsPanel.repaint();
     }
 
     /**
@@ -29,11 +37,7 @@ public class BookingsPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel3 = new javax.swing.JPanel();
-        processing1 = new amc.view.staff.ApptPendingPanel();
-        processing2 = new amc.view.staff.ApptPendingPanel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
-        jPanel1 = new javax.swing.JPanel();
+        bookLsPanel = new javax.swing.JPanel();
         amcButton1 = new amc.view.comp.AmcButton();
 
         setBackground(Theme.C1_BG);
@@ -49,36 +53,24 @@ public class BookingsPanel extends javax.swing.JPanel {
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(200, 200));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(200, 200));
         jScrollPane1.setOpaque(true);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(200, 200));
         jScrollPane1.setViewportView(null);
 
-        jPanel3.setBackground(Theme.C1_BG);
-        jPanel3.setPreferredSize(new java.awt.Dimension(0, 1000));
-        java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
-        jPanel3Layout.columnWeights = new double[] {1.0};
-        jPanel3.setLayout(jPanel3Layout);
-
-        processing1.setMinimumSize(new java.awt.Dimension(0, 100));
-        processing1.setPreferredSize(new java.awt.Dimension(0, 100));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        jPanel3.add(processing1, gridBagConstraints);
-
-        processing2.setMinimumSize(new java.awt.Dimension(0, 100));
-        processing2.setPreferredSize(new java.awt.Dimension(0, 100));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        jPanel3.add(processing2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel3.add(filler1, gridBagConstraints);
-
-        jScrollPane1.setViewportView(jPanel3);
+        bookLsPanel.setBackground(Theme.C1_BG);
+        bookLsPanel.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                bookLsPanelAncestorResized(evt);
+            }
+        });
+        java.awt.GridBagLayout jPanel3Layout1 = new java.awt.GridBagLayout();
+        jPanel3Layout1.columnWeights = new double[] {1.0};
+        bookLsPanel.setLayout(jPanel3Layout1);
+        jScrollPane1.setViewportView(bookLsPanel);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -87,34 +79,32 @@ public class BookingsPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         add(jScrollPane1, gridBagConstraints);
 
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 50));
-        jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
-
         amcButton1.setText("Add");
         amcButton1.setAlignmentX(1.0F);
         amcButton1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         amcButton1.setMaximumSize(new java.awt.Dimension(150, 40));
         amcButton1.setMinimumSize(new java.awt.Dimension(150, 40));
         amcButton1.setPreferredSize(new java.awt.Dimension(150, 40));
-        jPanel1.add(amcButton1);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        add(jPanel1, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        add(amcButton1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bookLsPanelAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_bookLsPanelAncestorResized
+        // TODO add your handling code here:
+        int childHeight = 100;
+        for (Component child: bookLsPanel.getComponents()) {
+            if (!child.isVisible()) continue;
+            childHeight += child.getPreferredSize().height;
+        }
+        bookLsPanel.setPreferredSize(new Dimension(bookLsPanel.getParent().getWidth(), childHeight));
+        bookLsPanel.revalidate();
+    }//GEN-LAST:event_bookLsPanelAncestorResized
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private amc.view.comp.AmcButton amcButton1;
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel bookLsPanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private amc.view.staff.ApptPendingPanel processing1;
-    private amc.view.staff.ApptPendingPanel processing2;
     // End of variables declaration//GEN-END:variables
 }

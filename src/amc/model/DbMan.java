@@ -32,4 +32,10 @@ public final class DbMan {
             return model.getId().equals(id);
         };
     }
+
+    public static Query<Appointment> checkByStatus(Appointment.Status status) {
+        return (model) -> {
+            return model.getStatus() == status;
+        };
+    }
 }

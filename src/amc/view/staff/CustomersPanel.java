@@ -1,7 +1,10 @@
 package amc.view.staff;
 
+import amc.model.entity.Customer;
 import amc.view.Theme;
 import java.awt.Cursor;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class CustomersPanel extends javax.swing.JPanel {
 
@@ -10,8 +13,22 @@ public class CustomersPanel extends javax.swing.JPanel {
      */
     public CustomersPanel() {
         initComponents();
-        this.amcPicture1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        this.amcPicture2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.picSearch.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+
+    public String getSearchContent() { return txtSearch.getText(); }
+
+    public void renderCustomerLs(List<Customer> customerLs) {
+        DefaultTableModel tbModel = (DefaultTableModel) tblCustomer.getModel();
+        for (Customer customer: customerLs) {
+            tbModel.addRow(new Object[] {
+                customer.getId(),
+                customer.getUserName(),
+                customer.getEmail(),
+                customer.getContact(),
+                customer.getGender()
+            });
+        }
     }
 
     /**
@@ -23,25 +40,20 @@ public class CustomersPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        amcPicture2 = new amc.view.comp.AmcPicture();
         amcRoundBox1 = new amc.view.comp.AmcRoundBox();
-        amcPicture1 = new amc.view.comp.AmcPicture();
-        jTextField1 = new javax.swing.JTextField();
-        amcButton1 = new amc.view.comp.AmcButton();
+        picSearch = new amc.view.comp.AmcPicture();
+        txtSearch = new javax.swing.JTextField();
+        btnAdd = new amc.view.comp.AmcButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        amcButton2 = new amc.view.comp.AmcButton();
-        jLabel1 = new javax.swing.JLabel();
-        amcButton3 = new amc.view.comp.AmcButton();
+        tblCustomer = new javax.swing.JTable();
 
         setBackground(Theme.C1_BG);
         setPreferredSize(new java.awt.Dimension(800, 500));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {10, 200, 10};
-        layout.rowHeights = new int[] {50, 0, 50};
+        layout.rowHeights = new int[] {50, 0};
         layout.columnWeights = new double[] {0.2, 0.6, 0.2};
-        layout.rowWeights = new double[] {0.0, 1.0, 0.0};
+        layout.rowWeights = new double[] {0.0, 1.0};
         setLayout(layout);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(100, 40));
@@ -49,19 +61,10 @@ public class CustomersPanel extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(100, 40));
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {40, 0, 40};
-        jPanel1Layout.columnWeights = new double[] {0.0, 1.0, 0.0};
+        jPanel1Layout.columnWidths = new int[] {0, 40};
+        jPanel1Layout.columnWeights = new double[] {1.0, 0.0};
         jPanel1Layout.rowWeights = new double[] {1.0};
         jPanel1.setLayout(jPanel1Layout);
-
-        amcPicture2.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/icon_refresh.png"))); // NOI18N
-        amcPicture2.set$maxSize(new java.awt.Dimension(28, 28));
-        amcPicture2.setMaximumSize(new java.awt.Dimension(40, 40));
-        amcPicture2.setMinimumSize(new java.awt.Dimension(40, 40));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(amcPicture2, gridBagConstraints);
 
         amcRoundBox1.setBackground(Theme.C1_BG);
         amcRoundBox1.set$borderColor(Theme.C1_FG);
@@ -76,46 +79,46 @@ public class CustomersPanel extends javax.swing.JPanel {
         amcRoundBox1Layout.rowWeights = new double[] {1.0};
         amcRoundBox1.setLayout(amcRoundBox1Layout);
 
-        amcPicture1.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/icon_search.png"))); // NOI18N
-        amcPicture1.set$maxSize(new java.awt.Dimension(20, 20));
-        amcPicture1.setMaximumSize(new java.awt.Dimension(32, 32));
-        amcPicture1.setMinimumSize(new java.awt.Dimension(32, 32));
+        picSearch.set$image(new javax.swing.ImageIcon(getClass().getResource("/amc/image/icon_search.png"))); // NOI18N
+        picSearch.set$maxSize(new java.awt.Dimension(20, 20));
+        picSearch.setMaximumSize(new java.awt.Dimension(32, 32));
+        picSearch.setMinimumSize(new java.awt.Dimension(32, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 0);
-        amcRoundBox1.add(amcPicture1, gridBagConstraints);
+        amcRoundBox1.add(picSearch, gridBagConstraints);
 
-        jTextField1.setBackground(Theme.C1_BG);
-        jTextField1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jTextField1.setBorder(null);
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextField1.setMaximumSize(new java.awt.Dimension(180, 35));
-        jTextField1.setMinimumSize(new java.awt.Dimension(180, 35));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtSearch.setBackground(Theme.C1_BG);
+        txtSearch.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        txtSearch.setBorder(null);
+        txtSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtSearch.setMaximumSize(new java.awt.Dimension(180, 35));
+        txtSearch.setMinimumSize(new java.awt.Dimension(180, 35));
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtSearchActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 5);
-        amcRoundBox1.add(jTextField1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 5);
+        amcRoundBox1.add(txtSearch, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
         jPanel1.add(amcRoundBox1, gridBagConstraints);
 
-        amcButton1.setText("Add");
-        amcButton1.setAlignmentX(1.0F);
-        amcButton1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        amcButton1.setMaximumSize(new java.awt.Dimension(120, 40));
-        amcButton1.setMinimumSize(new java.awt.Dimension(120, 40));
-        amcButton1.setPreferredSize(new java.awt.Dimension(120, 40));
+        btnAdd.setText("Add");
+        btnAdd.setAlignmentX(1.0F);
+        btnAdd.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnAdd.setMaximumSize(new java.awt.Dimension(120, 40));
+        btnAdd.setMinimumSize(new java.awt.Dimension(120, 40));
+        btnAdd.setPreferredSize(new java.awt.Dimension(120, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        jPanel1.add(amcButton1, gridBagConstraints);
+        gridBagConstraints.gridx = 1;
+        jPanel1.add(btnAdd, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -127,92 +130,50 @@ public class CustomersPanel extends javax.swing.JPanel {
         jScrollPane2.setMinimumSize(new java.awt.Dimension(100, 100));
         jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IC Number", "Full Name", "Email", "Contact", "Gender"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblCustomer);
+        if (tblCustomer.getColumnModel().getColumnCount() > 0) {
+            tblCustomer.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblCustomer.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblCustomer.getColumnModel().getColumn(2).setPreferredWidth(200);
+            tblCustomer.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tblCustomer.getColumnModel().getColumn(4).setPreferredWidth(40);
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         add(jScrollPane2, gridBagConstraints);
-
-        jPanel2.setMaximumSize(new java.awt.Dimension(100, 40));
-        jPanel2.setMinimumSize(new java.awt.Dimension(100, 40));
-        jPanel2.setOpaque(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(100, 40));
-        java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
-        jPanel2Layout.columnWidths = new int[] {0, 60, 0};
-        jPanel2Layout.columnWeights = new double[] {0.5, 0.0, 0.5};
-        jPanel2Layout.rowWeights = new double[] {1.0};
-        jPanel2.setLayout(jPanel2Layout);
-
-        amcButton2.setBackground(Theme.C1_BG);
-        amcButton2.setForeground(Theme.C1_FG);
-        amcButton2.setText("⮜");
-        amcButton2.set$hoverBackground(Theme.C1_BG_SELECT);
-        amcButton2.set$hoverForeground(Theme.C1_FG_SELECT);
-        amcButton2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        amcButton2.setMaximumSize(new java.awt.Dimension(50, 40));
-        amcButton2.setMinimumSize(new java.awt.Dimension(50, 40));
-        amcButton2.setPreferredSize(new java.awt.Dimension(50, 40));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel2.add(amcButton2, gridBagConstraints);
-
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("1");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel1, gridBagConstraints);
-
-        amcButton3.setBackground(Theme.C1_BG);
-        amcButton3.setForeground(Theme.C1_FG);
-        amcButton3.setText("⮞");
-        amcButton3.set$hoverBackground(Theme.C1_BG_SELECT);
-        amcButton3.set$hoverForeground(Theme.C1_FG_SELECT);
-        amcButton3.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        amcButton3.setMaximumSize(new java.awt.Dimension(50, 40));
-        amcButton3.setMinimumSize(new java.awt.Dimension(50, 40));
-        amcButton3.setPreferredSize(new java.awt.Dimension(50, 40));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(amcButton3, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        add(jPanel2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private amc.view.comp.AmcButton amcButton1;
-    private amc.view.comp.AmcButton amcButton2;
-    private amc.view.comp.AmcButton amcButton3;
-    private amc.view.comp.AmcPicture amcPicture1;
-    private amc.view.comp.AmcPicture amcPicture2;
     private amc.view.comp.AmcRoundBox amcRoundBox1;
-    private javax.swing.JLabel jLabel1;
+    public amc.view.comp.AmcButton btnAdd;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    public amc.view.comp.AmcPicture picSearch;
+    public javax.swing.JTable tblCustomer;
+    public javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
