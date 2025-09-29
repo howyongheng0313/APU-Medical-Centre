@@ -1,8 +1,10 @@
 package amc;
 
+import amc.controller.AmcCtl;
 
 public class App {
     public static void main(String[] args){
-        System.out.println("hello");
+        AmcCtl amc = new AmcCtl();
+        amc.startView();
     }
 }

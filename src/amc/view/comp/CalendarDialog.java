@@ -18,7 +18,7 @@ import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-public class CalendarDialog extends javax.swing.JDialog {
+public final class CalendarDialog extends javax.swing.JDialog {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CalendarDialog.class.getName());
     private Consumer<LocalDate> $outHandle;
     private LocalDate $currentDate;
@@ -42,9 +42,12 @@ public class CalendarDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form CalendarDialog
+     * @param parent
+     * @param $startDate
+     * @param $outHandle
      */
     public CalendarDialog(java.awt.Frame parent, LocalDate $startDate, Consumer<LocalDate> $outHandle) {
-        super(parent, false);
+        super(parent, true); //yongheng change to true
         initComponents();
 
         DefaultTableCellRenderer headRender = new DefaultTableCellRenderer();
@@ -95,7 +98,6 @@ public class CalendarDialog extends javax.swing.JDialog {
             public void columnSelectionChanged(ListSelectionEvent e) {
                 CalendarDialog.this.jTable1ListSelection(e);
             }
-            
         });
 
         this.$outHandle = $outHandle;
@@ -145,8 +147,7 @@ public class CalendarDialog extends javax.swing.JDialog {
         jPanel1Layout.rowWeights = new double[] {1.0};
         jPanel1.setLayout(jPanel1Layout);
 
-        jLabel1.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("⮜");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -160,13 +161,11 @@ public class CalendarDialog extends javax.swing.JDialog {
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("February 2025");
         jPanel1.add(jLabel2, new java.awt.GridBagConstraints());
 
-        jLabel5.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("⮞");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

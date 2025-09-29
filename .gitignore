@@ -2,16 +2,20 @@
 /nbproject/private/
 /nbbuild/
 /build/
-/dist/
+/dist/*
 /nbdist/
 /nbactions.xml
 # /nb-configuration.xml # (Optional)
 
 # Java build artifacts
 *.class
-*.jar
+#*.jar
 *.war
 *.ear
 *.log
 *.tmp
 *.bak
+
+# Exception
+!/dist/lib/
+!/dist/lib/*

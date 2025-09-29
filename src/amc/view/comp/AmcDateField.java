@@ -1,4 +1,5 @@
 package amc.view.comp;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
@@ -20,15 +21,19 @@ public class AmcDateField extends JTextField {
 
     public AmcDateField() {
         super();
+        this.setText(this.$date.toString());
         this.setFocusable(false);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
+                Window parentWindow = SwingUtilities.getWindowAncestor(AmcDateField.this);
                 CalendarDialog calendar = new CalendarDialog(
-                    (JFrame) SwingUtilities.getWindowAncestor(AmcDateField.this),
+                    parentWindow instanceof JFrame ? (JFrame) parentWindow : null,
                     AmcDateField.this.$date,
                     AmcDateField.this::set$date
                 );
+
+                calendar.setLocationRelativeTo(AmcDateField.this);
                 calendar.setVisible(true);
             }
         });
