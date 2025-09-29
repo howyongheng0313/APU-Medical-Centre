@@ -25,7 +25,7 @@ public class MainPageDoctor extends javax.swing.JPanel {
         this.apt = new AppointmentReadWrite(currentUser);
         this.currentUser = currentUser;
         this.currentDoctor = currentDoctor;
-        apt.view_appointment(jTable1, true);
+        apt.view_appointment(jTable1,"current");
     }
 
     /**
@@ -130,11 +130,11 @@ public class MainPageDoctor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        apt.view_appointment(jTable1, true);
+        apt.view_appointment(jTable1, "current");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        apt.view_appointment(jTable1, false);
+        apt.view_appointment(jTable1, "past");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
@@ -145,16 +145,15 @@ public class MainPageDoctor extends javax.swing.JPanel {
             String aptId = value.toString();
 
             // Create the Consultation panel
-            ServicesCtl servicesCtl = new ServicesCtl(ROOT);
-            // TODO-kzy show consultation
-//            JPanel consultationPanel = new Consultation(servicesCtl, aptId, currentDoctor);
-//
-//            // Put it inside a popup dialog
-//            javax.swing.JDialog dialog = new javax.swing.JDialog((java.awt.Frame) null, "Consultation", true);
-//            dialog.getContentPane().add(consultationPanel);
-//            dialog.pack();
-//            dialog.setLocationRelativeTo(this);
-//            dialog.setVisible(true);
+            ServicesCtl serviceCtl = new ServicesCtl(ROOT); 
+            JPanel consultationPanel = new ConsultationPanel(serviceCtl, aptId, currentDoctor);
+
+            // Put it inside a popup dialog
+            javax.swing.JDialog dialog = new javax.swing.JDialog((java.awt.Frame) null, "Consultation", true);
+            dialog.getContentPane().add(consultationPanel);
+            dialog.pack();
+            dialog.setLocationRelativeTo(this);
+            dialog.setVisible(true);
         }
     }//GEN-LAST:event_jTable1MouseReleased
 
