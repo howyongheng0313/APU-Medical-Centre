@@ -614,7 +614,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Theme.WARN_BG" type="code"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Reject"/>
+            <Property name="text" type="java.lang.String" value="Cancel"/>
             <Property name="$hoverBackground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Theme.WARN_BG_SELECT" type="code"/>
             </Property>

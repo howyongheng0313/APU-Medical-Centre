@@ -20,6 +20,7 @@ public class CustomersPanel extends javax.swing.JPanel {
 
     public void renderCustomerLs(List<Customer> customerLs) {
         DefaultTableModel tbModel = (DefaultTableModel) tblCustomer.getModel();
+        tbModel.setRowCount(0);
         for (Customer customer: customerLs) {
             tbModel.addRow(new Object[] {
                 customer.getId(),

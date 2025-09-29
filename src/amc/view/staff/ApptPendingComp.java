@@ -8,14 +8,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
-public class ApptPendingComp extends AmcRoundBox {
-    private final Appointment appointment;
+public final class ApptPendingComp extends AmcRoundBox {
+    private Appointment appointment;
     /**
      * Creates new form Processing
      * @param appointment
      */
     public ApptPendingComp(Appointment appointment) {
         initComponents();
+        setAppointment(appointment);
+
+    }
+
+    public ApptPendingComp() {
+        initComponents();
+    }
+
+    public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
         lblApptId.setText(appointment.getId());
         lblDate.setText(appointment.getDateTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
@@ -165,7 +174,7 @@ public class ApptPendingComp extends AmcRoundBox {
         jPanel3.add(btnConfirm);
 
         btnReject.setBackground(Theme.WARN_BG);
-        btnReject.setText("Reject");
+        btnReject.setText("Cancel");
         btnReject.set$hoverBackground(Theme.WARN_BG_SELECT);
         btnReject.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jPanel3.add(btnReject);
