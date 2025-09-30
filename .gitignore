@@ -16,6 +16,8 @@
 *.tmp
 *.bak
 
+.DS_Store
+
 # Exception
 !/dist/lib/
 !/dist/lib/*

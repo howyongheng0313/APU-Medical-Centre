@@ -17,6 +17,9 @@ import javax.swing.JPanel;
 public class PayingsCtl extends AbstractSubCtl {
     private final PayingsPanel viewPayings = new PayingsPanel();
 
+    private final Runnable apptListener = () -> refreshPayAppt();
+    private final Runnable deptListener = () -> initComboDept();
+
     public PayingsCtl(AmcCtl ROOT) {
         super(ROOT);
         refreshPayAppt();
@@ -24,8 +27,8 @@ public class PayingsCtl extends AbstractSubCtl {
         viewPayings.btnSearch.addActionListener((ActionEvent evt) -> {
             refreshPayAppt();
         });
-        Db.Appointment.addTblListener(() -> refreshPayAppt());
-        Db.Department.addTblListener(() -> initComboDept());
+        Db.Appointment.addTblListener(apptListener);
+        Db.Department.addTblListener(deptListener);
         viewPayings.tblPayAppt.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
