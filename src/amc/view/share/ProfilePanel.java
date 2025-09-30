@@ -770,6 +770,11 @@ public class ProfilePanel extends javax.swing.JPanel {
         pwdEditConfirmPass.setText("");
     }
 
+    public void clearSendCmtField() {
+        txtSend.setText("");
+        cmbRating.setSelectedIndex(0);
+    }
+
     public SendCmtContext getSendCmtCtx() {
         return new SendCmtContext(
             txtSend.getText(),

@@ -71,7 +71,7 @@ public class JumpTree {
         ProfileNode.SHOW_APPT, null
     );
 
-    private static final ProfileNode CusEmployee = new ProfileNode(
+    public static final ProfileNode CusEmployee = new ProfileNode(
         ProfileNode.SHOW_CMT | ProfileNode.SEND_CMT,
         null
     );

@@ -61,8 +61,16 @@ public class ProfileCtl extends AbstractSubCtl {
     }
 
     private void refreshEmpComment() {
+        Customer currentCus = getROOT().getCurrentUser() instanceof Customer ? 
+            (Customer) getROOT().getCurrentUser() : null;
+        
         List<Comment> cmtLs = Db.Comment.select(-1, model -> {
-            return model.getTargetId().equals(target.getId());
+            boolean isTarget = model.getTargetId().equals(target.getId());
+            // 如果是客户视角且同时启用了发送评论功能，排除自己发送的评论（避免重复显示）
+            if (currentCus != null && node.isSendComment) {
+                return isTarget && !model.getAppointment().getCustomerId().equals(currentCus.getId());
+            }
+            return isTarget;
         });
         viewProfile.renderCommentList(cmtLs);
     }
@@ -173,7 +181,7 @@ public class ProfileCtl extends AbstractSubCtl {
         refreshSendCmt();
         viewProfile.btnSend.addActionListener((ActionEvent evt) -> {
             ProfilePanel.SendCmtContext sendCtx = viewProfile.getSendCmtCtx();
-            if (sendCtx.content() == null) {
+            if (sendCtx.content() == null || sendCtx.content().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(viewProfile,
                     "Cannot send empty comment. Please write something.",
                     "Invalid Content",
@@ -181,29 +189,46 @@ public class ProfileCtl extends AbstractSubCtl {
                 );
                 return;
             }
+            
+            String apptId = node.getRecordedAppt();
+            if (apptId == null || apptId.isEmpty()) {
+                JOptionPane.showMessageDialog(viewProfile,
+                    "No appointment associated. Cannot send comment.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+            
             Comment newCmt = new Comment(
                 Db.Comment.newId(),
-                node.getRecordedAppt(),
+                apptId,
                 target.getId(),
                 sendCtx.rating(),
                 sendCtx.content()
             );
             Db.Comment.insert(List.of(newCmt));
+            
+            // Clear the text field after successful send
+            viewProfile.clearSendCmtField();
+            
+            // Refresh the list
+            refreshSendCmt();
+            if(node.isShowEmpComment){
+                refreshEmpComment();
+            }
         });
         if (node.nextApptNode != null) addOpenApptListener(viewProfile.lstSendCmt);
-        Db.Comment.addTblListener(() -> refreshSendCmt());
     }
 
     private void empCommentProc() {
         refreshEmpComment();
         if (node.nextApptNode != null) addOpenApptListener(viewProfile.lstComment);
-        Db.Comment.addTblListener(() -> refreshEmpComment());
     }
 
     private void cusFeedbackProc() {
         refreshCusFeedback();
         if (node.nextApptNode != null) addOpenApptListener(viewProfile.lstFeedback);
-        Db.Appointment.addTblListener(() -> refreshCusFeedback());
     }
 
     public void startView() {

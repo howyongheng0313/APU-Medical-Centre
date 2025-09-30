@@ -1,5 +1,7 @@
 package amc.controller;
 
+import amc.controller.customer.AppointmentCtl;
+import amc.controller.customer.BookAppointmentCtl;
 import amc.view.share.BarButton;
 import amc.view.share.BarComp;
 import amc.view.share.UserPanel;

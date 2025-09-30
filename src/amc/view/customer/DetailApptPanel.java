@@ -57,6 +57,18 @@ public class DetailApptPanel extends javax.swing.JPanel {
         return jButton1; // Replace with actual button name
     }
 
+    public javax.swing.JLabel getDoctorLabel() {
+        return jLabel7;
+    }
+    
+    public javax.swing.JLabel getStaffLabel() {
+        return jLabel8;
+    }
+    
+    public javax.swing.JLabel getDepartmentLabel() {
+        return jLabel12;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
