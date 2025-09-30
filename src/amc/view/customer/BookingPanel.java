@@ -41,6 +41,18 @@ public class BookingPanel extends javax.swing.JPanel {
         return jTextField2.getText();
     }
 
+    public void setPatientName(String name) {
+        jTextField1.setText(name);
+    }
+    
+    public void clearDate() {
+        amcDateField1.setText("");
+    }
+    
+    public void setTimeHint() {
+        jTextField2.setText("HH:mm:ss");
+    }
+
     // Add this method to handle the missing combo box action
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
         // No action needed for combo box selection

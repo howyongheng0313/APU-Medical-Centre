@@ -20,6 +20,8 @@ public class BookAppointmentCtl extends AbstractSubCtl {
 
     public BookAppointmentCtl(AmcCtl ROOT) {
         super(ROOT);
+
+        initializeFields();
         
         // Wire the button to call bookAppointment
         BookAppointment.addPropertyChangeListener("bookAppointment", evt -> {
@@ -31,6 +33,16 @@ public class BookAppointmentCtl extends AbstractSubCtl {
             );
         });
     }
+
+    private void initializeFields() {
+        User user = getROOT().getCurrentUser();
+        if(user != null){
+            BookAppointment.setPatientName(user.getUserName());
+        }
+        BookAppointment.clearDate();
+        BookAppointment.setTimeHint();
+    }
+        
    
 
     public void bookAppointment(String name, String departmentName, String dateStr, String timeStr) {
@@ -88,6 +100,7 @@ public class BookAppointmentCtl extends AbstractSubCtl {
             }
 
             JOptionPane.showMessageDialog(BookAppointment, "Booked successfully. ID: " + newApptId, "Success", JOptionPane.INFORMATION_MESSAGE);
+            initializeFields();
 
         } catch (java.time.format.DateTimeParseException ex) {
             JOptionPane.showMessageDialog(BookAppointment, "Invalid date/time format. Use yyyy-MM-dd and HH:mm:ss", "Invalid Format", JOptionPane.WARNING_MESSAGE);
