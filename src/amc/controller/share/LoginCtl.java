@@ -37,6 +37,12 @@ public class LoginCtl extends AbstractSubCtl {
     private void login() {
         User.LoginContext loginCtx = viewLogin.getLoginContext();
         User logged = User.login(loginCtx);
+        
+        if (logged == null) {
+            viewLogin.clearPassword();
+            return;
+        };
+
         getROOT().setCurrentUser(logged);
         getROOT().UserChange.fire();
         getROOT().popPage(viewLogin);

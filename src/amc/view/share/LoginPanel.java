@@ -16,6 +16,10 @@ public class LoginPanel extends javax.swing.JPanel {
         this.picSignupUndo.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
+    public void clearPassword() {
+        pwdPassword.setText("");
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
