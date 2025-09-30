@@ -207,7 +207,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
         createEmployee = new javax.swing.JDialog();
         main2 = new javax.swing.JPanel();
         title2 = new javax.swing.JPanel();
-        lblCreateDoctor = new javax.swing.JLabel();
+        lblCreateTitle = new javax.swing.JLabel();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(48, 0), new java.awt.Dimension(32767, 0));
         form2 = new javax.swing.JPanel();
         right2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(32767, 0));
@@ -233,7 +233,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
         updateEmployee = new javax.swing.JDialog();
         main4 = new javax.swing.JPanel();
         title4 = new javax.swing.JPanel();
-        lblUpdateDoctor = new javax.swing.JLabel();
+        lblUpdateTitle = new javax.swing.JLabel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(48, 0), new java.awt.Dimension(32767, 0));
         form4 = new javax.swing.JPanel();
         right4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(32767, 0));
@@ -312,9 +312,9 @@ public class EmployeesPanel extends javax.swing.JPanel {
         title2.setPreferredSize(new java.awt.Dimension(500, 50));
         title2.setLayout(new java.awt.BorderLayout());
 
-        lblCreateDoctor.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        lblCreateDoctor.setText("Create Doctor");
-        title2.add(lblCreateDoctor, java.awt.BorderLayout.CENTER);
+        lblCreateTitle.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        lblCreateTitle.setText("Create Doctor");
+        title2.add(lblCreateTitle, java.awt.BorderLayout.CENTER);
         title2.add(filler8, java.awt.BorderLayout.LINE_START);
 
         main2.add(title2, java.awt.BorderLayout.PAGE_START);
@@ -476,9 +476,9 @@ public class EmployeesPanel extends javax.swing.JPanel {
         title4.setPreferredSize(new java.awt.Dimension(500, 50));
         title4.setLayout(new java.awt.BorderLayout());
 
-        lblUpdateDoctor.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        lblUpdateDoctor.setText("Update Doctor");
-        title4.add(lblUpdateDoctor, java.awt.BorderLayout.CENTER);
+        lblUpdateTitle.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        lblUpdateTitle.setText("Update Doctor");
+        title4.add(lblUpdateTitle, java.awt.BorderLayout.CENTER);
         title4.add(filler10, java.awt.BorderLayout.LINE_START);
 
         main4.add(title4, java.awt.BorderLayout.PAGE_START);
@@ -941,6 +941,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
     private void btnManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerActionPerformed
         // TODO add your handling code here:
         currentCreateRole = Role.Manager;
+        lblCreateTitle.setText("Create Manager");
         deptInputVisible(false);
         licenseInputVisible(false);
         btnUserCDefaultAction();
@@ -949,6 +950,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
     private void btnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoctorActionPerformed
         // TODO add your handling code here:
         currentCreateRole = Role.Doctor;
+        lblCreateTitle.setText("Create Doctor");
         deptInputVisible(true);
         licenseInputVisible(true);
         btnUserCDefaultAction();
@@ -957,6 +959,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
     private void btnStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStaffActionPerformed
         // TODO add your handling code here:
         currentCreateRole = Role.Staff;
+        lblCreateTitle.setText("Create Staff");
         deptInputVisible(true);
         licenseInputVisible(false);
         btnUserCDefaultAction();
@@ -970,6 +973,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
                 "Role Mismatch", JOptionPane.WARNING_MESSAGE
                 );
         }else {
+            lblUpdateTitle.setText("Update Manager");
             btnUserUDefaultAction();
             populateUpdateForm();
         }
@@ -983,6 +987,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
                 "Role Mismatch", JOptionPane.WARNING_MESSAGE
                 );
         }else{
+            lblCreateTitle.setText("Update Doctor");
             btnUserUDefaultAction();
             populateUpdateForm();
         }
@@ -996,6 +1001,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
                 "Role Mismatch", JOptionPane.WARNING_MESSAGE
                 );
         }else{
+            lblCreateTitle.setText("Update Staff");
             btnUserUDefaultAction();
             populateUpdateForm();
         }
@@ -1090,7 +1096,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblCDMedicalLicense;
     private javax.swing.JLabel lblCDName;
     private javax.swing.JLabel lblCRInstruction;
-    private javax.swing.JLabel lblCreateDoctor;
+    private javax.swing.JLabel lblCreateTitle;
     private javax.swing.JLabel lblCreateRole;
     private javax.swing.JLabel lblUDBirthDate;
     private javax.swing.JLabel lblUDContact;
@@ -1101,7 +1107,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblUDMedicalLicense;
     private javax.swing.JLabel lblUDName;
     private javax.swing.JLabel lblURInstruction;
-    private javax.swing.JLabel lblUpdateDoctor;
+    private javax.swing.JLabel lblUpdateTitle;
     private javax.swing.JLabel lblUpdateRole;
     private javax.swing.Box.Filler left2;
     private javax.swing.Box.Filler left4;
