@@ -31,6 +31,7 @@ public class LoginCtl extends AbstractSubCtl {
     }
 
     public void startView() {
+        viewLogin.switch2Login(true);
         getROOT().pushPage(viewLogin);
     }
 
@@ -40,8 +41,14 @@ public class LoginCtl extends AbstractSubCtl {
         
         if (logged == null) {
             viewLogin.clearPassword();
+            javax.swing.JOptionPane.showMessageDialog(
+                viewLogin,
+                "Invalid email or password. Please try again.",
+                "Login Failed",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
             return;
-        };
+        }
 
         getROOT().setCurrentUser(logged);
         getROOT().UserChange.fire();

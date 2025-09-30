@@ -69,10 +69,10 @@ public class BookingsCtl extends AbstractSubCtl {
         List<String> busyDocLs = new ArrayList<>();
         DbMan.Query<Appointment> busyDocEach = (appt) -> {
             if (appt.getStatus().equals(Appointment.Status.Booked) &&
-                appt.getDepartmentId().equals(deptId) && (
-                appt.getDateTime().compareTo(time.plusMinutes(30))  >= 0 ||
+                appt.getDepartmentId().equals(deptId) && 
+                appt.getDateTime().compareTo(time.plusMinutes(30))  >= 0 &&
                 appt.getDateTime().compareTo(time.minusMinutes(30)) <= 0
-            )) busyDocLs.add(appt.getDoctorId());
+            ) busyDocLs.add(appt.getDoctorId());
             return false;
         };
         Db.Appointment.select(-1, busyDocEach);

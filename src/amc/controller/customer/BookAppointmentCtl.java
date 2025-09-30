@@ -91,7 +91,7 @@ public class BookAppointmentCtl extends AbstractSubCtl {
                 c.getId(),
                 departmentId,
                 LocalDateTime.of(date, time),
-                Appointment.Status.Booked
+                Appointment.Status.Pending
             );
 
             boolean ok = Db.Appointment.insert(List.of(appt));
