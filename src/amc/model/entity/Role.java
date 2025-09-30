@@ -2,7 +2,7 @@ package amc.model.entity;
 
 import amc.controller.AmcCtl;
 import amc.controller.CustomerCtl;
-import amc.controller.doctor.DoctorCtl;
+import amc.controller.DoctorCtl;
 import amc.controller.share.JumpTree;
 import amc.controller.ManagerCtl;
 import amc.controller.share.ProfileNode;

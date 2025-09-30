@@ -1,7 +1,5 @@
-package amc.controller.doctor;
+package amc.controller;
 
-import amc.controller.AmcCtl;
-import amc.controller.UserCtl;
 import amc.controller.doctor.AppointmentDoctorCtl;
 import amc.model.entity.Doctor;
 import amc.model.entity.User;
