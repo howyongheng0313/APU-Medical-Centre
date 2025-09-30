@@ -1,0 +1,6 @@
+005
+CMT-001|APT-001|DOC-001|5|The doctor is professional
+CMT-002|APT-003|DOC-003|4|The doctor is friendly
+CMT-003|APT-004|DOC-004|4|The doctor is kind
+CMT-004|APT-005|DOC-005|1|The doctor is rude
+CMT-005|APT-006|DOC-006|5|The doctor helps me a lot

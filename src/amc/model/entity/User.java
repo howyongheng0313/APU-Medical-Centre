@@ -1,0 +1,85 @@
+package amc.model.entity;
+
+import java.util.List;
+import java.time.LocalDate;
+
+import amc.model.DbMan;
+import amc.model.db_impl.Db;
+
+public abstract class User extends WithId {
+    public enum Gender { Male, Female; }
+
+    public record LoginContext(String email, String password) {}
+
+    public record SignupContext(
+        String icNumber,
+        String userName,
+        LocalDate dateOfBirth,
+        String email,
+        String contact,
+        Gender gender
+    ) {}
+
+    protected String    userName;
+    protected LocalDate dateOfBirth;
+    protected Gender    gender;
+    protected String    email;
+    protected String    contact;
+
+    public User(
+        String    id,
+        String    userName,
+        LocalDate dateOfBirth,
+        Gender    gender,
+        String    email,
+        String    contact
+    ) {
+        super(id);
+        this.userName    = userName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender      = gender;
+        this.email       = email;
+        this.contact     = contact;
+    }
+
+    public static User login(LoginContext loginCtx) {
+        List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserAuth(loginCtx.email));
+        if (authLs.isEmpty()) return null;
+
+        UserAuth auth = authLs.getFirst();
+        if (!auth.getPassword().verify(loginCtx.password)) return null;
+
+        List<? extends User> userLs = auth.getRole().getHandle().select(1, DbMan.checkUserEmail(loginCtx.email));
+        return userLs.getFirst();
+    }
+
+    public static User signup(SignupContext signupCtx) {
+        List<UserAuth> existAuthLs = Db.UserAuth.select(1, DbMan.checkUserAuth(signupCtx.email));
+        Customer existCustomer = Db.Customer.getById(signupCtx.icNumber);
+        if (!existAuthLs.isEmpty() || existCustomer != null) return null;
+
+        Customer newCus = new Customer(
+            signupCtx.icNumber,
+            signupCtx.userName,
+            signupCtx.dateOfBirth,
+            signupCtx.gender,
+            signupCtx.email,
+            signupCtx.contact
+        );
+        return Db.Customer.insert(List.of(newCus)) ? newCus : null;
+    }
+
+    public abstract Role getRole();
+
+    public String    getUserName() { return userName; }
+    public LocalDate getDateOfBirth() { return dateOfBirth; }
+    public Gender    getGender() { return gender; }
+    public String    getEmail() { return email; }
+    public String    getContact() { return contact; }
+
+    public void setUserName(String userName) { this.userName = userName; }
+    public void setDateOfBirth(LocalDate dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+    public void setGender(Gender gender) { this.gender = gender; }
+    public void setEmail(String email) { this.email = email; }
+    public void setContact(String contact) { this.contact = contact; }
+}
