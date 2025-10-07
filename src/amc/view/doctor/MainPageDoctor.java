@@ -4,6 +4,9 @@
  */
 package amc.view.doctor;
 import amc.controller.AmcCtl;
+
+import java.util.List;
+
 import javax.swing.JPanel;
 import amc.controller.manager.ServicesCtl;
 import amc.model.entity.Doctor;
@@ -19,6 +22,7 @@ public class MainPageDoctor extends javax.swing.JPanel {
     private final AmcCtl ROOT;
     private final User currentUser;
     private final Doctor currentDoctor;
+    private boolean isShowingCurrent = true;
     public MainPageDoctor(AmcCtl ROOT,User currentUser, Doctor currentDoctor) {
         initComponents();
         this.ROOT = ROOT;
@@ -130,13 +134,16 @@ public class MainPageDoctor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        isShowingCurrent = true;
         apt.view_appointment(jTable1, true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        isShowingCurrent = false;
         apt.view_appointment(jTable1, false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /*
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
         int selectedRow = jTable1.getSelectedRow();
         
@@ -157,6 +164,41 @@ public class MainPageDoctor extends javax.swing.JPanel {
 //            dialog.setVisible(true);
         }
     }//GEN-LAST:event_jTable1MouseReleased
+    */
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {
+        if (evt.getClickCount() != 2) return;
+        
+        int selectedRow = jTable1.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            Object value = jTable1.getValueAt(selectedRow, 0);
+            String aptId = value.toString();
+    
+            List<amc.model.entity.Appointment> appts = amc.model.db_impl.Db.Appointment.select(
+                1, 
+                a -> a.getId().equals(aptId)
+            );
+            
+            if (!appts.isEmpty()) {
+                amc.model.entity.Appointment appt = appts.get(0);
+                
+                // Current: 可编辑咨询界面; History: 只读结果界面
+                amc.controller.share.ApptNode node = isShowingCurrent 
+                    ? amc.controller.share.JumpTree.DocConsultation 
+                    : amc.controller.share.JumpTree.DocSelf.nextApptNode;
+                
+                // 传递刷新回调
+                amc.controller.share.AppointmentCtl apptCtl = new amc.controller.share.AppointmentCtl(
+                    ROOT,
+                    appt,
+                    node,
+                    this::refreshTable  // 回调：刷新表格
+                );
+                apptCtl.startView();
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -165,6 +207,9 @@ public class MainPageDoctor extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private java.awt.Label label1;
+    public void refreshTable(){
+        apt.view_appointment(jTable1, isShowingCurrent);
+    }
     // End of variables declaration//GEN-END:variables
     public JPanel getView() { return this; }
 }

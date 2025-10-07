@@ -52,7 +52,7 @@ public class JumpTree {
     );
 
     public static final ApptNode DocConsultation = new ApptNode(
-        ApptNode.SHOW_CUS | ApptNode.SHOW_STF | ApptNode.SHOW_CONSULT | ApptNode.SHOW_RESULT,
+        ApptNode.SHOW_CUS | ApptNode.SHOW_STF | ApptNode.SHOW_CONSULT,
         new ProfileNode(
             ProfileNode.SHOW_APPT,
             new ApptNode(

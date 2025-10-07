@@ -101,6 +101,7 @@ public class BookAppointmentCtl extends AbstractSubCtl {
 
             JOptionPane.showMessageDialog(BookAppointment, "Booked successfully. ID: " + newApptId, "Success", JOptionPane.INFORMATION_MESSAGE);
             initializeFields();
+            getROOT().clearToMenu();
 
         } catch (java.time.format.DateTimeParseException ex) {
             JOptionPane.showMessageDialog(BookAppointment, "Invalid date/time format. Use yyyy-MM-dd and HH:mm:ss", "Invalid Format", JOptionPane.WARNING_MESSAGE);

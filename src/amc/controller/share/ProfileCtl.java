@@ -173,7 +173,7 @@ public class ProfileCtl extends AbstractSubCtl {
         viewProfile.btnLogout.addActionListener((ActionEvent evt) -> {
             getROOT().setCurrentUser(null);
             getROOT().UserChange.fire();
-            getROOT().popPage(viewProfile);
+            getROOT().clearToMenu();
         });
     }
 

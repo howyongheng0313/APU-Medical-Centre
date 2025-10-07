@@ -13,9 +13,11 @@ import javax.swing.JPanel;
 
 public class MenuCtl extends AbstractSubCtl {
     private final MenuPanel viewMenu = new MenuPanel();
+    private final LoginCtl loginCtl;
 
     public MenuCtl(AmcCtl ROOT) {
         super(ROOT);
+        this.loginCtl = new LoginCtl(getROOT());
         viewMenu.btnLogin.addActionListener((ActionEvent evt) -> {
             gotoLogin();
         });
@@ -51,7 +53,6 @@ public class MenuCtl extends AbstractSubCtl {
     }
 
     private void gotoLogin() {
-        LoginCtl loginCtl = new LoginCtl(getROOT());
         loginCtl.startView();
     }
 

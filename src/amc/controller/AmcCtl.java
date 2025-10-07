@@ -27,7 +27,7 @@ public class AmcCtl {
 
     public void pushPage(JPanel page) {
         String name = "pg" + counter++;
-        if (!pageLs.isEmpty()) pageLs.getLast().setEnabled(false);
+        // if (!pageLs.isEmpty()) pageLs.getLast().setEnabled(false);
 
         pageLs.addLast(page);
         nameLs.addLast(name);
@@ -46,7 +46,23 @@ public class AmcCtl {
         nameLs.removeLast();
 
         if (!pageLs.isEmpty()) {
-            pageLs.getLast().setEnabled(true);
+            // pageLs.getLast().setEnabled(true);
+            ((CardLayout) viewPane.getLayout()).show(viewPane, nameLs.getLast());
+        }
+    }
+
+    public void clearToMenu() {
+        Container viewPane = viewAmc.getContentPane();
+        
+        // Remove all pages except the first one (MenuPanel)
+        while (pageLs.size() > 1) {
+            JPanel page = pageLs.removeLast();
+            nameLs.removeLast();
+            viewPane.remove(page);
+        }
+        
+        // Show the MenuPanel
+        if (!pageLs.isEmpty()) {
             ((CardLayout) viewPane.getLayout()).show(viewPane, nameLs.getLast());
         }
     }

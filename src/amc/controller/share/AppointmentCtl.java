@@ -13,11 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.JPanel;
+
 public class AppointmentCtl extends AbstractSubCtl {
     private final AppointmentPanel viewAppt = new AppointmentPanel();
     private final Appointment appt;
     private final ApptNode node;
     private double totalFee;
+    private Runnable onCloseCallback;
+    private List<Service> availableServices;
+    private List<Medicine> availableMedicines;
 
     public AppointmentCtl(AmcCtl ROOT, Appointment appt, ApptNode node) {
         super(ROOT);
@@ -34,6 +39,11 @@ public class AppointmentCtl extends AbstractSubCtl {
                 getROOT().popPage(viewAppt);
             }
         });
+    }
+
+    public AppointmentCtl(AmcCtl ROOT, Appointment appt, ApptNode node, Runnable onCloseCallback) {
+        this(ROOT, appt, node);
+        this.onCloseCallback = onCloseCallback;
     }
 
     private void writeNodeRecord() {
@@ -90,44 +100,102 @@ public class AppointmentCtl extends AbstractSubCtl {
     }
 
     private void consultProc() {
-        viewAppt.renderConsultPage(
-            Db.Service.select(-1, model->true),
-            Db.Medicine.select(-1, model->true)
+        // 获取医生的department ID
+        String doctorDeptId = null;
+        if (appt.getDoctorId() != null) {
+            Doctor doc = Db.Doctor.select(1, DbMan.checkById(appt.getDoctorId())).get(0);
+            doctorDeptId = doc.getDepartmentId();
+        }
+        
+        final String deptId = doctorDeptId;
+        
+        // 保存到字段中
+        availableServices = Db.Service.select(-1, service -> 
+            deptId == null || service.getDepartmentId().equals(deptId)
         );
+        availableMedicines = Db.Medicine.select(-1, model->true);
+        
+        // 只显示属于该department的服务
+        viewAppt.renderConsultPage(availableServices, availableMedicines);
         viewAppt.btnEndCon.addActionListener((ActionEvent evt) -> endConsult());
     }
 
     private void endConsult() {
-        AppointmentPanel.EndConsultContext ctx = viewAppt.getEndConsultContext();
-        List<ApptService>  selectedService  = new ArrayList<> ();
-        List<ApptMedicine> selectedMedicine = new ArrayList<> ();
-        for (Vector svcRow : ctx.serviceChooseList()) {
-            if (!(Boolean) svcRow.get(1)) continue;
-            Service service = (Service) svcRow.getLast();
-            selectedService.add(new ApptService(
-                appt.getId(),
-                service.getId(),
-                service.getFee()
-            ));
+        try {
+            System.out.println("=== End Consultation Started ===");
+            System.out.println("Appointment ID: " + appt.getId());
+            System.out.println("Current Status: " + appt.getStatus());
+            
+            AppointmentPanel.EndConsultContext ctx = viewAppt.getEndConsultContext();
+            List<ApptService>  selectedService  = new ArrayList<> ();
+            List<ApptMedicine> selectedMedicine = new ArrayList<> ();
+            
+            // 使用行索引从原始列表获取Service对象
+            int serviceRowIndex = 0;
+            for (Vector svcRow : ctx.serviceChooseList()) {
+                if ((Boolean) svcRow.get(1)) {  // 如果被选中
+                    Service service = availableServices.get(serviceRowIndex);
+                    selectedService.add(new ApptService(
+                        appt.getId(),
+                        service.getId(),
+                        service.getFee()
+                    ));
+                }
+                serviceRowIndex++;
+            }
+            System.out.println("Selected Services: " + selectedService.size());
+            
+            // 使用行索引从原始列表获取Medicine对象
+            int medicineRowIndex = 0;
+            for (Vector mdcRow: ctx.medicineChooseList()) {
+                int quantity = (Integer) mdcRow.get(1);
+                if (quantity > 0) {  // 如果数量大于0
+                    Medicine medicine = availableMedicines.get(medicineRowIndex);
+                    selectedMedicine.add(new ApptMedicine(
+                        appt.getId(),
+                        medicine.getId(),
+                        medicine.getPrice(),
+                        quantity
+                    ));
+                }
+                medicineRowIndex++;
+            }
+            System.out.println("Selected Medicines: " + selectedMedicine.size());
+            
+            Db.ApptService.insert(selectedService);
+            Db.ApptMedicine.insert(selectedMedicine);
+            appt.setFeedback(ctx.feedback());
+            appt.setStatus(Appointment.Status.EndCons);
+            
+            System.out.println("New Status: " + appt.getStatus());
+            System.out.println("Feedback: " + ctx.feedback());
+            
+            Db.Appointment.update(1, DbMan.checkById(appt.getId()), model->appt);
+            System.out.println("Database updated successfully");
+            
+            // Display end consultation message
+            javax.swing.JOptionPane.showMessageDialog(
+                viewAppt,
+                "Consultation has been ended successfully!",
+                "Success",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE
+            );
+            
+            getROOT().popPage(viewAppt);
+            if (onCloseCallback != null) {
+                onCloseCallback.run();
+            }
+            System.out.println("=== End Consultation Completed ===");
+        } catch (Exception e) {
+            System.err.println("Error in endConsult: " + e.getMessage());
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(
+                viewAppt,
+                "Error ending consultation: " + e.getMessage(),
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
         }
-        for (Vector mdcRow: ctx.medicineChooseList()) {
-            if (0 < (Integer) mdcRow.get(1)) continue;
-            Medicine medicine = (Medicine) mdcRow.getLast();
-            selectedMedicine.add(new ApptMedicine(
-                appt.getId(),
-                medicine.getId(),
-                medicine.getPrice(),
-                (Integer) mdcRow.get(1)
-            ));
-        }
-
-        Db.ApptService.insert(selectedService);
-        Db.ApptMedicine.insert(selectedMedicine);
-        appt.setFeedback(ctx.feedback());
-        appt.setStatus(Appointment.Status.EndCons);
-        Db.Appointment.update(1, DbMan.checkById(appt.getId()), model->appt);
-
-        getROOT().popPage(viewAppt);
     }
 
     private void resultProc() {
@@ -158,6 +226,9 @@ public class AppointmentCtl extends AbstractSubCtl {
         Db.Appointment.update(1, DbMan.checkById(appt.getId()), model -> appt);
 
         getROOT().popPage(viewAppt);
+        if (onCloseCallback != null) {
+            onCloseCallback.run();
+        }
     }
 
     public void startView() {

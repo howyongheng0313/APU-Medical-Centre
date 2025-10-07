@@ -123,13 +123,25 @@ public class MenuPanel extends javax.swing.JPanel {
         if (this.userBar  != null) userBarContainer.remove(this.userBar);
         this.userBody = body;
         this.userBar  = bar;
-
+    
         boolean isLogout = body == null || bar == null;
         ((CardLayout) accountPanel.getLayout()).show(accountPanel, isLogout ? "Login" : "Avatar");
-        if (isLogout) return;
-
+        
+        if (isLogout) {
+            // Refresh containers after removing components during logout
+            userBodyContainer.revalidate();
+            userBodyContainer.repaint();
+            userBarContainer.revalidate();
+            userBarContainer.repaint();
+            return;
+        }
+    
         userBodyContainer.add(body);
         userBarContainer.add(bar);
+        userBodyContainer.revalidate();
+        userBodyContainer.repaint();
+        userBarContainer.revalidate();
+        userBarContainer.repaint();
         this.switch2Home(false);
     }
 
