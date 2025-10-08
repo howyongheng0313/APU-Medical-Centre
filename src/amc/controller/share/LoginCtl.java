@@ -58,19 +58,34 @@ public class LoginCtl extends AbstractSubCtl {
     private void singup() {
         User.SignupContext signupCtx = viewLogin.getSignupContext();
         if (
-            (signupCtx.icNumber().isEmpty()) ||
-            (signupCtx.userName().isEmpty()) ||
-            (signupCtx.email().isEmpty()) ||
-            DataUtil.validContact(signupCtx.contact())
+            signupCtx.icNumber().isEmpty() ||
+            signupCtx.userName().isEmpty() ||
+            signupCtx.email().isEmpty() ||
+            !DataUtil.validContact(signupCtx.contact())
         ) {
             viewLogin.clearEmailContact(
                 signupCtx.email().isEmpty(),
-                DataUtil.validContact(signupCtx.contact())
+                !DataUtil.validContact(signupCtx.contact())
+            );
+            javax.swing.JOptionPane.showMessageDialog(
+                viewLogin,
+                "Please fill IC number, full name, a valid email, and a valid contact number.",
+                "Invalid Signup Details",
+                javax.swing.JOptionPane.ERROR_MESSAGE
             );
             return;
         }
+        
         User signed = User.signup(signupCtx);
-        if (signed == null) return;
+        if (signed == null) {
+            javax.swing.JOptionPane.showMessageDialog(
+                viewLogin,
+                "Signup failed. The IC or email may already exist.",
+                "Signup Failed",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
         viewLogin.switch2Login(true);
-    }
+            }
 }

@@ -351,7 +351,7 @@ public class LoginPanel extends javax.swing.JPanel {
             txtIcNumber.getText(),
             txtCustomerName.getText(),
             LocalDate.EPOCH,
-            DataUtil.formatEmail(txtLoginEmail.getText()),
+            DataUtil.formatEmail(txtSignupEmail.getText()),
             txtContact.getText(),
             User.Gender.valueOf(cmbGender.getSelectedItem().toString())
         );
