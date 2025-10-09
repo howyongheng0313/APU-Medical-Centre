@@ -146,14 +146,26 @@ public class EmployeesCtl extends AbstractSubCtl {
             Department department = viewEmployees.getCreateDepartment();
             String license = viewEmployees.getCreateLicense();
 
-            String formattedLicense = "MMC" + license;
+            String formattedLicense = selectedRole == Role.Doctor ? "MMC" + license : null;
             if (
                 !validateUserInput(name, birthDate, gender, email, contact) ||
                 (selectedRole == Role.Staff || selectedRole == Role.Doctor) && !validateDepartment(department) ||
                 (selectedRole == Role.Doctor) && !validateLicense(license)
             ) return;
 
-            User newEmp = selectedRole.newUsr(email, name, birthDate, gender, email, contact, email, formattedLicense);
+            String generatedId = selectedRole.getHandle().newId();
+            String departmentId = department != null ? department.getId() : null;
+
+            User newEmp = selectedRole.newUsr(
+                generatedId,
+                name,
+                birthDate,
+                gender,
+                email,
+                contact,
+                departmentId,
+                formattedLicense
+            );
             boolean success = switch (newEmp) {
                 case Manager mng -> Db.Manager.insert(List.of(mng));
                 case Staff   stf -> Db.Staff.insert(List.of(stf));
@@ -163,14 +175,14 @@ public class EmployeesCtl extends AbstractSubCtl {
 
             if (!success) {
                 JOptionPane.showMessageDialog(
-                    viewEmployees, "Failed to create doctor",
+                    viewEmployees, "Failed to create " + selectedRole.toString().toLowerCase(),
                     "Error", JOptionPane.ERROR_MESSAGE
                 );
                 return;
             }
 
             String password = generatePassword();
-            createUserAuth(email, Role.Doctor, password);
+            createUserAuth(email, selectedRole, password);
 
             JOptionPane.showMessageDialog(
                 viewEmployees, selectedRole.toString() + " created successfully!\nGenerated Password: " + password,
@@ -210,12 +222,13 @@ public class EmployeesCtl extends AbstractSubCtl {
             Department department = viewEmployees.getUpdateDepartment();
             String license = viewEmployees.getUpdateLicense();
 
-            String formattedLicense = "MMC" + license;
             if (
                 !validateUserInput(name, birthDate, gender, email, contact) ||
                 (employee instanceof Employee) && !validateDepartment(department) ||
                 (employee instanceof Doctor)   && !validateLicense(license)
             ) return;
+
+            String formattedLicense = (employee instanceof Doctor) ? "MMC" + license : null;
 
             String oldEmail = employee.getEmail();
             int updated = employee.getRole().getHandle().update(1,
@@ -226,7 +239,10 @@ public class EmployeesCtl extends AbstractSubCtl {
                     usr.setGender(gender);
                     usr.setEmail(email);
                     usr.setContact(contact);
-                    if (usr instanceof Employee emp) emp.setDepartment(department);
+                    if (usr instanceof Employee emp) {
+                        emp.setDepartmentId(department.getId());
+                        emp.setDepartment(department);
+                    }
                     if (usr instanceof Doctor doc) doc.setLicense(formattedLicense);
                     return usr;
                 }
@@ -243,6 +259,9 @@ public class EmployeesCtl extends AbstractSubCtl {
             if(!oldEmail.isEmpty() && !oldEmail.equals(email)){
                 updateUserAuth(oldEmail, email, employee.getRole());
             }
+
+            viewEmployees.closeUpdateDialog();
+            loadAllEmployees();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(
                 viewEmployees, "Error updating employee: " + ex.getMessage(),

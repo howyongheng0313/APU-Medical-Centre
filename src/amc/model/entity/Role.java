@@ -29,13 +29,13 @@ public enum Role {
     Doctor  (Db.Doctor  , DoctorCtl::new  , JumpTree.DocSelf) {
         @Override
         public User newUsr(String id, String name, LocalDate dateOfBirth, User.Gender gender, String email, String contact, String departmentId, String license) {
-            return new Staff(id, name, dateOfBirth, gender, email, contact, departmentId);
+            return new Doctor(id, name, dateOfBirth, gender, email, contact, departmentId, license);
         }
     },
     Staff   (Db.Staff   , StaffCtl::new   , JumpTree.StfSelf) {
         @Override
         public User newUsr(String id, String name, LocalDate dateOfBirth, User.Gender gender, String email, String contact, String departmentId, String license) {
-            return new Doctor(id, name, dateOfBirth, gender, email, contact, departmentId, license);
+            return new Staff(id, name, dateOfBirth, gender, email, contact, departmentId);
         }
     };
 

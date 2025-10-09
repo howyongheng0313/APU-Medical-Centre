@@ -123,6 +123,9 @@ public class ProfilePanel extends javax.swing.JPanel {
 
         editDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         editDialog.setTitle("Edit Profile");
+        editDialog.setMinimumSize(new java.awt.Dimension(520, 640));
+        editDialog.setPreferredSize(new java.awt.Dimension(520, 640));
+        editDialog.setResizable(false);
 
         jPanel2.setBackground(Theme.C2_BG);
         jPanel2.setMaximumSize(new java.awt.Dimension(200, 200));

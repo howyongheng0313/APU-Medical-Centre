@@ -11,12 +11,14 @@ import amc.model.entity.Customer;
 import amc.model.entity.Doctor;
 import amc.model.entity.Employee;
 import amc.model.entity.Password;
+import amc.model.entity.Department;
 import amc.model.entity.User;
 import amc.model.entity.UserAuth;
 import amc.view.share.ProfilePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -114,54 +116,68 @@ public class ProfileCtl extends AbstractSubCtl {
 
         viewProfile.btnEditConfirm.addActionListener((ActionEvent evt) -> {
             ProfilePanel.EditContext editCtx = viewProfile.getEditContext();
-            boolean kEmail   = true;
-            boolean kContact = !DataUtil.validContact(editCtx.contact());
-            boolean kLicense = (target instanceof Doctor) && !DataUtil.validLicense(editCtx.license());
-            if (!editCtx.email().isEmpty()) {
-                List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserAuth(editCtx.email()));
-                kEmail = !authLs.isEmpty();
-            }
-            viewProfile.clearEditECL(kEmail, kContact, kLicense);
 
-            boolean enableUpdate = true;
-            if (editCtx.userName().isEmpty() || kEmail || kContact || kLicense) {
-                enableUpdate = false;
-                JOptionPane.showMessageDialog(viewProfile,
-                    "Please confirm your input value.",
+            String newName     = editCtx.userName();
+            String newEmail    = editCtx.email();
+            String newContact  = editCtx.contact();
+            String newLicense  = editCtx.license();
+            String newPassword = editCtx.newPassword();
+            String confirmPass = editCtx.confirmPassword();
+
+            boolean invalidName = newName == null || newName.isBlank();
+
+            boolean emailChanged = !newEmail.equalsIgnoreCase(target.getEmail());
+            boolean invalidEmail = newEmail.isEmpty();
+            if (!invalidEmail && emailChanged) {
+                List<UserAuth> authLs = Db.UserAuth.select(1, DbMan.checkUserAuth(newEmail));
+                invalidEmail = !authLs.isEmpty();
+            }
+
+            boolean invalidContact = !DataUtil.validContact(newContact);
+            boolean invalidLicense = (target instanceof Doctor) && !DataUtil.validLicense(newLicense);
+            boolean passwordMismatch = !newPassword.equals(confirmPass);
+
+            viewProfile.clearEditECL(invalidEmail, invalidContact, invalidLicense);
+
+            List<String> errors = new ArrayList<>();
+            if (invalidName)       errors.add("Please enter your name.");
+            if (invalidEmail)      errors.add(emailChanged ? "Email is already in use." : "Please enter a valid email.");
+            if (invalidContact)    errors.add("Please enter a valid contact number.");
+            if (invalidLicense)    errors.add("Please enter a valid medical license.");
+            if (passwordMismatch)  errors.add("Please enter the new password again.");
+
+            if (!errors.isEmpty()) {
+                JOptionPane.showMessageDialog(
+                    viewProfile,
+                    String.join("\n", errors),
                     "Failed Edit",
                     JOptionPane.WARNING_MESSAGE
                 );
+                return;
             }
-
-            if (!editCtx.newPassword().equals(editCtx.confirmPassword())) {
-                enableUpdate = false;
-                JOptionPane.showMessageDialog(viewProfile,
-                    "Please enter the new password again.",
-                    "Incorrect Password",
-                    JOptionPane.WARNING_MESSAGE
-                );
-            }
-            if (!enableUpdate) return;
 
             Db.UserAuth.update(1, DbMan.checkUserAuth(target.getEmail()), (UserAuth model) -> {
-                model.setEmail(editCtx.email());
-                if (editCtx.newPassword() != null && !editCtx.newPassword().isEmpty()) {
-                    model.setPassword(Password.build(editCtx.newPassword()));
+                model.setEmail(newEmail);
+                if (newPassword != null && !newPassword.isEmpty()) {
+                    model.setPassword(Password.build(newPassword));
                 }
                 return model;
             });
             target.getRole().getHandle().update(1, DbMan.checkById(target.getId()), model -> {
-                model.setUserName(editCtx.userName());
+                model.setUserName(newName);
                 model.setDateOfBirth(editCtx.dateOfBirth());
                 model.setGender(editCtx.gender());
-                model.setEmail(editCtx.email());
-                model.setContact(editCtx.contact());
+                model.setEmail(newEmail);
+                model.setContact(newContact);
                 if (model instanceof Employee employee) {
-                    employee.setDepartmentId(editCtx.department().getId());
-                    employee.setDepartment(editCtx.department());
+                    Department dept = editCtx.department();
+                    if (dept != null) {
+                        employee.setDepartmentId(dept.getId());
+                        employee.setDepartment(dept);
+                    }
                 }
                 if (model instanceof Doctor doctor) {
-                    doctor.setLicense(editCtx.license());
+                    doctor.setLicense(newLicense);
                 }
                 target = model;
                 return model;
