@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.JPanel;
-
 public class AppointmentCtl extends AbstractSubCtl {
     private final AppointmentPanel viewAppt = new AppointmentPanel();
     private final Appointment appt;

@@ -20,6 +20,10 @@ public class LoginPanel extends javax.swing.JPanel {
         pwdPassword.setText("");
     }
 
+    public void clearSignupPassword() {
+        pwdSignup.setText("");
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,6 +48,7 @@ public class LoginPanel extends javax.swing.JPanel {
         txtIcNumber = new amc.view.comp.AmcPlaceHolder();
         txtCustomerName = new amc.view.comp.AmcPlaceHolder();
         txtSignupEmail = new amc.view.comp.AmcPlaceHolder();
+        pwdSignup = new javax.swing.JPasswordField();
         txtContact = new amc.view.comp.AmcPlaceHolder();
         cmbGender = new javax.swing.JComboBox<>();
         btnSignup = new amc.view.comp.AmcButton();
@@ -264,6 +269,19 @@ public class LoginPanel extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         signupForm.add(txtSignupEmail, gridBagConstraints);
 
+        pwdSignup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        pwdSignup.setForeground(Theme.C1_FG);
+        pwdSignup.setToolTipText("Enter your password for future logins.");
+        pwdSignup.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        pwdSignup.setMaximumSize(new java.awt.Dimension(100, 40));
+        pwdSignup.setMinimumSize(new java.awt.Dimension(100, 40));
+        pwdSignup.setPreferredSize(new java.awt.Dimension(100, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weighty = 1.0;
+        signupForm.add(pwdSignup, gridBagConstraints);
+
         txtContact.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         txtContact.setForeground(Theme.C1_FG);
         txtContact.set$hint("Enter your contact number");
@@ -331,6 +349,7 @@ public class LoginPanel extends javax.swing.JPanel {
         txtCustomerName.setText("");
         txtSignupEmail.setText("");
         txtContact.setText("");
+        pwdSignup.setText("");
         cmbGender.setSelectedIndex(0);
     }
 
@@ -353,7 +372,8 @@ public class LoginPanel extends javax.swing.JPanel {
             LocalDate.EPOCH,
             DataUtil.formatEmail(txtSignupEmail.getText()),
             txtContact.getText(),
-            User.Gender.valueOf(cmbGender.getSelectedItem().toString())
+            User.Gender.valueOf(cmbGender.getSelectedItem().toString()),
+            new String(pwdSignup.getPassword())
         );
     }
 
@@ -371,6 +391,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblNoAccount;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblSignupPasswordHint;
     private javax.swing.JPanel loginForm;
     private javax.swing.JPanel loginPage;
     public amc.view.comp.AmcPicture picLoginUndo;
@@ -378,6 +399,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private amc.view.comp.AmcPicture picSignupLogo;
     private amc.view.comp.AmcPicture picSignupUndo;
     private javax.swing.JPasswordField pwdPassword;
+    private javax.swing.JPasswordField pwdSignup;
     private javax.swing.JPanel signupForm;
     private javax.swing.JPanel signupPage;
     private amc.view.comp.AmcPlaceHolder txtContact;

@@ -17,7 +17,8 @@ public abstract class User extends WithId {
         LocalDate dateOfBirth,
         String email,
         String contact,
-        Gender gender
+        Gender gender,
+        String password
     ) {}
 
     protected String    userName;
@@ -54,19 +55,33 @@ public abstract class User extends WithId {
     }
 
     public static User signup(SignupContext signupCtx) {
-        List<UserAuth> existAuthLs = Db.UserAuth.select(1, DbMan.checkUserAuth(signupCtx.email));
-        Customer existCustomer = Db.Customer.getById(signupCtx.icNumber);
+        List<UserAuth> existAuthLs = Db.UserAuth.select(1, DbMan.checkUserAuth(signupCtx.email()));
+        Customer existCustomer = Db.Customer.getById(signupCtx.icNumber());
         if (!existAuthLs.isEmpty() || existCustomer != null) return null;
 
         Customer newCus = new Customer(
-            signupCtx.icNumber,
-            signupCtx.userName,
-            signupCtx.dateOfBirth,
-            signupCtx.gender,
-            signupCtx.email,
-            signupCtx.contact
+            signupCtx.icNumber(),
+            signupCtx.userName(),
+            signupCtx.dateOfBirth(),
+            signupCtx.gender(),
+            signupCtx.email(),
+            signupCtx.contact()
         );
-        return Db.Customer.insert(List.of(newCus)) ? newCus : null;
+        String passwordRaw = signupCtx.password() == null ? "" : signupCtx.password().strip();
+        if (passwordRaw.isEmpty()) return null;
+        Password password = Password.build(passwordRaw);
+        UserAuth newAuth = new UserAuth(
+            signupCtx.email(),
+            Role.Customer,
+            password
+        );
+
+        if (!Db.Customer.insert(List.of(newCus))) return null;
+        if (!Db.UserAuth.insert(List.of(newAuth))) {
+            Db.Customer.delete(1, DbMan.checkById(newCus.getId()));
+            return null;
+        }
+        return newCus;
     }
 
     public abstract Role getRole();

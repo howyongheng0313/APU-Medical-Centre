@@ -4,7 +4,6 @@ import amc.controller.AbstractSubCtl;
 import amc.controller.AmcCtl;
 import amc.model.DataUtil;
 import java.awt.event.ActionEvent;
-
 import amc.model.entity.User;
 import amc.view.share.LoginPanel;
 import java.awt.event.MouseAdapter;
@@ -57,19 +56,24 @@ public class LoginCtl extends AbstractSubCtl {
 
     private void singup() {
         User.SignupContext signupCtx = viewLogin.getSignupContext();
+        boolean invalidEmail = signupCtx.email().isEmpty();
+        boolean invalidContact = !DataUtil.validContact(signupCtx.contact());
+        boolean invalidPassword = signupCtx.password().isBlank();
         if (
             signupCtx.icNumber().isEmpty() ||
             signupCtx.userName().isEmpty() ||
-            signupCtx.email().isEmpty() ||
-            !DataUtil.validContact(signupCtx.contact())
+            invalidEmail ||
+            invalidContact ||
+            invalidPassword
         ) {
             viewLogin.clearEmailContact(
-                signupCtx.email().isEmpty(),
-                !DataUtil.validContact(signupCtx.contact())
+                invalidEmail,
+                invalidContact
             );
+            if (invalidPassword) viewLogin.clearSignupPassword();
             javax.swing.JOptionPane.showMessageDialog(
                 viewLogin,
-                "Please fill IC number, full name, a valid email, and a valid contact number.",
+                "Please fill IC number, full name, a valid email, a valid contact number, and a password.",
                 "Invalid Signup Details",
                 javax.swing.JOptionPane.ERROR_MESSAGE
             );
@@ -78,9 +82,10 @@ public class LoginCtl extends AbstractSubCtl {
         
         User signed = User.signup(signupCtx);
         if (signed == null) {
+            viewLogin.clearSignupPassword();
             javax.swing.JOptionPane.showMessageDialog(
                 viewLogin,
-                "Signup failed. The IC or email may already exist.",
+                "Signup failed. The IC or email may already exist, or we couldn't save your credentials.",
                 "Signup Failed",
                 javax.swing.JOptionPane.ERROR_MESSAGE
             );
