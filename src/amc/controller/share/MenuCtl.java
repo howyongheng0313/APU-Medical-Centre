@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 public class MenuCtl extends AbstractSubCtl {
     private final MenuPanel viewMenu = new MenuPanel();
     private final LoginCtl loginCtl;
+    private final Runnable userChangeHandler = this::loadUser;
 
     public MenuCtl(AmcCtl ROOT) {
         super(ROOT);
@@ -34,9 +35,7 @@ public class MenuCtl extends AbstractSubCtl {
             }
         });
 
-        getROOT().UserChange.listen(() -> {
-            loadUser();
-        });
+        getROOT().UserChange.listen(userChangeHandler);
     }
 
     private void loadUser() {
